@@ -74,7 +74,7 @@ private:
 template<>
 class Transmission<rev::CANSparkMax> {
 public:
-	Transmission(std::initializer_list<std::pair<int, Direction>> motor_info, std::pair<int,int> encPort)
+	Transmission(std::initializer_list<std::pair<int, Direction>> motor_info)
 	{
 		bool first_run = 0;
 		motors.reserve(motor_info.size());
