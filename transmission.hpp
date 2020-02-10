@@ -18,6 +18,7 @@
 
 #include <initializer_list>
 #include <vector>
+#include <memory>
 
 #include <frc/Encoder.h>
 #include <rev/CANSparkMax.h>
@@ -38,8 +39,8 @@ public:
 		motors.reserve(motor_info.size());
 		for(auto const& m_inf : motor_info)
 		{
-			motors.push_back( new Motor_Controller( m_inf.first ) );		// add new follower
-			auto * motor = *std::prev(std::end(motors));	// create reference to follower
+			motors.push_back( std::make_unique<Motor_Controller>( m_inf.first ) );		// add new follower
+			auto & motor = *std::prev(std::end(motors));	// create reference to follower
 
 			motor->SetInverted(m_inf.second);
 
@@ -48,14 +49,8 @@ public:
 		}
 	}
 
-	// Manual destruction required due to allocation of pointers
-	~Transmission(){
-		for(auto * motor : motors)
-			motor->~CANSparkMax();
-	}
-
 	Motor_Controller* operator->() {
-		return *std::begin(motors);
+		return std::begin(motors)->get();
 	}
 
 	int getEncoderPosition() const {
@@ -67,7 +62,7 @@ public:
 	}
 
 private:
-	std::vector<Motor_Controller*> motors;
+	std::vector<std::unique_ptr<Motor_Controller>> motors;
 	frc::Encoder enc;
 };
 
@@ -80,8 +75,8 @@ public:
 		motors.reserve(motor_info.size());
 		for(auto const& m_inf : motor_info)
 		{
-			motors.emplace_back( new rev::CANSparkMax( m_inf.first, rev::CANSparkMaxLowLevel::MotorType::kBrushless ) );
-			auto * motor = *std::prev(std::end(motors));
+			motors.emplace_back( std::make_unique<rev::CANSparkMax>( m_inf.first, rev::CANSparkMaxLowLevel::MotorType::kBrushless ) );
+			auto & motor = *std::prev(std::end(motors));
 
 			motor->RestoreFactoryDefaults();
 			motor->SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);
@@ -92,17 +87,11 @@ public:
 		enc = (*std::begin(motors))->GetEncoder();
 	}
 
-	// Manual destruction required due to allocation of pointers
-	~Transmission(){
-		for(auto * motor : motors)
-			motor->~CANSparkMax();
-	}
-
 	auto* operator->() {
-		return *std::begin(motors);
+		return std::begin(motors)->get();
 	}
 
-	void Set(ControlMode cm, double rate){
+	void Set(ControlMode cm, double rate) {
 		(*std::begin(motors))->Set(rate);
 	}
 
@@ -115,6 +104,6 @@ public:
 	}
 
 private:
-	std::vector<rev::CANSparkMax*> motors;
+	std::vector<std::unique_ptr<rev::CANSparkMax>> motors;
 	rev::CANEncoder enc;
 };
