@@ -16,8 +16,8 @@ namespace TRANS
     constexpr auto low_ratio_multiplier_to_ft = 1.0 / encoder_cpr / low_ratio * wheel_diameter / 2 / 12;
     constexpr auto high_ratio_multiplier_to_ft = 1.0 / encoder_cpr / high_ratio * wheel_diameter / 2 / 12;
 
-    constexpr int shift_up_point = 6 / low_ratio_multiplier_to_ft;
-    constexpr int shift_down_point = 4 / low_ratio_multiplier_to_ft;
+    constexpr int shift_up_point = 16000;//6 / low_ratio_multiplier_to_ft;
+    constexpr int shift_down_point = 6000;//4 / low_ratio_multiplier_to_ft;
 
     constexpr int rFalcon = 15;    
     constexpr int rNeo = 14;
