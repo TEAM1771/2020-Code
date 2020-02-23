@@ -23,5 +23,14 @@ namespace TRANS
     constexpr int rNeo = 14;
     constexpr int lFalcon = 17;
     constexpr int lNeo = 11;    
+
+    //Hopper Constants
+
+    // Used to define which motor direction is forward or not, can be negated as needed.
+    constexpr int hopperTransportForward = 1;
+    constexpr int hopperIndexerForward = 1;
+    //Define motor CAN IDs
+    constexpr int hopperTransportNeo = 16; 
+    constexpr int hopperIndexerNeo = 17;
     //std::string song_path = "paint";
 } // TRANS
