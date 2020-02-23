@@ -34,7 +34,7 @@ namespace HOPP
     constexpr double hopperIndexerForward = 1.0;
     constexpr double hopperFeedForward = 1.0;
     //Define motor CAN IDs
-    constexpr int hopperTransportNeo = 8;
+    constexpr int hopperTransportNeo = 3;
     constexpr int hopperIndexerNeo = 10;
     
     constexpr int laserPort = 4; //can be changed later
