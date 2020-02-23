@@ -13,6 +13,7 @@
 #include <frc/livewindow/LiveWindow.h>
 
 #include "Drivetrain.hpp"
+#include "Hopper.hpp"
 
 class Robot : public frc::TimedRobot 
 {
@@ -28,5 +29,6 @@ public:
     frc::Joystick rStick { 1 },
                   lStick { 2 };
     Drivetrain drive;
+    Hopper hopper;
     frc::LiveWindow& m_lw = *frc::LiveWindow::GetInstance();
 };

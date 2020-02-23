@@ -12,8 +12,15 @@ class Hopper
 public:
     Hopper();
     bool isLaserBroken() const;
-    int numberOfBalls;
+    int numberOfBalls = 3;
+    static double timeElapsed;
     void transportBall();
     void feedShooter();
     void stopFeed();
-}
+    void controlFeed();
+    void startIndexer();
+    void stopIndexer();
+    void manualIndexerControl(double speed);
+    void manualTransportControl(double speed);
+    void checkBallProgress();
+};

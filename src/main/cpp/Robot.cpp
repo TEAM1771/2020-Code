@@ -24,11 +24,23 @@ void Robot::TeleopPeriodic()
 {
   drive.drive(lStick.GetY(), rStick.GetY());
   drive.shift();
+  hopper.controlFeed();
+  if(lStick.GetTrigger())
+  {
+    hopper.feedShooter();
+  }
+  else
+  {
+    hopper.stopFeed();
+  }
+  
 }
 
 void Robot::TestPeriodic()
 {
-
+  hopper.manualIndexerControl(lStick.GetY());
+  hopper.manualTransportControl(rStick.GetY());
+  
 }
 
 
