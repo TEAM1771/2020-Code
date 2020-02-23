@@ -2,12 +2,10 @@
 
 Transmission::Transmission(int falcon_adr, int neo_adr):
     falcon { falcon_adr },
-    neo ( neo_adr, rev::CANSparkMaxLowLevel::MotorType::kBrushless ),
-    sensors { falcon.GetSensorCollection() }
+    neo ( neo_adr, rev::CANSparkMaxLowLevel::MotorType::kBrushless )
 {
     neo.SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);
-    falcon.SetNeutralMode(NeutralMode::Coast);
-    //sensors = falcon.GetSensorCollection();
+    sensors = falcon.GetSensorCollection();
 }
 
 ctre::phoenix::motorcontrol::can::TalonFX *Transmission::operator->()

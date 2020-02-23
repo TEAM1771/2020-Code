@@ -14,7 +14,7 @@ void Drivetrain::drive(double lval, double rval)
     ldrive.Set(lval);
 
     
-    auto const drivetrain_speed = fabs(ldrive.sensors.GetIntegratedSensorVelocity() - rdrive.sensors.GetIntegratedSensorVelocity()) / 2;
+    auto const drivetrain_speed = (ldrive.sensors.GetIntegratedSensorVelocity() + rdrive.sensors.GetIntegratedSensorVelocity()) / 2;
 
     std::cout << drivetrain_speed << '\n';
 }
@@ -25,9 +25,9 @@ void Drivetrain::driveFalcons(double lval, double rval)
     ldrive->Set(ControlMode::PercentOutput,lval);
 }
 
-void Drivetrain::shift()
+void Drivetrain::shift(bool state)
 {
-    auto const drivetrain_speed = fabs(ldrive.sensors.GetIntegratedSensorVelocity() - rdrive.sensors.GetIntegratedSensorVelocity()) / 2;
+    auto const drivetrain_speed = (ldrive.sensors.GetIntegratedSensorVelocity() + rdrive.sensors.GetIntegratedSensorVelocity()) / 2;
 
     if(drivetrain_speed > TRANS::shift_up_point)
         shifter.Set(1);

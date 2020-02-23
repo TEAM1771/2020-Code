@@ -23,7 +23,6 @@ void Robot::TeleopInit()
 void Robot::TeleopPeriodic()
 {
   drive.drive(lStick.GetY(), rStick.GetY());
-  drive.shift();
 }
 
 void Robot::TestPeriodic()
