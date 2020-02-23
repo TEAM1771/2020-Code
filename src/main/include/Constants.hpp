@@ -44,7 +44,7 @@ namespace HOPP
     //Define motor CAN IDs
     constexpr int hopperTransportNeo = 16; 
     constexpr int hopperIndexerNeo = 17;
-
+    
     constexpr int laserPort = 4; //can be changed later
 
     //std::string song_path = "paint";
