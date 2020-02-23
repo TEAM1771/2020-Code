@@ -1,4 +1,0 @@
-See file:///C:/Users/FRC%20Team%20%231771/Desktop/1771%20code/drivetrain/build/tmp/compileFrcUserProgramDebugExecutableFrcUserProgramCpp/output.txt for all output for compileFrcUserProgramDebugExecutableFrcUserProgramCpp.
-compiling Drivetrain.cpp successful.
-
-Finished compileFrcUserProgramDebugExecutableFrcUserProgramCpp, see full log file:///C:/Users/FRC%20Team%20%231771/Desktop/1771%20code/drivetrain/build/tmp/compileFrcUserProgramDebugExecutableFrcUserProgramCpp/output.txt.
