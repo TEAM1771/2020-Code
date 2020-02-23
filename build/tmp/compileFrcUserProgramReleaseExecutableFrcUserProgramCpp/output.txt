@@ -1,6 +1,4 @@
 See file:///C:/Users/FRC%20Team%20%231771/Desktop/1771%20code/drivetrain/build/tmp/compileFrcUserProgramReleaseExecutableFrcUserProgramCpp/output.txt for all output for compileFrcUserProgramReleaseExecutableFrcUserProgramCpp.
 compiling Drivetrain.cpp successful.
 
-compiling Robot.cpp successful.
-
 Finished compileFrcUserProgramReleaseExecutableFrcUserProgramCpp, see full log file:///C:/Users/FRC%20Team%20%231771/Desktop/1771%20code/drivetrain/build/tmp/compileFrcUserProgramReleaseExecutableFrcUserProgramCpp/output.txt.
