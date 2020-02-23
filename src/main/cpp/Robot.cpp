@@ -22,17 +22,26 @@ void Robot::TeleopInit()
 
 void Robot::TeleopPeriodic()
 {
+  
   drive.drive(lStick.GetY(), rStick.GetY());
   drive.shift();
-  hopper.controlFeed();
+
+  static bool isShooting = false;
   if(lStick.GetTrigger())
   {
     hopper.feedShooter();
+    isShooting = true;
+  }
+  else if (isShooting)
+  {
+    isShooting = false;
+    hopper.stopFeed();
   }
   else
   {
-    hopper.stopFeed();
+    hopper.controlFeed();
   }
+  
   
 }
 

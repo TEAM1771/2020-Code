@@ -38,7 +38,5 @@ namespace HOPP
     constexpr int hopperIndexerNeo = 10;
     
     constexpr int laserPort = 4; //can be changed later
-    constexpr double hopperTimer = 0.21771;
-
-    //std::string song_path = "paint";
+    constexpr double hopperTimer = 0.21771; //Will need to be changed
 }
