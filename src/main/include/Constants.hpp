@@ -25,3 +25,18 @@ namespace TRANS
     constexpr int lNeo = 11;    
     //std::string song_path = "paint";
 } // TRANS
+namespace HOPP
+{
+    //Hopper Constants
+
+    // Used to define which motor direction is forward or not, can be negated as needed.
+    constexpr double hopperTransportForward = 0.7;
+    constexpr double hopperIndexerForward = 1.0;
+    constexpr double hopperFeedForward = 1.0;
+    //Define motor CAN IDs
+    constexpr int hopperTransportNeo = 3;
+    constexpr int hopperIndexerNeo = 10;
+    
+    constexpr int laserPort = 4; //can be changed later
+    constexpr double hopperTimer = 0.21771; //Will need to be changed
+}
