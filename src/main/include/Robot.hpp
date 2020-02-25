@@ -13,6 +13,11 @@
 #include <frc/livewindow/LiveWindow.h>
 
 #include "Drivetrain.hpp"
+<<<<<<< Updated upstream
+=======
+#include "Hopper.hpp"
+#include "Intake.hpp"
+>>>>>>> Stashed changes
 
 class Robot : public frc::TimedRobot 
 {
@@ -23,10 +28,17 @@ public:
     void TeleopInit() override;
     void TeleopPeriodic() override;
     void TestPeriodic() override;
-
+    
+    void IntakeManager(); 
  private:
-    frc::Joystick rStick { 1 },
-                  lStick { 2 };
+    frc::Joystick rStick { 0 },
+                  lStick { 1 },
+                  oStick { 2 };
     Drivetrain drive;
+<<<<<<< Updated upstream
+=======
+    Hopper hopper;
+    Intake intake;
+>>>>>>> Stashed changes
     frc::LiveWindow& m_lw = *frc::LiveWindow::GetInstance();
 };
