@@ -12,11 +12,11 @@ class Drivetrain
     Transmission ldrive { TRANS::lFalcon, TRANS::lNeo };
     Orchestra orchestra;
 
-    frc::Solenoid shifter { TRANS::shifter };
+    frc::Solenoid shifter { 0 };
 public:
     Drivetrain();
     void drive(double lval, double rval);
     void driveFalcons(double lval, double rval);
 
-    void shift(bool);
+    void shift();
 };
