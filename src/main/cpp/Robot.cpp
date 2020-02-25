@@ -49,7 +49,20 @@ void Robot::TestPeriodic()
 {
   hopper.manualIndexerControl(lStick.GetY());
   hopper.manualTransportControl(rStick.GetY());
+  IntakeManager();
   
+}
+
+void Robot::IntakeManager()
+{
+  // Intake down
+
+  intake.deploy(oStick.GetRawButton(INTAKE::BUTTONS::intakedown));
+
+  // Intake in
+  intake.intakeneo.Set(oStick.GetRawButton(INTAKE::BUTTONS::intakein));
+  // Intake out 
+  intake.intakeneo.Set(oStick.GetRawButton(INTAKE::BUTTONS::intakeout));
 }
 
 
