@@ -58,11 +58,20 @@ void Robot::IntakeManager()
   // Intake down
 
   intake.deploy(oStick.GetRawButton(INTAKE::BUTTONS::intakedown));
+  
+  if (oStick.GetRawButton(INTAKE::BUTTONS::intakein))
+    {// Intake in
+    intake.intakeneo.Set(1);
+    }
+  else if (oStick.GetRawButton(INTAKE::BUTTONS::intakeout))
+    {// Intake out 
+    intake.intakeneo.Set(-1);
+    }
+  else
+    {//Idle 
+    intake.intakeneo.Set(0);
+    }
 
-  // Intake in
-  intake.intakeneo.Set(oStick.GetRawButton(INTAKE::BUTTONS::intakein));
-  // Intake out 
-  intake.intakeneo.Set(oStick.GetRawButton(INTAKE::BUTTONS::intakeout));
 }
 
 
