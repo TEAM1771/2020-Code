@@ -37,6 +37,17 @@ namespace HOPP
     constexpr int hopperTransportNeo = 3;
     constexpr int hopperIndexerNeo = 10;
     
-    constexpr int laserPort = 4; //can be changed later
-    constexpr double hopperTimer = 0.21771; //Will need to be changed
+    constexpr int laserPort = 0; //can be changed later
+    constexpr double hopperTimer = 0.51771; //Will need to be changed
+}
+namespace INTAKE
+{
+    constexpr int IntakePort = 12;
+    constexpr int intakeairport = 1;
+    namespace BUTTONS
+    { 
+        constexpr int intakedown = 2;
+        constexpr int intakein = 3;
+        constexpr int intakeout = 5;
+    }
 }

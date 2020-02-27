@@ -6,11 +6,12 @@ Hopper::Hopper()
     indexerNeo.Set(HOPP::hopperIndexerForward);
     indexerNeo.SetIdleMode(rev::CANSparkMax::IdleMode::kBrake);
     transportNeo.SetIdleMode(rev::CANSparkMax::IdleMode::kBrake);
+    numberOfBalls = 3;
 }
 
 bool Hopper::isLaserBroken() const
 {
-    return beamBreak.Get();
+    return !beamBreak.Get();
 }
 
 void Hopper::transportBall()
@@ -39,7 +40,7 @@ void Hopper::controlFeed()
 {   
     static bool isRunning = false;
     checkBallProgress();
-    if (isLaserBroken() && numberOfBalls < 5 && isRunning == false) {
+    if (isLaserBroken() && numberOfBalls < 4 && isRunning == false) {
         stopIndexer();
         transportBall();
         timer.Reset();
@@ -47,11 +48,17 @@ void Hopper::controlFeed()
         std::cout << "OMG THE LASER IS BROKEN" << '\n';
         isRunning = true;
     }
-    else if (!isLaserBroken())
+    else if (!isLaserBroken() && numberOfBalls < 4)
     {
         startIndexer();
         isRunning = false;
     }
+    else
+    {
+        stopIndexer();
+        isRunning = false;
+    }
+    
     
     
 }

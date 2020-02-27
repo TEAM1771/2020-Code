@@ -14,6 +14,7 @@
 
 #include "Drivetrain.hpp"
 #include "Hopper.hpp"
+#include "Intake.hpp"
 
 class Robot : public frc::TimedRobot 
 {
@@ -24,11 +25,14 @@ public:
     void TeleopInit() override;
     void TeleopPeriodic() override;
     void TestPeriodic() override;
+    void IntakeManager();
 
  private:
     frc::Joystick rStick { 1 },
-                  lStick { 2 };
+                  lStick { 2 },
+                  oStick { 3 };
     Drivetrain drive;
     Hopper hopper;
+    Intake intake;
     frc::LiveWindow& m_lw = *frc::LiveWindow::GetInstance();
 };
