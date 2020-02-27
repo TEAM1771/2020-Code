@@ -6,6 +6,7 @@ Hopper::Hopper()
     indexerNeo.Set(HOPP::hopperIndexerForward);
     indexerNeo.SetIdleMode(rev::CANSparkMax::IdleMode::kBrake);
     transportNeo.SetIdleMode(rev::CANSparkMax::IdleMode::kBrake);
+    numberOfBalls = 3;
 }
 
 bool Hopper::isLaserBroken() const
@@ -39,7 +40,7 @@ void Hopper::controlFeed()
 {   
     static bool isRunning = false;
     checkBallProgress();
-    if (isLaserBroken() && numberOfBalls < 5 && isRunning == false) {
+    if (isLaserBroken() && numberOfBalls < 1 && isRunning == false) {
         stopIndexer();
         transportBall();
         timer.Reset();
