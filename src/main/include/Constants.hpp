@@ -23,7 +23,7 @@ namespace TRANS
     constexpr int rNeo = 14;
     constexpr int lFalcon = 17;
     constexpr int lNeo = 11;    
-    //std::string song_path = "paint";
+    //std::string song_path = "Pain_it_black.chrp";
 } // TRANS
 namespace HOPP
 {
@@ -49,5 +49,24 @@ namespace INTAKE
         constexpr int intakedown = 2;
         constexpr int intakein = 3;
         constexpr int intakeout = 5;
+    }
+}
+namespace TURRET
+{
+    // shooter wheel
+    constexpr int shooterneo1 = 4;
+    constexpr int shooterneo2 = 5;
+
+    //  turret ring
+    constexpr int turretneo = 6;
+
+    //  hood
+    constexpr int hoodneo = 7;
+
+
+    namespace BUTTONS
+    {
+        //co-driver's joystick trigger button
+        //constexpr int turretfire = 1;
     }
 }
