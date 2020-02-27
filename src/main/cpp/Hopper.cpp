@@ -56,6 +56,7 @@ void Hopper::controlFeed()
     else
     {
         stopIndexer();
+        isRunning = false;
     }
     
     
