@@ -10,7 +10,7 @@ Hopper::Hopper()
 
 bool Hopper::isLaserBroken() const
 {
-    return beamBreak.Get();
+    return !beamBreak.Get();
 }
 
 void Hopper::transportBall()
