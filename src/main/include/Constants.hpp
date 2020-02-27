@@ -54,14 +54,14 @@ namespace INTAKE
 namespace TURRET
 {
     // shooter wheel
-    constexpr int shooterneo1 = 4;
-    constexpr int shooterneo2 = 5;
+    constexpr int shooterneo1 = 4;//subject to change
+    constexpr int shooterneo2 = 5;//subject to change
 
     //  turret ring
-    constexpr int turretneo = 6;
+    constexpr int turretneo = 6;//subject to change
 
     //  hood
-    constexpr int hoodneo = 7;
+    constexpr int hoodneo = 7;//subject to change
 
 
     namespace BUTTONS
