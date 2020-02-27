@@ -42,7 +42,7 @@ void Robot::TeleopPeriodic()
     hopper.controlFeed();
   }
   
-  
+  IntakeManager();
 }
 
 void Robot::TestPeriodic()

@@ -11,7 +11,7 @@ class Drivetrain
     Transmission rdrive { TRANS::rFalcon, TRANS::rNeo };
     Transmission ldrive { TRANS::lFalcon, TRANS::lNeo };
     Orchestra orchestra;
-
+    
     frc::Solenoid shifter { 0 };
 public:
     Drivetrain();

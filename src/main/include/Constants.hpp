@@ -37,7 +37,7 @@ namespace HOPP
     constexpr int hopperTransportNeo = 3;
     constexpr int hopperIndexerNeo = 10;
     
-    constexpr int laserPort = 4; //can be changed later
+    constexpr int laserPort = 0; //can be changed later
     constexpr double hopperTimer = 0.21771; //Will need to be changed
 }
 namespace INTAKE
