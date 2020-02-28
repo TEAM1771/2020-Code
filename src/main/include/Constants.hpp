@@ -23,14 +23,14 @@ namespace TRANS
     constexpr int rNeo = 14;
     constexpr int lFalcon = 17;
     constexpr int lNeo = 11;    
-    //std::string song_path = "paint";
+    //std::string song_path = "Pain_it_black.chrp";
 } // TRANS
 namespace HOPP
 {
     //Hopper Constants
 
     // Used to define which motor direction is forward or not, can be negated as needed.
-    constexpr double hopperTransportForward = 0.7;
+    constexpr double hopperTransportForward = 1.0;
     constexpr double hopperIndexerForward = 1.0;
     constexpr double hopperFeedForward = 1.0;
     //Define motor CAN IDs
@@ -38,7 +38,8 @@ namespace HOPP
     constexpr int hopperIndexerNeo = 10;
     
     constexpr int laserPort = 0; //can be changed later
-    constexpr double hopperTimer = 0.51771; //Will need to be changed
+    constexpr double hopperTimer = 0.151771; //Will need to be changed
+
 }
 namespace INTAKE
 {
@@ -49,5 +50,24 @@ namespace INTAKE
         constexpr int intakedown = 2;
         constexpr int intakein = 3;
         constexpr int intakeout = 5;
+    }
+}
+namespace TURRET
+{
+    // shooter wheel
+    constexpr int shooterneo1 = 4;//subject to change
+    constexpr int shooterneo2 = 5;//subject to change
+
+    //  turret ring
+    constexpr int turretneo = 6;//subject to change
+
+    //  hood
+    constexpr int hoodneo = 7;//subject to change
+
+
+    namespace BUTTONS
+    {
+        //co-driver's joystick trigger button
+        //constexpr int turretfire = 1;
     }
 }
