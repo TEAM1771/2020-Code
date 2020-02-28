@@ -15,6 +15,7 @@
 #include "Drivetrain.hpp"
 #include "Hopper.hpp"
 #include "Intake.hpp"
+#include "Turret.hpp"
 
 class Robot : public frc::TimedRobot 
 {
@@ -34,5 +35,6 @@ public:
     Drivetrain drive;
     Hopper hopper;
     Intake intake;
+    Turret turret;
     frc::LiveWindow& m_lw = *frc::LiveWindow::GetInstance();
 };
