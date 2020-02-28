@@ -27,6 +27,7 @@ public:
     void TeleopPeriodic() override;
     void TestPeriodic() override;
     void IntakeManager();
+    void TurretManager();
 
  private:
     frc::Joystick rStick { 1 },

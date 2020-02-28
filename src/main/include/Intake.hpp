@@ -11,8 +11,9 @@
 #include <frc/Timer.h>
 #include <frc/drive/DifferentialDrive.h>
 #include <frc/livewindow/LiveWindow.h>
-
-#include "Drivetrain.hpp"
+#include <rev/CANSparkMax.h>
+#include "Constants.hpp"
+#include <frc/Solenoid.h>
 
 class Intake
 {

@@ -53,6 +53,31 @@ void Robot::TestPeriodic()
   
 }
 
+void Robot::TurretManager()
+{
+  //Buttons need to be changed still
+  //Turn Left
+  if (oStick.GetRawButton(1))
+  {
+    turret.aimLeft();
+  }
+  //Turn Right
+  else if(oStick.GetRawButton(2))
+  {
+    turret.aimRight();
+  }
+  //Aim with camera
+  else if (oStick.GetRawButton(3))
+  {
+    turret.aimWithCamera();
+  }
+  else
+  {
+    turret.stopAiming();
+  }
+  
+}
+
 void Robot::IntakeManager()
 {
   // Intake down

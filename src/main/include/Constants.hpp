@@ -47,7 +47,7 @@ namespace HOPPER
     //Define motor CAN IDs
     
     constexpr int laserPort = 0; //can be changed later
-    constexpr double hopperTimer = 0.51771; //Will need to be changed
+    constexpr double hopperTimer = 0.151771; //Will need to be changed
 }
 namespace INTAKE
 {
@@ -67,15 +67,31 @@ namespace SHOOTER
     {
         constexpr int PORT_1 = 4;//subject to change
         constexpr int PORT_2 = 5;//subject to change
+        constexpr int SHOOTING_RPM = 4500; //Lol no idea
+        constexpr int IDLE_RPM = 3000; //lol lets not do this its dumb
+        constexpr double P = 1.0;
+        constexpr double I = 0.0;
+        constexpr double D = 0.0;
     } // SHOOTER
 
     namespace TURRET
     {
         constexpr int PORT = 6;//subject to change
 
-        constexpr double P = 1;
-        constexpr double I = 0;
-        constexpr double D = 0;
+        constexpr double TRAVERSE_SPEED = .4;
+        constexpr double P = 1.0;
+        constexpr double I = 0.0;
+        constexpr double D = 0.0;
+
+        //Define the 4 quadrants 
+        constexpr int FORWARD = 0;
+        constexpr int BACKWARDS = 1000;
+        constexpr int RIGHT = 500;
+        constexpr int LEFT = -500;
+        
+        //Define max travels
+        constexpr int MAX_LEFT = -600;
+        constexpr int MAX_RIGHT = 600;
     } // TURRET
 
     
@@ -83,9 +99,12 @@ namespace SHOOTER
     {
         constexpr int PORT = 7;//subject to change
         
-        constexpr double P = 1;
-        constexpr double I = 0;
-        constexpr double D = 0;
+        constexpr double P = 1.0;
+        constexpr double I = 0.0;
+        constexpr double D = 0.0;
+
+        constexpr int BOTTOM = 0;
+        constexpr int TOP = 100;
     } // HOOD
     
     namespace BUTTONS
