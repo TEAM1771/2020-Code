@@ -3,7 +3,7 @@
 
 Hopper::Hopper()
 {
-    indexerNeo.Set(HOPP::hopperIndexerForward);
+    indexerNeo.Set(HOPPER::INDEXER::SPEED);
     indexerNeo.SetIdleMode(rev::CANSparkMax::IdleMode::kBrake);
     transportNeo.SetIdleMode(rev::CANSparkMax::IdleMode::kBrake);
     numberOfBalls = 3;
@@ -16,11 +16,11 @@ bool Hopper::isLaserBroken() const
 
 void Hopper::transportBall()
 {
-     transportNeo.Set(HOPP::hopperTransportForward); 
+     transportNeo.Set(HOPPER::TRANSPORT::SPEED); 
 }
 void Hopper::feedShooter()
 {
-    transportNeo.Set(HOPP::hopperFeedForward);
+    transportNeo.Set(HOPPER::TRANSPORT::SHOOT_SPEED);
 }
 void Hopper::stopFeed()
 {
@@ -29,7 +29,7 @@ void Hopper::stopFeed()
 }
 void Hopper::startIndexer()
 {
-    indexerNeo.Set(HOPP::hopperIndexerForward);
+    indexerNeo.Set(HOPPER::INDEXER::SPEED);
 }
 void Hopper::stopIndexer()
 {
@@ -65,7 +65,7 @@ void Hopper::controlFeed()
 
 void Hopper::checkBallProgress()
 {
-    if ( timer.HasPeriodPassed(HOPP::hopperTimer) )
+    if ( timer.HasPeriodPassed(HOPPER::hopperTimer) )
     {
         timer.Stop();
         timer.Reset();
