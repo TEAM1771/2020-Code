@@ -27,7 +27,7 @@ void Robot::TeleopPeriodic()
   drive.shift();
 
   static bool isShooting = false;
-  if(lStick.GetTrigger())
+  if(oStick.GetTrigger())
   {
     hopper.feedShooter();
     isShooting = true;

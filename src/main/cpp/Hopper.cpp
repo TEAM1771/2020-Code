@@ -40,7 +40,7 @@ void Hopper::controlFeed()
 {   
     static bool isRunning = false;
     checkBallProgress();
-    if (isLaserBroken() && numberOfBalls < 4 && isRunning == false) {
+    if (isLaserBroken() && numberOfBalls < 3 && isRunning == false) {
         stopIndexer();
         transportBall();
         timer.Reset();
