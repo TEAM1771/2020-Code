@@ -50,6 +50,7 @@ void Robot::TestPeriodic()
   hopper.manualIndexerControl(lStick.GetY());
   hopper.manualTransportControl(rStick.GetY());
   IntakeManager();
+  TurretManager();
   
 }
 
@@ -57,17 +58,17 @@ void Robot::TurretManager()
 {
   //Buttons need to be changed still
   //Turn Left
-  if (oStick.GetRawButton(1))
+  if (oStick.GetRawButton(6))
   {
     turret.aimLeft();
   }
   //Turn Right
-  else if(oStick.GetRawButton(2))
+  else if(oStick.GetRawButton(7))
   {
     turret.aimRight();
   }
   //Aim with camera
-  else if (oStick.GetRawButton(3))
+  else if (oStick.GetRawButton(8))
   {
     turret.aimWithCamera();
   }
@@ -75,6 +76,7 @@ void Robot::TurretManager()
   {
     turret.stopAiming();
   }
+  turret.giveStatus();
   
 }
 

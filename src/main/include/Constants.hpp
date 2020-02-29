@@ -78,7 +78,7 @@ namespace SHOOTER
     {
         constexpr int PORT = 6;//subject to change
 
-        constexpr double TRAVERSE_SPEED = .4;
+        constexpr double TRAVERSE_SPEED = 1;
         constexpr double P = 1.0;
         constexpr double I = 0.0;
         constexpr double D = 0.0;

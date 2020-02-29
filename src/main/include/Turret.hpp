@@ -34,7 +34,7 @@ class Turret
     rev::CANPIDController hood_pidController = hood.GetPIDController();
     rev::CANEncoder hood_encoder = turretTurnyTurny.GetEncoder();
 
-    int turnyturnyEncoderTicks;
+    double turnyturnyEncoderTicks;
     double cameraXValue;
     double cameraYValue;
     double cameraArea;
@@ -56,6 +56,7 @@ public:
     void aimWithCamera();
     void stopAiming();
     void getCameraData();
+    void giveStatus();
     
 
 };

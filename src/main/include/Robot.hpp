@@ -30,9 +30,9 @@ public:
     void TurretManager();
 
  private:
-    frc::Joystick rStick { 1 },
-                  lStick { 2 },
-                  oStick { 3 };
+    frc::Joystick rStick { 0 },
+                  lStick { 1 },
+                  oStick { 2 };
     Drivetrain drive;
     Hopper hopper;
     Intake intake;

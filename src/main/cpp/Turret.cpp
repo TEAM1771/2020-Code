@@ -59,7 +59,7 @@ void Turret::controlTurret()
 
 void Turret::aimLeft()
 {
-    if (turretTurnyTurny_encoder.GetPosition() < SHOOTER::TURRET::MAX_LEFT)
+    if (turretTurnyTurny_encoder.GetPosition() > SHOOTER::TURRET::MAX_LEFT)
     {
         turretTurnyTurny.Set(-SHOOTER::TURRET::TRAVERSE_SPEED);
     }
@@ -92,6 +92,11 @@ void Turret::aimForward()
     turretTurnyTurny_pidController.SetReference(SHOOTER::TURRET::FORWARD, rev::ControlType::kPosition);
 } 
 */
+
+void Turret::giveStatus()
+{
+    std::cout << turretTurnyTurny_encoder.GetPosition() << std::endl;
+}
 
 void Turret::setHoodAngle(int position)
 {
