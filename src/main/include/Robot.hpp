@@ -25,6 +25,8 @@ public:
     void AutonomousPeriodic() override ;
     void TeleopInit() override;
     void TeleopPeriodic() override;
+    void DisabledInit() override;
+    void DisabledPeriodic() override;
     void TestPeriodic() override;
     void IntakeManager();
     void TurretManager();
