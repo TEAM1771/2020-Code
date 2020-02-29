@@ -44,6 +44,10 @@ namespace HOPPER
         constexpr double SPEED = 1.0;
     }
 
+    // Used to define which motor direction is forward or not, can be negated as needed.
+    constexpr double hopperTransportForward = 1.0;
+    constexpr double hopperIndexerForward = 1.0;
+    constexpr double hopperFeedForward = 1.0;
     //Define motor CAN IDs
     
     constexpr int laserPort = 0; //can be changed later
