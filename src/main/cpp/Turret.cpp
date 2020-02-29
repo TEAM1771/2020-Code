@@ -14,14 +14,18 @@ Turret::Turret()
 
     shooter_2.SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);
     shooter_1.SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);
+   // shooter_1.SetOpenLoopRampRate(3);
+   // shooter_2.SetOpenLoopRampRate(3);
 
-   // shooter_2.Follow(shooter_1, true);
-   // shooter_pidController.SetFeedbackDevice(shooter_encoder);
-   // shooter_pidController.SetP(SHOOTER::WHEEL::P);
-   // shooter_pidController.SetI(SHOOTER::WHEEL::I);
-   // shooter_pidController.SetD(SHOOTER::WHEEL::D);
-   // shooter_pidController.SetReference(SHOOTER::WHEEL::SHOOTING_RPM, rev::ControlType::kVelocity);
-
+   /* shooter_1.Follow(shooter_2, true);
+    shooter_pidController.SetFeedbackDevice(shooter_encoder);
+    shooter_pidController.SetP(SHOOTER::WHEEL::P);
+    shooter_pidController.SetI(SHOOTER::WHEEL::I);
+    shooter_pidController.SetD(SHOOTER::WHEEL::D);
+    shooter_pidController.SetFF(SHOOTER::WHEEL::FF);
+    shooter_pidController.SetReference(SHOOTER::WHEEL::SHOOTING_RPM, rev::ControlType::kVelocity);
+    */
+    //shooter_encoder.SetInverted(true);
     //TurretTurnyTurny setup
     turretTurnyTurny.RestoreFactoryDefaults();
     turretTurnyTurny.SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);
@@ -96,9 +100,11 @@ void Turret::aimForward()
 
 void Turret::giveStatus()
 {
-    std::cout << "Turny: " << turretTurnyTurny_encoder.GetPosition() << "\n";
+    std::cout << "Turny: " << turretTurnyTurny_encoder.GetPosition() << std::endl;
+  //  std::cout << "shoot1 " << shooter_1.GetAppliedOutput() << "\n";
+  //  std::cout << "shoot2 " << shooter_2.GetAppliedOutput() << "\n";
  //   std::cout << "Hood: "  << hood_encoder.GetPosition() << "\n";
-    std::cout << "Shooter actual: " << shooter_encoder.GetVelocity() << std::endl;
+   // std::cout << "Shooter actual: " << abs(shooter_encoder.GetVelocity()) << std::endl;
 
 }
 
@@ -107,22 +113,52 @@ void Turret::setHoodAngle(double position)
     hood_pidController.SetReference(position, rev::ControlType::kPosition);
 }
 
+bool Turret::valueInRange(double value, double min, double max)
+{
+    if ( (value >= min) && (value <= max) )
+    {
+         return true;
+    }
+    else
+    {
+        return false;
+    }
+    
+}
+
 void Turret::bangbangControl()
 {
-    if (abs(shooter_encoder.GetVelocity()) <  (SHOOTER::WHEEL::SHOOTING_RPM - 1000) )
-        {
+   /* if ( valueInRange(abs( shooter_encoder.GetVelocity() ) ,SHOOTER::WHEEL::SHOOTING_RPM - 900, SHOOTER::WHEEL::SHOOTING_RPM - 500) )
+    {
+            shooter_1.SetOpenLoopRampRate(0.2);
+            shooter_2.SetOpenLoopRampRate(0.2);
             shooter_1.Set(-.7);
             shooter_2.Set(7);
-        }
-    else if (abs(shooter_encoder.GetVelocity()) < SHOOTER::WHEEL::SHOOTING_RPM  )
-        {
+            std::cout << "area1" << std::endl;
+    }
+    else */if( valueInRange(abs( shooter_encoder.GetVelocity() ), SHOOTER::WHEEL::SHOOTING_RPM - 2000, SHOOTER::WHEEL::SHOOTING_RPM) )
+    {
+            shooter_1.SetOpenLoopRampRate(0);
+            shooter_2.SetOpenLoopRampRate(0);
             shooter_1.Set(-1);
-            shooter_2.Set(1);
-        }
+            shooter_2.Set(1);  
+            std::cout << "area2" << std::endl;
+    }
+    else if ( (abs(shooter_encoder.GetVelocity() ) < SHOOTER::WHEEL::SHOOTING_RPM ))
+    {
+            shooter_1.SetOpenLoopRampRate(3.5771);
+            shooter_2.SetOpenLoopRampRate(3.5771);
+            shooter_1.Set(-1);
+            shooter_2.Set(1);  
+            std::cout << "area3" << std::endl;
+    }
     else
         {
             shooter_1.Set(0);
             shooter_2.Set(0);
+            //shooter_1.SetOpenLoopRampRate(0);
+            //shooter_2.SetOpenLoopRampRate(0);
+            std::cout << "area4" << std::endl;
         }
     
     
@@ -219,6 +255,7 @@ void Turret::getCameraData()
     cameraYValue = table->GetNumber("ty",0.0);
     cameraHasTarget = table->GetBoolean("tv",0.0);
     cameraArea = table->GetNumber("ta", 0.0);
+    
 }
 
 void Turret::aimLeftPID()
@@ -235,8 +272,7 @@ void Turret::aimRightPID()
 
 void Turret::maintainRPM()
 {
-    shooter_1.Set(1);
-    shooter_2.Set(-1);
+    shooter_pidController.SetReference(SHOOTER::WHEEL::SHOOTING_RPM, rev::ControlType::kVelocity);
 }
 
 void Turret::rpmWithStick(float value)

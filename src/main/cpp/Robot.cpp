@@ -86,9 +86,20 @@ void Robot::TurretManager()
    turret.stopAiming(); 
   }
 
-  turret.bangbangControl();
-  turret.giveStatus();
+ turret.bangbangControl();
+ //
  // turret.maintainRPM();  
+  /*if(oStick.GetY() >= 0){
+  turret.rpmWithStick(0);
+  }
+  else
+  {
+  turret.rpmWithStick(oStick.GetY());
+  }*/
+  std::cout << oStick.GetY() << std::endl;
+
+  turret.giveStatus();
+
 }
 
 void Robot::IntakeManager()

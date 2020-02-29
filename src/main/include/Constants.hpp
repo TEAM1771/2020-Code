@@ -51,19 +51,12 @@ namespace HOPPER
     //Define motor CAN IDs
     
     constexpr int laserPort = 0; //can be changed later
-    constexpr double hopperTimer = 0.151771; //Will need to be changed
+    constexpr double hopperTimer = 0.251771; //Will need to be changed
 }
 namespace INTAKE
 {
     constexpr int IntakePort = 12;
     constexpr int intakeairport = 1;
-
-    namespace BUTTONS
-    { 
-        constexpr int intakedown = 2;
-        constexpr int intakein = 3;
-        constexpr int intakeout = 5;
-    }
 }
 namespace SHOOTER
 {
@@ -71,11 +64,12 @@ namespace SHOOTER
     {
         constexpr int PORT_1 = 4;//subject to change
         constexpr int PORT_2 = 5;//subject to change
-        constexpr int SHOOTING_RPM = 4500; //Lol no idea
-        constexpr int IDLE_RPM = 3000; //lol lets not do this its dumb
-        constexpr double P = 1.0;
-        constexpr double I = 0.0;
-        constexpr double D = 0.0;
+        constexpr double SHOOTING_RPM = 7500; //Lol no idea
+        constexpr double IDLE_RPM = 3000; //lol lets not do this its dumb
+        constexpr double P = 0.0001;
+        constexpr double I = 0.0001;
+        constexpr double D = 0.0001;
+        constexpr double FF = 0.1;
     } // SHOOTER
 
     namespace TURRET
@@ -88,14 +82,14 @@ namespace SHOOTER
         constexpr double D = 0.0;
 
         //Define the 4 quadrants 
-        constexpr int FORWARD = 0;
-        constexpr int BACKWARDS = 1000;
-        constexpr int RIGHT = 500;
-        constexpr int LEFT = -500;
+        constexpr double FORWARD = 0;
+        constexpr double BACKWARDS = 100;
+        constexpr double RIGHT = 50;
+        constexpr double LEFT = -50;
         
         //Define max travels
-        constexpr int MAX_LEFT = -600;
-        constexpr int MAX_RIGHT = 600;
+        constexpr double MAX_LEFT = -60;
+        constexpr double MAX_RIGHT = 60;
     } // TURRET
 
     
@@ -110,10 +104,27 @@ namespace SHOOTER
         constexpr int BOTTOM = 0;
         constexpr int TOP = 100;
     } // HOOD
-    
-    namespace BUTTONS
+
+}
+namespace BUTTONS
+{
+    namespace INTAKE
     {
-        //co-driver's joystick trigger button
-        //constexpr int turretfire = 1;
+        constexpr int intakedown = 2;
+        constexpr int intakein = 3;
+        constexpr int intakeout = 5;
     }
+    namespace TURRET
+    {
+        constexpr int AIM_LEFT = 6;
+        constexpr int AIM_RIGHT = 7;
+        constexpr int AIM_LEFT_MANUAL = 9;
+        constexpr int AIM_RIGHT_MANUAL = 8;
+        constexpr int AIM_CAMERA = 10;
+    }
+    namespace HOPPER
+    {
+        constexpr int SHOOT = 1;
+    }
+
 }

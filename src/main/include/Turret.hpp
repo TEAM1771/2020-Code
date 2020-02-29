@@ -32,7 +32,7 @@ class Turret
     rev::CANEncoder turretTurnyTurny_encoder = turretTurnyTurny.GetEncoder();
 
     rev::CANPIDController hood_pidController = hood.GetPIDController();
-    rev::CANEncoder hood_encoder = turretTurnyTurny.GetEncoder();
+    rev::CANEncoder hood_encoder = hood.GetEncoder();
 
     double turnyturnyEncoderTicks;
     double cameraXValue;
@@ -51,12 +51,19 @@ public:
     void aimRight();
     //void aimForward();
     //void aimBackwards();
-    void setHoodAngle(int position);
+    void setHoodAngle(double position);
     void bangbangControl();
     void aimWithCamera();
     void stopAiming();
     void getCameraData();
     void giveStatus();
-    
+    void aimLeftPID();
+    void aimRightPID();
+    double scaleOutput(double inputMin, double inputMax, double outputMin, double outputMax, double input);
+    double getHoodAngle(double height);
+    void batterShotPosition();
+    void maintainRPM();
+    void rpmWithStick(float value);
+    bool valueInRange(double value, double min, double max);
 
 };
