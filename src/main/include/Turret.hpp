@@ -39,6 +39,7 @@ class Turret
     double cameraYValue;
     double cameraArea;
     bool cameraHasTarget;
+    
     std::shared_ptr<NetworkTable> table = nt::NetworkTableInstance::GetDefault().GetTable("limelight");
     
 
@@ -59,11 +60,19 @@ public:
     void giveStatus();
     void aimLeftPID();
     void aimRightPID();
+    void aimZero();
     double scaleOutput(double inputMin, double inputMax, double outputMin, double outputMax, double input);
     double getHoodAngle(double height);
     void batterShotPosition();
     void maintainRPM();
     void rpmWithStick(float value);
     bool valueInRange(double value, double min, double max);
+    void zeroHood();
+    void midHood();
+    void batterHood();
+    double getTurnyTurnyValue();
+    double getHoodValue();
+    void stopShooter();
+    double traverseHood();
 
 };

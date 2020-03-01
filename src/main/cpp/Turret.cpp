@@ -33,7 +33,8 @@ Turret::Turret()
     turretTurnyTurny_pidController.SetI(SHOOTER::TURRET::I);
     turretTurnyTurny_pidController.SetD(SHOOTER::TURRET::D);
     turretTurnyTurny_pidController.SetFeedbackDevice(turretTurnyTurny_encoder);
-    turretTurnyTurny_pidController.SetReference(SHOOTER::TURRET::FORWARD, rev::ControlType::kPosition);
+    turretTurnyTurny_pidController.SetReference(SHOOTER::TURRET::ZERO, rev::ControlType::kPosition);
+    turretTurnyTurny_pidController.SetOutputRange(-.7, .7);
    // turretTurnyTurny.EnableSoftLimit(rev::CANSparkMax::SoftLimitDirection::kForward, true);
    // turretTurnyTurny.EnableSoftLimit(rev::CANSparkMax::SoftLimitDirection::kReverse, true);
    // turretTurnyTurny.SetSoftLimit(rev::CANSparkMax::SoftLimitDirection::kForward, SHOOTER::TURRET::MAX_LEFT);
@@ -41,13 +42,15 @@ Turret::Turret()
     
 
     //Hood setup
-   // hood.RestoreFactoryDefaults();
-   // hood.SetIdleMode(rev::CANSparkMax::IdleMode::kBrake);
-   // hood_pidController.SetP(SHOOTER::HOOD::P);
-   // hood_pidController.SetI(SHOOTER::HOOD::I);
-   // hood_pidController.SetD(SHOOTER::HOOD::D);
-   // hood_pidController.SetFeedbackDevice(hood_encoder);
-   // hood_pidController.SetReference(SHOOTER::HOOD::BOTTOM, rev::ControlType::kPosition);
+    hood.RestoreFactoryDefaults();
+    hood.SetIdleMode(rev::CANSparkMax::IdleMode::kBrake);
+    
+    hood_pidController.SetP(SHOOTER::HOOD::P);
+    hood_pidController.SetI(SHOOTER::HOOD::I);
+    hood_pidController.SetD(SHOOTER::HOOD::D);
+    hood_pidController.SetFeedbackDevice(hood_encoder);
+    hood_pidController.SetReference(SHOOTER::HOOD::BOTTOM, rev::ControlType::kPosition);
+    hood_pidController.SetOutputRange(-.8,.8);
    // hood.EnableSoftLimit(rev::CANSparkMax::SoftLimitDirection::kForward, true);
    // hood.EnableSoftLimit(rev::CANSparkMax::SoftLimitDirection::kReverse, true);
    // hood.SetSoftLimit(rev::CANSparkMax::SoftLimitDirection::kForward, SHOOTER::HOOD::TOP);
@@ -98,14 +101,30 @@ void Turret::aimForward()
 } 
 */
 
+void Turret::stopShooter()
+{
+    shooter_1.Set(0);
+    shooter_2.Set(0);
+}
+
 void Turret::giveStatus()
 {
     std::cout << "Turny: " << turretTurnyTurny_encoder.GetPosition() << std::endl;
   //  std::cout << "shoot1 " << shooter_1.GetAppliedOutput() << "\n";
   //  std::cout << "shoot2 " << shooter_2.GetAppliedOutput() << "\n";
- //   std::cout << "Hood: "  << hood_encoder.GetPosition() << "\n";
+    std::cout << "Hood: "  << hood_encoder.GetPosition() << std::endl;
    // std::cout << "Shooter actual: " << abs(shooter_encoder.GetVelocity()) << std::endl;
 
+}
+
+double Turret::getHoodValue()
+{
+    return hood_encoder.GetPosition();
+}
+
+double Turret::getTurnyTurnyValue()
+{
+    return turretTurnyTurny_encoder.GetPosition();
 }
 
 void Turret::setHoodAngle(double position)
@@ -142,15 +161,15 @@ void Turret::bangbangControl()
             shooter_2.SetOpenLoopRampRate(0);
             shooter_1.Set(-1);
             shooter_2.Set(1);  
-            std::cout << "area2" << std::endl;
+            //std::cout << "area2" << std::endl;
     }
     else if ( (abs(shooter_encoder.GetVelocity() ) < SHOOTER::WHEEL::SHOOTING_RPM ))
     {
-            shooter_1.SetOpenLoopRampRate(3.5771);
-            shooter_2.SetOpenLoopRampRate(3.5771);
+            shooter_1.SetOpenLoopRampRate(5.1771);
+            shooter_2.SetOpenLoopRampRate(5.1771);
             shooter_1.Set(-1);
             shooter_2.Set(1);  
-            std::cout << "area3" << std::endl;
+            //std::cout << "area3" << std::endl;
     }
     else
         {
@@ -158,7 +177,7 @@ void Turret::bangbangControl()
             shooter_2.Set(0);
             //shooter_1.SetOpenLoopRampRate(0);
             //shooter_2.SetOpenLoopRampRate(0);
-            std::cout << "area4" << std::endl;
+           // std::cout << "area4" << std::endl;
         }
     
     
@@ -188,6 +207,11 @@ void Turret::aimWithCamera()
         turretTurnyTurny.Set(0);
     }
 
+}
+
+double Turret::traverseHood()
+{
+    hood_pidController.SetReference(SHOOTER::HOOD::TRAVERSE, rev::ControlType::kPosition);
 }
 
 //Height is the Y value of the camera tracking the target
@@ -258,16 +282,22 @@ void Turret::getCameraData()
     
 }
 
+
 void Turret::aimLeftPID()
 {
     //turretTurnyTurny_pidController.Set
-    turretTurnyTurny_pidController.SetReference(-600, rev::ControlType::kPosition);
+    turretTurnyTurny_pidController.SetReference(SHOOTER::TURRET::FORWARD, rev::ControlType::kPosition);
     //std::cout << turretTurnyTurny_pidController
 }
 
 void Turret::aimRightPID()
 {
-     turretTurnyTurny_pidController.SetReference(600, rev::ControlType::kPosition);
+     turretTurnyTurny_pidController.SetReference(SHOOTER::TURRET::BACKWARDS, rev::ControlType::kPosition);
+}
+
+void Turret::aimZero()
+{
+     turretTurnyTurny_pidController.SetReference(SHOOTER::TURRET::ZERO, rev::ControlType::kPosition);
 }
 
 void Turret::maintainRPM()
@@ -279,4 +309,20 @@ void Turret::rpmWithStick(float value)
 {
     shooter_1.Set(value);
     shooter_2.Set(-value);
+}
+
+void Turret::zeroHood()
+{
+        hood_pidController.SetReference(SHOOTER::HOOD::BOTTOM, rev::ControlType::kPosition);
+}
+
+void Turret::midHood()
+{
+        hood_pidController.SetReference(SHOOTER::HOOD::MIDPOINT, rev::ControlType::kPosition);
+}
+
+void Turret::batterHood()
+{
+    hood_pidController.SetReference(SHOOTER::HOOD::BATTER, rev::ControlType::kPosition);
+
 }

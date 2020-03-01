@@ -51,7 +51,7 @@ namespace HOPPER
     //Define motor CAN IDs
     
     constexpr int laserPort = 0; //can be changed later
-    constexpr double hopperTimer = 0.251771; //Will need to be changed
+    constexpr double hopperTimer = 0.31771; //Will need to be changed
 }
 namespace INTAKE
 {
@@ -76,20 +76,23 @@ namespace SHOOTER
     {
         constexpr int PORT = 6;//subject to change
 
-        constexpr double TRAVERSE_SPEED = 1;
-        constexpr double P = 1.0;
+        constexpr double TRAVERSE_SPEED = .5;
+        constexpr double P = 0.1;
         constexpr double I = 0.0;
         constexpr double D = 0.0;
 
+        constexpr double SAFE_TO_DEPLOY_HOOD_FRONT = -44;
+
         //Define the 4 quadrants 
-        constexpr double FORWARD = 0;
-        constexpr double BACKWARDS = 100;
-        constexpr double RIGHT = 50;
-        constexpr double LEFT = -50;
+        constexpr double ZERO = 0;
+        constexpr double FORWARD = -53;
+        constexpr double BACKWARDS = 53;
+        //constexpr double RIGHT = 50;
+        //constexpr double LEFT = -50;
         
         //Define max travels
-        constexpr double MAX_LEFT = -60;
-        constexpr double MAX_RIGHT = 60;
+        constexpr double MAX_LEFT = -74;
+        constexpr double MAX_RIGHT = 74;
     } // TURRET
 
     
@@ -97,12 +100,15 @@ namespace SHOOTER
     {
         constexpr int PORT = 7;//subject to change
         
-        constexpr double P = 1.0;
+        constexpr double P = 0.1;
         constexpr double I = 0.0;
         constexpr double D = 0.0;
 
         constexpr int BOTTOM = 0;
-        constexpr int TOP = 100;
+        constexpr double TRAVERSE = -9.4;
+        constexpr int SAFE_TO_TURN = -42;
+        constexpr int MIDPOINT = -26;
+        constexpr int BATTER = -89;
     } // HOOD
 
 }
@@ -116,11 +122,14 @@ namespace BUTTONS
     }
     namespace TURRET
     {
-        constexpr int AIM_LEFT = 6;
+        constexpr int AIM_LEFT = 8;
         constexpr int AIM_RIGHT = 7;
-        constexpr int AIM_LEFT_MANUAL = 9;
-        constexpr int AIM_RIGHT_MANUAL = 8;
+        //constexpr int AIM_LEFT_MANUAL = 9;
+        //constexpr int AIM_RIGHT_MANUAL = 8;
         constexpr int AIM_CAMERA = 10;
+        constexpr int HOOD_ZERO = 4;
+        //constexpr int HOOD_MIDPOINT = 6;
+        constexpr int TURRET_HOOD_BATTERSHOT = 6;
     }
     namespace HOPPER
     {

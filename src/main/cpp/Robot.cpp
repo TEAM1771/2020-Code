@@ -2,7 +2,7 @@
 
 Robot::Robot()
 {
-
+  activeIntake = false;
 }
 
 void Robot::AutonomousInit()
@@ -27,7 +27,7 @@ void Robot::TeleopPeriodic()
   drive.shift();
 
   static bool isShooting = false;
-  if(BUTTONS::HOPPER::SHOOT)
+  if(oStick.GetRawButton(BUTTONS::HOPPER::SHOOT))
   {
     hopper.feedShooter();
     isShooting = true;
@@ -50,43 +50,84 @@ void Robot::TestPeriodic()
 {
   hopper.manualIndexerControl(lStick.GetY());
   hopper.manualTransportControl(rStick.GetY());
-  IntakeManager();
   TurretManager();
+  IntakeManager();
+
   
 }
 
 void Robot::TurretManager()
 {
+      
+    if (oStick.GetRawButton(BUTTONS::TURRET::AIM_LEFT))
+    {
+    turret.bangbangControl(); 
+    turret.aimLeftPID();
+    intake.deploy(true);
+    activeIntake = true;
+    turret.traverseHood();
+    }
+    else if(oStick.GetRawButton(BUTTONS::TURRET::AIM_RIGHT))
+    {
+    turret.bangbangControl();
+    turret.aimRightPID();
+    intake.deploy(true);
+    activeIntake = true;
+    turret.traverseHood();
+    }
+    else if(oStick.GetRawButton(BUTTONS::TURRET::TURRET_HOOD_BATTERSHOT))
+    {
 
-  if (oStick.GetRawButton(BUTTONS::TURRET::AIM_LEFT))
-  {
-   turret.aimLeftPID();
-  }
-  else if(oStick.GetRawButton(BUTTONS::TURRET::AIM_RIGHT))
-  {
-   turret.aimRightPID();
-  }
-  else if (oStick.GetRawButton(BUTTONS::TURRET::AIM_RIGHT_MANUAL))
-  {
-    turret.aimRight();
-  }
-  else if (oStick.GetRawButton(BUTTONS::TURRET::AIM_LEFT_MANUAL))
-  {
-    turret.aimLeft();
-  }
-  else if(oStick.GetRawButton(BUTTONS::TURRET::AIM_CAMERA))
-  {
-    turret.aimWithCamera();
-  }
+        //turret.traverseHood();
+        turret.bangbangControl();
+        turret.aimLeftPID();
+        intake.deploy(true);
+        activeIntake = true;
+        turret.traverseHood();
+        if(turret.getTurnyTurnyValue() < SHOOTER::TURRET::SAFE_TO_DEPLOY_HOOD_FRONT)
+        {
+          turret.batterHood();
+          
+        }
+        else
+        {
+          turret.traverseHood();
+        }
+    }
+    /*else if (oStick.GetRawButton(BUTTONS::TURRET::AIM_RIGHT_MANUAL))
+    {
+      turret.aimRight();
+    }
+    else if (oStick.GetRawButton(BUTTONS::TURRET::AIM_LEFT_MANUAL))
+    {
+      turret.aimLeft();
+    }*/
+    else if(oStick.GetRawButton(BUTTONS::TURRET::AIM_CAMERA))
+    {
+      turret.bangbangControl();
+      turret.aimWithCamera();
+    }
+    
+    else
+    {
+      if(turret.getHoodValue() > SHOOTER::HOOD::SAFE_TO_TURN)
+      {
+        turret.aimZero();
+      }
 
-  if( oStick.GetRawButtonReleased(BUTTONS::TURRET::AIM_RIGHT_MANUAL) 
-    || oStick.GetRawButtonReleased(BUTTONS::TURRET::AIM_LEFT_MANUAL) 
-    || oStick.GetRawButtonReleased(BUTTONS::TURRET::AIM_CAMERA) )
-  {
-   turret.stopAiming(); 
-  }
+      turret.zeroHood();
+      turret.stopShooter();
+      activeIntake = false;
+    }
+    
 
- turret.bangbangControl();
+    if(oStick.GetRawButtonReleased(BUTTONS::TURRET::AIM_CAMERA) )
+    {
+    turret.stopAiming(); 
+    }
+  
+
+ //turret.bangbangControl();
  //
  // turret.maintainRPM();  
   /*if(oStick.GetY() >= 0){
@@ -96,17 +137,21 @@ void Robot::TurretManager()
   {
   turret.rpmWithStick(oStick.GetY());
   }*/
-  std::cout << oStick.GetY() << std::endl;
+  //std::cout << oStick.GetY() << std::endl;
 
   turret.giveStatus();
 
 }
 
+
 void Robot::IntakeManager()
 {
   // Intake down
 
-  intake.deploy(oStick.GetRawButton(BUTTONS::INTAKE::intakedown));
+  if(!activeIntake){
+  intake.deploy(oStick.GetRawButton(BUTTONS::INTAKE::intakedown));  
+  }
+
   
   if (oStick.GetRawButton(BUTTONS::INTAKE::intakein))
     {// Intake in

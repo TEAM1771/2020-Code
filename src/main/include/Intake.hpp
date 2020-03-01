@@ -19,9 +19,11 @@ class Intake
 {
 
     frc::Solenoid intakeair {INTAKE::intakeairport};
+    bool intakeDeployed = false;
 public:
     rev::CANSparkMax intakeneo {INTAKE::IntakePort, rev::CANSparkMaxLowLevel::MotorType::kBrushless};
     Intake();
     void deploy(bool val);
+    bool isIntakeDown();
 
 };

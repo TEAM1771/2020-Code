@@ -39,5 +39,6 @@ public:
     Hopper hopper;
     Intake intake;
     Turret turret;
+    bool activeIntake;
     frc::LiveWindow& m_lw = *frc::LiveWindow::GetInstance();
 };
