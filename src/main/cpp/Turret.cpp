@@ -61,11 +61,168 @@ Turret::Turret()
      frc::SmartDashboard::PutNumber("Y Offset", cameraYValue);
 }
 
-//To be called from robot.cpp, will handle all autonomous self containing functions 
-void Turret::controlTurret()
+
+/*
+void Turret::aimBackwards()
 {
-    turnyturnyEncoderTicks = turretTurnyTurny_encoder.GetPosition();
+    turretTurnyTurny_pidController.SetReference(SHOOTER::TURRET::BACKWARDS, rev::ControlType::kPosition);
 }
+
+void Turret::aimForward()
+{
+    turretTurnyTurny_pidController.SetReference(SHOOTER::TURRET::FORWARD, rev::ControlType::kPosition);
+} 
+*/
+
+void Turret::stopShooter()
+{
+    shooter_1.Set(0);
+    shooter_2.Set(0);
+}
+
+bool Turret::valueInRange(double value, double min, double max)
+{
+    if ( (value >= min) && (value <= max) )
+    {
+         return true;
+    }
+    else
+    {
+        return false;
+    }
+    
+}
+
+void Turret::bangbangControl()
+{
+   /* if ( valueInRange(abs( shooter_encoder.GetVelocity() ) ,SHOOTER::WHEEL::SHOOTING_RPM - 900, SHOOTER::WHEEL::SHOOTING_RPM - 500) )
+    {
+        shooter_1.SetOpenLoopRampRate(0.2);
+        shooter_2.SetOpenLoopRampRate(0.2);
+        shooter_1.Set(-.7);
+        shooter_2.Set(7);
+        std::cout << "area1" << std::endl;
+    }
+    else */if( valueInRange(abs( shooter_encoder.GetVelocity() ), SHOOTER::WHEEL::SHOOTING_RPM - 2000, SHOOTER::WHEEL::SHOOTING_RPM) )
+    {
+        shooter_1.SetOpenLoopRampRate(0);
+        shooter_2.SetOpenLoopRampRate(0);
+        shooter_1.Set(-1);
+        shooter_2.Set(1);  
+        //std::cout << "area2" << std::endl;
+    }
+    else if ( (abs(shooter_encoder.GetVelocity() ) < SHOOTER::WHEEL::SHOOTING_RPM ))
+    {
+        shooter_1.SetOpenLoopRampRate(5.1771);
+        shooter_2.SetOpenLoopRampRate(5.1771);
+        shooter_1.Set(-1);
+        shooter_2.Set(1);  
+        //std::cout << "area3" << std::endl;
+    }
+    else
+    {
+        shooter_1.Set(0);
+        shooter_2.Set(0);
+        //shooter_1.SetOpenLoopRampRate(0);
+        //shooter_2.SetOpenLoopRampRate(0);
+        // std::cout << "area4" << std::endl;
+    }
+    
+    
+}
+
+void Turret::aimWithCameraLimelight()
+{
+    //frc::SmartDashboard::GetNumber("Hood Position", hoodSetpoint));
+    getCameraData();
+    if (cameraHasTarget)
+    {
+        double xOffset = cameraXValue;
+        double output = xOffset/20;
+        double const currentTicks = turretTurnyTurny_encoder.GetPosition();
+        if (currentTicks < SHOOTER::TURRET::MAX_RIGHT 
+         && currentTicks > SHOOTER::TURRET::MAX_LEFT)
+        {
+            turretTurnyTurny.Set(output);
+        }
+        else
+        {
+            turretTurnyTurny.Set(0);
+        }
+        
+        
+        double const yval = getHoodAngle(cameraYValue);
+        setHoodAngle(yval);
+    }
+    else
+    {
+          turretTurnyTurny.Set(0);
+    }
+
+}
+
+void Turret::aimWithCamera()
+{  
+    //Aim to the center of the target
+    getCameraData();
+    //Figure out some offset based on camera data?
+    if (cameraHasTarget)
+    {
+    //Insert math to scale here
+        const int cameraXMidPoint = 320 / 2;
+        const int cameraXOffset = cameraXValue - cameraXMidPoint;
+        //Need to scale output to be -1:1 based on cameraOffset 
+        double const output = scaleOutput(0,320,-1,1, cameraXOffset);
+        turretTurnyTurny.Set(output);
+
+        double const yval = getHoodAngle(cameraYValue);
+        setHoodAngle(yval);
+    }
+    else
+    {
+        turretTurnyTurny.Set(0);
+    }
+
+}
+
+void Turret::traverseHood()
+{
+    hood_pidController.SetReference(SHOOTER::HOOD::TRAVERSE, rev::ControlType::kPosition);
+}
+
+double Turret::scaleOutput(double inputMin, double inputMax, double outputMin, double outputMax, double input)
+{
+   double output = ( (input - inputMin) / (inputMax - inputMin) ) * ( ( outputMax - outputMin) ) + inputMin;
+   return output; 
+}
+
+void Turret::stopAiming()
+{
+    turretTurnyTurny.Set(0);
+}
+
+void Turret::getCameraData()
+{
+    //Do Something to get Network table data
+    
+    cameraXValue = table->GetNumber("tx",0.0);
+    cameraYValue = table->GetNumber("ty",0.0);
+    cameraHasTarget = table->GetNumber("tv",0.0);
+    //cameraArea = table->GetNumber("ta", 0.0);
+    
+}
+
+
+void Turret::rpmWithStick(float value)
+{
+    shooter_1.Set(value);
+    shooter_2.Set(-value);
+}
+
+/**************************************************/
+/*         Direct Position control functions      */
+/**************************************************/
+
 
 void Turret::aimLeft()
 {
@@ -91,24 +248,47 @@ void Turret::aimRight()
     }
 }
 
-/*
-void Turret::aimBackwards()
+void Turret::aimLeftPID()
 {
-    turretTurnyTurny_pidController.SetReference(SHOOTER::TURRET::BACKWARDS, rev::ControlType::kPosition);
-}
-
-void Turret::aimForward()
-{
+    //turretTurnyTurny_pidController.Set
     turretTurnyTurny_pidController.SetReference(SHOOTER::TURRET::FORWARD, rev::ControlType::kPosition);
-} 
-*/
-
-void Turret::stopShooter()
-{
-    shooter_1.Set(0);
-    shooter_2.Set(0);
+    //std::cout << turretTurnyTurny_pidController
 }
 
+void Turret::aimRightPID()
+{
+     turretTurnyTurny_pidController.SetReference(SHOOTER::TURRET::BACKWARDS, rev::ControlType::kPosition);
+}
+
+void Turret::aimZero()
+{
+     turretTurnyTurny_pidController.SetReference(SHOOTER::TURRET::ZERO, rev::ControlType::kPosition);
+}
+
+void Turret::maintainRPM()
+{
+    shooter_pidController.SetReference(SHOOTER::WHEEL::SHOOTING_RPM, rev::ControlType::kVelocity);
+}
+
+void Turret::zeroHood()
+{
+        hood_pidController.SetReference(SHOOTER::HOOD::BOTTOM, rev::ControlType::kPosition);
+}
+
+void Turret::midHood()
+{
+        hood_pidController.SetReference(SHOOTER::HOOD::MIDPOINT, rev::ControlType::kPosition);
+}
+
+void Turret::batterHood()
+{
+    hood_pidController.SetReference(SHOOTER::HOOD::BATTER, rev::ControlType::kPosition);
+
+}
+
+/************************************************************/
+/*          getters / display functions                     */
+/************************************************************/
 void Turret::giveStatus()
 {
    // std::cout << "Turny: " << turretTurnyTurny_encoder.GetPosition() << std::endl;
@@ -141,115 +321,10 @@ void Turret::setHoodAngle(double position)
     hood_pidController.SetReference(position, rev::ControlType::kPosition);
 }
 
-bool Turret::valueInRange(double value, double min, double max)
+//To be called from robot.cpp, will handle all autonomous self containing functions 
+void Turret::controlTurret()
 {
-    if ( (value >= min) && (value <= max) )
-    {
-         return true;
-    }
-    else
-    {
-        return false;
-    }
-    
-}
-
-void Turret::bangbangControl()
-{
-   /* if ( valueInRange(abs( shooter_encoder.GetVelocity() ) ,SHOOTER::WHEEL::SHOOTING_RPM - 900, SHOOTER::WHEEL::SHOOTING_RPM - 500) )
-    {
-            shooter_1.SetOpenLoopRampRate(0.2);
-            shooter_2.SetOpenLoopRampRate(0.2);
-            shooter_1.Set(-.7);
-            shooter_2.Set(7);
-            std::cout << "area1" << std::endl;
-    }
-    else */if( valueInRange(abs( shooter_encoder.GetVelocity() ), SHOOTER::WHEEL::SHOOTING_RPM - 2000, SHOOTER::WHEEL::SHOOTING_RPM) )
-    {
-            shooter_1.SetOpenLoopRampRate(0);
-            shooter_2.SetOpenLoopRampRate(0);
-            shooter_1.Set(-1);
-            shooter_2.Set(1);  
-            //std::cout << "area2" << std::endl;
-    }
-    else if ( (abs(shooter_encoder.GetVelocity() ) < SHOOTER::WHEEL::SHOOTING_RPM ))
-    {
-            shooter_1.SetOpenLoopRampRate(5.1771);
-            shooter_2.SetOpenLoopRampRate(5.1771);
-            shooter_1.Set(-1);
-            shooter_2.Set(1);  
-            //std::cout << "area3" << std::endl;
-    }
-    else
-        {
-            shooter_1.Set(0);
-            shooter_2.Set(0);
-            //shooter_1.SetOpenLoopRampRate(0);
-            //shooter_2.SetOpenLoopRampRate(0);
-           // std::cout << "area4" << std::endl;
-        }
-    
-    
-}
-
-void Turret::aimWithCameraLimelight()
-{
-    //frc::SmartDashboard::GetNumber("Hood Position", hoodSetpoint));
-    getCameraData();
-    if (cameraHasTarget)
-    {
-        double xOffset = cameraXValue;
-        double output = xOffset/20;
-        double const currentTicks = turretTurnyTurny_encoder.GetPosition();
-        if (currentTicks < SHOOTER::TURRET::MAX_RIGHT && currentTicks > SHOOTER::TURRET::MAX_LEFT)
-        {
-            turretTurnyTurny.Set(output);
-        }
-        else
-        {
-            turretTurnyTurny.Set(0);
-        }
-        double yOffset = cameraYValue;
-        //double hoodPosition = getHoodAngle();
-        
-        
-    }
-    else{
-          turretTurnyTurny.Set(0);
-   
-    }
-
-}
-
-void Turret::aimWithCamera()
-{  
-    //Aim to the center of the target
-    getCameraData();
-    //Figure out some offset based on camera data?
-    if (cameraHasTarget)
-    {
-    //Insert math to scale here
-        double output;
-        const int cameraXMidPoint = 320 / 2;
-        const int cameraXOffset = cameraXValue - cameraXMidPoint;
-        //Need to scale output to be -1:1 based on cameraOffset 
-        output = scaleOutput(0,320,-1,1, cameraXOffset);
-        turretTurnyTurny.Set(output);
-        double heightPosition;
-       // const int cameraYMidPoint = 240/2;
-        heightPosition = getHoodAngle(cameraYValue);
-        setHoodAngle(heightPosition);
-    }
-    else
-    {
-        turretTurnyTurny.Set(0);
-    }
-
-}
-
-void Turret::traverseHood()
-{
-    hood_pidController.SetReference(SHOOTER::HOOD::TRAVERSE, rev::ControlType::kPosition);
+    turnyturnyEncoderTicks = turretTurnyTurny_encoder.GetPosition();
 }
 
 //Height is the Y value of the camera tracking the target
@@ -258,18 +333,18 @@ double Turret::getHoodAngle(double height)
     
     //YValues table is the camera reading
     //Hood table is the hood position
-    std::vector<double> const YValues { 200, 180, 166, 154, 143, 132, 123, 115, 108, 102 }; 
-    std::vector<double> const hoodTable {0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100};
+    std::vector<double> const YValues   { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }; 
+    std::vector<double> const hoodTable { 0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20};
     
     //Check if height is higher than anything in the table (indicating we are closer, thus should set hood to the minimum value)
     if ( height > YValues[0] )
     {
-        return 0.0;
+        return SHOOTER::HOOD::TRAVERSE;
     }
     //Check if height is lower than anything in the table (indicating we are farther than anything, thus should set hood to the max)
     else if (height < *std::prev(YValues.end()) )
     {
-        return 100;
+        return SHOOTER::HOOD::SAFE_TO_TURN;
     }
 
     double valueToReturn;
@@ -294,72 +369,4 @@ double Turret::getHoodAngle(double height)
 
    // double valueToReturn = 0;
     return valueToReturn;
-
-}
-
-double Turret::scaleOutput(double inputMin, double inputMax, double outputMin, double outputMax, double input)
-{
-   double output = ( (input - inputMin) / (inputMax - inputMin) ) * ( ( outputMax - outputMin) ) + inputMin;
-   return output; 
-}
-
-void Turret::stopAiming()
-{
-    turretTurnyTurny.Set(0);
-}
-
-void Turret::getCameraData()
-{
-    //Do Something to get Network table data
-    
-    cameraXValue = table->GetNumber("tx",0.0);
-    cameraYValue = table->GetNumber("ty",0.0);
-    cameraHasTarget = table->GetNumber("tv",0.0);
-    //cameraArea = table->GetNumber("ta", 0.0);
-    
-}
-
-
-void Turret::aimLeftPID()
-{
-    //turretTurnyTurny_pidController.Set
-    turretTurnyTurny_pidController.SetReference(SHOOTER::TURRET::FORWARD, rev::ControlType::kPosition);
-    //std::cout << turretTurnyTurny_pidController
-}
-
-void Turret::aimRightPID()
-{
-     turretTurnyTurny_pidController.SetReference(SHOOTER::TURRET::BACKWARDS, rev::ControlType::kPosition);
-}
-
-void Turret::aimZero()
-{
-     turretTurnyTurny_pidController.SetReference(SHOOTER::TURRET::ZERO, rev::ControlType::kPosition);
-}
-
-void Turret::maintainRPM()
-{
-    shooter_pidController.SetReference(SHOOTER::WHEEL::SHOOTING_RPM, rev::ControlType::kVelocity);
-}
-
-void Turret::rpmWithStick(float value)
-{
-    shooter_1.Set(value);
-    shooter_2.Set(-value);
-}
-
-void Turret::zeroHood()
-{
-        hood_pidController.SetReference(SHOOTER::HOOD::BOTTOM, rev::ControlType::kPosition);
-}
-
-void Turret::midHood()
-{
-        hood_pidController.SetReference(SHOOTER::HOOD::MIDPOINT, rev::ControlType::kPosition);
-}
-
-void Turret::batterHood()
-{
-    hood_pidController.SetReference(SHOOTER::HOOD::BATTER, rev::ControlType::kPosition);
-
 }
