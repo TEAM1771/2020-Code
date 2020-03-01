@@ -11,6 +11,8 @@
 #include <frc/Timer.h>
 #include <frc/drive/DifferentialDrive.h>
 #include <frc/livewindow/LiveWindow.h>
+#include <frc/smartdashboard/smartdashboard.h>
+
 
 #include "Drivetrain.hpp"
 #include "Hopper.hpp"

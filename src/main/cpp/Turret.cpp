@@ -55,8 +55,10 @@ Turret::Turret()
    // hood.EnableSoftLimit(rev::CANSparkMax::SoftLimitDirection::kReverse, true);
    // hood.SetSoftLimit(rev::CANSparkMax::SoftLimitDirection::kForward, SHOOTER::HOOD::TOP);
    // hood.SetSoftLimit(rev::CANSparkMax::SoftLimitDirection::kForward, SHOOTER::HOOD::BOTTOM);
-
-
+    double hoodSetpoint = 0;
+    getCameraData();
+     frc::SmartDashboard::PutNumber("Hood Setpoint", hoodSetpoint);
+     frc::SmartDashboard::PutNumber("Y Offset", cameraYValue);
 }
 
 //To be called from robot.cpp, will handle all autonomous self containing functions 
@@ -109,11 +111,18 @@ void Turret::stopShooter()
 
 void Turret::giveStatus()
 {
-    std::cout << "Turny: " << turretTurnyTurny_encoder.GetPosition() << std::endl;
+   // std::cout << "Turny: " << turretTurnyTurny_encoder.GetPosition() << std::endl;
   //  std::cout << "shoot1 " << shooter_1.GetAppliedOutput() << "\n";
   //  std::cout << "shoot2 " << shooter_2.GetAppliedOutput() << "\n";
-    std::cout << "Hood: "  << hood_encoder.GetPosition() << std::endl;
+  //  std::cout << "Hood: "  << hood_encoder.GetPosition() << std::endl;
    // std::cout << "Shooter actual: " << abs(shooter_encoder.GetVelocity()) << std::endl;
+   getCameraData();
+   //std::cout << "X: " << cameraXValue << "\n";
+  // std::cout << "Y: " << cameraYValue << std::endl;
+  // if (cameraHasTarget)
+  // {
+  // std::cout << "Target! :" << std::endl;
+  // }
 
 }
 
@@ -183,6 +192,35 @@ void Turret::bangbangControl()
     
 }
 
+void Turret::aimWithCameraLimelight()
+{
+    //frc::SmartDashboard::GetNumber("Hood Position", hoodSetpoint));
+    getCameraData();
+    if (cameraHasTarget)
+    {
+        double xOffset = cameraXValue;
+        double output = xOffset/20;
+        double const currentTicks = turretTurnyTurny_encoder.GetPosition();
+        if (currentTicks < SHOOTER::TURRET::MAX_RIGHT && currentTicks > SHOOTER::TURRET::MAX_LEFT)
+        {
+            turretTurnyTurny.Set(output);
+        }
+        else
+        {
+            turretTurnyTurny.Set(0);
+        }
+        double yOffset = cameraYValue;
+        //double hoodPosition = getHoodAngle();
+        
+        
+    }
+    else{
+          turretTurnyTurny.Set(0);
+   
+    }
+
+}
+
 void Turret::aimWithCamera()
 {  
     //Aim to the center of the target
@@ -209,7 +247,7 @@ void Turret::aimWithCamera()
 
 }
 
-double Turret::traverseHood()
+void Turret::traverseHood()
 {
     hood_pidController.SetReference(SHOOTER::HOOD::TRAVERSE, rev::ControlType::kPosition);
 }
@@ -217,7 +255,7 @@ double Turret::traverseHood()
 //Height is the Y value of the camera tracking the target
 double Turret::getHoodAngle(double height)
 {
-    /*
+    
     //YValues table is the camera reading
     //Hood table is the hood position
     std::vector<double> const YValues { 200, 180, 166, 154, 143, 132, 123, 115, 108, 102 }; 
@@ -229,15 +267,15 @@ double Turret::getHoodAngle(double height)
         return 0.0;
     }
     //Check if height is lower than anything in the table (indicating we are farther than anything, thus should set hood to the max)
-    else if (height < std::prev(YValues.end()) )
+    else if (height < *std::prev(YValues.end()) )
     {
         return 100;
     }
 
     double valueToReturn;
-    int position;
+    int position = 1;
 
-    for (int i = 0; i <= YValues.size(); i++) {
+    for (unsigned int i = 0; i <= YValues.size(); i++) {
         if ((height <= YValues[i])
                 && (height >= YValues[i + 1])) {
             //assign a "position" to be used later on
@@ -253,8 +291,8 @@ double Turret::getHoodAngle(double height)
             * (height - YValues[position + 1]))
             + hoodTable[position + 1];
 
-*/
-    double valueToReturn = 0;
+
+   // double valueToReturn = 0;
     return valueToReturn;
 
 }
@@ -267,7 +305,6 @@ double Turret::scaleOutput(double inputMin, double inputMax, double outputMin, d
 
 void Turret::stopAiming()
 {
-    
     turretTurnyTurny.Set(0);
 }
 
@@ -277,8 +314,8 @@ void Turret::getCameraData()
     
     cameraXValue = table->GetNumber("tx",0.0);
     cameraYValue = table->GetNumber("ty",0.0);
-    cameraHasTarget = table->GetBoolean("tv",0.0);
-    cameraArea = table->GetNumber("ta", 0.0);
+    cameraHasTarget = table->GetNumber("tv",0.0);
+    //cameraArea = table->GetNumber("ta", 0.0);
     
 }
 

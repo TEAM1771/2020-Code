@@ -73,6 +73,7 @@ public:
     double getTurnyTurnyValue();
     double getHoodValue();
     void stopShooter();
-    double traverseHood();
+    void traverseHood();
+    void aimWithCameraLimelight();
 
 };

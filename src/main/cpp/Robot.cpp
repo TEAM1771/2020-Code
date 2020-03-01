@@ -58,22 +58,53 @@ void Robot::TestPeriodic()
 
 void Robot::TurretManager()
 {
+    static bool aiming = false;
+    static bool isCommandingHood = false;
       
     if (oStick.GetRawButton(BUTTONS::TURRET::AIM_LEFT))
     {
-    turret.bangbangControl(); 
-    turret.aimLeftPID();
-    intake.deploy(true);
-    activeIntake = true;
-    turret.traverseHood();
+      turret.bangbangControl(); 
+      if (!aiming)
+      {
+        turret.aimLeftPID();
+        if ( turret.getTurnyTurnyValue() > SHOOTER::TURRET::FORWARD-2 && turret.getTurnyTurnyValue() < SHOOTER::TURRET::FORWARD+2)
+        {
+          aiming = true;
+        }
+      }
+      else{
+        turret.aimWithCameraLimelight();
+      }
+      intake.deploy(true);
+      activeIntake = true;
+      if( !isCommandingHood)
+      {
+        turret.traverseHood();
+        isCommandingHood = true;
+      }
     }
     else if(oStick.GetRawButton(BUTTONS::TURRET::AIM_RIGHT))
     {
-    turret.bangbangControl();
-    turret.aimRightPID();
-    intake.deploy(true);
-    activeIntake = true;
-    turret.traverseHood();
+      turret.bangbangControl();
+      if (!aiming)
+      {
+        turret.aimRightPID();
+        if ( turret.getTurnyTurnyValue() > SHOOTER::TURRET::BACKWARDS-2 && turret.getTurnyTurnyValue() < SHOOTER::TURRET::BACKWARDS+2)
+        {
+          aiming = true;
+        }
+      }
+      else{
+        turret.aimWithCameraLimelight();
+      }
+      intake.deploy(true);
+      activeIntake = true;
+      if( !isCommandingHood)
+      {
+      turret.traverseHood();
+      isCommandingHood = true;
+      }
+      
     }
     else if(oStick.GetRawButton(BUTTONS::TURRET::TURRET_HOOD_BATTERSHOT))
     {
@@ -83,11 +114,15 @@ void Robot::TurretManager()
         turret.aimLeftPID();
         intake.deploy(true);
         activeIntake = true;
-        turret.traverseHood();
+        if(!isCommandingHood)
+        {
+          turret.traverseHood();
+          isCommandingHood = true;
+        
+        }
         if(turret.getTurnyTurnyValue() < SHOOTER::TURRET::SAFE_TO_DEPLOY_HOOD_FRONT)
         {
-          turret.batterHood();
-          
+          turret.batterHood();  
         }
         else
         {
@@ -102,22 +137,23 @@ void Robot::TurretManager()
     {
       turret.aimLeft();
     }*/
-    else if(oStick.GetRawButton(BUTTONS::TURRET::AIM_CAMERA))
+   /* else if(oStick.GetRawButton(BUTTONS::TURRET::AIM_CAMERA))
     {
       turret.bangbangControl();
-      turret.aimWithCamera();
+      turret.aimWithCameraLimelight();
     }
-    
+    */
     else
     {
       if(turret.getHoodValue() > SHOOTER::HOOD::SAFE_TO_TURN)
       {
         turret.aimZero();
       }
-
+      aiming = false;
       turret.zeroHood();
       turret.stopShooter();
       activeIntake = false;
+      isCommandingHood = false;
     }
     
 
