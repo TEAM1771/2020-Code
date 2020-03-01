@@ -1,5 +1,4 @@
 
-#include <frc/Joystick.h>
 #include <frc/PWMVictorSPX.h>
 #include <frc/TimedRobot.h>
 #include <frc/Timer.h>
@@ -53,22 +52,26 @@ public:
     //void aimForward();
     //void aimBackwards();
     void setHoodAngle(double position);
+    void debugSetHoodAngle(double position);
     void bangbangControl();
     void aimWithCamera();
-    void stopAiming();
     void getCameraData();
-    void aimLeftPID();
-    void aimRightPID();
-    void aimZero();
     void batterShotPosition();
     void maintainRPM();
     void rpmWithStick(float value);
+    void stopShooter();
+    void aimWithCameraLimelight();
+
+    void stopAiming();
+    void aimLeftPID();
+    void aimRightPID();
+    void aimZero();
     void zeroHood();
     void midHood();
     void batterHood();
-    void stopShooter();
     void traverseHood();
-    void aimWithCameraLimelight();
+
+    void limelight_led(bool);
 
     void giveStatus();
     double scaleOutput(double inputMin, double inputMax, double outputMin, double outputMax, double input);
@@ -76,4 +79,5 @@ public:
     bool valueInRange(double value, double min, double max);
     double getTurnyTurnyValue();
     double getHoodValue();
+    double getCameraY(); // for debug, bad default
 };

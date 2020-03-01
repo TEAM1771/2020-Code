@@ -1,3 +1,4 @@
+
 #include "Turret.hpp"
 #include <vector>
 
@@ -138,7 +139,7 @@ void Turret::aimWithCameraLimelight()
     if (cameraHasTarget)
     {
         double xOffset = cameraXValue;
-        double output = xOffset/20;
+        double output = xOffset/35;
         double const currentTicks = turretTurnyTurny_encoder.GetPosition();
         if (currentTicks < SHOOTER::TURRET::MAX_RIGHT 
          && currentTicks > SHOOTER::TURRET::MAX_LEFT)
@@ -150,8 +151,9 @@ void Turret::aimWithCameraLimelight()
             turretTurnyTurny.Set(0);
         }
         
-        
+        std::cout << "yval: " << cameraYValue << '\n';
         double const yval = getHoodAngle(cameraYValue);
+        std::cout << "hood: " << yval << std::endl;
         setHoodAngle(yval);
     }
     else
@@ -161,6 +163,14 @@ void Turret::aimWithCameraLimelight()
 
 }
 
+double Turret::getCameraY()
+{
+    getCameraData();
+    if(cameraHasTarget)
+        return cameraYValue;
+    else return -100;
+}
+
 void Turret::aimWithCamera()
 {  
     //Aim to the center of the target
@@ -168,7 +178,7 @@ void Turret::aimWithCamera()
     //Figure out some offset based on camera data?
     if (cameraHasTarget)
     {
-    //Insert math to scale here
+        //Insert math to scale here
         const int cameraXMidPoint = 320 / 2;
         const int cameraXOffset = cameraXValue - cameraXMidPoint;
         //Need to scale output to be -1:1 based on cameraOffset 
@@ -286,6 +296,12 @@ void Turret::batterHood()
 
 }
 
+
+void Turret::limelight_led(bool val)
+{
+    table->PutNumber("ledMode",val? 3 : 1);
+}
+
 /************************************************************/
 /*          getters / display functions                     */
 /************************************************************/
@@ -331,23 +347,23 @@ void Turret::controlTurret()
 double Turret::getHoodAngle(double height)
 {
     
+    return -30;
     //YValues table is the camera reading
     //Hood table is the hood position
-    std::vector<double> const YValues   { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }; 
-    std::vector<double> const hoodTable { 0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20};
+    std::vector<double> const YValues   { 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0 }; 
+    std::vector<double> const hoodTable {  -10,  -12,  -14,  -16,  -18, -20, -22, -23, -24, -25, -26 };
     
     //Check if height is higher than anything in the table (indicating we are closer, thus should set hood to the minimum value)
-    if ( height > YValues[0] )
+    /*if ( height < YValues[0] )
     {
         return SHOOTER::HOOD::TRAVERSE;
     }
     //Check if height is lower than anything in the table (indicating we are farther than anything, thus should set hood to the max)
-    else if (height < *std::prev(YValues.end()) )
+    else if (height > *std::prev(YValues.end()) )
     {
         return SHOOTER::HOOD::SAFE_TO_TURN;
-    }
+    }*/
 
-    double valueToReturn;
     int position = 1;
 
     for (unsigned int i = 0; i <= YValues.size(); i++) {
@@ -361,12 +377,21 @@ double Turret::getHoodAngle(double height)
     }
     
     //here is where position is used, for the linear interp.
-    valueToReturn = (((hoodTable[position] - hoodTable[position + 1])
+    double const valueToReturn = (((hoodTable[position] - hoodTable[position + 1])
             / (YValues[position] - YValues[position + 1]))
             * (height - YValues[position + 1]))
             + hoodTable[position + 1];
 
-
+    std::cout << "hood precheck: " << valueToReturn << '\n';
+    if(valueToReturn < SHOOTER::HOOD::SAFE_TO_TURN)
+        return SHOOTER::HOOD::SAFE_TO_TURN;
+    else if (valueToReturn > SHOOTER::HOOD::TRAVERSE)
+        return SHOOTER::HOOD::TRAVERSE;
    // double valueToReturn = 0;
-    return valueToReturn;
+    //return valueToReturn;
+}
+
+void Turret::debugSetHoodAngle(double position)
+{
+    //hood_pidController.SetReference(position, rev::ControlType::kPosition);
 }

@@ -18,6 +18,7 @@
 #include "Hopper.hpp"
 #include "Intake.hpp"
 #include "Turret.hpp"
+#include "Climber.hpp"
 
 class Robot : public frc::TimedRobot 
 {
@@ -32,7 +33,7 @@ public:
     void TestPeriodic() override;
     void IntakeManager();
     void TurretManager();
-
+    void ClimberManager();
  private:
     frc::Joystick rStick { 0 },
                   lStick { 1 },
@@ -41,6 +42,7 @@ public:
     Hopper hopper;
     Intake intake;
     Turret turret;
+    Climber climber;
     bool activeIntake;
     frc::LiveWindow& m_lw = *frc::LiveWindow::GetInstance();
 };

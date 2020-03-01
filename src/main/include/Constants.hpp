@@ -41,6 +41,7 @@ namespace HOPPER
     namespace INDEXER 
     {
         constexpr int PORT = 10;
+ 
         constexpr double SPEED = 1.0;
     }
 
@@ -112,6 +113,26 @@ namespace SHOOTER
     } // HOOD
 
 }
+
+namespace CLIMBER
+{
+    constexpr int PORT_1 = 13;
+    constexpr int PORT_2 = 14;
+    
+    constexpr double P = 0.1;
+    constexpr double I = 0.0;
+    constexpr double D = 0.0;
+    constexpr double MAX_OUTPUT = 1;
+
+    namespace POSITIONS
+    {
+        constexpr double DOWN = 0;
+        constexpr double UP = 100;
+    }
+
+
+} // CLIMBER
+
 namespace BUTTONS
 {
     namespace INTAKE
@@ -136,4 +157,9 @@ namespace BUTTONS
         constexpr int SHOOT = 1;
     }
 
+    namespace CLIMBER
+    {
+        constexpr int RAISE = 8;    // lstick 
+        constexpr int DOWN = 9;     // lstick
+    }
 }

@@ -48,12 +48,23 @@ void Robot::TeleopPeriodic()
 
 void Robot::TestPeriodic()
 {
-    hopper.manualIndexerControl(lStick.GetY());
-    hopper.manualTransportControl(rStick.GetY());
+    //hopper.manualIndexerControl(lStick.GetY());
+//hopper.manualTransportControl(rStick.GetY());
     TurretManager();
     IntakeManager();
 
+    frc::SmartDashboard::PutNumber("Y Value", turret.getCameraY());
+    double valueToReturn = frc::SmartDashboard::GetNumber("Hood Pos", 0);
+        
+    if(valueToReturn < SHOOTER::HOOD::SAFE_TO_TURN)
+        valueToReturn = SHOOTER::HOOD::SAFE_TO_TURN;
+    else if (valueToReturn > SHOOTER::HOOD::TRAVERSE)
+        valueToReturn = SHOOTER::HOOD::TRAVERSE;
     
+    if(oStick.GetThrottle() > 0)
+        turret.maintainRPM();
+
+    //turret.debugSetHoodAngle(20);
 }
 
 void Robot::TurretManager()
@@ -67,7 +78,10 @@ void Robot::TurretManager()
             if (!aiming)
             {
                 turret.aimLeftPID();
-                if ( turret.getTurnyTurnyValue() > SHOOTER::TURRET::FORWARD-2 && turret.getTurnyTurnyValue() < SHOOTER::TURRET::FORWARD+2)
+                turret.traverseHood();
+
+                if ( turret.getTurnyTurnyValue() > SHOOTER::TURRET::FORWARD - 2 
+                  && turret.getTurnyTurnyValue() < SHOOTER::TURRET::FORWARD + 2 )
                 {
                     aiming = true;
                 }
@@ -79,8 +93,8 @@ void Robot::TurretManager()
             activeIntake = true;
             if( !isCommandingHood)
             {
-                turret.traverseHood();
                 isCommandingHood = true;
+                turret.limelight_led(true);
             }
         }
         else if(oStick.GetRawButton(BUTTONS::TURRET::AIM_RIGHT))
@@ -89,10 +103,13 @@ void Robot::TurretManager()
             if (!aiming)
             {
                 turret.aimRightPID();
-                if ( turret.getTurnyTurnyValue() > SHOOTER::TURRET::BACKWARDS-2 
-                  && turret.getTurnyTurnyValue() < SHOOTER::TURRET::BACKWARDS+2)
+                turret.traverseHood();
+
+                if ( turret.getTurnyTurnyValue() > SHOOTER::TURRET::BACKWARDS - 2 
+                  && turret.getTurnyTurnyValue() < SHOOTER::TURRET::BACKWARDS + 2 )
                 {
                     aiming = true;
+                    turret.limelight_led(true);
                 }
             }
             else
@@ -101,12 +118,6 @@ void Robot::TurretManager()
             }
             intake.deploy(true);
             activeIntake = true;
-            if( !isCommandingHood)
-            {
-                turret.traverseHood();
-                isCommandingHood = true;
-            }
-            
         }
         else if(oStick.GetRawButton(BUTTONS::TURRET::TURRET_HOOD_BATTERSHOT))
         {
@@ -152,6 +163,7 @@ void Robot::TurretManager()
                 turret.aimZero();
             }
             aiming = false;
+            turret.limelight_led(false);
             turret.zeroHood();
             turret.stopShooter();
             activeIntake = false;
@@ -159,10 +171,10 @@ void Robot::TurretManager()
         }
         
 
-        if(oStick.GetRawButtonReleased(BUTTONS::TURRET::AIM_CAMERA) )
-        {
-            turret.stopAiming(); 
-        }
+        // if(oStick.GetRawButtonReleased(BUTTONS::TURRET::AIM_CAMERA) )
+        // {
+        //     turret.stopAiming(); 
+        // }
     
 
  //turret.bangbangControl();
@@ -204,6 +216,13 @@ void Robot::IntakeManager()
         intake.intakeneo.Set(0);
         }
 
+}
+
+void Robot::ClimberManager()
+{
+    if(lStick.GetRawButton(BUTTONS::CLIMBER::RAISE))
+        climber.climb(true);
+    else climber.climb(false);
 }
 
 void Robot::DisabledInit()
