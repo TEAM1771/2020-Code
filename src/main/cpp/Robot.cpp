@@ -54,10 +54,10 @@ void Robot::SimpleAuton()
         drive.drive(-.5,-.5); //Drive half speed backwards away from goal
         if (!aiming)
             {
-                turret.aimLeftPID();
+                turret.aimRightPID();
                 turret.traverseHood();
-                if ( turret.getTurnyTurnyValue() > SHOOTER::TURRET::FORWARD - 2 
-                  && turret.getTurnyTurnyValue() < SHOOTER::TURRET::FORWARD + 2 )
+                if ( turret.getTurnyTurnyValue() > SHOOTER::TURRET::BACKWARDS - 2 
+                  && turret.getTurnyTurnyValue() < SHOOTER::TURRET::BACKWARDS + 2 )
                 {
                     aiming = true;
                 }
