@@ -27,6 +27,7 @@ void Robot::SimpleAuton()
     {
             if(turret.getHoodValue() > SHOOTER::HOOD::SAFE_TO_TURN)
             {
+                turret.zeroHood();
                 turret.aimZero();
             }
             aiming = false;
@@ -110,6 +111,11 @@ void Robot::SimpleAuton()
             hopper.stopFeed();
             hasAutonRun = true;
             intake.deploy(false);
+            if(turret.getHoodValue() > SHOOTER::HOOD::SAFE_TO_TURN)
+            {
+                turret.zeroHood();
+                turret.aimZero();
+            }
         }
     }
 
