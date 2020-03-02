@@ -17,8 +17,6 @@ void Drivetrain::drive(double lval, double rval)
 
     
     auto const drivetrain_speed = fabs(ldrive.sensors.GetIntegratedSensorVelocity() - rdrive.sensors.GetIntegratedSensorVelocity()) / 2;
-
-    std::cout << drivetrain_speed << '\n';
 }
 
 void Drivetrain::driveFalcons(double lval, double rval)

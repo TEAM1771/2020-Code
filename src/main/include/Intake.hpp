@@ -11,16 +11,19 @@
 #include <frc/Timer.h>
 #include <frc/drive/DifferentialDrive.h>
 #include <frc/livewindow/LiveWindow.h>
-
-#include "Drivetrain.hpp"
+#include <rev/CANSparkMax.h>
+#include "Constants.hpp"
+#include <frc/Solenoid.h>
 
 class Intake
 {
 
     frc::Solenoid intakeair {INTAKE::intakeairport};
+    bool intakeDeployed = false;
 public:
     rev::CANSparkMax intakeneo {INTAKE::IntakePort, rev::CANSparkMaxLowLevel::MotorType::kBrushless};
     Intake();
     void deploy(bool val);
+    bool isIntakeDown();
 
 };

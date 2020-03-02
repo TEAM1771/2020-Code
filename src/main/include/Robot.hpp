@@ -11,10 +11,14 @@
 #include <frc/Timer.h>
 #include <frc/drive/DifferentialDrive.h>
 #include <frc/livewindow/LiveWindow.h>
+#include <frc/smartdashboard/smartdashboard.h>
+
 
 #include "Drivetrain.hpp"
 #include "Hopper.hpp"
 #include "Intake.hpp"
+#include "Turret.hpp"
+#include "Climber.hpp"
 
 class Robot : public frc::TimedRobot 
 {
@@ -24,15 +28,21 @@ public:
     void AutonomousPeriodic() override ;
     void TeleopInit() override;
     void TeleopPeriodic() override;
+    void DisabledInit() override;
+    void DisabledPeriodic() override;
     void TestPeriodic() override;
     void IntakeManager();
-
+    void TurretManager();
+    void ClimberManager();
  private:
-    frc::Joystick rStick { 1 },
-                  lStick { 2 },
-                  oStick { 3 };
+    frc::Joystick rStick { 0 },
+                  lStick { 1 },
+                  oStick { 2 };
     Drivetrain drive;
     Hopper hopper;
     Intake intake;
+    Turret turret;
+    Climber climber;
+    bool activeIntake;
     frc::LiveWindow& m_lw = *frc::LiveWindow::GetInstance();
 };

@@ -5,10 +5,10 @@
 #include <frc/Timer.h>
 class Hopper
 {
-    rev::CANSparkMax indexerNeo {HOPP::hopperIndexerNeo, rev::CANSparkMaxLowLevel::MotorType::kBrushless};
-    rev::CANSparkMax transportNeo {HOPP::hopperTransportNeo, rev::CANSparkMaxLowLevel::MotorType::kBrushless};
+    rev::CANSparkMax indexerNeo {HOPPER::INDEXER::PORT, rev::CANSparkMaxLowLevel::MotorType::kBrushless};
+    rev::CANSparkMax transportNeo {HOPPER::TRANSPORT::PORT, rev::CANSparkMaxLowLevel::MotorType::kBrushless};
     frc::Timer timer;
-    frc::DigitalInput beamBreak {HOPP::laserPort};
+    frc::DigitalInput beamBreak {HOPPER::laserPort};
 public:
     Hopper();
     bool isLaserBroken() const;

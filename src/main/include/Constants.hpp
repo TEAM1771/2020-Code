@@ -4,18 +4,22 @@
 
 namespace TRANS
 {
+    namespace SHIFT_MATH
+    {
+        constexpr int encoder_cpr = 2048;
+
+        constexpr auto low_ratio = 20.83;
+        constexpr auto high_ratio = 9.17;
+
+        constexpr auto wheel_diameter = 7.65;
+
+        constexpr auto low_ratio_multiplier_to_ft = 1.0 / encoder_cpr / low_ratio * wheel_diameter / 2 / 12;
+        constexpr auto high_ratio_multiplier_to_ft = 1.0 / encoder_cpr / high_ratio * wheel_diameter / 2 / 12;
+
+    } // SHIFT_MATH
+
     constexpr int shifter = 0;
-
-    constexpr int encoder_cpr = 2048;
-
-    constexpr auto low_ratio = 20.83;
-    constexpr auto high_ratio = 9.17;
-
-    constexpr auto wheel_diameter = 7.65;
-
-    constexpr auto low_ratio_multiplier_to_ft = 1.0 / encoder_cpr / low_ratio * wheel_diameter / 2 / 12;
-    constexpr auto high_ratio_multiplier_to_ft = 1.0 / encoder_cpr / high_ratio * wheel_diameter / 2 / 12;
-
+    
     constexpr int shift_up_point = 16000;//6 / low_ratio_multiplier_to_ft;
     constexpr int shift_down_point = 6000;//4 / low_ratio_multiplier_to_ft;
 
@@ -25,49 +29,137 @@ namespace TRANS
     constexpr int lNeo = 11;    
     //std::string song_path = "Pain_it_black.chrp";
 } // TRANS
-namespace HOPP
+namespace HOPPER
 {
-    //Hopper Constants
+    namespace TRANSPORT
+    {
+        constexpr int PORT = 3;
+        constexpr double SPEED = 0.7;
+        constexpr double SHOOT_SPEED = 1.0;
+    } // TRANSPORT
+
+    namespace INDEXER 
+    {
+        constexpr int PORT = 10;
+ 
+        constexpr double SPEED = 1.0;
+    }
 
     // Used to define which motor direction is forward or not, can be negated as needed.
     constexpr double hopperTransportForward = 1.0;
     constexpr double hopperIndexerForward = 1.0;
     constexpr double hopperFeedForward = 1.0;
     //Define motor CAN IDs
-    constexpr int hopperTransportNeo = 3;
-    constexpr int hopperIndexerNeo = 10;
     
     constexpr int laserPort = 0; //can be changed later
-    constexpr double hopperTimer = 0.151771; //Will need to be changed
-
+    constexpr double hopperTimer = 0.31771; //Will need to be changed
 }
 namespace INTAKE
 {
     constexpr int IntakePort = 12;
     constexpr int intakeairport = 1;
-    namespace BUTTONS
-    { 
-        constexpr int intakedown = 2;
-        constexpr int intakein = 3;
+}
+namespace SHOOTER
+{
+    namespace WHEEL
+    {
+        constexpr int PORT_1 = 4;//subject to change
+        constexpr int PORT_2 = 5;//subject to change
+        constexpr double SHOOTING_RPM = 7500; //Lol no idea
+        constexpr double IDLE_RPM = 3000; //lol lets not do this its dumb
+        constexpr double P = 0.0001;
+        constexpr double I = 0.0001;
+        constexpr double D = 0.0001;
+        constexpr double FF = 0.1;
+    } // SHOOTER
+
+    namespace TURRET
+    {
+        constexpr int PORT = 6;//subject to change
+
+        constexpr double TRAVERSE_SPEED = .5;
+        constexpr double P = 0.1;
+        constexpr double I = 0.0;
+        constexpr double D = 0.0;
+
+        constexpr double SAFE_TO_DEPLOY_HOOD_FRONT = -44;
+
+        //Define the 4 quadrants 
+        constexpr double ZERO = 0;
+        constexpr double FORWARD = -53;
+        constexpr double BACKWARDS = 53;
+        //constexpr double RIGHT = 50;
+        //constexpr double LEFT = -50;
+        
+        //Define max travels
+        constexpr double MAX_LEFT = -74;
+        constexpr double MAX_RIGHT = 74;
+    } // TURRET
+
+    
+    namespace HOOD
+    {
+        constexpr int PORT = 7;//subject to change
+        
+        constexpr double P = 0.1;
+        constexpr double I = 0.0;
+        constexpr double D = 0.0;
+
+        constexpr int BOTTOM = 0;
+        constexpr double TRAVERSE = -9.4;
+        constexpr int SAFE_TO_TURN = -42;
+        constexpr int MIDPOINT = -26;
+        constexpr int BATTER = -89;
+    } // HOOD
+
+}
+
+namespace CLIMBER
+{
+    constexpr int PORT_1 = 13;
+    constexpr int PORT_2 = 14;
+    
+    constexpr double P = 0.1;
+    constexpr double I = 0.0;
+    constexpr double D = 0.0;
+    constexpr double MAX_OUTPUT = 1;
+
+    namespace POSITIONS
+    {
+        constexpr double DOWN = 0;
+        constexpr double UP = 100;
+    }
+
+
+} // CLIMBER
+
+namespace BUTTONS
+{
+    namespace INTAKE
+    {
+        constexpr int intakedown = 3;
+        constexpr int intakein = 4[\];
         constexpr int intakeout = 5;
     }
-}
-namespace TURRET
-{
-    // shooter wheel
-    constexpr int shooterneo1 = 4;//subject to change
-    constexpr int shooterneo2 = 5;//subject to change
-
-    //  turret ring
-    constexpr int turretneo = 6;//subject to change
-
-    //  hood
-    constexpr int hoodneo = 7;//subject to change
-
-
-    namespace BUTTONS
+    namespace TURRET
     {
-        //co-driver's joystick trigger button
-        //constexpr int turretfire = 1;
+        constexpr int AIM_LEFT = 8;
+        constexpr int AIM_RIGHT = 7;
+        //constexpr int AIM_LEFT_MANUAL = 9;
+        //constexpr int AIM_RIGHT_MANUAL = 8;
+        constexpr int AIM_CAMERA = 10;
+        constexpr int HOOD_ZERO = 4;
+        //constexpr int HOOD_MIDPOINT = 6;
+        constexpr int TURRET_HOOD_BATTERSHOT = 6;
+    }
+    namespace HOPPER
+    {
+        constexpr int SHOOT = 1;
+    }
+
+    namespace CLIMBER
+    {
+        constexpr int RAISE = 8;    // lstick 
+        constexpr int DOWN = 9;     // lstick
     }
 }
