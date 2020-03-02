@@ -49,7 +49,7 @@ void Robot::SimpleAuton()
         autonInit = true;
     }
 
-    if ( !autonDriveTimer.hasPeriodPassed(AUTON::AUTON_DRIVE_TIMER) && !hasAutonRun )
+    if ( !autonDriveTimer.HasPeriodPassed(AUTON::AUTON_DRIVE_TIMER) && !hasAutonRun )
     {
         drive.drive(-.5,-.5); //Drive half speed backwards away from goal
         if (!aiming)
@@ -82,7 +82,7 @@ void Robot::SimpleAuton()
         turret.aimWithCameraLimelight();
     }
 
-    if ( !autonShootTimer.hasPeriodPassed() && !hasAutonRun)
+    if ( !autonShootTimer.HasPeriodPassed(AUTON::AUTON_SHOOT_TIMER) && !hasAutonRun)
     {
         turret.aimWithCameraLimelight();
     }
@@ -90,10 +90,10 @@ void Robot::SimpleAuton()
     {
         
         turret.aimWithCameraLimelight();
-        if( turret.cameraHasTarget() )
+        if( turret.cameraHasLock() )
         {
             
-            hopper.feedShooter()
+            hopper.feedShooter();
             if(!hasStartedFeeding)
             {
                 hasStartedFeeding = true;
@@ -105,7 +105,7 @@ void Robot::SimpleAuton()
             }
         }
 
-        if ( autonFeedTimer.hasPeriodPassed(AUTON::AUTON_FEED_SHOOTER_TIMER) )
+        if ( autonFeedTimer.HasPeriodPassed(AUTON::AUTON_FEED_SHOOTER_TIMER) )
         {
             hopper.stopFeed();
             hasAutonRun = true;

@@ -322,7 +322,7 @@ void Turret::giveStatus()
 
 }
 
-bool Turret::cameraHasTarget()
+bool Turret::cameraHasLock()
 {
     getCameraData();
     return cameraHasTarget;
