@@ -51,7 +51,7 @@ void Robot::SimpleAuton()
 
     if ( !autonDriveTimer.HasPeriodPassed(AUTON::AUTON_DRIVE_TIMER) && !hasAutonRun )
     {
-        drive.drive(-.5,-.5); //Drive half speed backwards away from goal
+        drive.drive(-.2,-.2); //Drive half speed backwards away from goal
         if (!aiming)
             {
                 turret.aimRightPID();
