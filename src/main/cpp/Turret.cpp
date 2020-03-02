@@ -138,7 +138,7 @@ void Turret::aimWithCameraLimelight()
     getCameraData();
     if (cameraHasTarget)
     {
-        double xOffset = cameraXValue;
+        double xOffset = cameraXValue + SHOOTER::TURRET::CAMERA_OFFSET;
         double output = xOffset/35;
         double const currentTicks = turretTurnyTurny_encoder.GetPosition();
         if (currentTicks < SHOOTER::TURRET::MAX_RIGHT 

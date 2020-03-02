@@ -94,6 +94,10 @@ namespace SHOOTER
         //Define max travels
         constexpr double MAX_LEFT = -74;
         constexpr double MAX_RIGHT = 74;
+    
+
+        //Camera offset
+        constexpr double CAMERA_OFFSET = 0.0;
     } // TURRET
 
     
