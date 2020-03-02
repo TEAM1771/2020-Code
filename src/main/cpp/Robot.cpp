@@ -117,9 +117,7 @@ void Robot::SimpleAuton()
 
 void Robot::AutonomousPeriodic() 
 {
-
-        
-
+    SimpleAuton();
 }
 
 void Robot::TeleopInit()
