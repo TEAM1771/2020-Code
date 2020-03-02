@@ -137,8 +137,8 @@ namespace BUTTONS
 {
     namespace INTAKE
     {
-        constexpr int intakedown = 2;
-        constexpr int intakein = 3;
+        constexpr int intakedown = 3;
+        constexpr int intakein = 4[\];
         constexpr int intakeout = 5;
     }
     namespace TURRET

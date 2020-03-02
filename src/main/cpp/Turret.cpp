@@ -34,7 +34,7 @@ Turret::Turret()
     turretTurnyTurny_pidController.SetI(SHOOTER::TURRET::I);
     turretTurnyTurny_pidController.SetD(SHOOTER::TURRET::D);
     turretTurnyTurny_pidController.SetFeedbackDevice(turretTurnyTurny_encoder);
-    turretTurnyTurny_pidController.SetReference(SHOOTER::TURRET::ZERO, rev::ControlType::kPosition);
+    //turretTurnyTurny_pidController.SetReference(SHOOTER::TURRET::ZERO, rev::ControlType::kPosition);
     turretTurnyTurny_pidController.SetOutputRange(-.7, .7);
    // turretTurnyTurny.EnableSoftLimit(rev::CANSparkMax::SoftLimitDirection::kForward, true);
    // turretTurnyTurny.EnableSoftLimit(rev::CANSparkMax::SoftLimitDirection::kReverse, true);
@@ -347,11 +347,11 @@ void Turret::controlTurret()
 double Turret::getHoodAngle(double height)
 {
     
-    return -30;
+    //return -30;
     //YValues table is the camera reading
     //Hood table is the hood position
-    std::vector<double> const YValues   { 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0 }; 
-    std::vector<double> const hoodTable {  -10,  -12,  -14,  -16,  -18, -20, -22, -23, -24, -25, -26 };
+    std::vector<double> const YValues   { 20.0104, 10.4538, 1.97857, -3.02635, -5.8812, -9.15754 }; 
+    std::vector<double> const hoodTable { -13.1929, -17.0433, -21.375, -22.0117, -21.6297, -21.375 };
     
     //Check if height is higher than anything in the table (indicating we are closer, thus should set hood to the minimum value)
     /*if ( height < YValues[0] )
@@ -388,7 +388,7 @@ double Turret::getHoodAngle(double height)
     else if (valueToReturn > SHOOTER::HOOD::TRAVERSE)
         return SHOOTER::HOOD::TRAVERSE;
    // double valueToReturn = 0;
-    //return valueToReturn;
+    return valueToReturn;
 }
 
 void Turret::debugSetHoodAngle(double position)

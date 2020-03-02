@@ -50,10 +50,27 @@ void Robot::TestPeriodic()
 {
     //hopper.manualIndexerControl(lStick.GetY());
 //hopper.manualTransportControl(rStick.GetY());
-    TurretManager();
+    //TurretManager();
     IntakeManager();
 
-    frc::SmartDashboard::PutNumber("Y Value", turret.getCameraY());
+    turret.limelight_led(true);
+    static bool isShooting = false;
+    if(oStick.GetRawButton(BUTTONS::HOPPER::SHOOT))
+    {
+        hopper.feedShooter();
+        isShooting = true;
+    }
+    else if (isShooting)
+    {
+        isShooting = false;
+        hopper.stopFeed();
+    }
+    else
+    {
+        hopper.controlFeed();
+    }
+    turret.getCameraData();
+    //frc::SmartDashboard::PutNumber("Y Value", turret.getCameraY());
     double valueToReturn = frc::SmartDashboard::GetNumber("Hood Pos", 0);
         
     if(valueToReturn < SHOOTER::HOOD::SAFE_TO_TURN)
@@ -61,10 +78,16 @@ void Robot::TestPeriodic()
     else if (valueToReturn > SHOOTER::HOOD::TRAVERSE)
         valueToReturn = SHOOTER::HOOD::TRAVERSE;
     
-    if(oStick.GetThrottle() > 0)
-        turret.maintainRPM();
-
-    //turret.debugSetHoodAngle(20);
+    //std::cout << oStick.GetThrottle() << '\n';
+    double hood = turret.scaleOutput(-1,1, SHOOTER::HOOD::TRAVERSE,SHOOTER::HOOD::SAFE_TO_TURN, -oStick.GetThrottle());
+    //if(oStick.GetThrottle() > 0)
+      //  turret.maintainRPM();
+    std::cout << "hood " << hood << '\n';
+    std::cout << "yval: " << turret.getCameraY() << '\n';
+    
+    // if(lStick.GetThrottle() > 0)
+        turret.bangbangControl();
+    turret.debugSetHoodAngle(hood);
 }
 
 void Robot::TurretManager()
@@ -72,9 +95,9 @@ void Robot::TurretManager()
         static bool aiming = false;
         static bool isCommandingHood = false;
             
+            turret.bangbangControl(); 
         if (oStick.GetRawButton(BUTTONS::TURRET::AIM_LEFT))
         {
-            turret.bangbangControl(); 
             if (!aiming)
             {
                 turret.aimLeftPID();
@@ -165,7 +188,7 @@ void Robot::TurretManager()
             aiming = false;
             turret.limelight_led(false);
             turret.zeroHood();
-            turret.stopShooter();
+            //turret.stopShooter();
             activeIntake = false;
             isCommandingHood = false;
         }
