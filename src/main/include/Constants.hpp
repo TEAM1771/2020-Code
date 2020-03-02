@@ -94,6 +94,10 @@ namespace SHOOTER
         //Define max travels
         constexpr double MAX_LEFT = -74;
         constexpr double MAX_RIGHT = 74;
+    
+
+        //Camera offset
+        constexpr double CAMERA_OFFSET = 4.2517710;
     } // TURRET
 
     
@@ -117,7 +121,7 @@ namespace SHOOTER
 namespace CLIMBER
 {
     constexpr int PORT_1 = 13;
-    constexpr int PORT_2 = 14;
+    constexpr int PORT_2 = 99;
     
     constexpr double P = 0.1;
     constexpr double I = 0.0;
