@@ -80,4 +80,5 @@ public:
     double getTurnyTurnyValue();
     double getHoodValue();
     double getCameraY(); // for debug, bad default
+    bool cameraHasTarget();
 };

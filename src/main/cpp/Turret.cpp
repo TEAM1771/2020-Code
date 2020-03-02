@@ -322,6 +322,12 @@ void Turret::giveStatus()
 
 }
 
+bool Turret::cameraHasTarget()
+{
+    getCameraData();
+    return cameraHasTarget;
+}
+
 double Turret::getHoodValue()
 {
     return hood_encoder.GetPosition();

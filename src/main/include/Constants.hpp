@@ -133,12 +133,20 @@ namespace CLIMBER
 
 } // CLIMBER
 
+namespace AUTON
+{
+    constexpr double AUTON_DRIVE_TIMER = 3.0; //How long to drive forward for
+    constexpr double AUTON_SHOOT_TIMER = 6.0; //When we can shoot (for spin up time)
+    constexpr double AUTON_FEED_SHOOTER_TIMER = 2.0; //How long to shoot for
+
+}
+
 namespace BUTTONS
 {
     namespace INTAKE
     {
         constexpr int intakedown = 3;
-        constexpr int intakein = 4[\];
+        constexpr int intakein = 4;
         constexpr int intakeout = 5;
     }
     namespace TURRET

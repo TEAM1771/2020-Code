@@ -1,4 +1,5 @@
 #include "Robot.hpp"
+#include <frc/Timer.h>
 
 Robot::Robot()
 {
@@ -10,8 +11,114 @@ void Robot::AutonomousInit()
 
 }
 
+//Simple Auton should drive forward while aiming back, and then shooting.
+void Robot::SimpleAuton()
+{
+    static bool autonInit = false; //First loop initilization
+    static bool hasAutonRun = false; //Is our auton still running?
+    static bool aiming = false;
+    static bool isCommandingHood = false;
+    static bool hasStartedFeeding = false;
+    static frc::Timer autonDriveTimer; //Used to track how long to drive for
+    static frc::Timer autonShootTimer; //Used to track when we can shoot (basically waiting for spin up to complete)
+    static frc::Timer autonFeedTimer;
+
+    if(hasAutonRun)
+    {
+            if(turret.getHoodValue() > SHOOTER::HOOD::SAFE_TO_TURN)
+            {
+                turret.aimZero();
+            }
+            aiming = false;
+            turret.limelight_led(false);
+            turret.zeroHood();
+            //turret.stopShooter();
+            activeIntake = false;
+            isCommandingHood = false;
+    }
+
+    //Start spooling up shooter wheel
+    turret.bangbangControl();
+    if (!autonInit)
+    {
+        autonDriveTimer.Reset();
+        autonDriveTimer.Start();
+        autonShootTimer.Reset();
+        autonShootTimer.Start();
+        
+        autonInit = true;
+    }
+
+    if ( !autonDriveTimer.hasPeriodPassed(AUTON::AUTON_DRIVE_TIMER) && !hasAutonRun )
+    {
+        drive.drive(-.5,-.5); //Drive half speed backwards away from goal
+        if (!aiming)
+            {
+                turret.aimLeftPID();
+                turret.traverseHood();
+                if ( turret.getTurnyTurnyValue() > SHOOTER::TURRET::FORWARD - 2 
+                  && turret.getTurnyTurnyValue() < SHOOTER::TURRET::FORWARD + 2 )
+                {
+                    aiming = true;
+                }
+                
+            }
+            else{
+                turret.aimWithCameraLimelight();
+            }
+            intake.deploy(true);
+            activeIntake = true;
+            if( !isCommandingHood )
+            {
+                isCommandingHood = true;
+                turret.limelight_led(true);
+            }
+
+    }
+    else
+    {
+        autonDriveTimer.Stop();
+        drive.drive(0,0);
+        turret.aimWithCameraLimelight();
+    }
+
+    if ( !autonShootTimer.hasPeriodPassed() && !hasAutonRun)
+    {
+        turret.aimWithCameraLimelight();
+    }
+    else
+    {
+        
+        turret.aimWithCameraLimelight();
+        if( turret.cameraHasTarget() )
+        {
+            
+            hopper.feedShooter()
+            if(!hasStartedFeeding)
+            {
+                hasStartedFeeding = true;
+            }
+            if( hasStartedFeeding )
+            {
+                autonFeedTimer.Stop();
+                autonFeedTimer.Start();
+            }
+        }
+
+        if ( autonFeedTimer.hasPeriodPassed(AUTON::AUTON_FEED_SHOOTER_TIMER) )
+        {
+            hopper.stopFeed();
+            hasAutonRun = true;
+            intake.deploy(false);
+        }
+    }
+
+}
+
 void Robot::AutonomousPeriodic() 
 {
+
+        
 
 }
 
@@ -95,7 +202,7 @@ void Robot::TurretManager()
         static bool aiming = false;
         static bool isCommandingHood = false;
             
-            turret.bangbangControl(); 
+        turret.bangbangControl(); 
         if (oStick.GetRawButton(BUTTONS::TURRET::AIM_LEFT))
         {
             if (!aiming)
