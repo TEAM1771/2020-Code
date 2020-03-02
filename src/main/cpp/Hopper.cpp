@@ -7,6 +7,13 @@ Hopper::Hopper()
     indexerNeo.SetIdleMode(rev::CANSparkMax::IdleMode::kBrake);
     transportNeo.SetIdleMode(rev::CANSparkMax::IdleMode::kBrake);
     numberOfBalls = 3;
+    hopperPIDController.SetP(HOPPER::TRANSPORT::P);
+    hopperPIDController.SetI(HOPPER::TRANSPORT::I);
+    hopperPIDController.SetD(HOPPER::TRANSPORT::D);
+    hopperPIDController.SetFeedbackDevice(transportEncoder);
+    hopperPIDController.SetOutputRange(-1,1);
+    transportEncoder.SetPosition(0);
+    targetDistance = 0; //Because there is no set distance for the PID, only position, we will have to always update the target by adding the desired movement distance  
 }
 
 bool Hopper::isLaserBroken() const

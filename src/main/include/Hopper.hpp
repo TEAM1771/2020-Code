@@ -9,10 +9,15 @@ class Hopper
     rev::CANSparkMax transportNeo {HOPPER::TRANSPORT::PORT, rev::CANSparkMaxLowLevel::MotorType::kBrushless};
     frc::Timer timer;
     frc::DigitalInput beamBreak {HOPPER::laserPort};
+    rev::CANPIDController hopperPIDController = transportNeo.GetPIDController();
+    rev::CANEncoder transportEncoder = transportNeo.GetEncoder();
+
+
 public:
     Hopper();
     bool isLaserBroken() const;
     int numberOfBalls = 3;
+    double targetDistance;
     static double timeElapsed;
     void transportBall();
     void feedShooter();
