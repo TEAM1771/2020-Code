@@ -97,7 +97,7 @@ namespace SHOOTER
     
 
         //Camera offset
-        constexpr double CAMERA_OFFSET = 0.0;
+        constexpr double CAMERA_OFFSET = 4.2517710;
     } // TURRET
 
     
