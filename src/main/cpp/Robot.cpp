@@ -86,6 +86,9 @@ void Robot::SimpleAuton()
        // turret.aimRightPID();
        // turret.traverseHood();
         //drive.drive(0,0);
+        
+         if(turret.getHoodValue() > SHOOTER::HOOD::SAFE_TO_TURN)
+         {
                 turret.aimRightPID();
                 turret.traverseHood();
                 aimingTimer.Start();
@@ -96,6 +99,13 @@ void Robot::SimpleAuton()
                 readyToTrack = true;
                 readyToAim = false;
             }
+         }
+         else
+         {
+             turret.traverseHood();
+         }
+         
+
             
     }
 
@@ -111,6 +121,12 @@ void Robot::SimpleAuton()
                 readyToShoot = true;
             }
         }
+        else
+        {
+            turret.traverseHood();
+            turret.aimRightPID();
+        }
+        
 
     }
 
