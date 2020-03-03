@@ -91,12 +91,10 @@ void Robot::SimpleAuton()
                     readyToAim = false;
                     readyToTrack = true;
                 }
-                
-            }
             
     }
 
-    if(readyToTrack && doneDriving && !readyToAim)
+    if( readyToTrack && doneDriving && !readyToAim)
     {
         if ( turret.getTurnyTurnyValue() > SHOOTER::TURRET::BACKWARDS - 2 
                     && turret.getTurnyTurnyValue() < SHOOTER::TURRET::BACKWARDS + 2 )
