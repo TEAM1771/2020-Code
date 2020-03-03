@@ -19,6 +19,7 @@ public:
     int numberOfBalls = 3;
     double targetDistance;
     static double timeElapsed;
+    static bool hasDrivenDistance();
     void transportBall();
     void feedShooter();
     void stopFeed();
@@ -28,4 +29,9 @@ public:
     void manualIndexerControl(double speed);
     void manualTransportControl(double speed);
     void checkBallProgress();
+    void driveDistance();
+    void giveStatus();
+    bool valueInRange(double value, double min, double max);
+    void controlFeedPID();
+
 };

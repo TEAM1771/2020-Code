@@ -36,9 +36,9 @@ namespace HOPPER
         constexpr int PORT = 3;
         constexpr double SPEED = 0.7;
         constexpr double SHOOT_SPEED = 1.0;
-        constexpr double DISTANCE = 20;
-        constexpr double P = 0.0001;
-        constexpr double I = 0.0001;
+        constexpr double DISTANCE = -10;
+        constexpr double P = 0.1;
+        constexpr double I = 0;
         constexpr double D = 0.0001;
     } // TRANSPORT
 

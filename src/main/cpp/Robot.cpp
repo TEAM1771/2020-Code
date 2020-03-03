@@ -253,20 +253,14 @@ void Robot::TeleopPeriodic()
     drive.drive(lStick.GetY(), rStick.GetY());
     drive.shift();
 
-    static bool isShooting = false;
+   
     if(oStick.GetRawButton(BUTTONS::HOPPER::SHOOT))
     {
         hopper.feedShooter();
-        isShooting = true;
-    }
-    else if (isShooting)
-    {
-        isShooting = false;
-        hopper.stopFeed();
     }
     else
     {
-        hopper.controlFeed();
+        hopper.controlFeedPID();
     }
     
     IntakeManager();
@@ -482,7 +476,8 @@ void Robot::DisabledInit()
 
 void Robot::DisabledPeriodic()
 {
-    turret.giveStatus();
+    //turret.giveStatus();
+    hopper.giveStatus();
 }
 
 
