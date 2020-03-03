@@ -263,7 +263,7 @@ void Robot::TeleopPeriodic()
 void Robot::HopperManager()
 {
     static bool isShooting = false;
-   if(oStick.GetRawButton(BUTTONS::HOPPER::SHOOT))
+    if(oStick.GetRawButton(BUTTONS::HOPPER::SHOOT))
     {
         hopper.feedShooter();
     }
