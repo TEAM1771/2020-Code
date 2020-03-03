@@ -47,7 +47,7 @@ void Robot::SimpleAuton()
             turret.limelight_led(false);
             turret.traverseHood();
             //turret.stopShooter();
-            activeIntake = false;
+            //activeIntake = false;
             isCommandingHood = false;
             //std::cout << "Done With Auton" std::endl;
     }
@@ -68,7 +68,7 @@ void Robot::SimpleAuton()
     if (!autonDriveTimer.HasPeriodPassed(AUTON::AUTON_DRIVE_TIMER) && !hasAutonRun && !doneDriving)
     {
         intake.deploy(true);
-        activeIntake = true;
+        //activeIntake = true;
         //std::cout << "Driving" << std::endl;
         //drive.drive(-.2,-.2);
     }
