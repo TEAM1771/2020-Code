@@ -254,7 +254,7 @@ void Robot::TeleopPeriodic()
     drive.shift();
 
    
- 
+    HopperManager();
     
     IntakeManager();
     TurretManager();
