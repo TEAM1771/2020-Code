@@ -255,7 +255,12 @@ void Robot::TeleopPeriodic()
 
    
    // HopperManager();
-   hopper.driveDistance();
+   static bool hasBeenPressed = false;
+   if(oStick.GetRawButton(1) && !hasBeenPressed)
+   {
+       hopper.driveDistance();
+       hasBeenPressed = true;
+   }
     
     IntakeManager();
     TurretManager();
