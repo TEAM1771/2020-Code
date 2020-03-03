@@ -54,7 +54,7 @@ void Robot::SimpleAuton()
     }
 
     //Start spooling up shooter wheel
-    //turret.bangbangControl();
+    turret.bangbangControl();
     if (!autonInit)
     {
         autonDriveTimer.Reset();
