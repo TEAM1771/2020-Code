@@ -49,10 +49,11 @@ void Robot::SimpleAuton()
             //turret.stopShooter();
             activeIntake = false;
             isCommandingHood = false;
+            std::cout << "Done With Auton" std::endl;
     }
 
     //Start spooling up shooter wheel
-    turret.bangbangControl();
+    //turret.bangbangControl();
     if (!autonInit)
     {
         autonDriveTimer.Reset();
@@ -68,25 +69,25 @@ void Robot::SimpleAuton()
     {
         intake.deploy(true);
         activeIntake = true;
+        std::cout << "Driving" << std::endl;
         //drive.drive(-.2,-.2);
     }
     else
     {
         doneDriving = true;
         readyToAim = true;
+        
     }
 
     if (doneDriving && readyToAim)
     {
+        std::cout << "Aiming Right" << std::endl;
         turret.aimRightPID();
         turret.traverseHood();
         //drive.drive(0,0);
-        if (!aiming)
-            {
-                if ( turret.getTurnyTurnyValue() > SHOOTER::TURRET::BACKWARDS - 2 
+        if ( turret.getTurnyTurnyValue() > SHOOTER::TURRET::BACKWARDS - 2 
                     && turret.getTurnyTurnyValue() < SHOOTER::TURRET::BACKWARDS + 2 )
                 {
-                    aiming = true;
                     readyToAim = false;
                     readyToTrack = true;
                 }
@@ -97,11 +98,16 @@ void Robot::SimpleAuton()
 
     if(readyToTrack && doneDriving && !readyToAim)
     {
-        turret.aimWithCameraLimelight();
-        if(turret.cameraHasLock())
-        {
-            readyToShoot = true;
+        if ( turret.getTurnyTurnyValue() > SHOOTER::TURRET::BACKWARDS - 2 
+                    && turret.getTurnyTurnyValue() < SHOOTER::TURRET::BACKWARDS + 2 )
+        {        
+            turret.aimWithCameraLimelight();
+            if(turret.cameraHasLock())
+            {
+                readyToShoot = true;
+            }
         }
+
     }
 
     if (readyToShoot)
@@ -193,6 +199,7 @@ void Robot::SimpleAuton()
 
         if ( autonFeedTimer.HasPeriodPassed(AUTON::AUTON_FEED_SHOOTER_TIMER) )
         {
+
             hopper.stopFeed();
             hasAutonRun = true;
             intake.deploy(false);
