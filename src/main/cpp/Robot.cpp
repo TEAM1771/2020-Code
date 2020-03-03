@@ -175,6 +175,7 @@ void Robot::SimpleAuton()
 
     }
     */
+   /*
     else
     {   doneDriving = true;
         autonDriveTimer.Stop();
@@ -193,7 +194,9 @@ void Robot::SimpleAuton()
         readyToAim = true;
 
     }
+    */
 
+/*
     if ( !autonShootTimer.HasPeriodPassed(AUTON::AUTON_SHOOT_TIMER) && !hasAutonRun && doneDriving && readyToAim)
     {
         turret.aimWithCameraLimelight();
@@ -230,6 +233,7 @@ void Robot::SimpleAuton()
             }
         }
     }
+    */
 
 }
 
