@@ -44,7 +44,7 @@ bool Hopper::valueInRange(double value, double min, double max)
 
 void Hopper::giveStatus()
 {
-    std::cout<< transportEncoder.GetPosition() << std::endl;
+    std::cout << "Hopper encoder: " << transportEncoder.GetPosition() << std::endl;
 }
 
 bool Hopper::isLaserBroken() const
