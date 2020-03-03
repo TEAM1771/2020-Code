@@ -351,7 +351,7 @@ void Robot::TurretManager()
         static bool aiming = false;
         static bool isCommandingHood = false;
             
-        //turret.bangbangControl(); 
+        turret.bangbangControl(); 
         if (oStick.GetRawButton(BUTTONS::TURRET::AIM_LEFT))
         {
             if (!aiming)
