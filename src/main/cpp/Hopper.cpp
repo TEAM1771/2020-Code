@@ -16,11 +16,17 @@ Hopper::Hopper()
     targetDistance = HOPPER::TRANSPORT::DISTANCE; //Because there is no set distance for the PID, only position, we will have to always update the target by adding the desired movement distance  
 }
 
+/*
+bool Hopper::hasReachedDistance()
+{
+    return valueInRange(transportEncoder.GetPosition(), )
+}*/
+
 void Hopper::driveDistance()
 {
 
     hopperPIDController.SetReference(targetDistance,rev::ControlType::kPosition);
-    if( valueInRange(transportEncoder.GetPosition(), HOPPER::TRANSPORT::DISTANCE -.5, HOPPER::TRANSPORT::DISTANCE + 0.5) ) //Ball has traveled distance, update new target position for next ball
+    if( valueInRange(transportEncoder.GetPosition(), targetDistance -.5, targetDistance + 0.5) ) //Ball has traveled distance, update new target position for next ball
     {
         targetDistance = transportEncoder.GetPosition() + HOPPER::TRANSPORT::DISTANCE;
         numberOfBalls++;
