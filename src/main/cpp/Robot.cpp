@@ -287,6 +287,7 @@ void Robot::HopperManager()
 
     if(hopper.isLaserBroken() && !isShooting)
     {
+        
         hopper.driveDistance();
         isShooting = true;
         std::cout << "Driving distance" << std::endl;
