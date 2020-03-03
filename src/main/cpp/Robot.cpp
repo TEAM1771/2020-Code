@@ -302,6 +302,7 @@ void Robot::HopperManager()
     else
     {
         isShooting = false;
+        std::cout << "RESETING" << std::endl;
         //hopper.controlFeedPID()
     }
     
