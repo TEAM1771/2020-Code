@@ -285,27 +285,19 @@ void Robot::HopperManager()
 {
     static bool isShooting = false;
 
-    if(hopper.isLaserBroken() && !isShooting)
+    if(oStick.GetRawButton(BUTTONS::HOPPER::SHOOT))
     {
-        
-        hopper.driveDistance();
-        isShooting = true;
-        std::cout << "Driving distance" << std::endl;
+        hopper.feedShooter();    
     }
-    else if(oStick.GetRawButton(BUTTONS::HOPPER::SHOOT))
-    {
-        hopper.feedShooter();
-        
-    }
-    else if(!isShooting)
+    else if(oStick.GetRawButtonReleased(BUTTONS::HOPPER::SHOOT))
     {
         hopper.stopFeed();
     }
     else
     {
-        isShooting = false;
+      //  isShooting = false;
       //  std::cout << "RESETING" << std::endl;
-        //hopper.controlFeedPID()
+        hopper.controlFeedPID();
     }
     
 }
