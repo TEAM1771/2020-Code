@@ -34,6 +34,7 @@ void Robot::SimpleAuton()
     static frc::Timer autonDriveTimer; //Used to track how long to drive for
     static frc::Timer autonShootTimer; //Used to track when we can shoot (basically waiting for spin up to complete)
     static frc::Timer autonFeedTimer;
+    static frc::Timer aimingTimer;
 
     turret.limelight_led(true);
     if(hasAutonRun)
@@ -85,19 +86,12 @@ void Robot::SimpleAuton()
        // turret.aimRightPID();
        // turret.traverseHood();
         //drive.drive(0,0);
-        if (!aiming)
-            {
                 turret.aimRightPID();
                 turret.traverseHood();
+                aimingTimer.Start();
+                std::cout << "Trying to aim right" << std::endl;
 
-                if ( turret.getTurnyTurnyValue() > SHOOTER::TURRET::BACKWARDS - 2 
-                  && turret.getTurnyTurnyValue() < SHOOTER::TURRET::BACKWARDS + 2 )
-                {
-                    aiming = true;
-                    //turret.limelight_led(true);
-                }
-            }
-            else
+            if( aimingTimer.HasPeriodPassed(AUTON::AUTON_LIMELIGHT_TIMER))
             {
                 readyToTrack = true;
                 readyToAim = false;
