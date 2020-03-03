@@ -71,7 +71,7 @@ void Robot::SimpleAuton()
         intake.deploy(true);
         //activeIntake = true;
         //std::cout << "Driving" << std::endl;
-        //drive.drive(-.2,-.2);
+        drive.drive(-.2,-.2);
     }
     else
     {
@@ -85,7 +85,7 @@ void Robot::SimpleAuton()
         //std::cout << "Aiming Right" << std::endl;
        // turret.aimRightPID();
        // turret.traverseHood();
-        //drive.drive(0,0);
+        drive.drive(0,0);
         
          if(turret.getHoodValue() > SHOOTER::HOOD::SAFE_TO_TURN)
          {
