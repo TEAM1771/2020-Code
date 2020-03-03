@@ -3,7 +3,7 @@
 
 Hopper::Hopper()
 {
-    indexerNeo.Set(HOPPER::INDEXER::SPEED);
+    //indexerNeo.Set(HOPPER::INDEXER::SPEED);
     indexerNeo.SetIdleMode(rev::CANSparkMax::IdleMode::kBrake);
     transportNeo.SetIdleMode(rev::CANSparkMax::IdleMode::kBrake);
     numberOfBalls = 3;
