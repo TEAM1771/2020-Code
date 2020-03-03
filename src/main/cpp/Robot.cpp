@@ -35,6 +35,7 @@ void Robot::SimpleAuton()
     static frc::Timer autonShootTimer; //Used to track when we can shoot (basically waiting for spin up to complete)
     static frc::Timer autonFeedTimer;
 
+    turret.limelight_led(true);
     if(hasAutonRun)
     {
             if(turret.getHoodValue() > SHOOTER::HOOD::SAFE_TO_TURN)
