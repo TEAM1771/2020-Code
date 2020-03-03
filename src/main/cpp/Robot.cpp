@@ -49,7 +49,7 @@ void Robot::SimpleAuton()
             //turret.stopShooter();
             activeIntake = false;
             isCommandingHood = false;
-            std::cout << "Done With Auton" std::endl;
+            //std::cout << "Done With Auton" std::endl;
     }
 
     //Start spooling up shooter wheel
@@ -69,7 +69,7 @@ void Robot::SimpleAuton()
     {
         intake.deploy(true);
         activeIntake = true;
-        std::cout << "Driving" << std::endl;
+        //std::cout << "Driving" << std::endl;
         //drive.drive(-.2,-.2);
     }
     else
@@ -81,7 +81,7 @@ void Robot::SimpleAuton()
 
     if (doneDriving && readyToAim)
     {
-        std::cout << "Aiming Right" << std::endl;
+        //std::cout << "Aiming Right" << std::endl;
         turret.aimRightPID();
         turret.traverseHood();
         //drive.drive(0,0);
