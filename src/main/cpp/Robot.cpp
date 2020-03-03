@@ -285,7 +285,7 @@ void Robot::HopperManager()
 {
     static bool isShooting = false;
 
-    if(hopper.isLaserBroken())
+    if(hopper.isLaserBroken() && !isShooting)
     {
         hopper.driveDistance();
         isShooting = true;
