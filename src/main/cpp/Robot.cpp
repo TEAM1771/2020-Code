@@ -254,7 +254,15 @@ void Robot::TeleopPeriodic()
     drive.shift();
 
    
-    if(oStick.GetRawButton(BUTTONS::HOPPER::SHOOT))
+ 
+    
+    IntakeManager();
+    TurretManager();
+}
+
+void Robot::HopperManager()
+{
+   if(oStick.GetRawButton(BUTTONS::HOPPER::SHOOT))
     {
         hopper.feedShooter();
     }
@@ -263,8 +271,6 @@ void Robot::TeleopPeriodic()
         hopper.controlFeedPID();
     }
     
-    IntakeManager();
-    TurretManager();
 }
 
 void Robot::TestPeriodic()

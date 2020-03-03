@@ -35,6 +35,7 @@ public:
     void IntakeManager();
     void TurretManager();
     void ClimberManager();
+    void HopperManager();
  private:
     frc::Joystick rStick { 0 },
                   lStick { 1 },
