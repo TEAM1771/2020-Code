@@ -132,7 +132,7 @@ void Turret::bangbangControl()
     
 }
 
-void Turret::aimWithCameraLimelight()
+double Turret::aimWithCameraLimelight()
 {
     //frc::SmartDashboard::GetNumber("Hood Position", hoodSetpoint));
     getCameraData();
@@ -155,12 +155,14 @@ void Turret::aimWithCameraLimelight()
         double const yval = getHoodAngle(cameraYValue);
         std::cout << "hood: " << yval << std::endl;
         setHoodAngle(yval);
+
+        return fabs(output); // returns small number if target is found
     }
     else
     {
           turretTurnyTurny.Set(0);
     }
-
+    return 100;
 }
 
 double Turret::getCameraY()

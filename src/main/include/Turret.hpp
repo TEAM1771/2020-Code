@@ -60,7 +60,7 @@ public:
     void maintainRPM();
     void rpmWithStick(float value);
     void stopShooter();
-    void aimWithCameraLimelight();
+    double aimWithCameraLimelight();
 
     void stopAiming();
     void aimLeftPID();

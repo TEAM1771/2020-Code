@@ -14,212 +14,86 @@ void Robot::AutonomousInit()
 //Simple Auton should drive forward while aiming back, and then shooting.
 void Robot::SimpleAuton()
 {
-
-
-    static bool doneDriving = false;
     static bool readyToAim = false;
-    static bool readyToTrack = false;
-    static bool readyToZero = false;
-    static bool readyToShoot = false;
 
-
-
-    static bool autonInit = false; //First loop initilization
-    static bool hasAutonRun = false; //Is our auton still running?
-    static bool aiming = false;
-    static bool isCommandingHood = false;
-    static bool hasStartedFeeding = false;
-  //  static bool doneDriving = false;
-  //  static bool readyToAim = false;
     static frc::Timer autonDriveTimer; //Used to track how long to drive for
     static frc::Timer autonShootTimer; //Used to track when we can shoot (basically waiting for spin up to complete)
     static frc::Timer autonFeedTimer;
 
-    turret.limelight_led(true);
-    if(hasAutonRun)
-    {
-            if(turret.getHoodValue() > SHOOTER::HOOD::SAFE_TO_TURN)
-            {
-                turret.traverseHood();
-                turret.aimZero();
-            }
-            aiming = false;
-            turret.limelight_led(false);
-            turret.traverseHood();
-            //turret.stopShooter();
-            //activeIntake = false;
-            isCommandingHood = false;
-            //std::cout << "Done With Auton" std::endl;
-    }
 
-    //Start spooling up shooter wheel
-    //turret.bangbangControl();
-    if (!autonInit)
+    static bool autonInit = true; //First loop initilization
+    if(autonInit)
     {
+        
+        autonDriveTimer.Stop();
         autonDriveTimer.Reset();
         autonDriveTimer.Start();
+
+        autonShootTimer.Stop();
         autonShootTimer.Reset();
         autonShootTimer.Start();
-        
-        autonInit = true;
-    }
 
+        autonFeedTimer.Stop();
+        autonFeedTimer.Reset();
 
-    if (!autonDriveTimer.HasPeriodPassed(AUTON::AUTON_DRIVE_TIMER) && !hasAutonRun && !doneDriving)
-    {
-        intake.deploy(true);
-        //activeIntake = true;
-        //std::cout << "Driving" << std::endl;
-        //drive.drive(-.2,-.2);
+        autonInit = false;
     }
-    else
-    {
-        doneDriving = true;
-        readyToAim = true;
-        
-    }
+    turret.limelight_led(true);
+    turret.bangbangControl();
 
-    if (doneDriving && readyToAim)
-    {
-        //std::cout << "Aiming Right" << std::endl;
-       // turret.aimRightPID();
-       // turret.traverseHood();
-        //drive.drive(0,0);
-        if (!aiming)
+    bool const driving = autonDriveTimer.Get() < AUTON::AUTON_DRIVE_TIMER;
+    bool const shootWheelReady = autonShootTimer.Get() < AUTON::AUTON_SHOOT_TIMER;
+    bool const not_done = autonFeedTimer.Get() < AUTON::AUTON_FEED_SHOOTER_TIMER;
+   
+   if (driving)
+   {
+       intake.deploy(true);
+       drive.drive(-.2,-.2);
+   }
+   else
+   {
+       drive.drive(0,0);
+   }
+
+   if(shootWheelReady && not_done)
+   {
+        if (turret.getTurnyTurnyValue() > SHOOTER::TURRET::BACKWARDS - 2 
+             && turret.getTurnyTurnyValue() < SHOOTER::TURRET::BACKWARDS + 2 )
+        {
+            readyToAim = true;
+        }
+        else if(!readyToAim)
+        {
+            turret.aimRightPID();
+        }
+
+        if(readyToAim && not_done)
+        {
+            if( turret.aimWithCameraLimelight() < .05 )
             {
-                turret.aimRightPID();
-                turret.traverseHood();
-
-                if ( turret.getTurnyTurnyValue() > SHOOTER::TURRET::BACKWARDS - 2 
-                  && turret.getTurnyTurnyValue() < SHOOTER::TURRET::BACKWARDS + 2 )
+                static bool startedShooting = false;
+                if(!startedShooting)
                 {
-                    aiming = true;
-                    //turret.limelight_led(true);
+                    autonFeedTimer.Start();
+                    startedShooting = true;
+                }
+                else 
+                {
+                    hopper.feedShooter();
                 }
             }
-            else
-            {
-                readyToTrack = true;
-                readyToAim = false;
-            }
-            
-    }
-
-    if( readyToTrack && doneDriving && !readyToAim)
-    {
-        std::cout << "Aiming with camera" << std::endl;
-        if ( turret.getTurnyTurnyValue() > SHOOTER::TURRET::BACKWARDS - 2 
-                    && turret.getTurnyTurnyValue() < SHOOTER::TURRET::BACKWARDS + 2 )
-        {        
-            turret.aimWithCameraLimelight();
-            if(turret.cameraHasLock())
-            {
-                readyToShoot = true;
-            }
         }
+   }
+   else if (not_done)
+   {
+        turret.aimRightPID();
+   }
+   else
+   {
+       turret.aimZero();
+       turret.zeroHood();
+   }
 
-    }
-
-    if (readyToShoot)
-    {
-        turret.aimWithCameraLimelight();
-        if(autonShootTimer.HasPeriodPassed(AUTON::AUTON_SHOOT_TIMER))
-        {
-            hopper.feedShooter();
-            autonFeedTimer.Start();
-        }
-        if(autonFeedTimer.HasPeriodPassed(AUTON::AUTON_FEED_SHOOTER_TIMER))
-        {
-            readyToZero = true;
-            readyToShoot = false;
-            hopper.stopFeed();
-        }
-    }
-
-    if(readyToZero)
-    {
-        intake.deploy(false);
-        turret.traverseHood();
-        if(turret.getHoodValue() > SHOOTER::HOOD::SAFE_TO_TURN)
-            {
-                turret.zeroHood();
-                turret.traverseHood();
-            }
-    }
-    
-
-    if(autonDriveTimer.HasPeriodPassed(AUTON::AUTON_MAX_TIMER))
-    {
-        readyToZero = true;
-        readyToShoot = false;
-        hasAutonRun = true;
-    }
-
-
-
-    /*if ( !autonDriveTimer.HasPeriodPassed(AUTON::AUTON_DRIVE_TIMER) && !hasAutonRun && !doneDriving)
-    {
-        //drive.drive(-.2,-.2); //Drive half speed backwards away from goal
-        intake.deploy(true);
-        activeIntake = true;
-
-    }
-    */
-    else
-    {   doneDriving = true;
-        autonDriveTimer.Stop();
-        //drive.drive(0,0);
-        if (!aiming)
-            {
-                turret.aimRightPID();
-                turret.traverseHood();
-                if ( turret.getTurnyTurnyValue() > SHOOTER::TURRET::BACKWARDS - 2 
-                  && turret.getTurnyTurnyValue() < SHOOTER::TURRET::BACKWARDS + 2 )
-                {
-                    aiming = true;
-                }
-                
-            }
-        readyToAim = true;
-
-    }
-
-    if ( !autonShootTimer.HasPeriodPassed(AUTON::AUTON_SHOOT_TIMER) && !hasAutonRun && doneDriving && readyToAim)
-    {
-        turret.aimWithCameraLimelight();
-    }
-    else
-    {
-        
-        turret.aimWithCameraLimelight();
-        if( turret.cameraHasLock() )
-        {
-            
-            hopper.feedShooter();
-            if(!hasStartedFeeding)
-            {
-                hasStartedFeeding = true;
-            }
-            if( hasStartedFeeding )
-            {
-                autonFeedTimer.Stop();
-                autonFeedTimer.Start();
-            }
-        }
-
-        if ( autonFeedTimer.HasPeriodPassed(AUTON::AUTON_FEED_SHOOTER_TIMER) )
-        {
-
-            hopper.stopFeed();
-            hasAutonRun = true;
-            intake.deploy(false);
-            if(turret.getHoodValue() > SHOOTER::HOOD::SAFE_TO_TURN)
-            {
-                turret.zeroHood();
-                turret.aimZero();
-            }
-        }
-    }
 
 }
 
