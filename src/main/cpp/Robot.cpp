@@ -19,6 +19,8 @@ void Robot::SimpleAuton()
     static bool aiming = false;
     static bool isCommandingHood = false;
     static bool hasStartedFeeding = false;
+    static bool doneDriving = false;
+    static bool readyToAim = false;
     static frc::Timer autonDriveTimer; //Used to track how long to drive for
     static frc::Timer autonShootTimer; //Used to track when we can shoot (basically waiting for spin up to complete)
     static frc::Timer autonFeedTimer;
@@ -50,9 +52,17 @@ void Robot::SimpleAuton()
         autonInit = true;
     }
 
-    if ( !autonDriveTimer.HasPeriodPassed(AUTON::AUTON_DRIVE_TIMER) && !hasAutonRun )
+    if ( !autonDriveTimer.HasPeriodPassed(AUTON::AUTON_DRIVE_TIMER) && !hasAutonRun && !doneDriving)
     {
-        drive.drive(-.2,-.2); //Drive half speed backwards away from goal
+        //drive.drive(-.2,-.2); //Drive half speed backwards away from goal
+        intake.deploy(true);
+        activeIntake = true;
+
+    }
+    else
+    {   doneDriving = true;
+        autonDriveTimer.Stop();
+        //drive.drive(0,0);
         if (!aiming)
             {
                 turret.aimRightPID();
@@ -64,26 +74,10 @@ void Robot::SimpleAuton()
                 }
                 
             }
-            else{
-                turret.aimWithCameraLimelight();
-            }
-            intake.deploy(true);
-            activeIntake = true;
-            if( !isCommandingHood )
-            {
-                isCommandingHood = true;
-                turret.limelight_led(true);
-            }
-
-    }
-    else
-    {
-        autonDriveTimer.Stop();
-        drive.drive(0,0);
-        turret.aimWithCameraLimelight();
+        readyToAim = true;
     }
 
-    if ( !autonShootTimer.HasPeriodPassed(AUTON::AUTON_SHOOT_TIMER) && !hasAutonRun)
+    if ( !autonShootTimer.HasPeriodPassed(AUTON::AUTON_SHOOT_TIMER) && !hasAutonRun && doneDriving && readyToAim)
     {
         turret.aimWithCameraLimelight();
     }
