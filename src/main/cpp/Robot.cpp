@@ -54,7 +54,7 @@ void Robot::SimpleAuton()
     }
 
     //Start spooling up shooter wheel
-    turret.bangbangControl();
+    //turret.bangbangControl();
     if (!autonInit)
     {
         autonDriveTimer.Reset();
@@ -322,7 +322,7 @@ void Robot::TurretManager()
         static bool aiming = false;
         static bool isCommandingHood = false;
             
-        turret.bangbangControl(); 
+        //turret.bangbangControl(); 
         if (oStick.GetRawButton(BUTTONS::TURRET::AIM_LEFT))
         {
             if (!aiming)
@@ -349,7 +349,7 @@ void Robot::TurretManager()
         }
         else if(oStick.GetRawButton(BUTTONS::TURRET::AIM_RIGHT))
         {
-            turret.bangbangControl();
+            //turret.bangbangControl();
             if (!aiming)
             {
                 turret.aimRightPID();
@@ -373,7 +373,7 @@ void Robot::TurretManager()
         {
 
             //turret.traverseHood();
-            turret.bangbangControl();
+            //turret.bangbangControl();
             turret.aimLeftPID();
             intake.deploy(true);
             activeIntake = true;
