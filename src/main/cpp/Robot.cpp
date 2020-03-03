@@ -254,8 +254,8 @@ void Robot::TeleopPeriodic()
     drive.shift();
 
    
-   // HopperManager();
-   static bool hasBeenPressed = false;
+    HopperManager();
+   /*static bool hasBeenPressed = false;
 
    if(oStick.GetRawButton(11) && !hasBeenPressed)
    {
@@ -274,6 +274,7 @@ void Robot::TeleopPeriodic()
    {
        hasBeenPressed = false;
    }
+   */
    
     
     IntakeManager();
@@ -283,18 +284,25 @@ void Robot::TeleopPeriodic()
 void Robot::HopperManager()
 {
     static bool isShooting = false;
-    if(oStick.GetRawButton(BUTTONS::HOPPER::SHOOT))
+
+    if(hopper.isLaserBroken())
+    {
+        hopper.driveDistance();
+        isShooting = true;
+    }
+    else if(oStick.GetRawButton(BUTTONS::HOPPER::SHOOT))
     {
         hopper.feedShooter();
+        
     }
-    else if(isShooting)
+    else if(!isShooting)
     {
-        hopper.controlFeedPID();
+        hopper.stopFeed();
+    }
+    else
+    {
         isShooting = false;
-    }
-    else if(!hopper.isLaserBroken())
-    {
-        isShooting = true;
+        //hopper.controlFeedPID()
     }
     
 }
