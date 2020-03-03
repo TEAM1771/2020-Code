@@ -82,20 +82,32 @@ void Robot::SimpleAuton()
     if (doneDriving && readyToAim)
     {
         //std::cout << "Aiming Right" << std::endl;
-        turret.aimRightPID();
-        turret.traverseHood();
+       // turret.aimRightPID();
+       // turret.traverseHood();
         //drive.drive(0,0);
-        if ( turret.getTurnyTurnyValue() > SHOOTER::TURRET::BACKWARDS - 2 
-                    && turret.getTurnyTurnyValue() < SHOOTER::TURRET::BACKWARDS + 2 )
+        if (!aiming)
+            {
+                turret.aimRightPID();
+                turret.traverseHood();
+
+                if ( turret.getTurnyTurnyValue() > SHOOTER::TURRET::BACKWARDS - 2 
+                  && turret.getTurnyTurnyValue() < SHOOTER::TURRET::BACKWARDS + 2 )
                 {
-                    readyToAim = false;
-                    readyToTrack = true;
+                    aiming = true;
+                    //turret.limelight_led(true);
                 }
+            }
+            else
+            {
+                readyToTrack = true;
+                readyToAim = false;
+            }
             
     }
 
     if( readyToTrack && doneDriving && !readyToAim)
     {
+        std::cout << "Aiming with camera" << std::endl;
         if ( turret.getTurnyTurnyValue() > SHOOTER::TURRET::BACKWARDS - 2 
                     && turret.getTurnyTurnyValue() < SHOOTER::TURRET::BACKWARDS + 2 )
         {        
