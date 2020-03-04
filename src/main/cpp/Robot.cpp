@@ -40,7 +40,7 @@ void Robot::FiveBallAuton()
     }
     else if(!doneTurning)
     {
-        drive.drive(-.3,0);
+        drive.drive(.3,0);
         if(turnTimer.HasPeriodPassed(AUTON::TURN_TIME))
         {
             doneTurning = true;
@@ -48,7 +48,7 @@ void Robot::FiveBallAuton()
             drive.drive(0,0);
         }
     }
-    /*else if(!doneDrivingBackward)
+    else if(!doneDrivingBackward)
     {
         std::cout << "Trying to drive" << std::endl;
         drive.driveDistanceBackward(AUTON::DISTANCE_BACKWARD);
@@ -58,7 +58,7 @@ void Robot::FiveBallAuton()
             drive.drive(0,0);
             doneDrivingBackward = true;
         }
-    }*/
+    }
 
 /*
     if(doneDrivingForward && !doneDrivingBackward)
