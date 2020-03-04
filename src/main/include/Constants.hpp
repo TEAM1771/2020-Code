@@ -134,8 +134,8 @@ namespace CLIMBER
 
     namespace POSITIONS
     {
-        constexpr double DOWN = 0;
-        constexpr double UP = 100;
+        constexpr double DOWN = 500;
+        constexpr double UP = 1000;
     }
 
 

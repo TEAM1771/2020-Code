@@ -16,11 +16,18 @@ Climber::Climber()
     climber_1_pidController.SetReference(CLIMBER::POSITIONS::DOWN, rev::ControlType::kPosition);
     climber_1_pidController.SetOutputRange(-CLIMBER::MAX_OUTPUT, CLIMBER::MAX_OUTPUT);
     
-    climber_2.Follow(climber_1, true);
+    //climber_2.Follow(climber_1, true);
 }
 
-void Climber::climb(bool val)
+void Climber::climb()
 {
-    climber_1_pidController.SetReference(val?CLIMBER::POSITIONS::UP : CLIMBER::POSITIONS::DOWN, rev::ControlType::kPosition);
+    climber_1.Set(-1);
+    climber_2.Set(1);
+    //climber_1_pidController.SetReference(val?CLIMBER::POSITIONS::UP : CLIMBER::POSITIONS::DOWN, rev::ControlType::kPosition);
     //climber_2_pidController.SetReference(val?CLIMBER::POSITIONS::UP : CLIMBER::POSITIONS::DOWN, rev::ControlType::kPosition);
+}
+void Climber::StopClimb()
+{
+    climber_1.Set(0);
+    climber_2.Set(0);
 }

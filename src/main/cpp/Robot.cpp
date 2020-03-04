@@ -287,7 +287,7 @@ void Robot::TeleopPeriodic()
 
    
     HopperManager();
-   /*static bool hasBeenPressed = false;
+   static bool hasBeenPressed = false;
 
    if(oStick.GetRawButton(11) && !hasBeenPressed)
    {
@@ -306,7 +306,7 @@ void Robot::TeleopPeriodic()
    {
        hasBeenPressed = false;
    }
-   */
+   
    
     
     IntakeManager();
@@ -339,7 +339,7 @@ void Robot::TestPeriodic()
     //hopper.manualIndexerControl(lStick.GetY());
 //hopper.manualTransportControl(rStick.GetY());
     //TurretManager();
-    IntakeManager();
+    /*IntakeManager();
 
     turret.limelight_led(true);
     static bool isShooting = false;
@@ -376,6 +376,10 @@ void Robot::TestPeriodic()
     // if(lStick.GetThrottle() > 0)
         turret.bangbangControl();
     turret.debugSetHoodAngle(hood);
+    */
+   
+   ClimberManager();
+
 }
 
 void Robot::TurretManager()
@@ -531,9 +535,19 @@ void Robot::IntakeManager()
 
 void Robot::ClimberManager()
 {
-    if(lStick.GetRawButton(BUTTONS::CLIMBER::RAISE))
+    if(lStick.GetRawButton(3))
+    {
+        climber.climb();
+    }
+    else
+    {
+        climber.StopClimb();
+        
+    }
+    
+   /* if(lStick.GetRawButton(BUTTONS::CLIMBER::RAISE))
         climber.climb(true);
-    else climber.climb(false);
+    else climber.climb(false);*/
 }
 
 void Robot::DisabledInit()
