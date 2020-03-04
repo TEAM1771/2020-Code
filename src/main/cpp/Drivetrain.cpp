@@ -32,26 +32,20 @@ void Drivetrain::driveDistanceForward(double distance)
     if((fabs(rdrive.getEncoderDistance())+fabs(ldrive.getEncoderDistance()))/2<fabs(distance))
     {
         isDriving = true;
-        else if(fabs(rdrive.getEncoderDistance())<fabs(ldrive.getEncoderDistance()))
+        if(fabs(rdrive.getEncoderDistance())<fabs(ldrive.getEncoderDistance()))
         {
             isDriving = true;
             if(fabs(rdrive.getEncoderDistance())>fabs(ldrive.getEncoderDistance()))
             {
                 drive(-.3,-.2);
-                // SetLeftJags(-.5);
-                // SetRightJags(1);
             }
             else if(fabs(rdrive.getEncoderDistance())<fabs(ldrive.getEncoderDistance()))
             {
                 drive(-.2,-.3);
-                //SetLeftJags(-1);
-                // SetRightJags(.5);
             }
             else
             {
                 drive(-.2,-.2);
-                //  SetLeftJags(-1);
-                // SetRightJags(1);
             }
         }
         else
