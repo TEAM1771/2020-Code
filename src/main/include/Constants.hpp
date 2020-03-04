@@ -151,6 +151,8 @@ namespace AUTON
 
     constexpr double DISTANCE_FORWARD = 105;
     constexpr double DISTANCE_BACKWARD = -40;
+    constexpr double TURN_TIME = 1;
+
 
 }
 

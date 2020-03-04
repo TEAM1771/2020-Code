@@ -15,7 +15,9 @@ void Robot::FiveBallAuton()
 {
     static bool doneDrivingForward = false;
     static bool doneDrivingBackward = false;
-    static bool finishedTurning = false;
+    static bool doneTurning = false;
+
+    static frc::Timer turnTimer;
     //drive.printDistance();
     HopperManager();
 
@@ -32,11 +34,20 @@ void Robot::FiveBallAuton()
             std::cout << "Done driving" << std::endl;
             drive.drive(0,0);
             doneDrivingForward = true;
+            turnTimer.Reset();
+            turnTimer.Start();
         }
     }
-    if(doneDrivingForward)
-        intake.deploy(false);
-        intake.intakeneo.Set(0);
+    else if(!doneTurning)
+    {
+        drive.drive(-.3,0);
+        if(turnTimer.HasPeriodPassed(AUTON::TURN_TIME))
+        {
+            doneTurning = true;
+            turnTimer.Stop();
+            drive.drive(0,0);
+        }
+    }
     /*else if(!doneDrivingBackward)
     {
         std::cout << "Trying to drive" << std::endl;
