@@ -16,22 +16,30 @@ void Robot::FiveBallAuton()
     static bool doneDrivingForward = false;
     static bool doneDrivingBackward = false;
     static bool doneTurning = false;
+    static bool doneAiming = false;
+    static bool doneShooting = false;
 
     static frc::Timer turnTimer;
+    static frc::Timer shootTimer;
+    static frc::Timer aimTimer;
     //drive.printDistance();
-    HopperManager();
 
+    //HopperManager();
+
+    //turret.bangbangControl();
     turret.limelight_led(true);
     intake.deploy(true);
     intake.intakeneo.Set(-1);
 
     if(!doneDrivingForward)
     {
-        std::cout << "Trying to drive" << std::endl;
+        turret.traverseHood();
+        HopperManager();
+        std::cout << "Trying to drive forward" << std::endl;
         drive.driveDistanceForward(AUTON::DISTANCE_FORWARD);
         if(!drive.stillDriving())
         {
-            std::cout << "Done driving" << std::endl;
+            std::cout << "Done driving forward" << std::endl;
             drive.drive(0,0);
             doneDrivingForward = true;
             turnTimer.Reset();
@@ -40,39 +48,67 @@ void Robot::FiveBallAuton()
     }
     else if(!doneTurning)
     {
+        HopperManager();
         drive.drive(.3,0);
+        turret.traverseHood();
+        turret.aimRightPID();
         if(turnTimer.HasPeriodPassed(AUTON::TURN_TIME))
         {
             doneTurning = true;
             turnTimer.Stop();
             drive.drive(0,0);
+            frc::Wait(0.2); //Wait to let momentum from the robot stop spinning it so we don't mess with encoder reset. Using Wait() is pretty sketchy, so we try not to use it. This is a good time to use it.
         }
     }
+    
     else if(!doneDrivingBackward)
     {
-        std::cout << "Trying to drive" << std::endl;
+        HopperManager();
+        turret.traverseHood();
+        turret.aimRightPID();
+        std::cout << "Trying to drive backwards" << std::endl;
         drive.driveDistanceBackward(AUTON::DISTANCE_BACKWARD);
         if(!drive.stillDriving())
         {
-            std::cout << "Done driving" << std::endl;
+            std::cout << "Done driving backwards" << std::endl;
             drive.drive(0,0);
             doneDrivingBackward = true;
+            aimTimer.Start();
         }
     }
-
-/*
-    if(doneDrivingForward && !doneDrivingBackward)
+    
+    /*
+    else if(!doneAiming)
     {
-        drive.driveDistanceBackward(20);
-        if(!drive.stillDriving())
+        HopperManager();
+        std::cout << "Aiming with camera" << std::endl;
+        if ( turret.getTurnyTurnyValue() > SHOOTER::TURRET::BACKWARDS - 2 
+                    && turret.getTurnyTurnyValue() < SHOOTER::TURRET::BACKWARDS + 2 )
+        {        
+            turret.aimWithCameraLimelight();
+            if(turret.cameraHasLock() && aimTimer.HasPeriodPassed(AUTON::AUTON_LIMELIGHT_TIMER))
+            {
+                doneAiming = true;
+            }
+        }
+        else
         {
-            drive.drive(0,0);
-            doneDrivingBackward = true;
+            turret.traverseHood();
+            turret.aimRightPID();
+        }
+    }
+    */
+   /* else if(!doneShooting) //Auton code can end here, hopper will be feeding shooter until auton ends
+    {
+        turret.aimWithCameraLimelight();
+        if(shootTimer.HasPeriodPassed(AUTON::AUTON_SHOOT_TIMER))
+        {
+            hopper.feedShooter();
         }
     }
     */
 
-    //if(doneDrivingBackward && doneDrivingForward && !finishedTurning)
+    
 }
 
 

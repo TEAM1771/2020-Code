@@ -76,6 +76,7 @@ void Drivetrain::driveDistanceBackward(double distance)
     }
     if((fabs(rdrive.getEncoderDistance())+fabs(ldrive.getEncoderDistance()))/2<fabs(distance))//96
     {
+        std::cout << "Going back" << std::endl;
         isDriving = true;
         if(fabs(rdrive.getEncoderDistance())>fabs(ldrive.getEncoderDistance()))
         {
