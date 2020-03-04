@@ -207,7 +207,7 @@ void Robot::SimpleAuton()
 void Robot::AutonomousPeriodic() 
 {
     //SimpleAuton();
-    //FiveBallAuton();
+    FiveBallAuton();
 }
 
 void Robot::TeleopInit()
