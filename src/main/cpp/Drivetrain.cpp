@@ -74,7 +74,7 @@ void Drivetrain::driveDistanceBackward(double distance)
         reset();
         isReset=true;
     }
-    if((fabs(rdrive.getEncoderDistance())+fabs(ldrive.getEncoderDistance()))/2>fabs(distance))//96
+    if((fabs(rdrive.getEncoderDistance())+fabs(ldrive.getEncoderDistance()))/2<fabs(distance))//96
     {
         isDriving = true;
         if(fabs(rdrive.getEncoderDistance())>fabs(ldrive.getEncoderDistance()))
