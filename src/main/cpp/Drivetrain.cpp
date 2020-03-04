@@ -80,15 +80,15 @@ void Drivetrain::driveDistanceBackward(double distance)
         isDriving = true;
         if(fabs(rdrive.getEncoderDistance())>fabs(ldrive.getEncoderDistance()))
         {
-            drive(.2,.3);
+            drive(.3,.4);
         }
         else if(fabs(rdrive.getEncoderDistance())<fabs(ldrive.getEncoderDistance()))
         {
-            drive(.3,.2);
+            drive(.4,.3);
         }
         else
         {
-            drive(.2,.2);
+            drive(.3,.3);
         }
     }
     else
