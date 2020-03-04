@@ -539,7 +539,8 @@ void Robot::DisabledPeriodic()
 {
     //turret.giveStatus();
     //hopper.giveStatus();
-    drive.printDistance();
+    //drive.printDistance();
+    climber.printStatus();
 }
 
 
