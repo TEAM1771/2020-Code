@@ -24,9 +24,11 @@ void Robot::FiveBallAuton()
 
     if(!doneDrivingForward)
     {
+        std::cout << "Trying to drive" << std::endl;
         drive.driveDistanceForward(AUTON::DISTANCE_FORWARD);
         if(!drive.stillDriving())
         {
+            std::cout << "Done driving" << std::endl;
             drive.drive(0,0);
             doneDrivingForward = true;
         }
