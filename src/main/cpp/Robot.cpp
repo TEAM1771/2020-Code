@@ -287,30 +287,9 @@ void Robot::TeleopPeriodic()
 
    
     HopperManager();
-   static bool hasBeenPressed = false;
-
-   if(oStick.GetRawButton(11) && !hasBeenPressed)
-   {
-       hopper.driveDistance();
-       hasBeenPressed = true;
-   }
-   else if(oStick.GetRawButton(1))
-   {
-       hopper.feedShooter();
-   }
-   else if(!hasBeenPressed)
-   {
-       hopper.stopFeed();
-   }
-   else
-   {
-       hasBeenPressed = false;
-   }
-   
-   
-    
     IntakeManager();
-    TurretManager();
+    ClimberManager();
+    //TurretManager();
 }
 
 void Robot::HopperManager()
@@ -537,11 +516,11 @@ void Robot::ClimberManager()
 {
     if(lStick.GetRawButton(3))
     {
-        climber.climb(true);
+        climber.ClimbUp();
     }
     else
     {
-        climber.StopClimb();
+        climber.ClimbDown();
         
     }
     climber.printStatus();

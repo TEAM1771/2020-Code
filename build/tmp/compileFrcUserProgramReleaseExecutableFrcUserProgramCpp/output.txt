@@ -1,6 +1,10 @@
 See file:///C:/Users/Matt/Documents/frc2020/2020-Code/build/tmp/compileFrcUserProgramReleaseExecutableFrcUserProgramCpp/output.txt for all output for compileFrcUserProgramReleaseExecutableFrcUserProgramCpp.
 compiling Climber.cpp successful.
 
+compiling Hopper.cpp successful.
+
+compiling transmission.cpp successful.
+
 compiling Drivetrain.cpp successful.
 C:\Users\Matt\Documents\frc2020\2020-Code\src\main\cpp\Drivetrain.cpp: In member function 'void Drivetrain::drive(double, double)':
 C:\Users\Matt\Documents\frc2020\2020-Code\src\main\cpp\Drivetrain.cpp:108:16: warning: unused variable 'drivetrain_speed' [-Wunused-variable]
@@ -8,8 +12,6 @@ C:\Users\Matt\Documents\frc2020\2020-Code\src\main\cpp\Drivetrain.cpp:108:16: wa
                 ^~~~~~~~~~~~~~~~
 
 compiling Intake.cpp successful.
-
-compiling Hopper.cpp successful.
 
 compiling Turret.cpp successful.
 
@@ -32,11 +34,11 @@ C:\Users\Matt\Documents\frc2020\2020-Code\src\main\cpp\Robot.cpp:132:17: warning
      static bool hasStartedFeeding = false;
                  ^~~~~~~~~~~~~~~~~
 C:\Users\Matt\Documents\frc2020\2020-Code\src\main\cpp\Robot.cpp: In member function 'void Robot::HopperManager()':
-C:\Users\Matt\Documents\frc2020\2020-Code\src\main\cpp\Robot.cpp:318:17: warning: unused variable 'isShooting' [-Wunused-variable]
+C:\Users\Matt\Documents\frc2020\2020-Code\src\main\cpp\Robot.cpp:297:17: warning: unused variable 'isShooting' [-Wunused-variable]
      static bool isShooting = false;
                  ^~~~~~~~~~
 C:\Users\Matt\Documents\frc2020\2020-Code\src\main\cpp\Robot.cpp: At global scope:
-C:\Users\Matt\Documents\frc2020\2020-Code\src\main\cpp\Robot.cpp:318:17: warning: 'isShooting' defined but not used [-Wunused-variable]
+C:\Users\Matt\Documents\frc2020\2020-Code\src\main\cpp\Robot.cpp:297:17: warning: 'isShooting' defined but not used [-Wunused-variable]
 C:\Users\Matt\Documents\frc2020\2020-Code\src\main\cpp\Robot.cpp:132:17: warning: 'hasStartedFeeding' defined but not used [-Wunused-variable]
      static bool hasStartedFeeding = false;
                  ^~~~~~~~~~~~~~~~~
