@@ -24,7 +24,7 @@ void Robot::FiveBallAuton()
 
     if(!doneDrivingForward)
     {
-        drive.driveDistanceForward(40);
+        drive.driveDistanceForward(AUTON::DISTANCE_FORWARD);
         if(!drive.stillDriving())
         {
             drive.drive(0,0);
