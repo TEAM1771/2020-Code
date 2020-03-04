@@ -19,8 +19,8 @@ void Robot::FiveBallAuton()
     //drive.printDistance();
 
     turret.limelight_led(true);
-    //intake.deploy();
-    //intake.intakeneo.Set(1);
+    intake.deploy(true);
+    intake.intakeneo.Set(-1);
 
     if(!doneDrivingForward)
     {

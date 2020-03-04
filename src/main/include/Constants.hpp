@@ -149,7 +149,7 @@ namespace AUTON
     constexpr double AUTON_MAX_TIMER = 12; //max time
     constexpr double AUTON_LIMELIGHT_TIMER = 3;
 
-    constexpr double DISTANCE_FORWARD = 40;
+    constexpr double DISTANCE_FORWARD = 105;
     constexpr double DISTANCE_BACKWARD = -40;
 
 }
