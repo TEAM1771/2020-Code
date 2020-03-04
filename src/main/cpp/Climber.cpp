@@ -13,13 +13,13 @@ Climber::Climber()
     climber_1_pidController.SetI(CLIMBER::I);
     climber_1_pidController.SetD(CLIMBER::D);
     climber_1_pidController.SetFeedbackDevice(climber_1_encoder);
-    climber_1_pidController.SetReference(CLIMBER::POSITIONS::DOWN, rev::ControlType::kPosition);
+    //climber_1_pidController.SetReference(CLIMBER::POSITIONS::DOWN, rev::ControlType::kPosition);
     climber_1_pidController.SetOutputRange(-CLIMBER::MAX_OUTPUT, CLIMBER::MAX_OUTPUT);
     
     //climber_2.Follow(climber_1, true);
 }
 
-void Climber::climb()
+void Climber::climb(bool value)
 {
     climber_1.Set(-1);
     climber_2.Set(1);
@@ -30,4 +30,10 @@ void Climber::StopClimb()
 {
     climber_1.Set(0);
     climber_2.Set(0);
+}
+
+void Climber::printStatus()
+{
+    std::cout<< "Climber 1: " << climber_1_encoder.GetPosition() << std::endl;
+    std::cout<< "Climber 2: " << climber_2_encoder.GetPosition() << std::endl;
 }

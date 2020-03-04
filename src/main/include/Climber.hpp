@@ -17,5 +17,7 @@ class Climber
 public:
     Climber();
 
-    void climb(bool);
+    void climb(bool value);
+    void StopClimb();
+    void printStatus();
 };

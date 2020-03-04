@@ -537,13 +537,14 @@ void Robot::ClimberManager()
 {
     if(lStick.GetRawButton(3))
     {
-        climber.climb();
+        climber.climb(true);
     }
     else
     {
         climber.StopClimb();
         
     }
+    climber.printStatus();
     
    /* if(lStick.GetRawButton(BUTTONS::CLIMBER::RAISE))
         climber.climb(true);
