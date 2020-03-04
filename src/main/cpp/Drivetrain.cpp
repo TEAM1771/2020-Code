@@ -62,8 +62,8 @@ void Drivetrain::driveDistanceForward(double distance)
 
 void Drivetrain::printDistance()
 {
-    //std::cout << "Left: " << ldrive.getEncoderDistance() << std::endl;
-    //std::cout << "Right: " << rdrive.getEncoderDistance() << std::endl;
+    std::cout << "Left: " << ldrive.getEncoderDistance() << std::endl;
+    std::cout << "Right: " << rdrive.getEncoderDistance() << std::endl;
 }
 
 void Drivetrain::driveDistanceBackward(double distance)
