@@ -33,6 +33,17 @@ void Robot::FiveBallAuton()
             doneDrivingForward = true;
         }
     }
+    /*else if(!doneDrivingBackward)
+    {
+        std::cout << "Trying to drive" << std::endl;
+        drive.driveDistanceBackward(AUTON::DISTANCE_BACKWARD);
+        if(!drive.stillDriving())
+        {
+            std::cout << "Done driving" << std::endl;
+            drive.drive(0,0);
+            doneDrivingBackward = true;
+        }
+    }*/
 
 /*
     if(doneDrivingForward && !doneDrivingBackward)
