@@ -24,7 +24,7 @@ namespace TRANS
     constexpr int shift_down_point = 6000;//4 / low_ratio_multiplier_to_ft;
 
     constexpr int rFalcon = 15;    
-    constexpr int rNeo = 14;
+    constexpr int rNeo = 19;
     constexpr int lFalcon = 17;
     constexpr int lNeo = 11;    
     //std::string song_path = "Pain_it_black.chrp";
@@ -124,7 +124,7 @@ namespace SHOOTER
 
 namespace CLIMBER
 {
-    constexpr int PORT_1 = 13;
+    constexpr int PORT_1 = 47;
     constexpr int PORT_2 = 9;
     
     constexpr double P = 0.1;
