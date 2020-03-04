@@ -34,6 +34,9 @@ void Robot::FiveBallAuton()
             doneDrivingForward = true;
         }
     }
+    if(doneDrivingForward)
+        intake.deploy(false);
+        intake.intakeneo.Set(0);
     /*else if(!doneDrivingBackward)
     {
         std::cout << "Trying to drive" << std::endl;
