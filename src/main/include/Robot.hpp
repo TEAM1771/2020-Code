@@ -27,6 +27,7 @@ public:
     void AutonomousInit() override;
     void AutonomousPeriodic() override ;
     void SimpleAuton();
+    void FiveBallAuton();
     void TeleopInit() override;
     void TeleopPeriodic() override;
     void DisabledInit() override;
@@ -36,6 +37,7 @@ public:
     void TurretManager();
     void ClimberManager();
     void HopperManager();
+    
  private:
     frc::Joystick rStick { 0 },
                   lStick { 1 },

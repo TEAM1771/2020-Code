@@ -1,12 +1,29 @@
-See file:///D:/ryan/Documents/Code/1771/2020-Code/build/tmp/compileFrcUserProgramDebugExecutableFrcUserProgramCpp/output.txt for all output for compileFrcUserProgramDebugExecutableFrcUserProgramCpp.
-compiling Intake.cpp successful.
-
-compiling Hopper.cpp successful.
-
+See file:///C:/Users/Matt/Documents/frc2020/2020-Code/build/tmp/compileFrcUserProgramDebugExecutableFrcUserProgramCpp/output.txt for all output for compileFrcUserProgramDebugExecutableFrcUserProgramCpp.
 compiling Drivetrain.cpp successful.
-
-compiling transmission.cpp successful.
+C:\Users\Matt\Documents\frc2020\2020-Code\src\main\cpp\Drivetrain.cpp: In member function 'void Drivetrain::drive(double, double)':
+C:\Users\Matt\Documents\frc2020\2020-Code\src\main\cpp\Drivetrain.cpp:113:16: warning: unused variable 'drivetrain_speed' [-Wunused-variable]
+     auto const drivetrain_speed = fabs(ldrive.sensors.GetIntegratedSensorVelocity() - rdrive.sensors.GetIntegratedSensorVelocity()) / 2;
+                ^~~~~~~~~~~~~~~~
 
 compiling Robot.cpp successful.
+C:\Users\Matt\Documents\frc2020\2020-Code\src\main\cpp\Robot.cpp: In member function 'void Robot::SimpleAuton()':
+C:\Users\Matt\Documents\frc2020\2020-Code\src\main\cpp\Robot.cpp:45:17: warning: variable 'aiming' set but not used [-Wunused-but-set-variable]
+     static bool aiming = false;
+                 ^~~~~~
+C:\Users\Matt\Documents\frc2020\2020-Code\src\main\cpp\Robot.cpp:46:17: warning: variable 'isCommandingHood' set but not used [-Wunused-but-set-variable]
+     static bool isCommandingHood = false;
+                 ^~~~~~~~~~~~~~~~
+C:\Users\Matt\Documents\frc2020\2020-Code\src\main\cpp\Robot.cpp:47:17: warning: unused variable 'hasStartedFeeding' [-Wunused-variable]
+     static bool hasStartedFeeding = false;
+                 ^~~~~~~~~~~~~~~~~
+C:\Users\Matt\Documents\frc2020\2020-Code\src\main\cpp\Robot.cpp: In member function 'void Robot::HopperManager()':
+C:\Users\Matt\Documents\frc2020\2020-Code\src\main\cpp\Robot.cpp:303:17: warning: unused variable 'isShooting' [-Wunused-variable]
+     static bool isShooting = false;
+                 ^~~~~~~~~~
+C:\Users\Matt\Documents\frc2020\2020-Code\src\main\cpp\Robot.cpp: At global scope:
+C:\Users\Matt\Documents\frc2020\2020-Code\src\main\cpp\Robot.cpp:303:17: warning: 'isShooting' defined but not used [-Wunused-variable]
+C:\Users\Matt\Documents\frc2020\2020-Code\src\main\cpp\Robot.cpp:47:17: warning: 'hasStartedFeeding' defined but not used [-Wunused-variable]
+     static bool hasStartedFeeding = false;
+                 ^~~~~~~~~~~~~~~~~
 
-Finished compileFrcUserProgramDebugExecutableFrcUserProgramCpp, see full log file:///D:/ryan/Documents/Code/1771/2020-Code/build/tmp/compileFrcUserProgramDebugExecutableFrcUserProgramCpp/output.txt.
+Finished compileFrcUserProgramDebugExecutableFrcUserProgramCpp, see full log file:///C:/Users/Matt/Documents/frc2020/2020-Code/build/tmp/compileFrcUserProgramDebugExecutableFrcUserProgramCpp/output.txt.

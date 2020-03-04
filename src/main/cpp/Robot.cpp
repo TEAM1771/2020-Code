@@ -11,6 +11,22 @@ void Robot::AutonomousInit()
 
 }
 
+void Robot::FiveBallAuton()
+{
+    static bool doneDriving = false;
+
+    if(!doneDriving)
+    {
+        drive.driveDistanceForward(20);
+        if(!drive.stillDriving())
+        {
+            drive.drive(0,0);
+            doneDriving = true;
+        }
+    }
+}
+
+
 //Simple Auton should drive forward while aiming back, and then shooting.
 void Robot::SimpleAuton()
 {
@@ -239,7 +255,8 @@ void Robot::SimpleAuton()
 
 void Robot::AutonomousPeriodic() 
 {
-    SimpleAuton();
+    //SimpleAuton();
+    //FiveBallAuton();
 }
 
 void Robot::TeleopInit()
@@ -512,7 +529,8 @@ void Robot::DisabledInit()
 void Robot::DisabledPeriodic()
 {
     //turret.giveStatus();
-    hopper.giveStatus();
+    //hopper.giveStatus();
+    drive.printDistance();
 }
 
 

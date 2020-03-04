@@ -10,6 +10,100 @@ Drivetrain::Drivetrain()
     //std::cout << 
 }
 
+void Drivetrain::reset()
+{
+    ldrive.setEncoderDistance(0);
+    rdrive.setEncoderDistance(0);
+}
+
+bool Drivetrain::stillDriving()
+{
+    return isDriving;
+}
+
+void Drivetrain::driveDistanceForward(double distance)
+{
+    static bool isReset = false;
+     if(!isReset)
+        {
+            reset();
+            isReset=true;
+        }
+        if((fabs(rdrive.getEncoderDistance())+fabs(ldrive.getEncoderDistance()))/2<distance)
+        {
+            isDriving = true;
+             if(fabs(rdrive.getEncoderDistance())>fabs(ldrive.getEncoderDistance()))
+                {
+                    drive(-.2,-.3);
+                   // SetLeftJags(-.5);
+                   // SetRightJags(1);
+                }
+                else if(fabs(rdrive.getEncoderDistance())<fabs(ldrive.getEncoderDistance()))
+                {
+                    drive(-.3,-.2);
+                    //SetLeftJags(-1);
+                   // SetRightJags(.5);
+                }
+                else
+                {
+                    drive(-.2,-.2);
+                  //  SetLeftJags(-1);
+                   // SetRightJags(1);
+                }
+        }
+        else
+            {
+                drive(0,0);
+                isDriving = false;
+            }
+}
+
+void Drivetrain::printDistance()
+{
+    std::cout << "Left: " << ldrive.getEncoderDistance() << std::endl;
+    std::cout << "Right: " << rdrive.getEncoderDistance() << std::endl;
+}
+
+void Drivetrain::driveDistanceBackward(double distance)
+    {
+        static bool isReset = false;
+        if(!isReset)
+        {
+            reset();
+            isReset=true;
+        }
+        if((fabs(rdrive.getEncoderDistance())+fabs(ldrive.getEncoderDistance()))/2>distance)//96
+        
+                {
+                                isDriving = true;
+
+                        if(fabs(rdrive.getEncoderDistance())>fabs(ldrive.getEncoderDistance()))
+                        {
+                                drive(-3.,-.2);
+                                //SetLeftJags(1);
+                               // SetRightJags(-.5);
+                        }
+                        else if(fabs(rdrive.getEncoderDistance())<fabs(ldrive.getEncoderDistance()))
+                        {
+                                drive(-.2,-.3);
+                                //SetLeftJags(.5);
+                                //SetRightJags(-1);
+                        }
+                        else
+                        {
+                                drive(-.2,-.2);
+                               // SetLeftJags(1);
+                               // SetRightJags(-1);
+                        }
+                }
+                else
+                {
+                        drive(0,0);
+                        isDriving = false;
+                }
+        }
+
+
 void Drivetrain::drive(double lval, double rval)
 {
     rdrive.Set(-rval);

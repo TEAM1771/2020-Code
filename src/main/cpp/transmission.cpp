@@ -20,3 +20,13 @@ void Transmission::Set(double val)
     neo.Set(val);
     falcon.Set(ControlMode::PercentOutput, val);
 }
+
+double Transmission::getEncoderDistance()
+{
+    return encoder.GetPosition();
+}
+
+void Transmission::setEncoderDistance(double distance)
+{
+    encoder.SetPosition(distance);
+}
