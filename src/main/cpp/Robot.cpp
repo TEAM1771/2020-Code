@@ -13,17 +13,38 @@ void Robot::AutonomousInit()
 
 void Robot::FiveBallAuton()
 {
-    static bool doneDriving = false;
+    static bool doneDrivingForward = false;
+    static bool doneDrivingBackward = false;
+    static bool finishedTurning = false;
+    
 
-    if(!doneDriving)
+    turret.limelight_led(true);
+    //intake.deploy();
+    //intake.intakeneo.Set(1);
+
+    if(!doneDrivingForward)
     {
-        drive.driveDistanceForward(20);
+        drive.driveDistanceForward(40);
         if(!drive.stillDriving())
         {
             drive.drive(0,0);
-            doneDriving = true;
+            doneDrivingForward = true;
         }
     }
+
+/*
+    if(doneDrivingForward && !doneDrivingBackward)
+    {
+        drive.driveDistanceBackward(20);
+        if(!drive.stillDriving())
+        {
+            drive.drive(0,0);
+            doneDrivingBackward = true;
+        }
+    }
+    */
+
+    //if(doneDrivingBackward && doneDrivingForward && !finishedTurning)
 }
 
 
@@ -180,76 +201,6 @@ void Robot::SimpleAuton()
         readyToShoot = false;
         hasAutonRun = true;
     }
-
-
-
-    /*if ( !autonDriveTimer.HasPeriodPassed(AUTON::AUTON_DRIVE_TIMER) && !hasAutonRun && !doneDriving)
-    {
-        //drive.drive(-.2,-.2); //Drive half speed backwards away from goal
-        intake.deploy(true);
-        activeIntake = true;
-
-    }
-    */
-   /*
-    else
-    {   doneDriving = true;
-        autonDriveTimer.Stop();
-        //drive.drive(0,0);
-        if (!aiming)
-            {
-                turret.aimRightPID();
-                turret.traverseHood();
-                if ( turret.getTurnyTurnyValue() > SHOOTER::TURRET::BACKWARDS - 2 
-                  && turret.getTurnyTurnyValue() < SHOOTER::TURRET::BACKWARDS + 2 )
-                {
-                    aiming = true;
-                }
-                
-            }
-        readyToAim = true;
-
-    }
-    */
-
-/*
-    if ( !autonShootTimer.HasPeriodPassed(AUTON::AUTON_SHOOT_TIMER) && !hasAutonRun && doneDriving && readyToAim)
-    {
-        turret.aimWithCameraLimelight();
-    }
-    else
-    {
-        
-        turret.aimWithCameraLimelight();
-        if( turret.cameraHasLock() )
-        {
-            
-            hopper.feedShooter();
-            if(!hasStartedFeeding)
-            {
-                hasStartedFeeding = true;
-            }
-            if( hasStartedFeeding )
-            {
-                autonFeedTimer.Stop();
-                autonFeedTimer.Start();
-            }
-        }
-
-        if ( autonFeedTimer.HasPeriodPassed(AUTON::AUTON_FEED_SHOOTER_TIMER) )
-        {
-
-            hopper.stopFeed();
-            hasAutonRun = true;
-            intake.deploy(false);
-            if(turret.getHoodValue() > SHOOTER::HOOD::SAFE_TO_TURN)
-            {
-                turret.zeroHood();
-                turret.aimZero();
-            }
-        }
-    }
-    */
 
 }
 
