@@ -16,7 +16,7 @@ void Robot::FiveBallAuton()
     static bool doneDrivingForward = false;
     static bool doneDrivingBackward = false;
     static bool finishedTurning = false;
-    
+    drive.printDistance();
 
     turret.limelight_led(true);
     //intake.deploy();
