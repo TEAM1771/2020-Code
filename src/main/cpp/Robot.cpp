@@ -8,7 +8,7 @@ Robot::Robot()
 
 void Robot::AutonomousInit()
 {
-
+    drive.reset();
 }
 
 void Robot::FiveBallAuton()
