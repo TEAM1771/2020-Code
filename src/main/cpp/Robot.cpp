@@ -22,6 +22,7 @@ void Robot::FiveBallAuton()
     static frc::Timer turnTimer;
     static frc::Timer shootTimer;
     static frc::Timer aimTimer;
+    static frc::Timer backTimer;
     //drive.printDistance();
 
     //HopperManager();
@@ -57,7 +58,7 @@ void Robot::FiveBallAuton()
             doneTurning = true;
             turnTimer.Stop();
             drive.drive(0,0);
-            frc::Wait(0.2); //Wait to let momentum from the robot stop spinning it so we don't mess with encoder reset. Using Wait() is pretty sketchy, so we try not to use it. This is a good time to use it.
+            //frc::Wait(0.2); //Wait to let momentum from the robot stop spinning it so we don't mess with encoder reset. Using Wait() is pretty sketchy, so we try not to use it. This is a good time to use it.
         }
     }
     
@@ -67,8 +68,8 @@ void Robot::FiveBallAuton()
         turret.traverseHood();
         turret.aimRightPID();
         std::cout << "Trying to drive backwards" << std::endl;
-        drive.driveDistanceBackward(AUTON::DISTANCE_BACKWARD);
-        if(!drive.stillDriving())
+        drive.drive(.5,.5);
+        if(backTimer.HasPeriodPassed(AUTON::TIME_BACKWARD))
         {
             std::cout << "Done driving backwards" << std::endl;
             drive.drive(0,0);
@@ -85,7 +86,7 @@ void Robot::FiveBallAuton()
         if ( turret.getTurnyTurnyValue() > SHOOTER::TURRET::BACKWARDS - 2 
                     && turret.getTurnyTurnyValue() < SHOOTER::TURRET::BACKWARDS + 2 )
         {        
-            turret.aimWithCameraLimelight();
+            //turret.aimWithCameraLimelight();
             if(turret.cameraHasLock() && aimTimer.HasPeriodPassed(AUTON::AUTON_LIMELIGHT_TIMER))
             {
                 doneAiming = true;

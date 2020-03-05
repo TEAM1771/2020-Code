@@ -150,7 +150,7 @@ namespace AUTON
     constexpr double AUTON_LIMELIGHT_TIMER = 3;
 
     constexpr double DISTANCE_FORWARD = 115;
-    constexpr double DISTANCE_BACKWARD = -80;
+    constexpr double TIME_BACKWARD = 2.0;
     constexpr double TURN_TIME =.25;
 
 
