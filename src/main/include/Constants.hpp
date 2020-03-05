@@ -170,7 +170,7 @@ namespace BUTTONS
         constexpr int AIM_RIGHT = 7;
         //constexpr int AIM_LEFT_MANUAL = 9;
         //constexpr int AIM_RIGHT_MANUAL = 8;
-        constexpr int AIM_CAMERA = 10;
+        constexpr int SHOOT_FORWARD = 10;
         constexpr int HOOD_ZERO = 4;
         //constexpr int HOOD_MIDPOINT = 6;
         constexpr int TURRET_HOOD_BATTERSHOT = 6;

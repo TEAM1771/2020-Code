@@ -436,11 +436,11 @@ void Robot::TurretManager()
                 turret.traverseHood();
             }
         }
-        /*else if (oStick.GetRawButton(BUTTONS::TURRET::AIM_RIGHT_MANUAL))
+        else if (oStick.GetRawButton(BUTTONS::TURRET::SHOOT_FORWARD))
         {
-            turret.aimRight();
+            turret.setHoodAngle(-20);
         }
-        else if (oStick.GetRawButton(BUTTONS::TURRET::AIM_LEFT_MANUAL))
+        /*else if (oStick.GetRawButton(BUTTONS::TURRET::AIM_LEFT_MANUAL))
         {
             turret.aimLeft();
         }*/
