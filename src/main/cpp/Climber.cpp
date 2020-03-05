@@ -13,14 +13,14 @@ Climber::Climber()
     climber_1_pidController.SetI(CLIMBER::I);
     climber_1_pidController.SetD(CLIMBER::D);
     climber_1_pidController.SetFeedbackDevice(climber_1_encoder);
-    climber_1_pidController.SetReference(CLIMBER::POSITIONS::DOWN, rev::ControlType::kPosition);
+    climber_1_pidController.SetReference(CLIMBER::POSITIONS::ZERO, rev::ControlType::kPosition);
     climber_1_pidController.SetOutputRange(-CLIMBER::MAX_OUTPUT, CLIMBER::MAX_OUTPUT);
 
     climber_2_pidController.SetP(CLIMBER::P);
     climber_2_pidController.SetI(CLIMBER::I);
     climber_2_pidController.SetD(CLIMBER::D);
     climber_2_pidController.SetFeedbackDevice(climber_2_encoder);
-    climber_2_pidController.SetReference(-CLIMBER::POSITIONS::DOWN, rev::ControlType::kPosition);
+    climber_2_pidController.SetReference(-CLIMBER::POSITIONS::ZERO, rev::ControlType::kPosition);
     climber_2_pidController.SetOutputRange(-CLIMBER::MAX_OUTPUT, CLIMBER::MAX_OUTPUT);
 }
 

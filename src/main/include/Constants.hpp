@@ -36,7 +36,7 @@ namespace HOPPER
         constexpr int PORT = 3;
         constexpr double SPEED = 0.7;
         constexpr double SHOOT_SPEED = 1.0;
-        constexpr double DISTANCE = 75;
+        constexpr double DISTANCE = 73;
         constexpr double P = 0.1;
         constexpr double I = 0;
         constexpr double D = 0.0001;
@@ -127,15 +127,16 @@ namespace CLIMBER
     constexpr int PORT_1 = 47;
     constexpr int PORT_2 = 9;
     
-    constexpr double P = 0.1;
+    constexpr double P = 0.1771;
     constexpr double I = 0.0;
     constexpr double D = 0.0;
     constexpr double MAX_OUTPUT = 1;
 
     namespace POSITIONS
     {
-        constexpr double DOWN = 0;
-        constexpr double UP = 1000;
+        constexpr double DOWN = 100;
+        constexpr double UP = 802; //802
+        constexpr double ZERO = 0;
     }
 
 
@@ -145,6 +146,7 @@ namespace AUTON
 {
     constexpr double AUTON_DRIVE_TIMER = 0.3; //How long to drive forward for
     constexpr double AUTON_SHOOT_TIMER = 1.0; //When we can shoot (for spin up time)
+    constexpr double AUTON_SHOOT_TIMER_SIMPLE = 6.0;
     constexpr double AUTON_FEED_SHOOTER_TIMER = 3.5; //How long to shoot for
     constexpr double AUTON_MAX_TIMER = 12; //max time
     constexpr double AUTON_LIMELIGHT_TIMER = 3;
@@ -167,10 +169,10 @@ namespace BUTTONS
     namespace TURRET
     {
         constexpr int AIM_LEFT = 8;
-        constexpr int AIM_RIGHT = 7;
+        constexpr int AIM_RIGHT = 10;
         //constexpr int AIM_LEFT_MANUAL = 9;
         //constexpr int AIM_RIGHT_MANUAL = 8;
-        constexpr int SHOOT_FORWARD = 10;
+        constexpr int SHOOT_FORWARD = 2;
         constexpr int HOOD_ZERO = 4;
         //constexpr int HOOD_MIDPOINT = 6;
         constexpr int TURRET_HOOD_BATTERSHOT = 6;

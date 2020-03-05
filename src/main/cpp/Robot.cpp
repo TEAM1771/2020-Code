@@ -154,7 +154,7 @@ void Robot::SimpleAuton()
                 turret.aimZero();
             }
             aiming = false;
-            turret.limelight_led(false);
+            //turret.limelight_led(false);
             turret.traverseHood();
             //turret.stopShooter();
             //activeIntake = false;
@@ -239,7 +239,7 @@ void Robot::SimpleAuton()
     if (readyToShoot)
     {
         turret.aimWithCameraLimelight();
-        if(autonShootTimer.HasPeriodPassed(AUTON::AUTON_SHOOT_TIMER))
+        if(autonShootTimer.HasPeriodPassed(AUTON::AUTON_SHOOT_TIMER_SIMPLE))
         {
             hopper.feedShooter();
             autonFeedTimer.Start();
@@ -362,14 +362,16 @@ void Robot::TestPeriodic()
     turret.debugSetHoodAngle(hood);
     */
    
-   //ClimberManager();
-
-   climber.joystickControl(oStick.GetY());
+   ClimberManager();
+   // HopperManager();
+  // climber.joystickControl(oStick.GetY());
+   climber.printStatus();
 
 }
 
 void Robot::TurretManager()
 {
+        turret.limelight_led(true);
         static bool aiming = false;
         static bool isCommandingHood = false;
             
@@ -463,7 +465,7 @@ void Robot::TurretManager()
                 turret.aimZero();
             }
             aiming = false;
-            turret.limelight_led(false);
+          //  turret.limelight_led(false);
             turret.zeroHood();
             //turret.stopShooter();
             activeIntake = false;
@@ -520,13 +522,16 @@ void Robot::IntakeManager()
 
 void Robot::ClimberManager()
 {
-    if(lStick.GetRawButton(3))
+    static bool hasBeenPressed = false;
+    if(oStick.GetThrottle() < 0 && oStick.GetRawButton(11))
     {
         climber.ClimbUp();
+        hasBeenPressed = true;
     }
-    else
+    else if(hasBeenPressed && oStick.GetThrottle() < 0)
     {
         climber.ClimbDown();
+        hasBeenPressed = false;
         
     }
     climber.printStatus();
@@ -546,7 +551,7 @@ void Robot::DisabledPeriodic()
     //turret.giveStatus();
     //hopper.giveStatus();
     //drive.printDistance();
-    //climber.printStatus();
+    climber.printStatus();
 }
 
 
