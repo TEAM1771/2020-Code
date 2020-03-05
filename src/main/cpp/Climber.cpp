@@ -35,6 +35,13 @@ void Climber::ClimbDown()
     climber_2_pidController.SetReference(-CLIMBER::POSITIONS::DOWN, rev::ControlType::kPosition);
 }
 
+void Climber::joystickControl(double val)
+{
+    climber_1.Set(val);
+    climber_2.Set(-val);
+    printStatus();
+}
+
 void Climber::printStatus()
 {
     std::cout<< "Climber 1: " << climber_1_encoder.GetPosition() << std::endl;

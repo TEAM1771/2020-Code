@@ -188,27 +188,24 @@ void Robot::SimpleAuton()
        // turret.traverseHood();
         drive.drive(0,0);
         
-         if(turret.getHoodValue() > SHOOTER::HOOD::SAFE_TO_TURN)
-         {
-                turret.aimRightPID();
-                turret.traverseHood();
-                aimingTimer.Start();
-                std::cout << "Trying to aim right" << std::endl;
+        if(turret.getHoodValue() > SHOOTER::HOOD::SAFE_TO_TURN)
+        {
+            turret.aimRightPID();
+            turret.traverseHood();
+            aimingTimer.Start();
+            std::cout << "Trying to aim right" << std::endl;
 
-            if( aimingTimer.HasPeriodPassed(AUTON::AUTON_LIMELIGHT_TIMER))
-            {
-                readyToTrack = true;
-                readyToAim = false;
-            }
-         }
-         else
-         {
-             turret.traverseHood();
-         }
-         
-
-            
+        if( aimingTimer.HasPeriodPassed(AUTON::AUTON_LIMELIGHT_TIMER))
+        {
+            readyToTrack = true;
+            readyToAim = false;
+        }
+        }
+    else
+    {
+        turret.traverseHood();
     }
+}
 
     if( readyToTrack && doneDriving && !readyToAim)
     {
@@ -357,7 +354,9 @@ void Robot::TestPeriodic()
     turret.debugSetHoodAngle(hood);
     */
    
-   ClimberManager();
+   //ClimberManager();
+
+   climber.joystickControl(oStick.GetY());
 
 }
 
@@ -425,7 +424,6 @@ void Robot::TurretManager()
             {
                 turret.traverseHood();
                 isCommandingHood = true;
-            
             }
             if(turret.getTurnyTurnyValue() < SHOOTER::TURRET::SAFE_TO_DEPLOY_HOOD_FRONT)
             {

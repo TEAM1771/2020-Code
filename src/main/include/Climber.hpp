@@ -19,5 +19,8 @@ public:
 
     void ClimbUp();
     void ClimbDown();
+
+    void joystickControl(double);
+
     void printStatus();
 };

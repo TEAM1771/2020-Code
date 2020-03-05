@@ -128,8 +128,6 @@ void Turret::bangbangControl()
         //shooter_2.SetOpenLoopRampRate(0);
         // std::cout << "area4" << std::endl;
     }
-    
-    
 }
 
 void Turret::aimWithCameraLimelight()
