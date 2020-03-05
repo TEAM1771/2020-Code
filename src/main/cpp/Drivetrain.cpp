@@ -66,7 +66,7 @@ void Drivetrain::printDistance()
     std::cout << "Right: " << rdrive.getEncoderDistance() << std::endl;
 }
 
-void Drivetrain::driveDistanceBackward(double distance)
+void Drivetrain::driveDistanceBackward(double distance) // doesnt work yet
 {
     static bool isReset = false;
     if(!isReset)

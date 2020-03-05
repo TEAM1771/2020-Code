@@ -182,7 +182,7 @@ namespace BUTTONS
 
     namespace CLIMBER
     {
-        constexpr int RAISE = 8;    // lstick 
-        constexpr int DOWN = 9;     // lstick
+        constexpr int RAISE = 3;    // lstick 
+        //constexpr int DOWN = 9;     // lstick
     }
 }
