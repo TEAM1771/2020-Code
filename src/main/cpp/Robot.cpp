@@ -27,7 +27,7 @@ void Robot::FiveBallAuton()
 
     //HopperManager();
 
-    //turret.bangbangControl();
+    turret.bangbangControl();
     turret.limelight_led(true);
     intake.deploy(true);
     intake.intakeneo.Set(-1);
@@ -58,6 +58,8 @@ void Robot::FiveBallAuton()
             doneTurning = true;
             turnTimer.Stop();
             drive.drive(0,0);
+            backTimer.Reset();
+            backTimer.Start();
             //frc::Wait(0.2); //Wait to let momentum from the robot stop spinning it so we don't mess with encoder reset. Using Wait() is pretty sketchy, so we try not to use it. This is a good time to use it.
         }
     }
@@ -73,12 +75,15 @@ void Robot::FiveBallAuton()
         {
             std::cout << "Done driving backwards" << std::endl;
             drive.drive(0,0);
+
+            backTimer.Stop();   
             doneDrivingBackward = true;
+            aimTimer.Reset();
             aimTimer.Start();
         }
     }
     
-    /*
+    
     else if(!doneAiming)
     {
         HopperManager();
@@ -90,6 +95,8 @@ void Robot::FiveBallAuton()
             if(turret.cameraHasLock() && aimTimer.HasPeriodPassed(AUTON::AUTON_LIMELIGHT_TIMER))
             {
                 doneAiming = true;
+                shootTimer.Reset();
+                shootTimer.Start();
             }
         }
         else
@@ -98,8 +105,8 @@ void Robot::FiveBallAuton()
             turret.aimRightPID();
         }
     }
-    */
-   /* else if(!doneShooting) //Auton code can end here, hopper will be feeding shooter until auton ends
+    
+    else if(!doneShooting) //Auton code can end here, hopper will be feeding shooter until auton ends
     {
         turret.aimWithCameraLimelight();
         if(shootTimer.HasPeriodPassed(AUTON::AUTON_SHOOT_TIMER))
@@ -107,7 +114,7 @@ void Robot::FiveBallAuton()
             hopper.feedShooter();
         }
     }
-    */
+    
 
     
 }
@@ -286,8 +293,8 @@ void Robot::TeleopPeriodic()
    
     HopperManager();
     IntakeManager();
-    ClimberManager();
-    //TurretManager();
+    //ClimberManager();
+    TurretManager();
 }
 
 void Robot::HopperManager()
@@ -539,7 +546,7 @@ void Robot::DisabledPeriodic()
     //turret.giveStatus();
     //hopper.giveStatus();
     //drive.printDistance();
-    climber.printStatus();
+    //climber.printStatus();
 }
 
 
