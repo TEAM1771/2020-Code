@@ -27,7 +27,7 @@ Climber::Climber()
 void Climber::ClimbUp()
 {
     climber_1_pidController.SetReference(CLIMBER::POSITIONS::UP, rev::ControlType::kPosition);
-    climber_2_pidController.SetReference(val?-CLIMBER::POSITIONS::UP : -CLIMBER::POSITIONS::DOWN, rev::ControlType::kPosition);
+    climber_2_pidController.SetReference(-CLIMBER::POSITIONS::UP, rev::ControlType::kPosition);
 }
 void Climber::ClimbDown()
 {
