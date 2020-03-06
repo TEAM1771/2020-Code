@@ -12,8 +12,10 @@ Drivetrain::Drivetrain()
 
 void Drivetrain::reset()
 {
-    ldrive.setEncoderDistance(0);
-    rdrive.setEncoderDistance(0);
+    ldrive.sensors.SetIntegratedSensorPosition(0);
+    rdrive.sensors.SetIntegratedSensorPosition(0);
+   // ldrive.senssetEncoderDistance(0);
+    //rdrive.setEncoderDistance(0);
 }
 
 bool Drivetrain::stillDriving()
@@ -103,6 +105,7 @@ void Drivetrain::drive(double lval, double rval)
 {
     rdrive.Set(-rval);
     ldrive.Set(lval);
+
 
     
     auto const drivetrain_speed = fabs(ldrive.sensors.GetIntegratedSensorVelocity() - rdrive.sensors.GetIntegratedSensorVelocity()) / 2;

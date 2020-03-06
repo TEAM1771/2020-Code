@@ -1,101 +1,4 @@
 See file:///C:/Users/FRC%20%23Team%201771/Documents/GitHub/2020-Code/build/tmp/compileFrcUserProgramDebugExecutableFrcUserProgramCpp/output.txt for all output for compileFrcUserProgramDebugExecutableFrcUserProgramCpp.
-compiling Turret.cpp failed.
-C:\Users\FRC #Team 1771\Documents\GitHub\2020-Code\src\main\cpp\Turret.cpp:172:6: error: stray '`' in program
-     }`
-      ^
-C:\Users\FRC #Team 1771\Documents\GitHub\2020-Code\src\main\cpp\Turret.cpp: In member function 'void Turret::bangbangControl()':
-C:\Users\FRC #Team 1771\Documents\GitHub\2020-Code\src\main\cpp\Turret.cpp:174:36: error: qualified-id in declaration before '(' token
- void Turret::aimWithCameraLimelight()
-                                    ^
-C:\Users\FRC #Team 1771\Documents\GitHub\2020-Code\src\main\cpp\Turret.cpp:205:26: error: qualified-id in declaration before '(' token
- double Turret::getCameraY()
-                          ^
-C:\Users\FRC #Team 1771\Documents\GitHub\2020-Code\src\main\cpp\Turret.cpp:213:27: error: qualified-id in declaration before '(' token
- void Turret::aimWithCamera()
-                           ^
-C:\Users\FRC #Team 1771\Documents\GitHub\2020-Code\src\main\cpp\Turret.cpp:237:26: error: qualified-id in declaration before '(' token
- void Turret::traverseHood()
-                          ^
-C:\Users\FRC #Team 1771\Documents\GitHub\2020-Code\src\main\cpp\Turret.cpp:242:27: error: qualified-id in declaration before '(' token
- double Turret::scaleOutput(double inputMin, double inputMax, double outputMin, double outputMax, double input)
-                           ^
-C:\Users\FRC #Team 1771\Documents\GitHub\2020-Code\src\main\cpp\Turret.cpp:248:24: error: qualified-id in declaration before '(' token
- void Turret::stopAiming()
-                        ^
-C:\Users\FRC #Team 1771\Documents\GitHub\2020-Code\src\main\cpp\Turret.cpp:253:27: error: qualified-id in declaration before '(' token
- void Turret::getCameraData()
-                           ^
-C:\Users\FRC #Team 1771\Documents\GitHub\2020-Code\src\main\cpp\Turret.cpp:265:26: error: qualified-id in declaration before '(' token
- void Turret::rpmWithStick(float value)
-                          ^
-C:\Users\FRC #Team 1771\Documents\GitHub\2020-Code\src\main\cpp\Turret.cpp:276:21: error: qualified-id in declaration before '(' token
- void Turret::aimLeft()
-                     ^
-C:\Users\FRC #Team 1771\Documents\GitHub\2020-Code\src\main\cpp\Turret.cpp:288:22: error: qualified-id in declaration before '(' token
- void Turret::aimRight()
-                      ^
-C:\Users\FRC #Team 1771\Documents\GitHub\2020-Code\src\main\cpp\Turret.cpp:300:24: error: qualified-id in declaration before '(' token
- void Turret::aimLeftPID()
-                        ^
-C:\Users\FRC #Team 1771\Documents\GitHub\2020-Code\src\main\cpp\Turret.cpp:307:25: error: qualified-id in declaration before '(' token
- void Turret::aimRightPID()
-                         ^
-C:\Users\FRC #Team 1771\Documents\GitHub\2020-Code\src\main\cpp\Turret.cpp:312:21: error: qualified-id in declaration before '(' token
- void Turret::aimZero()
-                     ^
-C:\Users\FRC #Team 1771\Documents\GitHub\2020-Code\src\main\cpp\Turret.cpp:317:25: error: qualified-id in declaration before '(' token
- void Turret::maintainRPM()
-                         ^
-C:\Users\FRC #Team 1771\Documents\GitHub\2020-Code\src\main\cpp\Turret.cpp:322:22: error: qualified-id in declaration before '(' token
- void Turret::zeroHood()
-                      ^
-C:\Users\FRC #Team 1771\Documents\GitHub\2020-Code\src\main\cpp\Turret.cpp:327:21: error: qualified-id in declaration before '(' token
- void Turret::midHood()
-                     ^
-C:\Users\FRC #Team 1771\Documents\GitHub\2020-Code\src\main\cpp\Turret.cpp:332:24: error: qualified-id in declaration before '(' token
- void Turret::batterHood()
-                        ^
-C:\Users\FRC #Team 1771\Documents\GitHub\2020-Code\src\main\cpp\Turret.cpp:339:27: error: qualified-id in declaration before '(' token
- void Turret::limelight_led(bool val)
-                           ^
-C:\Users\FRC #Team 1771\Documents\GitHub\2020-Code\src\main\cpp\Turret.cpp:347:24: error: qualified-id in declaration before '(' token
- void Turret::giveStatus()
-                        ^
-C:\Users\FRC #Team 1771\Documents\GitHub\2020-Code\src\main\cpp\Turret.cpp:364:27: error: qualified-id in declaration before '(' token
- bool Turret::cameraHasLock()
-                           ^
-C:\Users\FRC #Team 1771\Documents\GitHub\2020-Code\src\main\cpp\Turret.cpp:370:28: error: qualified-id in declaration before '(' token
- double Turret::getHoodValue()
-                            ^
-C:\Users\FRC #Team 1771\Documents\GitHub\2020-Code\src\main\cpp\Turret.cpp:375:34: error: qualified-id in declaration before '(' token
- double Turret::getTurnyTurnyValue()
-                                  ^
-C:\Users\FRC #Team 1771\Documents\GitHub\2020-Code\src\main\cpp\Turret.cpp:380:26: error: qualified-id in declaration before '(' token
- void Turret::setHoodAngle(double position)
-                          ^
-C:\Users\FRC #Team 1771\Documents\GitHub\2020-Code\src\main\cpp\Turret.cpp:386:27: error: qualified-id in declaration before '(' token
- void Turret::controlTurret()
-                           ^
-C:\Users\FRC #Team 1771\Documents\GitHub\2020-Code\src\main\cpp\Turret.cpp:392:28: error: qualified-id in declaration before '(' token
- double Turret::getHoodAngle(double height)
-                            ^
-C:\Users\FRC #Team 1771\Documents\GitHub\2020-Code\src\main\cpp\Turret.cpp:439:31: error: qualified-id in declaration before '(' token
- void Turret::debugSetHoodAngle(double position)
-                               ^
-C:\Users\FRC #Team 1771\Documents\GitHub\2020-Code\src\main\cpp\Turret.cpp:442:1: error: expected '}' at end of input
- }
- ^
-
-compiling Climber.cpp successful.
-
-compiling Drivetrain.cpp successful.
-C:\Users\FRC #Team 1771\Documents\GitHub\2020-Code\src\main\cpp\Drivetrain.cpp: In member function 'void Drivetrain::drive(double, double)':
-C:\Users\FRC #Team 1771\Documents\GitHub\2020-Code\src\main\cpp\Drivetrain.cpp:108:16: warning: unused variable 'drivetrain_speed' [-Wunused-variable]
-     auto const drivetrain_speed = fabs(ldrive.sensors.GetIntegratedSensorVelocity() - rdrive.sensors.GetIntegratedSensorVelocity()) / 2;
-                ^~~~~~~~~~~~~~~~
-
-compiling Hopper.cpp successful.
-
 compiling Robot.cpp successful.
 C:\Users\FRC #Team 1771\Documents\GitHub\2020-Code\src\main\cpp\Robot.cpp: In member function 'void Robot::SimpleAuton()':
 C:\Users\FRC #Team 1771\Documents\GitHub\2020-Code\src\main\cpp\Robot.cpp:138:17: warning: variable 'aiming' set but not used [-Wunused-but-set-variable]
@@ -108,17 +11,13 @@ C:\Users\FRC #Team 1771\Documents\GitHub\2020-Code\src\main\cpp\Robot.cpp:140:17
      static bool hasStartedFeeding = false;
                  ^~~~~~~~~~~~~~~~~
 C:\Users\FRC #Team 1771\Documents\GitHub\2020-Code\src\main\cpp\Robot.cpp: In member function 'void Robot::HopperManager()':
-C:\Users\FRC #Team 1771\Documents\GitHub\2020-Code\src\main\cpp\Robot.cpp:302:17: warning: unused variable 'isShooting' [-Wunused-variable]
+C:\Users\FRC #Team 1771\Documents\GitHub\2020-Code\src\main\cpp\Robot.cpp:305:17: warning: unused variable 'isShooting' [-Wunused-variable]
      static bool isShooting = false;
                  ^~~~~~~~~~
 C:\Users\FRC #Team 1771\Documents\GitHub\2020-Code\src\main\cpp\Robot.cpp: At global scope:
-C:\Users\FRC #Team 1771\Documents\GitHub\2020-Code\src\main\cpp\Robot.cpp:302:17: warning: 'isShooting' defined but not used [-Wunused-variable]
+C:\Users\FRC #Team 1771\Documents\GitHub\2020-Code\src\main\cpp\Robot.cpp:305:17: warning: 'isShooting' defined but not used [-Wunused-variable]
 C:\Users\FRC #Team 1771\Documents\GitHub\2020-Code\src\main\cpp\Robot.cpp:140:17: warning: 'hasStartedFeeding' defined but not used [-Wunused-variable]
      static bool hasStartedFeeding = false;
                  ^~~~~~~~~~~~~~~~~
-
-compiling Intake.cpp successful.
-
-compiling transmission.cpp successful.
 
 Finished compileFrcUserProgramDebugExecutableFrcUserProgramCpp, see full log file:///C:/Users/FRC%20%23Team%201771/Documents/GitHub/2020-Code/build/tmp/compileFrcUserProgramDebugExecutableFrcUserProgramCpp/output.txt.

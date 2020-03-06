@@ -1,4 +1,23 @@
 See file:///C:/Users/FRC%20%23Team%201771/Documents/GitHub/2020-Code/build/tmp/compileFrcUserProgramReleaseExecutableFrcUserProgramCpp/output.txt for all output for compileFrcUserProgramReleaseExecutableFrcUserProgramCpp.
-compiling Turret.cpp successful.
+compiling Robot.cpp successful.
+C:\Users\FRC #Team 1771\Documents\GitHub\2020-Code\src\main\cpp\Robot.cpp: In member function 'void Robot::SimpleAuton()':
+C:\Users\FRC #Team 1771\Documents\GitHub\2020-Code\src\main\cpp\Robot.cpp:138:17: warning: variable 'aiming' set but not used [-Wunused-but-set-variable]
+     static bool aiming = false;
+                 ^~~~~~
+C:\Users\FRC #Team 1771\Documents\GitHub\2020-Code\src\main\cpp\Robot.cpp:139:17: warning: variable 'isCommandingHood' set but not used [-Wunused-but-set-variable]
+     static bool isCommandingHood = false;
+                 ^~~~~~~~~~~~~~~~
+C:\Users\FRC #Team 1771\Documents\GitHub\2020-Code\src\main\cpp\Robot.cpp:140:17: warning: unused variable 'hasStartedFeeding' [-Wunused-variable]
+     static bool hasStartedFeeding = false;
+                 ^~~~~~~~~~~~~~~~~
+C:\Users\FRC #Team 1771\Documents\GitHub\2020-Code\src\main\cpp\Robot.cpp: In member function 'void Robot::HopperManager()':
+C:\Users\FRC #Team 1771\Documents\GitHub\2020-Code\src\main\cpp\Robot.cpp:305:17: warning: unused variable 'isShooting' [-Wunused-variable]
+     static bool isShooting = false;
+                 ^~~~~~~~~~
+C:\Users\FRC #Team 1771\Documents\GitHub\2020-Code\src\main\cpp\Robot.cpp: At global scope:
+C:\Users\FRC #Team 1771\Documents\GitHub\2020-Code\src\main\cpp\Robot.cpp:305:17: warning: 'isShooting' defined but not used [-Wunused-variable]
+C:\Users\FRC #Team 1771\Documents\GitHub\2020-Code\src\main\cpp\Robot.cpp:140:17: warning: 'hasStartedFeeding' defined but not used [-Wunused-variable]
+     static bool hasStartedFeeding = false;
+                 ^~~~~~~~~~~~~~~~~
 
 Finished compileFrcUserProgramReleaseExecutableFrcUserProgramCpp, see full log file:///C:/Users/FRC%20%23Team%201771/Documents/GitHub/2020-Code/build/tmp/compileFrcUserProgramReleaseExecutableFrcUserProgramCpp/output.txt.

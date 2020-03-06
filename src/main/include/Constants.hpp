@@ -69,7 +69,7 @@ namespace SHOOTER
     {
         constexpr int PORT_1 = 4;//subject to change
         constexpr int PORT_2 = 5;//subject to change
-        constexpr double SHOOTING_RPM = 7500; //Lol no idea
+        constexpr double SHOOTING_RPM = 7700; //Lol no idea
         constexpr double IDLE_RPM = 3000; //lol lets not do this its dumb
         constexpr double P = 0.0001;
         constexpr double I = 0.0001;
@@ -146,14 +146,14 @@ namespace AUTON
 {
     constexpr double AUTON_DRIVE_TIMER = 0.3; //How long to drive forward for
     constexpr double AUTON_SHOOT_TIMER = 1.0; //When we can shoot (for spin up time)
-    constexpr double AUTON_SHOOT_TIMER_SIMPLE = 6.0;
+    constexpr double AUTON_SHOOT_TIMER_SIMPLE = 7.0;
     constexpr double AUTON_FEED_SHOOTER_TIMER = 3.5; //How long to shoot for
     constexpr double AUTON_MAX_TIMER = 12; //max time
     constexpr double AUTON_LIMELIGHT_TIMER = 3;
 
     constexpr double DISTANCE_FORWARD = 115;
-    constexpr double TIME_BACKWARD = 1;
-    constexpr double TURN_TIME =.15;
+    constexpr double TIME_BACKWARD = 1.5;
+    constexpr double TURN_TIME =.2;
 
 
 }

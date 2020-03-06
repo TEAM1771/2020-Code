@@ -6,8 +6,8 @@
 class Transmission
 {
     ctre::phoenix::motorcontrol::can::TalonFX falcon;
-    rev::CANSparkMax neo;
-    rev::CANEncoder encoder = neo.GetEncoder();
+   // rev::CANSparkMax neo;
+   // rev::CANEncoder encoder = neo.GetEncoder();
 
 public:
     Transmission(int falcon_adr, int neo_adr);

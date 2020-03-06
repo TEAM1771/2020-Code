@@ -105,7 +105,7 @@ void Turret::bangbangControl()
         std::cout << "area1" << std::endl;
     }
     else */
-    if( valueInRange(abs( shooter_encoder.GetVelocity() ), SHOOTER::WHEEL::SHOOTING_RPM - 500, SHOOTER::WHEEL::SHOOTING_RPM) )
+    if( valueInRange(abs( shooter_encoder.GetVelocity() ), SHOOTER::WHEEL::SHOOTING_RPM - 2, SHOOTER::WHEEL::SHOOTING_RPM) )
     {
         shooter_1.SetOpenLoopRampRate(0);
         //shooter_2.SetOpenLoopRampRate(0);
@@ -122,7 +122,7 @@ void Turret::bangbangControl()
     }
     else if ( (abs(shooter_encoder.GetVelocity() ) < SHOOTER::WHEEL::SHOOTING_RPM ) )
     {
-        shooter_1.SetOpenLoopRampRate(5.1771);
+        shooter_1.SetOpenLoopRampRate(6.0);
        // shooter_2.SetOpenLoopRampRate(5.1771);
         shooter_1.Set(-1);
       //  shooter_2.Set(1);  
@@ -139,7 +139,7 @@ void Turret::bangbangControl()
 
     //Shooter 2 code below
 
-    if( valueInRange(abs( shooter2_encoder.GetVelocity() ), SHOOTER::WHEEL::SHOOTING_RPM - 500, SHOOTER::WHEEL::SHOOTING_RPM) )
+    if( valueInRange(abs( shooter2_encoder.GetVelocity() ), SHOOTER::WHEEL::SHOOTING_RPM - 2, SHOOTER::WHEEL::SHOOTING_RPM) )
     {
        // shooter_1.SetOpenLoopRampRate(0);
         shooter_2.SetOpenLoopRampRate(0);
@@ -157,7 +157,7 @@ void Turret::bangbangControl()
     else if ( (abs(shooter2_encoder.GetVelocity() ) < SHOOTER::WHEEL::SHOOTING_RPM ) )
     {
       //  shooter_1.SetOpenLoopRampRate(5.1771);
-        shooter_2.SetOpenLoopRampRate(5.1771);
+        shooter_2.SetOpenLoopRampRate(6.0);
      //   shooter_1.Set(-1);
         shooter_2.Set(1);  
         //std::cout << "area3" << std::endl;

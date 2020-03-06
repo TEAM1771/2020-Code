@@ -13,6 +13,7 @@ void Robot::AutonomousInit()
 
 void Robot::FiveBallAuton()
 {
+    
     static bool doneDrivingForward = false;
     static bool doneDrivingBackward = false;
     static bool doneTurning = false;
@@ -66,6 +67,7 @@ void Robot::FiveBallAuton()
     
     else if(!doneDrivingBackward)
     {
+        
         HopperManager();
         turret.traverseHood();
         turret.aimRightPID();
@@ -114,8 +116,6 @@ void Robot::FiveBallAuton()
             hopper.feedShooter();
         }
     }
-    
-
     
 }
 
@@ -217,7 +217,7 @@ void Robot::SimpleAuton()
 
     if( readyToTrack && doneDriving && !readyToAim)
     {
-        std::cout << "Aiming with camera" << std::endl;
+       // std::cout << "Aiming with camera" << std::endl;
         if ( turret.getTurnyTurnyValue() > SHOOTER::TURRET::BACKWARDS - 2 
                     && turret.getTurnyTurnyValue() < SHOOTER::TURRET::BACKWARDS + 2 )
         {        
@@ -275,8 +275,10 @@ void Robot::SimpleAuton()
 
 void Robot::AutonomousPeriodic() 
 {
+    //+
     SimpleAuton();
-   // FiveBallAuton();
+    FiveBallAuton();
+  //  drive.printDistance();
 }
 
 void Robot::TeleopInit()
@@ -288,16 +290,16 @@ void Robot::TeleopPeriodic()
 {
     
     drive.drive(lStick.GetY(), rStick.GetY());
-    drive.shift();
+    //drive.shift();
+  //  std::cout << "lstick: " << lStick.GetY() << std::endl;
+   // std::cout << "rstick: " << rStick.GetY() << std::endl;
 
    
     HopperManager();
-    //IntakeManager();
+    IntakeManager();
     ClimberManager();
     TurretManager();
-}
-
-void Robot::HopperManager()
+}id Robot::HopperManager()
 {
     static bool isShooting = false;
 
@@ -363,12 +365,19 @@ void Robot::TestPeriodic()
     */
    
   // ClimberManager();
-  TurretManager();
+  //TurretManager();
   HopperManager();
+
+  if(oStick.GetRawButton(1))
+  {
+      drive.reset();
+  }
  // turret.giveStatus();
    // HopperManager();
   // climber.joystickControl(oStick.GetY());
   // climber.printStatus();
+    drive.printDistance();
+
 
 }
 
@@ -493,7 +502,6 @@ void Robot::TurretManager()
     turret.rpmWithStick(oStick.GetY());
     }*/
     //std::cout << oStick.GetY() << std::endl;
-
     turret.giveStatus();
 
 }
@@ -537,7 +545,7 @@ void Robot::ClimberManager()
         hasBeenPressed = false;
         
     }
-    climber.printStatus();
+   // climber.printStatus();
     
    /* if(lStick.GetRawButton(BUTTONS::CLIMBER::RAISE))
         climber.climb(true);
@@ -553,7 +561,7 @@ void Robot::DisabledPeriodic()
 {
     //turret.giveStatus();
     //hopper.giveStatus();
-    //drive.printDistance();
+    drive.printDistance();
    // climber.printStatus();
 }
 
