@@ -275,8 +275,8 @@ void Robot::SimpleAuton()
 
 void Robot::AutonomousPeriodic() 
 {
-    //SimpleAuton();
-    FiveBallAuton();
+    SimpleAuton();
+   // FiveBallAuton();
 }
 
 void Robot::TeleopInit()
@@ -292,8 +292,8 @@ void Robot::TeleopPeriodic()
 
    
     HopperManager();
-    IntakeManager();
-    //ClimberManager();
+    //IntakeManager();
+    ClimberManager();
     TurretManager();
 }
 
@@ -362,10 +362,13 @@ void Robot::TestPeriodic()
     turret.debugSetHoodAngle(hood);
     */
    
-   ClimberManager();
+  // ClimberManager();
+  TurretManager();
+  HopperManager();
+ // turret.giveStatus();
    // HopperManager();
   // climber.joystickControl(oStick.GetY());
-   climber.printStatus();
+  // climber.printStatus();
 
 }
 
@@ -551,7 +554,7 @@ void Robot::DisabledPeriodic()
     //turret.giveStatus();
     //hopper.giveStatus();
     //drive.printDistance();
-    climber.printStatus();
+   // climber.printStatus();
 }
 
 
