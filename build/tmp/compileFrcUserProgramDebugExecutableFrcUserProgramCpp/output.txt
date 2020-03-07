@@ -1,4 +1,18 @@
 See file:///C:/Users/FRC%20%23Team%201771/Documents/GitHub/2020-Code/build/tmp/compileFrcUserProgramDebugExecutableFrcUserProgramCpp/output.txt for all output for compileFrcUserProgramDebugExecutableFrcUserProgramCpp.
+compiling Climber.cpp successful.
+
+compiling Intake.cpp successful.
+
+compiling Hopper.cpp successful.
+
+compiling Turret.cpp successful.
+
+compiling Drivetrain.cpp successful.
+C:\Users\FRC #Team 1771\Documents\GitHub\2020-Code\src\main\cpp\Drivetrain.cpp: In member function 'void Drivetrain::drive(double, double)':
+C:\Users\FRC #Team 1771\Documents\GitHub\2020-Code\src\main\cpp\Drivetrain.cpp:111:16: warning: unused variable 'drivetrain_speed' [-Wunused-variable]
+     auto const drivetrain_speed = fabs(ldrive.sensors.GetIntegratedSensorVelocity() - rdrive.sensors.GetIntegratedSensorVelocity()) / 2;
+                ^~~~~~~~~~~~~~~~
+
 compiling Robot.cpp successful.
 C:\Users\FRC #Team 1771\Documents\GitHub\2020-Code\src\main\cpp\Robot.cpp: In member function 'void Robot::SimpleAuton()':
 C:\Users\FRC #Team 1771\Documents\GitHub\2020-Code\src\main\cpp\Robot.cpp:138:17: warning: variable 'aiming' set but not used [-Wunused-but-set-variable]
