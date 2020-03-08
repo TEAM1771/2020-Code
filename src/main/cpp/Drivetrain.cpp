@@ -12,8 +12,10 @@ Drivetrain::Drivetrain()
 
 void Drivetrain::reset()
 {
-    ldrive.setEncoderDistance(0);
-    rdrive.setEncoderDistance(0);
+    ldrive.sensors.SetIntegratedSensorPosition(0);
+    rdrive.sensors.SetIntegratedSensorPosition(0);
+   // ldrive.senssetEncoderDistance(0);
+    //rdrive.setEncoderDistance(0);
 }
 
 bool Drivetrain::stillDriving()
@@ -37,20 +39,20 @@ void Drivetrain::driveDistanceForward(double distance)
             isDriving = true;
             if(fabs(rdrive.getEncoderDistance())>fabs(ldrive.getEncoderDistance()))
             {
-                drive(-.4,-.3);
+                drive(-.35,-.25);
             }
             else if(fabs(rdrive.getEncoderDistance())<fabs(ldrive.getEncoderDistance()))
             {
-                drive(-.3,-.4);
+                drive(-.25,-.35);
             }
             else
             {
-                drive(-.3,-.3);
+                drive(-.25,-.25);
             }
         }
         else
         {
-            drive(-.3,-.3);
+            drive(-.25,-.25);
         }
     }
     else
@@ -103,6 +105,7 @@ void Drivetrain::drive(double lval, double rval)
 {
     rdrive.Set(-rval);
     ldrive.Set(lval);
+
 
     
     auto const drivetrain_speed = fabs(ldrive.sensors.GetIntegratedSensorVelocity() - rdrive.sensors.GetIntegratedSensorVelocity()) / 2;

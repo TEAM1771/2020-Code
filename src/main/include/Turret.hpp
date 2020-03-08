@@ -26,7 +26,7 @@ class Turret
 
     rev::CANPIDController shooter_pidController = shooter_1.GetPIDController();
     rev::CANEncoder shooter_encoder = shooter_1.GetEncoder();
-
+    rev::CANEncoder shooter2_encoder = shooter_2.GetEncoder();
     rev::CANPIDController turretTurnyTurny_pidController = turretTurnyTurny.GetPIDController();
     rev::CANEncoder turretTurnyTurny_encoder = turretTurnyTurny.GetEncoder();
 

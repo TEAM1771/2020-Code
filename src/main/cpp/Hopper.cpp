@@ -72,6 +72,8 @@ void Hopper::stopFeed()
 {
     transportNeo.Set(0);
     numberOfBalls = 0;
+    transportEncoder.SetPosition(0);
+    targetDistance = HOPPER::TRANSPORT::DISTANCE;
 }
 void Hopper::startIndexer()
 {
