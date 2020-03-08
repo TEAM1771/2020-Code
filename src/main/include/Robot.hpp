@@ -48,7 +48,6 @@ public:
     Intake intake;
     Turret turret;
     Climber climber;
-    bool activeIntake = false;
-    bool autonInit = false;
+    bool activeIntake;
     frc::LiveWindow& m_lw = *frc::LiveWindow::GetInstance();
 };
