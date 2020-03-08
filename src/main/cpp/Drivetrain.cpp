@@ -39,20 +39,20 @@ void Drivetrain::driveDistanceForward(double distance)
             isDriving = true;
             if(fabs(rdrive.getEncoderDistance())>fabs(ldrive.getEncoderDistance()))
             {
-                drive(-.4,-.3);
+                drive(-.35,-.25);
             }
             else if(fabs(rdrive.getEncoderDistance())<fabs(ldrive.getEncoderDistance()))
             {
-                drive(-.3,-.4);
+                drive(-.25,-.35);
             }
             else
             {
-                drive(-.3,-.3);
+                drive(-.25,-.25);
             }
         }
         else
         {
-            drive(-.3,-.3);
+            drive(-.25,-.25);
         }
     }
     else

@@ -96,6 +96,16 @@ bool Turret::valueInRange(double value, double min, double max)
 
 void Turret::bangbangControl()
 {
+
+    if(abs(shooter_encoder.GetVelocity() > SHOOTER::WHEEL::SHOOTING_RPM - 1200))
+    {
+        shooter_1.SetOpenLoopRampRate(0);
+    }
+    else
+    {
+        shooter_1.SetOpenLoopRampRate(6);
+    }
+    
    /* if ( valueInRange(abs( shooter_encoder.GetVelocity() ) ,SHOOTER::WHEEL::SHOOTING_RPM - 900, SHOOTER::WHEEL::SHOOTING_RPM - 500) )
     {
         shooter_1.SetOpenLoopRampRate(0.2);
@@ -105,24 +115,45 @@ void Turret::bangbangControl()
         std::cout << "area1" << std::endl;
     }
     else */
-    if( valueInRange(abs( shooter_encoder.GetVelocity() ), SHOOTER::WHEEL::SHOOTING_RPM - 2, SHOOTER::WHEEL::SHOOTING_RPM) )
+    if (abs(shooter_encoder.GetVelocity() > SHOOTER::WHEEL::SHOOTING_RPM - 2000) )
+    {
+        shooter_1.SetOpenLoopRampRate(0);
+        //shooter_1.Set(0);
+    }
+    else
+    {
+        shooter_1.SetOpenLoopRampRate(6);
+    }
+    
+
+    if(abs(shooter2_encoder.GetVelocity() > SHOOTER::WHEEL::SHOOTING_RPM - 2000) )
+    {
+        shooter_2.SetOpenLoopRampRate(0);
+    }
+    else
+    {
+        shooter_2.SetOpenLoopRampRate(6);
+    }
+    
+
+    /*if( valueInRange(abs( shooter_encoder.GetVelocity() ), SHOOTER::WHEEL::SHOOTING_RPM - 2500, SHOOTER::WHEEL::SHOOTING_RPM) )
     {
         shooter_1.SetOpenLoopRampRate(0);
         //shooter_2.SetOpenLoopRampRate(0);
         shooter_1.Set(-1);
        // shooter_2.Set(0);  
         //std::cout << "area2" << std::endl;
-    }
-    else if( valueInRange(abs( shooter_encoder.GetVelocity() ), SHOOTER::WHEEL::SHOOTING_RPM - 1000, SHOOTER::WHEEL::SHOOTING_RPM ) )
+    }*/
+   /* else if( valueInRange(abs( shooter_encoder.GetVelocity() ), SHOOTER::WHEEL::SHOOTING_RPM - 1000, SHOOTER::WHEEL::SHOOTING_RPM ) )
     {
         shooter_1.SetOpenLoopRampRate(0);
        // shooter_2.SetOpenLoopRampRate(0);
         shooter_1.Set(-1);
       //  shooter_2.Set(1);
-    }
-    else if ( (abs(shooter_encoder.GetVelocity() ) < SHOOTER::WHEEL::SHOOTING_RPM ) )
+    }*/
+    
+    if ( (abs(shooter_encoder.GetVelocity() ) < SHOOTER::WHEEL::SHOOTING_RPM - 250) )
     {
-        shooter_1.SetOpenLoopRampRate(6.0);
        // shooter_2.SetOpenLoopRampRate(5.1771);
         shooter_1.Set(-1);
       //  shooter_2.Set(1);  
@@ -137,27 +168,36 @@ void Turret::bangbangControl()
         // std::cout << "area4" << std::endl;
     }
 
+    if ( (abs(shooter2_encoder.GetVelocity() ) < SHOOTER::WHEEL::SHOOTING_RPM - 250) )
+    {
+       // shooter_2.SetOpenLoopRampRate(5.1771);
+        shooter_2.Set(1);
+      //  shooter_2.Set(1);  
+        //std::cout << "area3" << std::endl;
+    }
+    else
+    {
+        shooter_2.Set(0);
+      //  shooter_2.Set(0);
+        //shooter_1.SetOpenLoopRampRate(0);
+        //shooter_2.SetOpenLoopRampRate(0);
+        // std::cout << "area4" << std::endl;
+    }
+
     //Shooter 2 code below
 
+
+/*
     if( valueInRange(abs( shooter2_encoder.GetVelocity() ), SHOOTER::WHEEL::SHOOTING_RPM - 2, SHOOTER::WHEEL::SHOOTING_RPM) )
     {
        // shooter_1.SetOpenLoopRampRate(0);
-        shooter_2.SetOpenLoopRampRate(0);
       //  shooter_1.Set(-1);
         shooter_2.Set(0);  
         //std::cout << "area2" << std::endl;
     }
-    else if( valueInRange(abs( shooter2_encoder.GetVelocity() ), SHOOTER::WHEEL::SHOOTING_RPM - 1000, SHOOTER::WHEEL::SHOOTING_RPM ) )
-    {
-       // shooter_1.SetOpenLoopRampRate(0);
-        shooter_2.SetOpenLoopRampRate(0);
-     //   shooter_1.Set(-1);
-        shooter_2.Set(1);
-    }
     else if ( (abs(shooter2_encoder.GetVelocity() ) < SHOOTER::WHEEL::SHOOTING_RPM ) )
     {
       //  shooter_1.SetOpenLoopRampRate(5.1771);
-        shooter_2.SetOpenLoopRampRate(6.0);
      //   shooter_1.Set(-1);
         shooter_2.Set(1);  
         //std::cout << "area3" << std::endl;
@@ -170,6 +210,7 @@ void Turret::bangbangControl()
         //shooter_2.SetOpenLoopRampRate(0);
         // std::cout << "area4" << std::endl;
     }
+    */
 }
 
 void Turret::aimWithCameraLimelight()

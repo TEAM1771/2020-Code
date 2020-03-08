@@ -69,7 +69,7 @@ namespace SHOOTER
     {
         constexpr int PORT_1 = 4;//subject to change
         constexpr int PORT_2 = 5;//subject to change
-        constexpr double SHOOTING_RPM = 7700; //Lol no idea
+        constexpr double SHOOTING_RPM = 8000; //Lol no idea
         constexpr double IDLE_RPM = 3000; //lol lets not do this its dumb
         constexpr double P = 0.0001;
         constexpr double I = 0.0001;

@@ -276,7 +276,7 @@ void Robot::SimpleAuton()
 void Robot::AutonomousPeriodic() 
 {
     //+
-    SimpleAuton();
+   // SimpleAuton();
     FiveBallAuton();
   //  drive.printDistance();
 }
@@ -299,7 +299,8 @@ void Robot::TeleopPeriodic()
     IntakeManager();
     ClimberManager();
     TurretManager();
-}id Robot::HopperManager()
+}
+void Robot::HopperManager()
 {
     static bool isShooting = false;
 
@@ -386,8 +387,17 @@ void Robot::TurretManager()
         turret.limelight_led(true);
         static bool aiming = false;
         static bool isCommandingHood = false;
-            
-        turret.bangbangControl(); 
+       /* if(!isClimbing)
+        {
+        turret.bangbangControl();
+        }
+        else
+        {
+            turret.stopShooter();
+        }
+        */
+       turret.bangbangControl();
+        
         if (oStick.GetRawButton(BUTTONS::TURRET::AIM_LEFT))
         {
             if (!aiming)
@@ -533,14 +543,17 @@ void Robot::IntakeManager()
 
 void Robot::ClimberManager()
 {
+    
     static bool hasBeenPressed = false;
     if(oStick.GetThrottle() < 0 && oStick.GetRawButton(11))
     {
+       // isClimbing = true;
         climber.ClimbUp();
         hasBeenPressed = true;
     }
     else if(hasBeenPressed && oStick.GetThrottle() < 0)
     {
+       // isClimbing = false;
         climber.ClimbDown();
         hasBeenPressed = false;
         

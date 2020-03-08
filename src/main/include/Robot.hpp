@@ -49,5 +49,6 @@ public:
     Turret turret;
     Climber climber;
     bool activeIntake;
+    bool isClimbing = false;
     frc::LiveWindow& m_lw = *frc::LiveWindow::GetInstance();
 };
