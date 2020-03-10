@@ -144,16 +144,23 @@ namespace CLIMBER
 
 namespace AUTON
 {
+    //  Simple Auton Constants 
     constexpr double AUTON_DRIVE_TIMER = 0.3; //How long to drive forward for
-    constexpr double AUTON_SHOOT_TIMER = 1.0; //When we can shoot (for spin up time)
-    constexpr double AUTON_SHOOT_TIMER_SIMPLE = 7.0;
+    constexpr double AUTON_SHOOT_TIMER_SIMPLE = 7.0;//When we can shoot (for spin up time)
     constexpr double AUTON_FEED_SHOOTER_TIMER = 3.5; //How long to shoot for
     constexpr double AUTON_MAX_TIMER = 12; //max time
     constexpr double AUTON_LIMELIGHT_TIMER = 3;
 
+    //  5 Ball Auton Constants
     constexpr double DISTANCE_FORWARD = 115;
     constexpr double TIME_BACKWARD = 1.5;
     constexpr double TURN_TIME =.2;
+    constexpr double AUTON_SHOOT_TIMER = 1.0;
+
+    // 8 Ball Auton Constants 
+    //constexpr double SEGMENT_ONE = ; 
+    //constexpr double SEGMENT_TWO = ;
+    
 
 
 }
