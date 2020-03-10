@@ -10,8 +10,8 @@ void Robot::AutonomousInit()
 {
     drive.reset();
 }
-//viod Robot::EightBallAuton()
-/*
+
+void Robot::EightBallAuton()
 {
     static bool doneDrivingForward = false;
     static bool doneDrivingBackward = false;
@@ -24,7 +24,7 @@ void Robot::AutonomousInit()
     static frc::Timer aimTimer;
     static frc::Timer backTimer;
 }
-*/
+
 void Robot::FiveBallAuton()
 {
     
