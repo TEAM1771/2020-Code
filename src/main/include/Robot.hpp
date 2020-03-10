@@ -28,6 +28,7 @@ public:
     void AutonomousInit() override;
     void AutonomousPeriodic() override ;
     void SimpleAuton();
+    void EightBallAuton();
     void FiveBallAuton();
     void TeleopInit() override;
     void TeleopPeriodic() override;

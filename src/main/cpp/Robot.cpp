@@ -10,7 +10,21 @@ void Robot::AutonomousInit()
 {
     drive.reset();
 }
+//viod Robot::EightBallAuton()
+/*
+{
+    static bool doneDrivingForward = false;
+    static bool doneDrivingBackward = false;
+    static bool doneTurning = false;
+    static bool doneAiming = false;
+    static bool doneShooting = false;
 
+    static frc::Timer turnTimer;
+    static frc::Timer shootTimer;
+    static frc::Timer aimTimer;
+    static frc::Timer backTimer;
+}
+*/
 void Robot::FiveBallAuton()
 {
     
@@ -213,7 +227,7 @@ void Robot::SimpleAuton()
     {
         turret.traverseHood();
     }
-}
+    }
 
     if( readyToTrack && doneDriving && !readyToAim)
     {
@@ -283,7 +297,7 @@ void Robot::AutonomousPeriodic()
 
 void Robot::TeleopInit()
 {
-
+    hopper.stopFeed();
 }
 
 void Robot::TeleopPeriodic()
