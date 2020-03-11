@@ -337,62 +337,16 @@ void Robot::HopperManager()
 
 void Robot::TestPeriodic()
 {
-    //hopper.manualIndexerControl(lStick.GetY());
-//hopper.manualTransportControl(rStick.GetY());
-    //TurretManager();
-    /*IntakeManager();
+      drive.drive(lStick.GetY(), rStick.GetY());
+    //drive.shift();
+  //  std::cout << "lstick: " << lStick.GetY() << std::endl;
+   // std::cout << "rstick: " << rStick.GetY() << std::endl;
 
-    turret.limelight_led(true);
-    static bool isShooting = false;
-    if(oStick.GetRawButton(BUTTONS::HOPPER::SHOOT))
-    {
-        hopper.feedShooter();
-        isShooting = true;
-    }
-    else if (isShooting)
-    {
-        isShooting = false;
-        hopper.stopFeed();
-    }
-    else
-    {
-        hopper.controlFeed();
-    }
-    turret.getCameraData();
-    //frc::SmartDashboard::PutNumber("Y Value", turret.getCameraY());
-    double valueToReturn = frc::SmartDashboard::GetNumber("Hood Pos", 0);
-        
-    if(valueToReturn < SHOOTER::HOOD::SAFE_TO_TURN)
-        valueToReturn = SHOOTER::HOOD::SAFE_TO_TURN;
-    else if (valueToReturn > SHOOTER::HOOD::TRAVERSE)
-        valueToReturn = SHOOTER::HOOD::TRAVERSE;
-    
-    //std::cout << oStick.GetThrottle() << '\n';
-    double hood = turret.scaleOutput(-1,1, SHOOTER::HOOD::TRAVERSE,SHOOTER::HOOD::SAFE_TO_TURN, -oStick.GetThrottle());
-    //if(oStick.GetThrottle() > 0)
-      //  turret.maintainRPM();
-    std::cout << "hood " << hood << '\n';
-    std::cout << "yval: " << turret.getCameraY() << '\n';
-    
-    // if(lStick.GetThrottle() > 0)
-        turret.bangbangControl();
-    turret.debugSetHoodAngle(hood);
-    */
    
-  // ClimberManager();
-  //TurretManager();
-  HopperManager();
-
-  if(oStick.GetRawButton(1))
-  {
-      drive.reset();
-  }
- // turret.giveStatus();
-   // HopperManager();
-  // climber.joystickControl(oStick.GetY());
-  // climber.printStatus();
-    drive.printDistance();
-
+    HopperManager();
+    IntakeManager();
+    ClimberManager();
+    //TurretManager();
 
 }
 
