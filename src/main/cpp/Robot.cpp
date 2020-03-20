@@ -283,7 +283,7 @@ void Robot::AutonomousPeriodic()
 
 void Robot::TeleopInit()
 {
-
+    hopper.stopFeed();
 }
 
 void Robot::TeleopPeriodic()
