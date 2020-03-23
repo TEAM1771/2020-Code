@@ -144,6 +144,7 @@ namespace CLIMBER
 
 namespace AUTON
 {
+
     constexpr double AUTON_DRIVE_TIMER = 0.3; //How long to drive forward for
     constexpr double AUTON_SHOOT_TIMER = 1.0; //When we can shoot (for spin up time)
     constexpr double AUTON_SHOOT_TIMER_SIMPLE = 7.0;
@@ -155,6 +156,12 @@ namespace AUTON
     constexpr double TIME_BACKWARD = 2;
     constexpr double TURN_TIME =.2;
 
+    namespace AUTON_MATH //Conversion for encoder values for comand line auton
+    {
+        constexpr int foot = 18; // number of ticks in a foot
+        constexpr auto inch = foot / 12; // converting the ticks for inches
+
+    }
 
 }
 
