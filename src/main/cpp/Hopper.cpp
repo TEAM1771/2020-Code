@@ -11,7 +11,7 @@ Hopper::Hopper()
     hopperPIDController.SetI(HOPPER::TRANSPORT::I);
     hopperPIDController.SetD(HOPPER::TRANSPORT::D);
     hopperPIDController.SetFeedbackDevice(transportEncoder);
-    hopperPIDController.SetOutputRange(-1,1);
+    hopperPIDController.SetOutputRange(-.3,.3);
     transportEncoder.SetPosition(0);
     targetDistance = HOPPER::TRANSPORT::DISTANCE; //Because there is no set distance for the PID, only position, we will have to always update the target by adding the desired movement distance  
 }

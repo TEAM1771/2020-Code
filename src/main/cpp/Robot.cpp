@@ -369,15 +369,15 @@ void Robot::TestPeriodic()
   //TurretManager();
   HopperManager();
 
-  if(oStick.GetRawButton(1))
+  //if(oStick.GetRawButton(1))
   {
-      drive.reset();
+      //drive.reset();
   }
  // turret.giveStatus();
    // HopperManager();
   // climber.joystickControl(oStick.GetY());
   // climber.printStatus();
-    drive.printDistance();
+    //drive.printDistance();
 
 
 }
