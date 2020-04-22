@@ -29,7 +29,7 @@ bool Turret::goToPosition(TURRET::POSITION position, double tolerance)
     return std::fabs(encoder_.GetPosition() - static_cast<double>(position)) < tolerance;
 }
 
-std::pair<bool,bool> Turret::visionTrack(TURRET::POSITION initPosition, double tolerance)
+Turret::visionState Turret::visionTrack(TURRET::POSITION initPosition, double tolerance)
 {
     if(!tracking_) // move to initPosition
     {

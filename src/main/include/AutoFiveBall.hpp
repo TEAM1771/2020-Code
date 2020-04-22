@@ -38,8 +38,9 @@ public:
                 stage = AutoFiveBall::Stage::Turn;
             else break;
         } [[fallthrough]];
-        
+
         case Stage::Turn:
+            // TODO: add the rest
             break;
         default:
             break;

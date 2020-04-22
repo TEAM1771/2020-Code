@@ -15,6 +15,7 @@
 
 #include <memory>
 
+#include "AutoSimple.hpp"
 #include "AutoFiveBall.hpp"
 
 #include "Drivetrain.hpp"
@@ -44,8 +45,9 @@ public:
     void ButtonManager();
     
  private:
+    friend class AutoSimple<Robot>;
     friend class AutoFiveBall<Robot>; // Repeat this for all Auton Modes
-    std::unique_ptr<AutoBase<Robot>> auton { new AutoFiveBall<Robot>(this) }; // setup active auton
+    std::unique_ptr<AutoBase<Robot>> auton { new AutoSimple<Robot>(this) }; // setup active auton
 
     Drivetrain drivetrain;
 

@@ -11,17 +11,17 @@ void Intake::drive(INTAKE::DIRECTION mode)
 {
     switch (mode)
     {
-        case INTAKE::DIRECTION::IN:
-            wheels.Set(INTAKE::IN_SPEED);
-            break;
-        case INTAKE::DIRECTION::OFF:
-            wheels.Set(0);
-            break;
-        case INTAKE::DIRECTION::OUT:
-            wheels.Set(INTAKE::OUT_SPEED);
-            break;
-        default:
-            std::cerr << "Invalad Intake Direction\n";
+    case INTAKE::DIRECTION::IN:
+        wheels.Set(INTAKE::IN_SPEED);
+        break;
+    case INTAKE::DIRECTION::OFF:
+        wheels.Set(0);
+        break;
+    case INTAKE::DIRECTION::OUT:
+        wheels.Set(INTAKE::OUT_SPEED);
+        break;
+    default:
+        std::cerr << "Invalad Intake Direction\n";
     }
 }
 

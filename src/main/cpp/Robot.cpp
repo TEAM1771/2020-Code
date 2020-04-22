@@ -13,7 +13,7 @@ void Robot::AutonomousPeriodic()
 
 void Robot::TeleopInit()
 {
-    
+    hopper.stop(); // eliminates need to shoot at start of teleop
 }
 
 void Robot::TeleopPeriodic()

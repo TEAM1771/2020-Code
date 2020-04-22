@@ -13,6 +13,12 @@ class Turret
 
     TURRET::POSITION position_ = TURRET::POSITION::ZERO;
     bool tracking_ = false;
+
+    struct visionState
+    {
+        bool isTracking;
+        bool readyToShoot;
+    };
 public:
     explicit Turret(LimeLight const& limelight);
 
@@ -20,7 +26,7 @@ public:
     bool goToPosition(TURRET::POSITION position, double tolerance = 0.01);
 
     /// goes to position and then starts tracking, returns true if tolerance is met
-    std::pair<bool,bool> visionTrack(TURRET::POSITION initPosition, double tolerance = 0.01);
+    visionState visionTrack(TURRET::POSITION initPosition, double tolerance = 0.01);
 
     /// used for tuning interpolation tables
     void manualPositionControl(double position);
