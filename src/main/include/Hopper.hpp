@@ -1,37 +1,27 @@
 #pragma once
+
+#include <frc/DigitalInput.h>
 #include "Constants.hpp"
-#include <rev\CANSparkMax.h>
-#include <frc\DigitalInput.h>
-#include <frc/Timer.h>
-class Hopper
+
+class Hopper 
 {
-    rev::CANSparkMax indexerNeo {HOPPER::INDEXER::PORT, rev::CANSparkMaxLowLevel::MotorType::kBrushless};
-    rev::CANSparkMax transportNeo {HOPPER::TRANSPORT::PORT, rev::CANSparkMaxLowLevel::MotorType::kBrushless};
-    frc::Timer timer;
-    frc::DigitalInput beamBreak {HOPPER::laserPort};
-    rev::CANPIDController hopperPIDController = transportNeo.GetPIDController();
-    rev::CANEncoder transportEncoder = transportNeo.GetEncoder();
+    rev::CANSparkMax indexer   { HOPPER::INDEXER::PORT,   rev::CANSparkMaxLowLevel::MotorType::kBrushless };
+    rev::CANSparkMax transport { HOPPER::TRANSPORT::PORT, rev::CANSparkMaxLowLevel::MotorType::kBrushless };
+    
+    rev::CANPIDController pidController = transport.GetPIDController();
+    rev::CANEncoder encoder = transport.GetEncoder();
+    
+    frc::DigitalInput limitSwitch { HOPPER::LIMIT_SWITCH };
+    
+    int numberOfBalls = 3;
+    double targetDistance = HOPPER::TRANSPORT::DISTANCE;
+    bool isTransporting = false;
+    bool invalidStopFlag = false;
 
-
+    void driveDistance();
 public:
     Hopper();
-    bool isLaserBroken() const;
-    int numberOfBalls = 3;
-    double targetDistance;
-    static double timeElapsed;
-    static bool hasDrivenDistance();
-    void transportBall();
-    void feedShooter();
-    void stopFeed();
-    void controlFeed();
-    void startIndexer();
-    void stopIndexer();
-    void manualIndexerControl(double speed);
-    void manualTransportControl(double speed);
-    void checkBallProgress();
-    void driveDistance();
-    void giveStatus();
-    bool valueInRange(double value, double min, double max);
-    void controlFeedPID();
-
+    void index();
+    void shoot(); // must call Hopper::stop() to stop shooting
+    void stop();
 };

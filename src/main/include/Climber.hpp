@@ -17,8 +17,7 @@ class Climber
 public:
     Climber();
 
-    void ClimbUp();
-    void ClimbDown();
+    void set(CLIMBER::POSITION position);
 
     void joystickControl(double);
 

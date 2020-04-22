@@ -1,155 +1,66 @@
 #include "Hopper.hpp"
-#include <iostream>
 
-Hopper::Hopper()
+Hopper::Hopper() 
 {
-    indexerNeo.Set(HOPPER::INDEXER::SPEED);
-    indexerNeo.SetIdleMode(rev::CANSparkMax::IdleMode::kBrake);
-    transportNeo.SetIdleMode(rev::CANSparkMax::IdleMode::kBrake);
-    numberOfBalls = 3;
-    hopperPIDController.SetP(HOPPER::TRANSPORT::P);
-    hopperPIDController.SetI(HOPPER::TRANSPORT::I);
-    hopperPIDController.SetD(HOPPER::TRANSPORT::D);
-    hopperPIDController.SetFeedbackDevice(transportEncoder);
-    hopperPIDController.SetOutputRange(-1,1);
-    transportEncoder.SetPosition(0);
-    targetDistance = HOPPER::TRANSPORT::DISTANCE; //Because there is no set distance for the PID, only position, we will have to always update the target by adding the desired movement distance  
+    indexer.Set(HOPPER::INDEXER::SPEED);
+
+    indexer.SetIdleMode(HOPPER::INDEXER::IDLE_MODE);
+    transport.SetIdleMode(HOPPER::TRANSPORT::IDLE_MODE);
+    
+    pidController.SetP(HOPPER::TRANSPORT::P);
+    pidController.SetI(HOPPER::TRANSPORT::I);
+    pidController.SetD(HOPPER::TRANSPORT::D);
+
+    pidController.SetFeedbackDevice(encoder);
+    pidController.SetOutputRange(-HOPPER::TRANSPORT::SPEED, HOPPER::TRANSPORT::SPEED);
+
+    encoder.SetPosition(0);
 }
 
-/*
-bool Hopper::hasReachedDistance()
-{
-    return valueInRange(transportEncoder.GetPosition(), )
-}*/
 
-void Hopper::driveDistance()
+void Hopper::index()
 {
-
-    hopperPIDController.SetReference(targetDistance,rev::ControlType::kPosition);
-    if( valueInRange(transportEncoder.GetPosition(), targetDistance -.5, targetDistance + 0.5) ) //Ball has traveled distance, update new target position for next ball
+    if(invalidStopFlag)
     {
-        targetDistance = transportEncoder.GetPosition() + HOPPER::TRANSPORT::DISTANCE;
+        std::cerr << "Stop not called after shooting: Indexer Aborting\n";
+        return;
+    }
+
+    if (limitSwitch.Get() && numberOfBalls < 3 && !isTransporting)
+    {
+        pidController.SetReference(targetDistance, rev::ControlType::kPosition);
         numberOfBalls++;
+        isTransporting = true;
     }
 
-        
-}
-
-bool Hopper::valueInRange(double value, double min, double max)
-{
-    if ( (value >= min) && (value <= max) )
+    if(isTransporting && encoder.GetPosition() > (targetDistance - HOPPER::TRANSPORT::TOLERANCE))
     {
-         return true;
-    }
-    else
-    {
-        return false;
+        targetDistance += HOPPER::TRANSPORT::DISTANCE;
+        isTransporting = false;
     }
     
+    if(!limitSwitch.Get() && numberOfBalls < 4)
+        indexer.Set(HOPPER::INDEXER::SPEED);
+    else
+        indexer.Set(0);
+
 }
 
-void Hopper::giveStatus()
+void Hopper::shoot()
 {
-    std::cout << "Hopper encoder: " << transportEncoder.GetPosition() << std::endl;
+    invalidStopFlag = true;
+    indexer.Set(HOPPER::INDEXER::SPEED);
+    transport.Set(HOPPER::TRANSPORT::SHOOT_SPEED);
 }
 
-bool Hopper::isLaserBroken() const
+void Hopper::stop()
 {
-    return !beamBreak.Get();
-}
-
-void Hopper::transportBall()
-{
-     transportNeo.Set(HOPPER::TRANSPORT::SPEED); 
-}
-void Hopper::feedShooter()
-{
-    transportNeo.Set(HOPPER::TRANSPORT::SHOOT_SPEED);
-    transportEncoder.SetPosition(0);
+    invalidStopFlag = false;
     numberOfBalls = 0;
-}
-void Hopper::stopFeed()
-{
-    transportNeo.Set(0);
-    numberOfBalls = 0;
-    transportEncoder.SetPosition(0);
     targetDistance = HOPPER::TRANSPORT::DISTANCE;
-}
-void Hopper::startIndexer()
-{
-    indexerNeo.Set(HOPPER::INDEXER::SPEED);
-}
-void Hopper::stopIndexer()
-{
-    indexerNeo.Set(0);
-}
-//controlFeed should make the decision to feed a ball into the transport
-void Hopper::controlFeed()
-{   
-    static bool isRunning = false;
-    checkBallProgress();
-    if (isLaserBroken() && numberOfBalls < 3 && isRunning == false) {
-        stopIndexer();
-        transportBall();
-        timer.Reset();
-        timer.Start();
-        std::cout << "OMG THE LASER IS BROKEN" << '\n';
-        isRunning = true;
-    }
-    else if (!isLaserBroken() && numberOfBalls < 4)
-    {
-        startIndexer();
-        isRunning = false;
-    }
-    else
-    {
-        stopIndexer();
-        isRunning = false;
-    }
-    
-    
-    
-}
+    isTransporting = false;
+    encoder.SetPosition(0);
 
-void Hopper::controlFeedPID()
-{
-    static bool isRunning = false;
-    if (isLaserBroken() && numberOfBalls < 3 && !isRunning)
-    {
-        stopIndexer();
-        driveDistance();
-        isRunning = true;
-    }
-    else if(!isLaserBroken() && numberOfBalls < 4)
-    {
-        startIndexer();
-        isRunning = false;
-    }
-    else
-    {
-        stopIndexer();
-        isRunning = false;
-    }
-    
-}
-
-void Hopper::checkBallProgress()
-{
-    if ( timer.HasPeriodPassed(HOPPER::hopperTimer) )
-    {
-        timer.Stop();
-        timer.Reset();
-        transportNeo.Set(0);
-        numberOfBalls++;
-    }
-}
-
-void Hopper::manualIndexerControl(double speed)
-{
-    indexerNeo.Set(speed);
-}
-
-void Hopper::manualTransportControl(double speed)
-{
-    transportNeo.Set(speed);
+    indexer.Set(0);
+    transport.Set(0);
 }

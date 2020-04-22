@@ -13,42 +13,49 @@
 #include <frc/livewindow/LiveWindow.h>
 #include <frc/smartdashboard/smartdashboard.h>
 
+#include <memory>
 
+#include "AutoFiveBall.hpp"
 
 #include "Drivetrain.hpp"
+#include "Limelight.hpp"
+#include "AutoBase.hpp"
+#include "Hood.hpp"
 #include "Hopper.hpp"
-#include "Intake.hpp"
 #include "Turret.hpp"
 #include "Climber.hpp"
+#include "Intake.hpp"
 
 class Robot : public frc::TimedRobot 
 {
 public:
-    Robot();
     void AutonomousInit() override;
-    void AutonomousPeriodic() override ;
-    void SimpleAuton();
-    void FiveBallAuton();
+    void AutonomousPeriodic() override;
+
     void TeleopInit() override;
     void TeleopPeriodic() override;
+
     void DisabledInit() override;
     void DisabledPeriodic() override;
+
     void TestPeriodic() override;
-    void IntakeManager();
-    void TurretManager();
-    void ClimberManager();
-    void HopperManager();
     
  private:
     frc::Joystick rStick { 0 },
                   lStick { 1 },
                   oStick { 2 };
-    Drivetrain drive;
+
+    friend class AutoFiveBall<Robot>; // Repeat this for all Auton Modes
+    std::unique_ptr<AutoBase<Robot>> auton { new AutoFiveBall<Robot>(this) }; // setup active auton
+
+    Drivetrain drivetrain;
+
+    LimeLight limelight;
+    Hood hood { limelight };
+    Turret turret { limelight };
     Hopper hopper;
-    Intake intake;
-    Turret turret;
     Climber climber;
-    bool activeIntake;
-    bool isClimbing = false;
+    Intake intake;
+
     frc::LiveWindow& m_lw = *frc::LiveWindow::GetInstance();
 };
