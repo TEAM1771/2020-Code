@@ -26,8 +26,8 @@ public:
     // Corners not implimented because slightly difficult and we arent using it here
     // Advanced Usage section not implimented becuase im too bored to do so
 
-    [[nodiscard]] int getPipe() const;
-    [[nodiscard]] double getLatency_ms() const;
+    [[nodiscard]]int getPipe() const;
+    [[nodiscard]]double getLatency_ms() const;
 
     void setLEDMode(LED_Mode mode);
     void setCameraMode(Camera_Mode mode);

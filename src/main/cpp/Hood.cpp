@@ -62,9 +62,18 @@ struct table_row
 
 bool Hood::visionTrack(double tolerance)
 {
-    double const target = getTrackingValue(limelight_.getY());
-    pidController_.SetReference(target, rev::ControlType::kPosition);
-    return std::fabs(target - encoder_.GetPosition()) < tolerance;
+    if(limelight_.hasTarget())
+    {
+        double const target = getTrackingValue(limelight_.getY());
+        pidController_.SetReference(target, rev::ControlType::kPosition);
+        return std::fabs(target - encoder_.GetPosition()) < tolerance;
+    }
+    else
+    {
+        goToPosition(HOOD::POSITION::TRAVERSE);
+        return false;        
+    }
+    
 }
 
 [[nodiscard]] constexpr double scaleOutput(double inputMin, double inputMax, double outputMin, double outputMax, double input)

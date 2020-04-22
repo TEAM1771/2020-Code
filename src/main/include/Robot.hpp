@@ -25,6 +25,7 @@
 #include "Turret.hpp"
 #include "Climber.hpp"
 #include "Intake.hpp"
+#include "ShooterWheel.hpp"
 
 class Robot : public frc::TimedRobot 
 {
@@ -39,12 +40,10 @@ public:
     void DisabledPeriodic() override;
 
     void TestPeriodic() override;
+
+    void ButtonManager();
     
  private:
-    frc::Joystick rStick { 0 },
-                  lStick { 1 },
-                  oStick { 2 };
-
     friend class AutoFiveBall<Robot>; // Repeat this for all Auton Modes
     std::unique_ptr<AutoBase<Robot>> auton { new AutoFiveBall<Robot>(this) }; // setup active auton
 
@@ -56,6 +55,7 @@ public:
     Hopper hopper;
     Climber climber;
     Intake intake;
+    ShooterWheel shooter_wheel;
 
     frc::LiveWindow& m_lw = *frc::LiveWindow::GetInstance();
 };

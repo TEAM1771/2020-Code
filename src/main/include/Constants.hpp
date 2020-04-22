@@ -2,12 +2,36 @@
 
 #include <rev/CANSparkMax.h>
 #include <ctre/Phoenix.h>
+#include <frc/Joystick.h>
+
+#include "JoystickButton.hpp"
 
 using can_adr = unsigned;
 
-namespace BUTTONS
+namespace BUTTON
 {
+    inline frc::Joystick rStick { 0 },
+                         lStick { 1 },
+                         oStick { 2 };
+    namespace INTAKE
+    {
+        inline JoystickButton DEPLOY       { BUTTON::oStick,  3 };
+        inline JoystickButton RETRACT      { BUTTON::oStick,  4 };
+        inline JoystickButton INTAKE       { BUTTON::oStick,  5 };
+    }
+    namespace SHOOTER
+    {
+        inline JoystickButton AIM_FRONT    { BUTTON::oStick,  8 };
+        inline JoystickButton AIM_BACK     { BUTTON::oStick, 10 };
+        inline JoystickButton AIM_SIDE     { BUTTON::oStick,  2 };
+        inline JoystickButton BATTERSHOT   { BUTTON::oStick,  6 };
+        inline JoystickButton SHOOT        { BUTTON::oStick,  1 };
+    }
 
+    namespace CLIMBER
+    {
+        inline JoystickButton RAISE        { BUTTON::lStick,  11 };
+    }
 } /* BUTTONS */
 
 
@@ -77,6 +101,17 @@ namespace TURRET
 } // TURRET
 
 
+namespace SHOOTER_WHEEL
+{
+    constexpr can_adr PORT_1 = 4;
+    constexpr can_adr PORT_2 = 5;
+
+    constexpr auto IDLE_MODE = rev::CANSparkMax::IdleMode::kCoast;
+
+    constexpr double SHOOTING_RPM = 8000;    
+} // SHOOTER_WHEEL
+
+
 namespace HOPPER
 {
     namespace INDEXER
@@ -136,7 +171,17 @@ namespace INTAKE
 {
     constexpr can_adr PCM_PORT = 1;
     constexpr can_adr PORT = 12;
+
     constexpr auto IDLE_MODE = rev::CANSparkMax::IdleMode::kCoast;
 
+    enum class DIRECTION
+    {
+        OUT,
+        OFF,
+        IN
+    };
+
+    constexpr double IN_SPEED = -1;
+    constexpr double OUT_SPEED = 1;
 } // INTAKE
 

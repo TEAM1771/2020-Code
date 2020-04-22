@@ -5,16 +5,24 @@ compiling Drivetrain.cpp successful.
 
 compiling Hood.cpp successful.
 
-compiling Hopper.cpp successful.
-
 compiling Intake.cpp successful.
 
-compiling transmission.cpp successful.
+compiling JoystickButton.cpp successful.
+
+compiling LimeLight.cpp successful.
+
+compiling ShooterWheel.cpp successful.
+D:\ryan\Documents\Code\1771\2020-Code\src\main\cpp\ShooterWheel.cpp: In member function 'bool ShooterWheel::bangbang()':
+D:\ryan\Documents\Code\1771\2020-Code\src\main\cpp\ShooterWheel.cpp:39:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
 
 compiling Robot.cpp successful.
 
-compiling Turret.cpp successful.
+compiling transmission.cpp successful.
 
-compiling LimeLight.cpp successful.
+compiling Hopper.cpp successful.
+
+compiling Turret.cpp successful.
 
 Finished compileFrcUserProgramReleaseExecutableFrcUserProgramCpp, see full log file:///D:/ryan/Documents/Code/1771/2020-Code/build/tmp/compileFrcUserProgramReleaseExecutableFrcUserProgramCpp/output.txt.

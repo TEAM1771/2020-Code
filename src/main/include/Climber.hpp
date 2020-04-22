@@ -19,6 +19,8 @@ public:
 
     void set(CLIMBER::POSITION position);
 
+    void ButtonManager();
+
     void joystickControl(double);
 
     void printStatus();

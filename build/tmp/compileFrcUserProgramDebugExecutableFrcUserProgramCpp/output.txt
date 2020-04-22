@@ -7,9 +7,17 @@ compiling Hood.cpp successful.
 
 compiling LimeLight.cpp successful.
 
-compiling transmission.cpp successful.
+compiling JoystickButton.cpp successful.
 
 compiling Robot.cpp successful.
+
+compiling ShooterWheel.cpp successful.
+D:\ryan\Documents\Code\1771\2020-Code\src\main\cpp\ShooterWheel.cpp: In member function 'bool ShooterWheel::bangbang()':
+D:\ryan\Documents\Code\1771\2020-Code\src\main\cpp\ShooterWheel.cpp:39:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+
+compiling transmission.cpp successful.
 
 compiling Turret.cpp successful.
 

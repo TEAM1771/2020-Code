@@ -29,12 +29,12 @@ bool Turret::goToPosition(TURRET::POSITION position, double tolerance)
     return std::fabs(encoder_.GetPosition() - static_cast<double>(position)) < tolerance;
 }
 
-bool Turret::visionTrack(TURRET::POSITION initPosition, double tolerance)
+std::pair<bool,bool> Turret::visionTrack(TURRET::POSITION initPosition, double tolerance)
 {
     if(!tracking_) // move to initPosition
     {
         tracking_ = goToPosition(initPosition);
-        return false;
+        return {false, false};
     }
     
     if (limelight_.hasTarget())
@@ -44,16 +44,13 @@ bool Turret::visionTrack(TURRET::POSITION initPosition, double tolerance)
         double const currentTicks = encoder_.GetPosition();
         if (currentTicks < static_cast<double>(TURRET::POSITION::MAX_RIGHT) 
          && currentTicks > static_cast<double>(TURRET::POSITION::MAX_LEFT))
-        {
             turretTurnyTurny_.Set(output);
-            return fabs(xOffset) < tolerance;
-        }
         else
             turretTurnyTurny_.Set(0);
+        return { true, fabs(xOffset) < tolerance };
     }
-    else
-        turretTurnyTurny_.Set(0);
-    return false;
+    turretTurnyTurny_.Set(0);
+    return {false, false};
 }
 
 [[nodiscard]] constexpr double scaleOutput(double inputMin, double inputMax, double outputMin, double outputMax, double input)

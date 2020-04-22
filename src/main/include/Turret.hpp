@@ -20,7 +20,7 @@ public:
     bool goToPosition(TURRET::POSITION position, double tolerance = 0.01);
 
     /// goes to position and then starts tracking, returns true if tolerance is met
-    bool visionTrack(TURRET::POSITION initPosition, double tolerance = 0.01);
+    std::pair<bool,bool> visionTrack(TURRET::POSITION initPosition, double tolerance = 0.01);
 
     /// used for tuning interpolation tables
     void manualPositionControl(double position);

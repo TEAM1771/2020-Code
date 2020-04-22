@@ -42,3 +42,15 @@ void Climber::printStatus()
     std::cout<< "Climber 1: " << climber_1_encoder.GetPosition() << std::endl;
     std::cout<< "Climber 2: " << climber_2_encoder.GetPosition() << std::endl;
 }
+
+void Climber::ButtonManager()
+{
+    static bool hasBeenPressed = false;
+    if(BUTTON::CLIMBER::RAISE && BUTTON::oStick.GetThrottle() < 0)
+    {
+        hasBeenPressed = true;
+        set(CLIMBER::POSITION::UP);
+    }
+    else if(hasBeenPressed)
+        set(CLIMBER::POSITION::DOWN);
+}
