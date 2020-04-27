@@ -5,7 +5,8 @@
 #include <frc/Timer.h>
 
 template <class Robot>
-class AutoSimple : public AutoBase<Robot> {
+class AutoSimple : public AutoBase<Robot>
+{
     using AutoBase<Robot>::robot;
 
     frc::Timer timer;

@@ -4,7 +4,8 @@
 #include "networktables/NetworkTable.h"
 #include "networktables/NetworkTableInstance.h"
 
-class LimeLight {
+class LimeLight
+{
     std::shared_ptr<NetworkTable> table = nt::NetworkTableInstance::GetDefault().GetTable("limelight");
 
 public:
@@ -24,16 +25,16 @@ public:
     [[nodiscard]] double getY() const;    // [-20.5, 20.5] For LimeLight-1
     [[nodiscard]] double getArea() const; // % of image
     [[nodiscard]] double getSkew() const; // [-90, 0]
-    [[nodiscard]] bool hasTarget() const;
-    [[nodiscard]] int getShortSideLength() const;      // [0, 320]
-    [[nodiscard]] int getLongSideLength() const;       // [0, 320]
-    [[nodiscard]] int getHorizontalSideLength() const; // [0, 320]
-    [[nodiscard]] int getVerticalSideLength() const;   // [0, 320]
+    [[nodiscard]] bool   hasTarget() const;
+    [[nodiscard]] int    getShortSideLength() const;      // [0, 320]
+    [[nodiscard]] int    getLongSideLength() const;       // [0, 320]
+    [[nodiscard]] int    getHorizontalSideLength() const; // [0, 320]
+    [[nodiscard]] int    getVerticalSideLength() const;   // [0, 320]
     // Camera Translation not implimented because of unclear documentation
     // Corners not implimented because slightly difficult and we arent using it here
     // Advanced Usage section not implimented becuase im too bored to do so
 
-    [[nodiscard]] int getPipe() const;
+    [[nodiscard]] int    getPipe() const;
     [[nodiscard]] double getLatency_ms() const;
 
     void setLEDMode(LED_Mode mode);

@@ -25,7 +25,8 @@
 #include <frc/smartdashboard/smartdashboard.h>
 #include <memory>
 
-class Robot : public frc::TimedRobot {
+class Robot : public frc::TimedRobot
+{
 public:
     void AutonomousInit() override;
     void AutonomousPeriodic() override;
@@ -45,14 +46,13 @@ private:
     friend class AutoFiveBall<Robot>;                                       // Repeat this for all Auton Modes
     std::unique_ptr<AutoBase<Robot>> auton { new AutoSimple<Robot>(this) }; // setup active auton
 
-    Drivetrain drivetrain;
-
-    LimeLight limelight;
-    Hood hood { limelight };
-    Turret turret { limelight };
-    Hopper hopper;
-    Climber climber;
-    Intake intake;
+    Drivetrain   drivetrain;
+    LimeLight    limelight;
+    Hood         hood { limelight };
+    Turret       turret { limelight };
+    Hopper       hopper;
+    Climber      climber;
+    Intake       intake;
     ShooterWheel shooter_wheel;
 
     frc::LiveWindow& m_lw = *frc::LiveWindow::GetInstance();

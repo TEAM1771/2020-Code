@@ -3,13 +3,15 @@
 #include <iostream>
 
 template <class Robot>
-class AutoBase {
+class AutoBase
+{
 protected:
     Robot* robot;
 
 public:
     constexpr AutoBase(Robot* robot_)
-    : robot { robot } {}
+        : robot { robot }
+    {}
     virtual void init()
     {
         std::cout << "No Auton Mode Selected\n";

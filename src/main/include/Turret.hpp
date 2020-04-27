@@ -3,15 +3,16 @@
 #include "Constants.hpp"
 #include "LimeLight.hpp"
 
-class Turret {
+class Turret
+{
     LimeLight const& limelight_;
 
-    rev::CANSparkMax turretTurnyTurny_ { TURRET::PORT, rev::CANSparkMaxLowLevel::MotorType::kBrushless };
+    rev::CANSparkMax      turretTurnyTurny_ { TURRET::PORT, rev::CANSparkMaxLowLevel::MotorType::kBrushless };
     rev::CANPIDController pidController_ = turretTurnyTurny_.GetPIDController();
-    rev::CANEncoder encoder_             = turretTurnyTurny_.GetEncoder();
+    rev::CANEncoder       encoder_       = turretTurnyTurny_.GetEncoder();
 
     TURRET::POSITION position_ = TURRET::POSITION::ZERO;
-    bool tracking_             = false;
+    bool             tracking_ = false;
 
     struct visionState
     {

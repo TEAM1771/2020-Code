@@ -80,8 +80,8 @@ static_assert(is_close_to(.1, .100000001));
         interpolate(yval,
                     std::prev(range),
                     range),
-        HOOD::POSITION::SAFE_TO_TURN,
-        HOOD::POSITION::TRAVERSE);
+        static_cast<double>(HOOD::POSITION::SAFE_TO_TURN),
+        static_cast<double>(HOOD::POSITION::TRAVERSE));
 
     //tests
     static_assert(std::end(lookup_table) - std::begin(lookup_table) >= 2, "lookup table too small");

@@ -5,12 +5,13 @@
 #include <frc/Joystick.h>
 #include <rev/CANSparkMax.h>
 
-class Hood {
+class Hood
+{
     LimeLight const& limelight_;
 
-    rev::CANSparkMax hood_ { HOOD::PORT, rev::CANSparkMaxLowLevel::MotorType::kBrushless };
+    rev::CANSparkMax      hood_ { HOOD::PORT, rev::CANSparkMaxLowLevel::MotorType::kBrushless };
     rev::CANPIDController pidController_ = hood_.GetPIDController();
-    rev::CANEncoder encoder_             = hood_.GetEncoder();
+    rev::CANEncoder       encoder_       = hood_.GetEncoder();
 
     HOOD::POSITION position_ = HOOD::POSITION::BOTTOM;
 

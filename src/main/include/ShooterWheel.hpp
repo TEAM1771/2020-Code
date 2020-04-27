@@ -2,7 +2,8 @@
 
 #include "Constants.hpp"
 
-class ShooterWheel {
+class ShooterWheel
+{
     rev::CANSparkMax shooter_1 { SHOOTER_WHEEL::PORT_1, rev::CANSparkMaxLowLevel::MotorType::kBrushless };
     rev::CANSparkMax shooter_2 { SHOOTER_WHEEL::PORT_2, rev::CANSparkMaxLowLevel::MotorType::kBrushless };
 

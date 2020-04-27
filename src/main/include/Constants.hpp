@@ -109,8 +109,8 @@ namespace HOPPER
 {
     namespace INDEXER
     {
-        constexpr can_adr PORT = 10;
-        constexpr double SPEED = 1;
+        constexpr can_adr PORT  = 10;
+        constexpr double  SPEED = 1;
 
         constexpr auto IDLE_MODE = rev::CANSparkMax::IdleMode::kBrake;
     } // namespace INDEXER

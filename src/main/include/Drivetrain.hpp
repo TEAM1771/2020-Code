@@ -5,7 +5,8 @@
 #include "transmission.hpp"
 #include <frc\Solenoid.h>
 
-class Drivetrain {
+class Drivetrain
+{
     Transmission rdrive { TRANSMISSION::RIGHT_MOTOR };
     Transmission ldrive { TRANSMISSION::LEFT_MOTOR };
 

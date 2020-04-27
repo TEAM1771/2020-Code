@@ -5,7 +5,8 @@
 #include <frc/Timer.h>
 
 template <class Robot>
-class AutoFiveBall : public AutoBase<Robot> {
+class AutoFiveBall : public AutoBase<Robot>
+{
     using AutoBase<Robot>::robot;
     enum class Stage {
         PickUpBalls,
