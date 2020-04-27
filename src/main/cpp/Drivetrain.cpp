@@ -14,37 +14,37 @@ void Drivetrain::reset()
 bool Drivetrain::driveDistanceForward(double distance)
 {
     static bool isReset = false;
-    if(!isReset)
+    if(! isReset)
     {
         reset();
-        isReset=true;
+        isReset = true;
     }
-    if((fabs(rdrive.getEncoderDistance())+fabs(ldrive.getEncoderDistance()))/2<fabs(distance))
+    if((fabs(rdrive.getEncoderDistance()) + fabs(ldrive.getEncoderDistance())) / 2 < fabs(distance))
     {
-        if(fabs(rdrive.getEncoderDistance())<fabs(ldrive.getEncoderDistance()))
+        if(fabs(rdrive.getEncoderDistance()) < fabs(ldrive.getEncoderDistance()))
         {
-            if(fabs(rdrive.getEncoderDistance())>fabs(ldrive.getEncoderDistance()))
+            if(fabs(rdrive.getEncoderDistance()) > fabs(ldrive.getEncoderDistance()))
             {
-                drive(-.35,-.25);
+                drive(-.35, -.25);
             }
-            else if(fabs(rdrive.getEncoderDistance())<fabs(ldrive.getEncoderDistance()))
+            else if(fabs(rdrive.getEncoderDistance()) < fabs(ldrive.getEncoderDistance()))
             {
-                drive(-.25,-.35);
+                drive(-.25, -.35);
             }
             else
             {
-                drive(-.25,-.25);
+                drive(-.25, -.25);
             }
         }
         else
         {
-            drive(-.25,-.25);
+            drive(-.25, -.25);
         }
         return false;
     }
     else
     {
-        drive(0,0);
+        drive(0, 0);
         return true;
     }
 }
@@ -58,32 +58,31 @@ void Drivetrain::printDistance()
 bool Drivetrain::driveDistanceBackward(double distance) // TODO: fix this
 {
     static bool isReset = false;
-    if(!isReset)
+    if(! isReset)
     {
         reset();
-        isReset=true;
+        isReset = true;
     }
-    if((fabs(rdrive.getEncoderDistance())+fabs(ldrive.getEncoderDistance()))/2<fabs(distance))//96
+    if((fabs(rdrive.getEncoderDistance()) + fabs(ldrive.getEncoderDistance())) / 2 < fabs(distance)) //96
     {
         std::cout << "Going back" << std::endl;
-        if(fabs(rdrive.getEncoderDistance())>fabs(ldrive.getEncoderDistance()))
+        if(fabs(rdrive.getEncoderDistance()) > fabs(ldrive.getEncoderDistance()))
         {
-            drive(.3,.4);
+            drive(.3, .4);
         }
-        else if(fabs(rdrive.getEncoderDistance())<fabs(ldrive.getEncoderDistance()))
+        else if(fabs(rdrive.getEncoderDistance()) < fabs(ldrive.getEncoderDistance()))
         {
-            drive(.4,.3);
+            drive(.4, .3);
         }
         else
         {
-            drive(.3,.3);
+            drive(.3, .3);
         }
         return false;
     }
-    drive(0,0);
+    drive(0, 0);
     return true;
 }
-
 
 void Drivetrain::drive(double lval, double rval)
 {

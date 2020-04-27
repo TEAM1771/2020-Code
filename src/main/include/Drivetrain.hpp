@@ -1,13 +1,11 @@
 #pragma once
 
-#include "transmission.hpp"
 #include "Constants.hpp"
-
 #include "ctre\phoenix\music\Orchestra.h"
+#include "transmission.hpp"
 #include <frc\Solenoid.h>
 
-class Drivetrain
-{
+class Drivetrain {
     Transmission rdrive { TRANSMISSION::RIGHT_MOTOR };
     Transmission ldrive { TRANSMISSION::LEFT_MOTOR };
 

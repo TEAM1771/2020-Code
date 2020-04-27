@@ -1,13 +1,11 @@
 #pragma once
 
-#include <frc/Timer.h>
-
 #include "AutoBase.hpp"
 #include "Constants.hpp"
+#include <frc/Timer.h>
 
-template<class Robot>
-class AutoFiveBall : public AutoBase<Robot>
-{
+template <class Robot>
+class AutoFiveBall : public AutoBase<Robot> {
     using AutoBase<Robot>::robot;
     enum class Stage {
         PickUpBalls,
@@ -21,7 +19,7 @@ class AutoFiveBall : public AutoBase<Robot>
 
 public:
     using AutoBase<Robot>::AutoBase;
-    
+
     void init() override
     {
         timer.Reset();
@@ -30,14 +28,15 @@ public:
 
     void run() override
     {
-        switch (stage)
+        switch(stage)
         {
-        case Stage::PickUpBalls:
-        {
+        case Stage::PickUpBalls: {
             if(! robot->drivetrain.driveDistanceForward(pickup_distance))
                 stage = AutoFiveBall::Stage::Turn;
-            else break;
-        } [[fallthrough]];
+            else
+                break;
+        }
+            [[fallthrough]];
 
         case Stage::Turn:
             // TODO: add the rest

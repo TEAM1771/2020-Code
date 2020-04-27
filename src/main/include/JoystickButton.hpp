@@ -2,10 +2,10 @@
 
 #include <frc/GenericHID.h>
 
-class JoystickButton 
-{
+class JoystickButton {
     frc::GenericHID& stick_;
     int const button_;
+
 public:
     JoystickButton(frc::GenericHID&, int const button);
     [[nodiscard]] operator bool() const { return stick_.GetRawButton(button_); }

@@ -9,7 +9,7 @@ Intake::Intake()
 
 void Intake::drive(INTAKE::DIRECTION mode)
 {
-    switch (mode)
+    switch(mode)
     {
     case INTAKE::DIRECTION::IN:
         wheels.Set(INTAKE::IN_SPEED);
@@ -29,7 +29,7 @@ void Intake::deploy(bool val)
 {
     intakeair.Set(val);
     intakeDeployed = val;
-} 
+}
 
 bool Intake::isIntakeDown() const
 {

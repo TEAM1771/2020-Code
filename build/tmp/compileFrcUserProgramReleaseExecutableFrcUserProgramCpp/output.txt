@@ -1,4 +1,54 @@
 See file:///D:/ryan/Documents/Code/1771/2020-Code/build/tmp/compileFrcUserProgramReleaseExecutableFrcUserProgramCpp/output.txt for all output for compileFrcUserProgramReleaseExecutableFrcUserProgramCpp.
+compiling Drivetrain.cpp successful.
+
+compiling Hood.cpp failed.
+D:\ryan\Documents\Code\1771\2020-Code\src\main\cpp\Hood.cpp:49:28: warning: ISO C++ forbids use of 'auto' in parameter declaration [-Wpedantic]
+ constexpr bool is_close_to(auto value,
+                            ^~~~
+D:\ryan\Documents\Code\1771\2020-Code\src\main\cpp\Hood.cpp:50:28: warning: ISO C++ forbids use of 'auto' in parameter declaration [-Wpedantic]
+                            auto target, double tol = 0.00001)
+                            ^~~~
+D:\ryan\Documents\Code\1771\2020-Code\src\main\cpp\Hood.cpp: In function 'double getTrackingValue(double)':
+D:\ryan\Documents\Code\1771\2020-Code\src\main\cpp\Hood.cpp:82:33: error: no matching function for call to 'clamp(double, HOOD::POSITION, HOOD::POSITION)'
+         HOOD::POSITION::TRAVERSE);
+                                 ^
+In file included from c:\users\public\wpilib\2020\roborio\arm-frc2020-linux-gnueabi\usr\include\c++\7.3.0\algorithm:62:0,
+                 from C:\Users\mrrya\.gradle\caches\transforms-2\files-2.1\cbb7e889f016f5acf3187c40ca84bdfe\wpiutil-cpp-2020.2.2-headers/wpi/MathExtras.h:19,
+                 from C:\Users\mrrya\.gradle\caches\transforms-2\files-2.1\cbb7e889f016f5acf3187c40ca84bdfe\wpiutil-cpp-2020.2.2-headers/wpi/SmallVector.h:28,
+                 from C:\Users\mrrya\.gradle\caches\transforms-2\files-2.1\cbb7e889f016f5acf3187c40ca84bdfe\wpiutil-cpp-2020.2.2-headers/wpi/STLExtras.h:20,
+                 from C:\Users\mrrya\.gradle\caches\transforms-2\files-2.1\cbb7e889f016f5acf3187c40ca84bdfe\wpiutil-cpp-2020.2.2-headers/wpi/StringRef.h:13,
+                 from C:\Users\mrrya\.gradle\caches\transforms-2\files-2.1\026266dbca03d5947ac28d68c439645c\wpilibc-cpp-2020.2.2-headers/frc/ErrorBase.h:12,
+                 from C:\Users\mrrya\.gradle\caches\transforms-2\files-2.1\026266dbca03d5947ac28d68c439645c\wpilibc-cpp-2020.2.2-headers/frc/GenericHID.h:14,
+                 from C:\Users\mrrya\.gradle\caches\transforms-2\files-2.1\026266dbca03d5947ac28d68c439645c\wpilibc-cpp-2020.2.2-headers/frc/Joystick.h:14,
+                 from D:\ryan\Documents\Code\1771\2020-Code\src\main\include/Hood.hpp:3,
+                 from D:\ryan\Documents\Code\1771\2020-Code\src\main\cpp\Hood.cpp:1:
+c:\users\public\wpilib\2020\roborio\arm-frc2020-linux-gnueabi\usr\include\c++\7.3.0\bits\stl_algo.h:3719:5: note: candidate: template<class _Tp> constexpr const _Tp& std::clamp(const _Tp&, const _Tp&, const _Tp&)
+     clamp(const _Tp& __val, const _Tp& __lo, const _Tp& __hi)
+     ^~~~~
+c:\users\public\wpilib\2020\roborio\arm-frc2020-linux-gnueabi\usr\include\c++\7.3.0\bits\stl_algo.h:3719:5: note:   template argument deduction/substitution failed:
+D:\ryan\Documents\Code\1771\2020-Code\src\main\cpp\Hood.cpp:82:33: note:   deduced conflicting types for parameter 'const _Tp' ('double' and 'HOOD::POSITION')
+         HOOD::POSITION::TRAVERSE);
+                                 ^
+In file included from c:\users\public\wpilib\2020\roborio\arm-frc2020-linux-gnueabi\usr\include\c++\7.3.0\algorithm:62:0,
+                 from C:\Users\mrrya\.gradle\caches\transforms-2\files-2.1\cbb7e889f016f5acf3187c40ca84bdfe\wpiutil-cpp-2020.2.2-headers/wpi/MathExtras.h:19,
+                 from C:\Users\mrrya\.gradle\caches\transforms-2\files-2.1\cbb7e889f016f5acf3187c40ca84bdfe\wpiutil-cpp-2020.2.2-headers/wpi/SmallVector.h:28,
+                 from C:\Users\mrrya\.gradle\caches\transforms-2\files-2.1\cbb7e889f016f5acf3187c40ca84bdfe\wpiutil-cpp-2020.2.2-headers/wpi/STLExtras.h:20,
+                 from C:\Users\mrrya\.gradle\caches\transforms-2\files-2.1\cbb7e889f016f5acf3187c40ca84bdfe\wpiutil-cpp-2020.2.2-headers/wpi/StringRef.h:13,
+                 from C:\Users\mrrya\.gradle\caches\transforms-2\files-2.1\026266dbca03d5947ac28d68c439645c\wpilibc-cpp-2020.2.2-headers/frc/ErrorBase.h:12,
+                 from C:\Users\mrrya\.gradle\caches\transforms-2\files-2.1\026266dbca03d5947ac28d68c439645c\wpilibc-cpp-2020.2.2-headers/frc/GenericHID.h:14,
+                 from C:\Users\mrrya\.gradle\caches\transforms-2\files-2.1\026266dbca03d5947ac28d68c439645c\wpilibc-cpp-2020.2.2-headers/frc/Joystick.h:14,
+                 from D:\ryan\Documents\Code\1771\2020-Code\src\main\include/Hood.hpp:3,
+                 from D:\ryan\Documents\Code\1771\2020-Code\src\main\cpp\Hood.cpp:1:
+c:\users\public\wpilib\2020\roborio\arm-frc2020-linux-gnueabi\usr\include\c++\7.3.0\bits\stl_algo.h:3737:5: note: candidate: template<class _Tp, class _Compare> constexpr const _Tp& std::clamp(const _Tp&, const _Tp&, const _Tp&, _Compare)
+     clamp(const _Tp& __val, const _Tp& __lo, const _Tp& __hi, _Compare __comp)
+     ^~~~~
+c:\users\public\wpilib\2020\roborio\arm-frc2020-linux-gnueabi\usr\include\c++\7.3.0\bits\stl_algo.h:3737:5: note:   template argument deduction/substitution failed:
+D:\ryan\Documents\Code\1771\2020-Code\src\main\cpp\Hood.cpp:82:33: note:   deduced conflicting types for parameter 'const _Tp' ('double' and 'HOOD::POSITION')
+         HOOD::POSITION::TRAVERSE);
+                                 ^
+
+compiling transmission.cpp successful.
+
 compiling Robot.cpp successful.
 
 Finished compileFrcUserProgramReleaseExecutableFrcUserProgramCpp, see full log file:///D:/ryan/Documents/Code/1771/2020-Code/build/tmp/compileFrcUserProgramReleaseExecutableFrcUserProgramCpp/output.txt.

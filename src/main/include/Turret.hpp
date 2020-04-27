@@ -1,10 +1,9 @@
 #pragma once
 
-#include "LimeLight.hpp"
 #include "Constants.hpp"
+#include "LimeLight.hpp"
 
-class Turret 
-{
+class Turret {
     LimeLight const& limelight_;
 
     rev::CANSparkMax turretTurnyTurny_ { TURRET::PORT, rev::CANSparkMaxLowLevel::MotorType::kBrushless };
@@ -12,13 +11,14 @@ class Turret
     rev::CANEncoder encoder_             = turretTurnyTurny_.GetEncoder();
 
     TURRET::POSITION position_ = TURRET::POSITION::ZERO;
-    bool tracking_ = false;
+    bool tracking_             = false;
 
     struct visionState
     {
         bool isTracking;
         bool readyToShoot;
     };
+
 public:
     explicit Turret(LimeLight const& limelight);
 

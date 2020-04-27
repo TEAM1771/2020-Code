@@ -1,20 +1,19 @@
 #pragma once
 
+#include "Constants.hpp"
+#include "LimeLight.hpp"
 #include <frc/Joystick.h>
 #include <rev/CANSparkMax.h>
 
-#include "Constants.hpp"
-#include "LimeLight.hpp"
-
-class Hood 
-{
+class Hood {
     LimeLight const& limelight_;
 
     rev::CANSparkMax hood_ { HOOD::PORT, rev::CANSparkMaxLowLevel::MotorType::kBrushless };
     rev::CANPIDController pidController_ = hood_.GetPIDController();
-    rev::CANEncoder encoder_ = hood_.GetEncoder();
+    rev::CANEncoder encoder_             = hood_.GetEncoder();
 
     HOOD::POSITION position_ = HOOD::POSITION::BOTTOM;
+
 public:
     explicit Hood(LimeLight const& limelight);
 

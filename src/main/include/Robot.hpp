@@ -5,6 +5,17 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
+#include "AutoBase.hpp"
+#include "AutoFiveBall.hpp"
+#include "AutoSimple.hpp"
+#include "Climber.hpp"
+#include "Drivetrain.hpp"
+#include "Hood.hpp"
+#include "Hopper.hpp"
+#include "Intake.hpp"
+#include "Limelight.hpp"
+#include "ShooterWheel.hpp"
+#include "Turret.hpp"
 #include <frc/Joystick.h>
 #include <frc/PWMVictorSPX.h>
 #include <frc/TimedRobot.h>
@@ -12,24 +23,9 @@
 #include <frc/drive/DifferentialDrive.h>
 #include <frc/livewindow/LiveWindow.h>
 #include <frc/smartdashboard/smartdashboard.h>
-
 #include <memory>
 
-#include "AutoSimple.hpp"
-#include "AutoFiveBall.hpp"
-
-#include "Drivetrain.hpp"
-#include "Limelight.hpp"
-#include "AutoBase.hpp"
-#include "Hood.hpp"
-#include "Hopper.hpp"
-#include "Turret.hpp"
-#include "Climber.hpp"
-#include "Intake.hpp"
-#include "ShooterWheel.hpp"
-
-class Robot : public frc::TimedRobot 
-{
+class Robot : public frc::TimedRobot {
 public:
     void AutonomousInit() override;
     void AutonomousPeriodic() override;
@@ -43,10 +39,10 @@ public:
     void TestPeriodic() override;
 
     void ButtonManager();
-    
- private:
+
+private:
     friend class AutoSimple<Robot>;
-    friend class AutoFiveBall<Robot>; // Repeat this for all Auton Modes
+    friend class AutoFiveBall<Robot>;                                       // Repeat this for all Auton Modes
     std::unique_ptr<AutoBase<Robot>> auton { new AutoSimple<Robot>(this) }; // setup active auton
 
     Drivetrain drivetrain;

@@ -39,8 +39,8 @@ void Climber::joystickControl(double val)
 
 void Climber::printStatus()
 {
-    std::cout<< "Climber 1: " << climber_1_encoder.GetPosition() << std::endl;
-    std::cout<< "Climber 2: " << climber_2_encoder.GetPosition() << std::endl;
+    std::cout << "Climber 1: " << climber_1_encoder.GetPosition() << std::endl;
+    std::cout << "Climber 2: " << climber_2_encoder.GetPosition() << std::endl;
 }
 
 void Climber::ButtonManager()

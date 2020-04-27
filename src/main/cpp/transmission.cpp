@@ -1,13 +1,13 @@
 #include "transmission.hpp"
 
-Transmission::Transmission(int falcon_adr):
-    falcon { falcon_adr },
-    sensors { falcon.GetSensorCollection() }
+Transmission::Transmission(int falcon_adr)
+    : falcon { falcon_adr }
+    , sensors { falcon.GetSensorCollection() }
 {
     falcon.SetNeutralMode(TRANSMISSION::IDLE_MODE);
 }
 
-ctre::phoenix::motorcontrol::can::TalonFX *Transmission::operator->()
+ctre::phoenix::motorcontrol::can::TalonFX* Transmission::operator->()
 {
     return &falcon;
 }
@@ -16,7 +16,6 @@ void Transmission::Set(double val)
 {
     falcon.Set(ControlMode::PercentOutput, val);
 }
-
 
 double Transmission::getEncoderDistance()
 {
