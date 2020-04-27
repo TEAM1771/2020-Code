@@ -4,17 +4,17 @@
 Drivetrain::Drivetrain()
 {
     //orchestra.LoadMusic(Paint_it_black.chrp);
-    
+
     //orchestra.Play();
 
-    //std::cout << 
+    //std::cout <<
 }
 
 void Drivetrain::reset()
 {
     ldrive.sensors.SetIntegratedSensorPosition(0);
     rdrive.sensors.SetIntegratedSensorPosition(0);
-   // ldrive.senssetEncoderDistance(0);
+    // ldrive.senssetEncoderDistance(0);
     //rdrive.setEncoderDistance(0);
 }
 
@@ -26,38 +26,38 @@ bool Drivetrain::stillDriving()
 void Drivetrain::driveDistanceForward(double distance)
 {
     static bool isReset = false;
-    if(!isReset)
+    if(! isReset)
     {
         reset();
-        isReset=true;
+        isReset = true;
     }
-    if((fabs(rdrive.getEncoderDistance())+fabs(ldrive.getEncoderDistance()))/2<fabs(distance))
+    if((fabs(rdrive.getEncoderDistance()) + fabs(ldrive.getEncoderDistance())) / 2 < fabs(distance))
     {
         isDriving = true;
-        if(fabs(rdrive.getEncoderDistance())<fabs(ldrive.getEncoderDistance()))
+        if(fabs(rdrive.getEncoderDistance()) < fabs(ldrive.getEncoderDistance()))
         {
             isDriving = true;
-            if(fabs(rdrive.getEncoderDistance())>fabs(ldrive.getEncoderDistance()))
+            if(fabs(rdrive.getEncoderDistance()) > fabs(ldrive.getEncoderDistance()))
             {
-                drive(-.35,-.25);
+                drive(-.35, -.25);
             }
-            else if(fabs(rdrive.getEncoderDistance())<fabs(ldrive.getEncoderDistance()))
+            else if(fabs(rdrive.getEncoderDistance()) < fabs(ldrive.getEncoderDistance()))
             {
-                drive(-.25,-.35);
+                drive(-.25, -.35);
             }
             else
             {
-                drive(-.25,-.25);
+                drive(-.25, -.25);
             }
         }
         else
         {
-            drive(-.25,-.25);
+            drive(-.25, -.25);
         }
     }
     else
     {
-        drive(0,0);
+        drive(0, 0);
         isDriving = false;
     }
 }
@@ -71,31 +71,31 @@ void Drivetrain::printDistance()
 void Drivetrain::driveDistanceBackward(double distance)
 {
     static bool isReset = false;
-    if(!isReset)
+    if(! isReset)
     {
         reset();
-        isReset=true;
+        isReset = true;
     }
-    if((fabs(rdrive.getEncoderDistance())+fabs(ldrive.getEncoderDistance()))/2<fabs(distance))//96
+    if((fabs(rdrive.getEncoderDistance()) + fabs(ldrive.getEncoderDistance())) / 2 < fabs(distance)) //96
     {
         std::cout << "Going back" << std::endl;
         isDriving = true;
-        if(fabs(rdrive.getEncoderDistance())>fabs(ldrive.getEncoderDistance()))
+        if(fabs(rdrive.getEncoderDistance()) > fabs(ldrive.getEncoderDistance()))
         {
-            drive(.3,.4);
+            drive(.3, .4);
         }
-        else if(fabs(rdrive.getEncoderDistance())<fabs(ldrive.getEncoderDistance()))
+        else if(fabs(rdrive.getEncoderDistance()) < fabs(ldrive.getEncoderDistance()))
         {
-            drive(.4,.3);
+            drive(.4, .3);
         }
         else
         {
-            drive(.3,.3);
+            drive(.3, .3);
         }
     }
     else
     {
-        drive(0,0);
+        drive(0, 0);
         isDriving = false;
     }
 }
@@ -107,14 +107,13 @@ void Drivetrain::drive(double lval, double rval)
     ldrive.Set(lval);
 
 
-    
     auto const drivetrain_speed = fabs(ldrive.sensors.GetIntegratedSensorVelocity() - rdrive.sensors.GetIntegratedSensorVelocity()) / 2;
 }
 
 void Drivetrain::driveFalcons(double lval, double rval)
 {
-    rdrive->Set(ControlMode::PercentOutput,-rval);
-    ldrive->Set(ControlMode::PercentOutput,lval);
+    rdrive->Set(ControlMode::PercentOutput, -rval);
+    ldrive->Set(ControlMode::PercentOutput, lval);
 }
 
 void Drivetrain::shift()

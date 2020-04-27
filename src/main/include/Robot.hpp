@@ -5,6 +5,11 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
+#include "Climber.hpp"
+#include "Drivetrain.hpp"
+#include "Hopper.hpp"
+#include "Intake.hpp"
+#include "Turret.hpp"
 #include <frc/Joystick.h>
 #include <frc/PWMVictorSPX.h>
 #include <frc/TimedRobot.h>
@@ -13,42 +18,38 @@
 #include <frc/livewindow/LiveWindow.h>
 #include <frc/smartdashboard/smartdashboard.h>
 
-
-
-#include "Drivetrain.hpp"
-#include "Hopper.hpp"
-#include "Intake.hpp"
-#include "Turret.hpp"
-#include "Climber.hpp"
-
-class Robot : public frc::TimedRobot 
+class Robot : public frc::TimedRobot
 {
 public:
     Robot();
     void AutonomousInit() override;
-    void AutonomousPeriodic() override ;
-    void SimpleAuton();
-    void FiveBallAuton();
+    void AutonomousPeriodic() override;
     void TeleopInit() override;
     void TeleopPeriodic() override;
     void DisabledInit() override;
     void DisabledPeriodic() override;
     void TestPeriodic() override;
+
+    void SimpleAuton();
+    void FiveBallAuton();
+
     void IntakeManager();
     void TurretManager();
     void ClimberManager();
     void HopperManager();
-    
- private:
+
+private:
     frc::Joystick rStick { 0 },
-                  lStick { 1 },
-                  oStick { 2 };
+        lStick { 1 },
+        oStick { 2 };
+
     Drivetrain drive;
-    Hopper hopper;
-    Intake intake;
-    Turret turret;
-    Climber climber;
-    bool activeIntake;
-    bool isClimbing = false;
+    Hopper     hopper;
+    Intake     intake;
+    Turret     turret;
+    Climber    climber;
+    bool       activeIntake;
+    bool       isClimbing = false;
+
     frc::LiveWindow& m_lw = *frc::LiveWindow::GetInstance();
 };

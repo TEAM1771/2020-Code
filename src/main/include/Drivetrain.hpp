@@ -1,17 +1,16 @@
 #pragma once
 
-#include "transmission.hpp"
 #include "Constants.hpp"
-
 #include "ctre\phoenix\music\Orchestra.h"
+#include "transmission.hpp"
 #include <frc\Solenoid.h>
 
 class Drivetrain
 {
-    Transmission rdrive { TRANS::rFalcon, TRANS::rNeo };
-    Transmission ldrive { TRANS::lFalcon, TRANS::lNeo };
-    Orchestra orchestra;
-    bool isDriving;
+    Transmission  rdrive { TRANS::rFalcon, TRANS::rNeo };
+    Transmission  ldrive { TRANS::lFalcon, TRANS::lNeo };
+    Orchestra     orchestra;
+    bool          isDriving;
     frc::Solenoid shifter { TRANS::shifter };
 
 public:
@@ -21,7 +20,7 @@ public:
     void driveDistanceForward(double distance);
     void driveDistanceBackward(double distance);
     void printDistance();
-    
+
     bool stillDriving();
 
     void reset();

@@ -5,25 +5,24 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
+#include "Constants.hpp"
 #include <frc/Joystick.h>
 #include <frc/PWMVictorSPX.h>
+#include <frc/Solenoid.h>
 #include <frc/TimedRobot.h>
 #include <frc/Timer.h>
 #include <frc/drive/DifferentialDrive.h>
 #include <frc/livewindow/LiveWindow.h>
 #include <rev/CANSparkMax.h>
-#include "Constants.hpp"
-#include <frc/Solenoid.h>
 
 class Intake
 {
+    frc::Solenoid intakeair { INTAKE::intakeairport };
+    bool          intakeDeployed = false;
 
-    frc::Solenoid intakeair {INTAKE::intakeairport};
-    bool intakeDeployed = false;
 public:
-    rev::CANSparkMax intakeneo {INTAKE::IntakePort, rev::CANSparkMaxLowLevel::MotorType::kBrushless};
+    rev::CANSparkMax intakeneo { INTAKE::IntakePort, rev::CANSparkMaxLowLevel::MotorType::kBrushless };
     Intake();
     void deploy(bool val);
     bool isIntakeDown();
-
 };

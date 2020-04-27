@@ -11,9 +11,9 @@ Hopper::Hopper()
     hopperPIDController.SetI(HOPPER::TRANSPORT::I);
     hopperPIDController.SetD(HOPPER::TRANSPORT::D);
     hopperPIDController.SetFeedbackDevice(transportEncoder);
-    hopperPIDController.SetOutputRange(-1,1);
+    hopperPIDController.SetOutputRange(-1, 1);
     transportEncoder.SetPosition(0);
-    targetDistance = HOPPER::TRANSPORT::DISTANCE; //Because there is no set distance for the PID, only position, we will have to always update the target by adding the desired movement distance  
+    targetDistance = HOPPER::TRANSPORT::DISTANCE; //Because there is no set distance for the PID, only position, we will have to always update the target by adding the desired movement distance
 }
 
 /*
@@ -24,28 +24,24 @@ bool Hopper::hasReachedDistance()
 
 void Hopper::driveDistance()
 {
-
-    hopperPIDController.SetReference(targetDistance,rev::ControlType::kPosition);
-    if( valueInRange(transportEncoder.GetPosition(), targetDistance -.5, targetDistance + 0.5) ) //Ball has traveled distance, update new target position for next ball
+    hopperPIDController.SetReference(targetDistance, rev::ControlType::kPosition);
+    if(valueInRange(transportEncoder.GetPosition(), targetDistance - .5, targetDistance + 0.5)) //Ball has traveled distance, update new target position for next ball
     {
         targetDistance = transportEncoder.GetPosition() + HOPPER::TRANSPORT::DISTANCE;
         numberOfBalls++;
     }
-
-        
 }
 
 bool Hopper::valueInRange(double value, double min, double max)
 {
-    if ( (value >= min) && (value <= max) )
+    if((value >= min) && (value <= max))
     {
-         return true;
+        return true;
     }
     else
     {
         return false;
     }
-    
 }
 
 void Hopper::giveStatus()
@@ -55,19 +51,21 @@ void Hopper::giveStatus()
 
 bool Hopper::isLaserBroken() const
 {
-    return !beamBreak.Get();
+    return ! beamBreak.Get();
 }
 
 void Hopper::transportBall()
 {
-     transportNeo.Set(HOPPER::TRANSPORT::SPEED); 
+    transportNeo.Set(HOPPER::TRANSPORT::SPEED);
 }
+
 void Hopper::feedShooter()
 {
     transportNeo.Set(HOPPER::TRANSPORT::SHOOT_SPEED);
     transportEncoder.SetPosition(0);
     numberOfBalls = 0;
 }
+
 void Hopper::stopFeed()
 {
     transportNeo.Set(0);
@@ -75,20 +73,24 @@ void Hopper::stopFeed()
     transportEncoder.SetPosition(0);
     targetDistance = HOPPER::TRANSPORT::DISTANCE;
 }
+
 void Hopper::startIndexer()
 {
     indexerNeo.Set(HOPPER::INDEXER::SPEED);
 }
+
 void Hopper::stopIndexer()
 {
     indexerNeo.Set(0);
 }
+
 //controlFeed should make the decision to feed a ball into the transport
 void Hopper::controlFeed()
-{   
+{
     static bool isRunning = false;
     checkBallProgress();
-    if (isLaserBroken() && numberOfBalls < 3 && isRunning == false) {
+    if(isLaserBroken() && numberOfBalls < 3 && isRunning == false)
+    {
         stopIndexer();
         transportBall();
         timer.Reset();
@@ -96,7 +98,7 @@ void Hopper::controlFeed()
         std::cout << "OMG THE LASER IS BROKEN" << '\n';
         isRunning = true;
     }
-    else if (!isLaserBroken() && numberOfBalls < 4)
+    else if(! isLaserBroken() && numberOfBalls < 4)
     {
         startIndexer();
         isRunning = false;
@@ -106,21 +108,18 @@ void Hopper::controlFeed()
         stopIndexer();
         isRunning = false;
     }
-    
-    
-    
 }
 
 void Hopper::controlFeedPID()
 {
     static bool isRunning = false;
-    if (isLaserBroken() && numberOfBalls < 3 && !isRunning)
+    if(isLaserBroken() && numberOfBalls < 3 && ! isRunning)
     {
         stopIndexer();
         driveDistance();
         isRunning = true;
     }
-    else if(!isLaserBroken() && numberOfBalls < 4)
+    else if(! isLaserBroken() && numberOfBalls < 4)
     {
         startIndexer();
         isRunning = false;
@@ -130,12 +129,11 @@ void Hopper::controlFeedPID()
         stopIndexer();
         isRunning = false;
     }
-    
 }
 
 void Hopper::checkBallProgress()
 {
-    if ( timer.HasPeriodPassed(HOPPER::hopperTimer) )
+    if(timer.HasPeriodPassed(HOPPER::hopperTimer))
     {
         timer.Stop();
         timer.Reset();

@@ -10,8 +10,7 @@ void Intake::deploy(bool val)
 {
     intakeair.Set(val);
     intakeDeployed = val;
-
-} 
+}
 
 bool Intake::isIntakeDown()
 {
