@@ -7,7 +7,7 @@ Transmission::Transmission(int falcon_adr)
     falcon.SetNeutralMode(TRANSMISSION::IDLE_MODE);
 }
 
-ctre::phoenix::motorcontrol::can::TalonFX* Transmission::operator->()
+WPI_TalonFX* Transmission::operator->()
 {
     return &falcon;
 }

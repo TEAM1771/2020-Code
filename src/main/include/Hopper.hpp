@@ -13,16 +13,18 @@ class Hopper
 
     frc::DigitalInput limitSwitch { HOPPER::LIMIT_SWITCH };
 
-    int    numberOfBalls   = 3;
-    double targetDistance  = HOPPER::TRANSPORT::DISTANCE;
-    bool   isTransporting  = false;
-    bool   invalidStopFlag = false;
+    int               numberOfBalls  = 3;
+    double            targetDistance = HOPPER::TRANSPORT::DISTANCE;
+    bool              isTransporting = false;
+    std::atomic<bool> invalidStopFlag { false };
 
     void driveDistance();
 
 public:
     Hopper();
-    void index();
+    // index does not override shoot
+    // returns whether or not it's indexing
+    bool index(bool warn_if_shooting = true);
     void shoot(); // must call Hopper::stop() to stop shooting
     void stop();
 };

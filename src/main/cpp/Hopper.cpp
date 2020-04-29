@@ -17,12 +17,13 @@ Hopper::Hopper()
     encoder.SetPosition(0);
 }
 
-void Hopper::index()
+bool Hopper::index(bool warn_if_shooting)
 {
     if(invalidStopFlag)
     {
-        std::cerr << "Stop not called after shooting: Indexer Aborting\n";
-        return;
+        if(warn_if_shooting)
+            std::cerr << "Stop not called after shooting: Indexer Aborting\n";
+        return false;
     }
 
     if(limitSwitch.Get() && numberOfBalls < 3 && ! isTransporting)
@@ -42,6 +43,7 @@ void Hopper::index()
         indexer.Set(HOPPER::INDEXER::SPEED);
     else
         indexer.Set(0);
+    return true;
 }
 
 void Hopper::shoot()
@@ -54,9 +56,9 @@ void Hopper::shoot()
 void Hopper::stop()
 {
     invalidStopFlag = false;
+    isTransporting  = false;
     numberOfBalls   = 0;
     targetDistance  = HOPPER::TRANSPORT::DISTANCE;
-    isTransporting  = false;
     encoder.SetPosition(0);
 
     indexer.Set(0);

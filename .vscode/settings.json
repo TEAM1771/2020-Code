@@ -6,6 +6,7 @@
     "-fconcpts",
     "-pthread"
   ],
+  "C_Cpp.default.cppStandard": "c++17",
   "C_Cpp.clang_format_style": "file",
   "C_Cpp.clang_format_fallbackStyle": "none",
   "editor.formatOnSave": true,
@@ -87,6 +88,7 @@
     "streambuf": "cpp",
     "thread": "cpp",
     "cinttypes": "cpp",
-    "typeinfo": "cpp"
+    "typeinfo": "cpp",
+    "bit": "cpp"
   }
 }

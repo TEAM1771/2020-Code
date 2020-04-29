@@ -1,30 +1,4 @@
 See file:///D:/ryan/Documents/Code/1771/2020-Code/build/tmp/compileFrcUserProgramReleaseExecutableFrcUserProgramCpp/output.txt for all output for compileFrcUserProgramReleaseExecutableFrcUserProgramCpp.
-compiling Climber.cpp successful.
-
-compiling Drivetrain.cpp successful.
-
-compiling Hood.cpp successful.
-D:\ryan\Documents\Code\1771\2020-Code\src\main\cpp\Hood.cpp:49:28: warning: ISO C++ forbids use of 'auto' in parameter declaration [-Wpedantic]
- constexpr bool is_close_to(auto   value,
-                            ^~~~
-D:\ryan\Documents\Code\1771\2020-Code\src\main\cpp\Hood.cpp:50:28: warning: ISO C++ forbids use of 'auto' in parameter declaration [-Wpedantic]
-                            auto   target,
-                            ^~~~
-
-compiling Hopper.cpp successful.
-
-compiling JoystickButton.cpp successful.
-
-compiling LimeLight.cpp successful.
-
-compiling Intake.cpp successful.
-
-compiling ShooterWheel.cpp successful.
-
-compiling transmission.cpp successful.
-
-compiling Turret.cpp successful.
-
 compiling Robot.cpp successful.
 
 Finished compileFrcUserProgramReleaseExecutableFrcUserProgramCpp, see full log file:///D:/ryan/Documents/Code/1771/2020-Code/build/tmp/compileFrcUserProgramReleaseExecutableFrcUserProgramCpp/output.txt.

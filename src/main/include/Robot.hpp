@@ -41,6 +41,9 @@ public:
 
     void ButtonManager();
 
+    // returns true when aimed at goal
+    bool aim(TURRET::POSITION);
+
 private:
     friend class AutoSimple<Robot>;
     friend class AutoFiveBall<Robot>;                                       // Repeat this for all Auton Modes

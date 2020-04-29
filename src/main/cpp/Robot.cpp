@@ -1,5 +1,4 @@
 #include "Robot.hpp"
-#include <frc/Timer.h>
 
 void Robot::AutonomousInit()
 {
@@ -41,22 +40,18 @@ void Robot::ButtonManager()
     if(BUTTON::SHOOTER::AIM_FRONT)
     {
         deployIntake = true;
-        if(auto [is_tracking, readyToShoot] = turret.visionTrack(TURRET::POSITION::FRONT); is_tracking)
-            targetLocked = hood.visionTrack() && readyToShoot;
-        else
-            hood.goToPosition(HOOD::POSITION::TRAVERSE);
+        aim(TURRET::POSITION::FRONT);
     }
     else if(BUTTON::SHOOTER::AIM_BACK)
     {
         deployIntake = true;
-        if(auto [is_tracking, readyToShoot] = turret.visionTrack(TURRET::POSITION::BACK); is_tracking)
-            targetLocked = hood.visionTrack() && readyToShoot;
-        else
-            hood.goToPosition(HOOD::POSITION::TRAVERSE);
+        aim(TURRET::POSITION::BACK);
     }
     else if(BUTTON::SHOOTER::BATTERSHOT)
     {
-        deployIntake             = true;
+        deployIntake = true;
+
+        // turret_in_pos is true when it's safe to deploy hood
         bool const turret_in_pos = turret.goToPosition(TURRET::POSITION::FRONT,
                                                        fabs(static_cast<double>(TURRET::POSITION::FRONT) - static_cast<double>(TURRET::POSITION::SAFE_TO_DEPLOY_HOOD_FRONT)));
         if(turret_in_pos)
@@ -93,6 +88,14 @@ void Robot::ButtonManager()
         intake.drive(INTAKE::DIRECTION::OFF);
 
     climber.ButtonManager();
+}
+
+bool Robot::aim(TURRET::POSITION direction)
+{
+    if(auto [is_tracking, readyToShoot] = turret.visionTrack(direction); is_tracking)
+        return hood.visionTrack() && readyToShoot;
+    hood.goToPosition(HOOD::POSITION::TRAVERSE);
+    return false;
 }
 
 #ifndef RUNNING_FRC_TESTS

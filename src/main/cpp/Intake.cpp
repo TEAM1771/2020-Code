@@ -4,7 +4,6 @@
 Intake::Intake()
 {
     wheels.SetIdleMode(INTAKE::IDLE_MODE);
-    intakeDeployed = false;
 }
 
 void Intake::drive(INTAKE::DIRECTION mode)

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "JoystickButton.hpp"
+#include "Limelight.hpp"
 #include <ctre/Phoenix.h>
 #include <frc/Joystick.h>
 #include <rev/CANSparkMax.h>

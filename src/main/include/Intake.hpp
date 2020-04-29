@@ -11,7 +11,8 @@ class Intake
 
 public:
     Intake();
-    void               drive(INTAKE::DIRECTION mode);
-    void               deploy(bool val);
+    void drive(INTAKE::DIRECTION mode);
+    void deploy(bool val);
+
     [[nodiscard]] bool isIntakeDown() const;
 };
