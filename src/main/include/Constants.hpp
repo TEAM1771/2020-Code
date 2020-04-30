@@ -66,11 +66,13 @@ namespace HOOD
     constexpr double MAX_SPEED = 0.8;
 
     typedef enum {
+        // commented values are corret for normal operation
+        // they are replaced for safely testing the batershot position
         BOTTOM       = 0,
         TRAVERSE     = -9,
-        SAFE_TO_TURN = -42,
+        SAFE_TO_TURN = -30, //-42,
         MIDPOINT     = -26,
-        BATTER       = -89
+        BATTER       = -42 //-89
     } POSITION;
 } // namespace HOOD
 
