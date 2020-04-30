@@ -2,14 +2,13 @@
 
 #include "Constants.hpp"
 #include "LimeLight.hpp"
+#include "PID_CANSparkMax.hpp"
 
 class Turret
 {
     LimeLight const& limelight_;
 
-    rev::CANSparkMax      turretTurnyTurny_ { TURRET::PORT, rev::CANSparkMaxLowLevel::MotorType::kBrushless };
-    rev::CANPIDController pidController_ = turretTurnyTurny_.GetPIDController();
-    rev::CANEncoder       encoder_       = turretTurnyTurny_.GetEncoder();
+    PID_CANSparkMax turretTurnyTurny_ { TURRET::PORT, rev::CANSparkMaxLowLevel::MotorType::kBrushless };
 
     TURRET::POSITION position_ = TURRET::POSITION::ZERO;
     bool             tracking_ = false;

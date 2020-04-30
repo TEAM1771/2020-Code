@@ -9,53 +9,33 @@ Hood::Hood(LimeLight const& limelight)
     hood_.RestoreFactoryDefaults();
     hood_.SetIdleMode(HOOD::IDLE_MODE);
 
-    pidController_.SetP(HOOD::P);
-    pidController_.SetI(HOOD::I);
-    pidController_.SetD(HOOD::D);
+    hood_.SetP(HOOD::P);
+    hood_.SetI(HOOD::I);
+    hood_.SetD(HOOD::D);
 
-    pidController_.SetFeedbackDevice(encoder_);
-    pidController_.SetReference(static_cast<double>(HOOD::POSITION::BOTTOM), rev::ControlType::kPosition);
-    pidController_.SetOutputRange(-HOOD::MAX_SPEED, HOOD::MAX_SPEED);
+    hood_.SetTarget(HOOD::POSITION::BOTTOM);
+    hood_.SetOutputRange(-HOOD::MAX_SPEED, HOOD::MAX_SPEED);
+    hood_.SetPositionRange(HOOD::POSITION::BATTER, HOOD::POSITION::BOTTOM);
 }
 
 bool Hood::goToPosition(HOOD::POSITION position, double tolerance)
 {
     if(position != position_)
     {
-        pidController_.SetReference(static_cast<double>(position), rev::ControlType::kPosition);
+        hood_.SetTarget(position);
         position_ = position;
     }
-    return std::fabs(encoder_.GetPosition() - static_cast<double>(position)) < tolerance;
+    return std::fabs(hood_.encoder.GetPosition() - position) < tolerance;
 }
-
-struct table_row
-{
-    double y_val;
-    double hood_val;
-};
-
-// bad, but good enough implimentation of std::midpoint from C++20
-// remove this if upgraded to C++20
-namespace std
-{
-    template <typename A, typename B>
-    constexpr std::common_type_t<A, B> midpoint(A const& a, B const& b)
-    {
-        return (a + b) / 2;
-    }
-} // namespace std
-
-// floating point comparison at compile time
-constexpr bool is_close_to(auto   value,
-                           auto   target,
-                           double tol = 0.00001)
-{
-    return std::fabs(value - target) < tol;
-}
-static_assert(is_close_to(.1, .100000001));
 
 [[nodiscard]] inline static double getTrackingValue(double yval)
 {
+    struct table_row
+    {
+        double y_val;
+        double hood_val;
+    };
+
     constexpr table_row lookup_table[] {
         { 20.0104, -13.1929 },
         { 10.4538, -17.0433 },
@@ -76,12 +56,9 @@ static_assert(is_close_to(.1, .100000001));
     };
 
     auto const range = find_value_in_table(yval, std::begin(lookup_table), std::end(lookup_table));
-    return std::clamp(
-        interpolate(yval,
-                    std::prev(range),
-                    range),
-        static_cast<double>(HOOD::POSITION::SAFE_TO_TURN),
-        static_cast<double>(HOOD::POSITION::TRAVERSE));
+    return interpolate(yval,
+                       std::prev(range),
+                       range);
 
     //tests
     static_assert(std::end(lookup_table) - std::begin(lookup_table) >= 2, "lookup table too small");
@@ -96,7 +73,7 @@ static_assert(is_close_to(.1, .100000001));
     //         lookup_table[1].y_val,
     //     "Invalid Table Search");
 
-    static_assert(is_close_to(std::midpoint(lookup_table[0].hood_val, lookup_table[1].hood_val), interpolate(std::midpoint(lookup_table[0].y_val, lookup_table[1].y_val), &lookup_table[0], &lookup_table[1])),
+    static_assert(ngr::is_close_to(std::midpoint(lookup_table[0].hood_val, lookup_table[1].hood_val), interpolate(std::midpoint(lookup_table[0].y_val, lookup_table[1].y_val), &lookup_table[0], &lookup_table[1])),
                   "interpolation error");
 }
 
@@ -105,8 +82,8 @@ bool Hood::visionTrack(double tolerance)
     if(limelight_.hasTarget())
     {
         double const target = getTrackingValue(limelight_.getY());
-        pidController_.SetReference(target, rev::ControlType::kPosition);
-        return std::fabs(target - encoder_.GetPosition()) < tolerance;
+        hood_.SetTarget(target);
+        return std::fabs(target - hood_.encoder.GetPosition()) < tolerance;
     }
     else
     {
@@ -115,17 +92,11 @@ bool Hood::visionTrack(double tolerance)
     }
 }
 
-[[nodiscard]] constexpr double scaleOutput(double inputMin, double inputMax, double outputMin, double outputMax, double input)
-{
-    return ((input - inputMin) / (inputMax - inputMin)) * ((outputMax - outputMin)) + inputMin;
-}
-
 void Hood::manualPositionControl(double position)
 {
-    pidController_.SetReference(scaleOutput(0,
-                                            1,
-                                            static_cast<double>(HOOD::POSITION::TRAVERSE),
-                                            static_cast<double>(HOOD::POSITION::SAFE_TO_TURN),
-                                            std::clamp(position, 0.0, 1.0)),
-                                rev::ControlType::kPosition);
+    hood_.SetTarget(ngr::scaleOutput(0,
+                                     1,
+                                     HOOD::POSITION::TRAVERSE,
+                                     HOOD::POSITION::SAFE_TO_TURN,
+                                     std::clamp(position, 0.0, 1.0)));
 }

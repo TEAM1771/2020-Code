@@ -2,16 +2,14 @@
 
 #include "Constants.hpp"
 #include "LimeLight.hpp"
+#include <PID_CANSparkMax.hpp>
 #include <frc/Joystick.h>
-#include <rev/CANSparkMax.h>
 
 class Hood
 {
     LimeLight const& limelight_;
 
-    rev::CANSparkMax      hood_ { HOOD::PORT, rev::CANSparkMaxLowLevel::MotorType::kBrushless };
-    rev::CANPIDController pidController_ = hood_.GetPIDController();
-    rev::CANEncoder       encoder_       = hood_.GetEncoder();
+    PID_CANSparkMax hood_ { HOOD::PORT, rev::CANSparkMaxLowLevel::MotorType::kBrushless };
 
     HOOD::POSITION position_ = HOOD::POSITION::BOTTOM;
 

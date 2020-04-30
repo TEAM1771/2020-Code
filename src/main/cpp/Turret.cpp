@@ -6,27 +6,26 @@ Turret::Turret(LimeLight const& limelight)
 
     turretTurnyTurny_.SetIdleMode(TURRET::IDLE_MODE);
 
-    pidController_.SetP(TURRET::P);
-    pidController_.SetI(TURRET::I);
-    pidController_.SetD(TURRET::D);
+    turretTurnyTurny_.SetP(TURRET::P);
+    turretTurnyTurny_.SetI(TURRET::I);
+    turretTurnyTurny_.SetD(TURRET::D);
 
-    pidController_.SetFeedbackDevice(encoder_);
-
-    pidController_.SetReference(static_cast<double>(TURRET::POSITION::ZERO), rev::ControlType::kPosition);
-    pidController_.SetOutputRange(-TURRET::TRAVERSE_SPEED, TURRET::TRAVERSE_SPEED);
+    turretTurnyTurny_.SetTarget(TURRET::POSITION::ZERO);
+    turretTurnyTurny_.SetOutputRange(-TURRET::TRAVERSE_SPEED, TURRET::TRAVERSE_SPEED);
+    turretTurnyTurny_.SetPositionRange(TURRET::POSITION::MAX_LEFT, TURRET::POSITION::MAX_RIGHT);
 }
 
 bool Turret::goToPosition(TURRET::POSITION position, double tolerance)
 {
     if(position != position_)
     {
-        pidController_.SetReference(static_cast<double>(position), rev::ControlType::kPosition);
+        turretTurnyTurny_.SetTarget(position);
         position_ = position;
     }
 
     tracking_ = false; // Reset for Turret::visionTrack(...)
 
-    return std::fabs(encoder_.GetPosition() - static_cast<double>(position)) < tolerance;
+    return std::fabs(turretTurnyTurny_.encoder.GetPosition() - position) < tolerance;
 }
 
 Turret::visionState Turret::visionTrack(TURRET::POSITION initPosition, double tolerance)
@@ -39,31 +38,22 @@ Turret::visionState Turret::visionTrack(TURRET::POSITION initPosition, double to
 
     if(limelight_.hasTarget())
     {
-        double const xOffset      = limelight_.getX() + CAMERA::X_OFFSET;
-        double const output       = xOffset / 35;
-        double const currentTicks = encoder_.GetPosition();
-        if(currentTicks < static_cast<double>(TURRET::POSITION::MAX_RIGHT) && currentTicks > static_cast<double>(TURRET::POSITION::MAX_LEFT))
-            turretTurnyTurny_.Set(output);
-        else
-            turretTurnyTurny_.Set(0);
+        double const xOffset = limelight_.getX() + CAMERA::X_OFFSET;
+        double const output  = xOffset / 35;
+        turretTurnyTurny_.Set(output);
         return { true, fabs(xOffset) < tolerance };
     }
     turretTurnyTurny_.Set(0);
     return { false, false };
 }
 
-[[nodiscard]] constexpr double scaleOutput(double inputMin, double inputMax, double outputMin, double outputMax, double input)
-{
-    return ((input - inputMin) / (inputMax - inputMin)) * ((outputMax - outputMin)) + inputMin;
-}
-
 void Turret::manualPositionControl(double position)
 {
-    pidController_.SetReference(scaleOutput(
+    turretTurnyTurny_.SetTarget(ngr::scaleOutput(
                                     -1,
                                     1,
-                                    static_cast<double>(TURRET::POSITION::MAX_LEFT),
-                                    static_cast<double>(TURRET::POSITION::MAX_RIGHT),
+                                    TURRET::POSITION::MAX_LEFT,
+                                    TURRET::POSITION::MAX_RIGHT,
                                     std::clamp(position, -1.0, 1.0)),
                                 rev::ControlType::kPosition);
 }
