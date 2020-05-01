@@ -1,22 +1,4 @@
 See file:///D:/ryan/Documents/Code/1771/2020-Code/build/tmp/compileFrcUserProgramDebugExecutableFrcUserProgramCpp/output.txt for all output for compileFrcUserProgramDebugExecutableFrcUserProgramCpp.
-compiling Intake.cpp successful.
-
-compiling Hood.cpp successful.
-
-compiling Hopper.cpp successful.
-
-compiling ShooterWheel.cpp successful.
-
-compiling PID_CANSparkMax.cpp successful.
-
 compiling Robot.cpp successful.
-
-compiling transmission.cpp successful.
-
-compiling Turret.cpp successful.
-
-compiling Drivetrain.cpp successful.
-
-compiling Climber.cpp successful.
 
 Finished compileFrcUserProgramDebugExecutableFrcUserProgramCpp, see full log file:///D:/ryan/Documents/Code/1771/2020-Code/build/tmp/compileFrcUserProgramDebugExecutableFrcUserProgramCpp/output.txt.

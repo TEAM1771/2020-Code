@@ -23,6 +23,7 @@ void Robot::TeleopPeriodic()
 
 void Robot::TestPeriodic()
 {
+    turret.visionTrack_v2(TURRET::POSITION::FRONT);
 }
 
 void Robot::DisabledInit()
@@ -53,7 +54,7 @@ void Robot::ButtonManager()
 
         // turret_in_pos is true when it's safe to deploy hood
         bool const turret_in_pos = turret.goToPosition(TURRET::POSITION::FRONT,
-                                                       fabs(static_cast<double>(TURRET::POSITION::FRONT) - static_cast<double>(TURRET::POSITION::SAFE_TO_DEPLOY_HOOD_FRONT)));
+                                                       fabs(TURRET::POSITION::FRONT - TURRET::POSITION::SAFE_TO_DEPLOY_HOOD_FRONT));
         if(turret_in_pos)
             targetLocked = hood.goToPosition(HOOD::POSITION::BATTER);
         else
@@ -67,7 +68,7 @@ void Robot::ButtonManager()
     else
     {
         deployIntake = false;
-        if(hood.goToPosition(HOOD::POSITION::BOTTOM, fabs(static_cast<double>(HOOD::POSITION::SAFE_TO_TURN))))
+        if(hood.goToPosition(HOOD::POSITION::BOTTOM, fabs(HOOD::POSITION::SAFE_TO_TURN)))
             turret.goToPosition(TURRET::POSITION::ZERO);
     }
 
