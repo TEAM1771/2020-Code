@@ -40,7 +40,11 @@ public:
 
     [[deprecated]] rev::CANPIDController GetPIDController();
 
-    void SetTarget(double pos, rev::ControlType = default_control_type);
+    /**
+     * If the target is within the position range, it will go to the target
+     * If not, it will go as close as it can to the target without exceding the range
+     */
+    void SetTarget(double target, rev::ControlType = default_control_type);
 
     void SetP(double P);
     void SetI(double I);

@@ -9,6 +9,8 @@
 
 using can_adr = unsigned;
 
+constexpr double pi = 3.1415926;
+
 namespace BUTTON
 {
     inline frc::Joystick rStick { 0 },
@@ -90,6 +92,9 @@ namespace TURRET
         BACK                      = 53,
         MAX_RIGHT                 = 74
     } POSITION;
+
+    constexpr double TICKS_PER_REVOLUTION = 212; // replace me with correct, number. this should be close if not exact
+    constexpr double TICKS_PER_RADIAN     = TICKS_PER_REVOLUTION / (2 * pi);
 
     constexpr double TRAVERSE_SPEED = .7;
 
