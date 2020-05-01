@@ -19,6 +19,8 @@ void Robot::TeleopPeriodic()
 {
     shooter_wheel.bangbang();
     ButtonManager();
+    drivetrain.drive(BUTTON::lStick.GetY(), BUTTON::rStick.GetY());
+    drivetrain.shift();
 }
 
 void Robot::TestPeriodic()
