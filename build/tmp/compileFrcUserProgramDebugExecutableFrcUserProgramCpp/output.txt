@@ -1,6 +1,4 @@
 See file:///D:/ryan/Documents/Code/1771/2020-Code/build/tmp/compileFrcUserProgramDebugExecutableFrcUserProgramCpp/output.txt for all output for compileFrcUserProgramDebugExecutableFrcUserProgramCpp.
-compiling Hood.cpp successful.
-
-compiling Climber.cpp successful.
+compiling Robot.cpp successful.
 
 Finished compileFrcUserProgramDebugExecutableFrcUserProgramCpp, see full log file:///D:/ryan/Documents/Code/1771/2020-Code/build/tmp/compileFrcUserProgramDebugExecutableFrcUserProgramCpp/output.txt.

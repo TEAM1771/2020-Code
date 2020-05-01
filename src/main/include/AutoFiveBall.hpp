@@ -18,22 +18,6 @@ class AutoFiveBall : public AutoBase<Robot>
     using AutoBase<Robot>::robot;
     using AutoBase<Robot>::is_auto;
 
-    std::thread run_shooter_wheel { [this] {
-        using namespace std::literals::chrono_literals;
-        while(is_auto())
-        {
-            robot->shooter_wheel.bangbang();
-            std::this_thread::sleep_for(5ms); // don't spam the CAN network
-        }
-    } };
-
-    // thread exits when it starts shooting
-    std::thread index_balls { [this] {
-        using namespace std::literals::chrono_literals;
-        while(is_auto() && robot->hopper.index(false)) // don't warn when called while shooting
-            std::this_thread::sleep_for(20ms);         // don't spam the CAN network
-    } };
-
 
 public:
     using AutoBase<Robot>::AutoBase;
@@ -42,6 +26,17 @@ public:
     {
         using namespace FIVE_BALL_CONSTANTS;
         using namespace std::literals::chrono_literals;
+
+        // Start BangBang and indexer
+        std::thread run_shooter_wheel_and_index_balls = { [this] {
+            using namespace std::literals::chrono_literals;
+            while(is_auto())
+            {
+                robot->shooter_wheel.bangbang();
+                robot->hopper.index(false);       // don't warn when called while shooting
+                std::this_thread::sleep_for(5ms); // don't spam the CAN network
+            }
+        } };
 
         // drive back / intake
         robot->intake.deploy(true);
@@ -56,10 +51,17 @@ public:
         std::thread aim_and_shoot { [this] {
             robot->limelight.setLEDMode(LimeLight::LED_Mode::Force_On);
             while(is_auto())
+            {
+                std::this_thread::sleep_for(10ms);
                 if(robot->aim(TURRET::POSITION::BACK))
                     robot->hopper.shoot();
+            }
         } };
         std::this_thread::sleep_for(TIME_BACKWARD);
         robot->drivetrain.drive(0, 0);
+
+        // wait for threads to exit
+        run_shooter_wheel_and_index_balls.join();
+        aim_and_shoot.join();
     }
 };

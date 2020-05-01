@@ -3,7 +3,7 @@
 
 PID_CANSparkMax::PID_CANSparkMax(int id, MotorType motor_type)
     : rev::CANSparkMax(id, motor_type)
-    , pid_controller { GetPIDController() }
+    , pid_controller { rev::CANSparkMax::GetPIDController() }
     , encoder { GetEncoder() }
 {
     pid_controller.SetFeedbackDevice(encoder);
@@ -50,4 +50,9 @@ void PID_CANSparkMax::SetI(double I)
 void PID_CANSparkMax::SetD(double D)
 {
     pid_controller.SetD(D);
+}
+
+rev::CANPIDController PID_CANSparkMax::GetPIDController()
+{
+    return rev::CANSparkMax::GetPIDController();
 }

@@ -38,6 +38,8 @@ public:
         max_position = max;
     }
 
+    [[deprecated]] rev::CANPIDController GetPIDController();
+
     void SetTarget(double pos, rev::ControlType = default_control_type);
 
     void SetP(double P);
