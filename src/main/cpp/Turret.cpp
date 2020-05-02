@@ -65,6 +65,14 @@ Turret::visionState Turret::visionTrack_v2(TURRET::POSITION initPosition, double
         double const xPosition = turretTurnyTurny_.encoder.GetPosition();
         double const xTarget   = xPosition + xOffset;
 
+        static double prevOffsetDeg = 0;
+        if(prevOffsetDeg == xOffsetDeg) // prevents reusing outdated data
+        {
+            std::cout << "cam data reused\n";              // remove this section if this doesn't appear in the output, if it does appear remove this print statment
+            return { true, fabs(xOffsetDeg) < tolerance }; // maybe unnecissary, idk
+        }
+        prevOffsetDeg = xOffsetDeg;
+
         // for testing, this should print a constant or near constant value when the robot is stationary
         // the value should change when the robot moves
         std::cout << "xTarget: " << xTarget << "\n";
