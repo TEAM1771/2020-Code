@@ -26,20 +26,18 @@ bool Hopper::index(bool warn_if_shooting)
         return false;
     }
 
-    if(limitSwitch.Get() && numberOfBalls < 3 && ! isTransporting)
+    if(!limitSwitch.Get() && numberOfBalls < 3 && ! isTransporting)
     {
         pidController.SetReference(targetDistance, rev::ControlType::kPosition);
+        targetDistance += HOPPER::TRANSPORT::DISTANCE;
         numberOfBalls++;
         isTransporting = true;
     }
 
     if(isTransporting && encoder.GetPosition() > (targetDistance - HOPPER::TRANSPORT::TOLERANCE))
-    {
-        targetDistance += HOPPER::TRANSPORT::DISTANCE;
         isTransporting = false;
-    }
 
-    if(! limitSwitch.Get() && numberOfBalls < 4)
+    if(limitSwitch.Get() && numberOfBalls < 4)
         indexer.Set(HOPPER::INDEXER::SPEED);
     else
         indexer.Set(0);
