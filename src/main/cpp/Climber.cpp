@@ -6,33 +6,28 @@ Climber::Climber()
     climber_1.RestoreFactoryDefaults();
     climber_2.RestoreFactoryDefaults();
 
-    climber_1.SetIdleMode(rev::CANSparkMax::IdleMode::kBrake);
-    climber_2.SetIdleMode(rev::CANSparkMax::IdleMode::kBrake);
+    climber_1.SetIdleMode(CLIMBER::IDLE_MODE);
+    climber_2.SetIdleMode(CLIMBER::IDLE_MODE);
 
-    climber_1_pidController.SetP(CLIMBER::P);
-    climber_1_pidController.SetI(CLIMBER::I);
-    climber_1_pidController.SetD(CLIMBER::D);
-    climber_1_pidController.SetFeedbackDevice(climber_1_encoder);
-    climber_1_pidController.SetReference(CLIMBER::POSITIONS::ZERO, rev::ControlType::kPosition);
-    climber_1_pidController.SetOutputRange(-CLIMBER::MAX_OUTPUT, CLIMBER::MAX_OUTPUT);
+    climber_1.SetP(CLIMBER::P);
+    climber_1.SetI(CLIMBER::I);
+    climber_1.SetD(CLIMBER::D);
+    climber_1.SetTarget(CLIMBER::POSITION::ZERO);
+    climber_1.SetOutputRange(-CLIMBER::MAX_OUTPUT, CLIMBER::MAX_OUTPUT);
+    climber_2.SetPositionRange(CLIMBER::POSITION::ZERO, CLIMBER::POSITION::UP);
 
-    climber_2_pidController.SetP(CLIMBER::P);
-    climber_2_pidController.SetI(CLIMBER::I);
-    climber_2_pidController.SetD(CLIMBER::D);
-    climber_2_pidController.SetFeedbackDevice(climber_2_encoder);
-    climber_2_pidController.SetReference(-CLIMBER::POSITIONS::ZERO, rev::ControlType::kPosition);
-    climber_2_pidController.SetOutputRange(-CLIMBER::MAX_OUTPUT, CLIMBER::MAX_OUTPUT);
+    climber_2.SetP(CLIMBER::P);
+    climber_2.SetI(CLIMBER::I);
+    climber_2.SetD(CLIMBER::D);
+    climber_2.SetTarget(CLIMBER::POSITION::ZERO);
+    climber_2.SetOutputRange(-CLIMBER::MAX_OUTPUT, CLIMBER::MAX_OUTPUT);
+    climber_2.SetPositionRange(-CLIMBER::POSITION::UP, CLIMBER::POSITION::ZERO);
 }
 
-void Climber::ClimbUp()
+void Climber::set(CLIMBER::POSITION position)
 {
-    climber_1_pidController.SetReference(CLIMBER::POSITIONS::UP, rev::ControlType::kPosition);
-    climber_2_pidController.SetReference(-CLIMBER::POSITIONS::UP, rev::ControlType::kPosition);
-}
-void Climber::ClimbDown()
-{
-    climber_1_pidController.SetReference(CLIMBER::POSITIONS::DOWN, rev::ControlType::kPosition);
-    climber_2_pidController.SetReference(-CLIMBER::POSITIONS::DOWN, rev::ControlType::kPosition);
+    climber_1.SetTarget(position, rev::ControlType::kPosition);
+    climber_2.SetTarget(-position, rev::ControlType::kPosition);
 }
 
 void Climber::joystickControl(double val)
@@ -44,6 +39,18 @@ void Climber::joystickControl(double val)
 
 void Climber::printStatus()
 {
-    // std::cout<< "Climber 1: " << climber_1_encoder.GetPosition() << std::endl;
-    // std::cout<< "Climber 2: " << climber_2_encoder.GetPosition() << std::endl;
+    std::cout << "Climber 1: " << climber_1.encoder.GetPosition() << std::endl;
+    std::cout << "Climber 2: " << climber_2.encoder.GetPosition() << std::endl;
+}
+
+void Climber::ButtonManager()
+{
+    static bool hasBeenPressed = false;
+    if(BUTTON::CLIMBER::RAISE && BUTTON::oStick.GetThrottle() < 0)
+    {
+        hasBeenPressed = true;
+        set(CLIMBER::POSITION::UP);
+    }
+    else if(hasBeenPressed)
+        set(CLIMBER::POSITION::DOWN);
 }

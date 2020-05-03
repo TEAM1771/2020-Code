@@ -1,80 +1,36 @@
+#pragma once
 
 #include "Constants.hpp"
-#include "frc/smartdashboard/Smartdashboard.h"
-#include "networktables/NetworkTable.h"
-#include "networktables/NetworkTableInstance.h"
-#include <frc/PWMVictorSPX.h>
-#include <frc/TimedRobot.h>
-#include <frc/Timer.h>
-#include <frc/drive/DifferentialDrive.h>
-#include <frc/livewindow/LiveWindow.h>
-#include <rev\CANSparkMax.h>
+#include "LimeLight.hpp"
+#include "PID_CANSparkMax.hpp"
 
 class Turret
 {
-    //  shooter neos
-    rev::CANSparkMax shooter_1 { SHOOTER::WHEEL::PORT_1, rev::CANSparkMaxLowLevel::MotorType::kBrushless };
-    rev::CANSparkMax shooter_2 { SHOOTER::WHEEL::PORT_2, rev::CANSparkMaxLowLevel::MotorType::kBrushless };
+    LimeLight const& limelight_;
 
-    //  turret ring neo
-    rev::CANSparkMax turretTurnyTurny { SHOOTER::TURRET::PORT, rev::CANSparkMaxLowLevel::MotorType::kBrushless };
+    PID_CANSparkMax turretTurnyTurny_ { TURRET::PORT, rev::CANSparkMaxLowLevel::MotorType::kBrushless };
 
-    //  hood neo
-    rev::CANSparkMax hood { SHOOTER::HOOD::PORT, rev::CANSparkMaxLowLevel::MotorType::kBrushless };
+    TURRET::POSITION position_ = TURRET::POSITION::ZERO;
+    bool             tracking_ = false;
 
-    rev::CANPIDController shooter_pidController          = shooter_1.GetPIDController();
-    rev::CANEncoder       shooter_encoder                = shooter_1.GetEncoder();
-    rev::CANEncoder       shooter2_encoder               = shooter_2.GetEncoder();
-    rev::CANPIDController turretTurnyTurny_pidController = turretTurnyTurny.GetPIDController();
-    rev::CANEncoder       turretTurnyTurny_encoder       = turretTurnyTurny.GetEncoder();
-
-    rev::CANPIDController hood_pidController = hood.GetPIDController();
-    rev::CANEncoder       hood_encoder       = hood.GetEncoder();
-
-    double turnyturnyEncoderTicks;
-    double cameraXValue;
-    double cameraYValue;
-    double cameraArea;
-    bool   cameraHasTarget;
-
-    std::shared_ptr<NetworkTable> table = nt::NetworkTableInstance::GetDefault().GetTable("limelight");
+    struct visionState
+    {
+        bool isTracking;
+        bool readyToShoot;
+    };
 
 public:
-    Turret();
-    void controlTurret();
-    void rotateTurret();
-    void aimLeft();
-    void aimRight();
-    //void aimForward();
-    //void aimBackwards();
-    void setHoodAngle(double position);
-    void debugSetHoodAngle(double position);
-    void bangbangControl();
-    void aimWithCamera();
-    void getCameraData();
-    void batterShotPosition();
-    void maintainRPM();
-    void rpmWithStick(float value);
-    void stopShooter();
-    void aimWithCameraLimelight();
+    explicit Turret(LimeLight const& limelight);
 
-    void stopAiming();
-    void aimLeftPID();
-    void aimRightPID();
-    void aimZero();
-    void zeroHood();
-    void midHood();
-    void batterHood();
-    void traverseHood();
+    /// returns true if tolerance is met
+    bool goToPosition(TURRET::POSITION position, double tolerance = 1);
 
-    void limelight_led(bool);
+    /// goes to position and then starts tracking, returns true if tolerance (in degrees) is met
+    visionState visionTrack(TURRET::POSITION initPosition, double tolerance = 10);
 
-    void   giveStatus();
-    double scaleOutput(double inputMin, double inputMax, double outputMin, double outputMax, double input);
-    double getHoodAngle(double height);
-    bool   valueInRange(double value, double min, double max);
-    double getTurnyTurnyValue();
-    double getHoodValue();
-    double getCameraY(); // for debug, bad default
-    bool   cameraHasLock();
+    /// geos to position, then determines angle of target and goes to that angle
+    visionState visionTrack_v2(TURRET::POSITION initPosition, double tolerance = 10);
+
+    /// used for tuning interpolation tables
+    void manualPositionControl(double position);
 };

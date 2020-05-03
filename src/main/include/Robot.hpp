@@ -5,10 +5,16 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
+#include "AutoBase.hpp"
+#include "AutoFiveBall.hpp"
+#include "AutoSimple.hpp"
 #include "Climber.hpp"
 #include "Drivetrain.hpp"
+#include "Hood.hpp"
 #include "Hopper.hpp"
 #include "Intake.hpp"
+#include "Limelight.hpp"
+#include "ShooterWheel.hpp"
 #include "Turret.hpp"
 #include <frc/Joystick.h>
 #include <frc/PWMVictorSPX.h>
@@ -17,39 +23,39 @@
 #include <frc/drive/DifferentialDrive.h>
 #include <frc/livewindow/LiveWindow.h>
 #include <frc/smartdashboard/smartdashboard.h>
+#include <memory>
 
 class Robot : public frc::TimedRobot
 {
 public:
-    Robot();
     void AutonomousInit() override;
     void AutonomousPeriodic() override;
     void TeleopInit() override;
     void TeleopPeriodic() override;
+
     void DisabledInit() override;
     void DisabledPeriodic() override;
+
     void TestPeriodic() override;
 
-    void SimpleAuton();
-    void FiveBallAuton();
+    void ButtonManager();
 
-    void IntakeManager();
-    void TurretManager();
-    void ClimberManager();
-    void HopperManager();
+    // returns true when aimed at goal
+    bool aim(TURRET::POSITION);
 
 private:
-    frc::Joystick rStick { 0 },
-        lStick { 1 },
-        oStick { 2 };
+    friend class AutoSimple<Robot>;
+    friend class AutoFiveBall<Robot>;                                       // Repeat this for all Auton Modes
+    std::unique_ptr<AutoBase<Robot>> auton { new AutoSimple<Robot>(this) }; // setup active auton
 
-    Drivetrain drive;
-    Hopper     hopper;
-    Intake     intake;
-    Turret     turret;
-    Climber    climber;
-    bool       activeIntake;
-    bool       isClimbing = false;
+    Drivetrain   drivetrain;
+    LimeLight    limelight;
+    Hood         hood { limelight };
+    Turret       turret { limelight };
+    Hopper       hopper;
+    Climber      climber;
+    Intake       intake;
+    ShooterWheel shooter_wheel;
 
     frc::LiveWindow& m_lw = *frc::LiveWindow::GetInstance();
 };

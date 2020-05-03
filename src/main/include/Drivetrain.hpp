@@ -7,21 +7,19 @@
 
 class Drivetrain
 {
-    Transmission  rdrive { TRANS::rFalcon, TRANS::rNeo };
-    Transmission  ldrive { TRANS::lFalcon, TRANS::lNeo };
-    Orchestra     orchestra;
-    bool          isDriving;
-    frc::Solenoid shifter { TRANS::shifter };
+    Transmission rdrive { TRANSMISSION::RIGHT_MOTOR };
+    Transmission ldrive { TRANSMISSION::LEFT_MOTOR };
+
+    frc::Solenoid shifter { TRANSMISSION::SHIFTER };
 
 public:
     Drivetrain();
     void drive(double lval, double rval);
-    void driveFalcons(double lval, double rval);
-    void driveDistanceForward(double distance);
-    void driveDistanceBackward(double distance);
-    void printDistance();
 
-    bool stillDriving();
+    bool driveDistanceForward(double distance);
+    bool driveDistanceBackward(double distance);
+
+    void printDistance();
 
     void reset();
 

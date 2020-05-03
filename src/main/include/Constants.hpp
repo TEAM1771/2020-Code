@@ -1,189 +1,250 @@
 #pragma once
 
-#include <string>
+#include "JoystickButton.hpp"
+#include "Limelight.hpp"
+#include <cmath>
+#include <ctre/Phoenix.h>
+#include <frc/Joystick.h>
+#include <rev/CANSparkMax.h>
 
-namespace TRANS
+using can_adr = unsigned;
+
+constexpr double pi = 3.1415926;
+
+namespace BUTTON
 {
-    namespace SHIFT_MATH
+    inline frc::Joystick rStick { 0 },
+        lStick { 1 },
+        oStick { 2 };
+    namespace INTAKE
     {
-        constexpr int encoder_cpr = 2048;
+        inline JoystickButton DEPLOY { BUTTON::oStick, 3 };
+        inline JoystickButton RETRACT { BUTTON::oStick, 4 };
+        inline JoystickButton INTAKE { BUTTON::oStick, 5 };
+    } // namespace INTAKE
+    namespace SHOOTER
+    {
+        inline JoystickButton AIM_FRONT { BUTTON::oStick, 8 };
+        inline JoystickButton AIM_BACK { BUTTON::oStick, 10 };
+        inline JoystickButton AIM_SIDE { BUTTON::oStick, 2 };
+        inline JoystickButton BATTERSHOT { BUTTON::oStick, 6 };
+        inline JoystickButton SHOOT { BUTTON::oStick, 1 };
+    } // namespace SHOOTER
 
-        constexpr auto low_ratio  = 20.83;
-        constexpr auto high_ratio = 9.17;
+    namespace CLIMBER
+    {
+        inline JoystickButton RAISE { BUTTON::oStick, 11 };
+    }
+} // namespace BUTTON
 
-        constexpr auto wheel_diameter = 7.65;
+namespace TRANSMISSION
+{
+    constexpr can_adr RIGHT_MOTOR = 15;
+    constexpr can_adr LEFT_MOTOR  = 17;
 
-        constexpr auto low_ratio_multiplier_to_ft  = 1.0 / encoder_cpr / low_ratio * wheel_diameter / 2 / 12;
-        constexpr auto high_ratio_multiplier_to_ft = 1.0 / encoder_cpr / high_ratio * wheel_diameter / 2 / 12;
+    constexpr auto IDLE_MODE = NeutralMode::Coast;
 
-    } // namespace SHIFT_MATH
+    constexpr can_adr SHIFTER = 0;
 
-    constexpr int shifter = 0;
+    constexpr int SHIFT_UP_POINT   = 16000;
+    constexpr int SHIFT_DOWN_POINT = 6000;
+} // namespace TRANSMISSION
 
-    constexpr int shift_up_point   = 16000; //6 / low_ratio_multiplier_to_ft;
-    constexpr int shift_down_point = 6000;  //4 / low_ratio_multiplier_to_ft;
+namespace CAMERA
+{
+    constexpr double X_OFFSET = 4.2517710;
+} // namespace CAMERA
 
-    constexpr int rFalcon = 15;
-    constexpr int rNeo    = 19;
-    constexpr int lFalcon = 17;
-    constexpr int lNeo    = 11;
-    //std::string song_path = "Pain_it_black.chrp";
-} // namespace TRANS
+namespace HOOD
+{
+    constexpr can_adr PORT = 7;
+
+    constexpr auto IDLE_MODE = rev::CANSparkMax::IdleMode::kBrake;
+
+    constexpr double P = 0.1;
+    constexpr double I = 0.0;
+    constexpr double D = 0.0;
+
+    constexpr double MAX_SPEED = 0.8;
+
+    typedef enum {
+        BOTTOM       = 0,
+        TRAVERSE     = -9,
+        SAFE_TO_TURN = -42, 
+        MIDPOINT     = -26,
+        BATTER       = -89
+    } POSITION;
+} // namespace HOOD
+
+namespace TURRET
+{
+    constexpr can_adr PORT = 6;
+
+    constexpr auto IDLE_MODE = rev::CANSparkMax::IdleMode::kCoast;
+
+    typedef enum {
+        MAX_LEFT                  = -74,
+        FRONT                     = -53,
+        SAFE_TO_DEPLOY_HOOD_FRONT = -44,
+        ZERO                      = 0,
+        BACK                      = 53,
+        MAX_RIGHT                 = 74
+    } POSITION;
+
+    constexpr double TICKS_PER_REVOLUTION = 212; // replace me with correct, number. this should be close if not exact
+    constexpr double TICKS_PER_RADIAN     = TICKS_PER_REVOLUTION / (2 * pi);
+
+    constexpr double TRAVERSE_SPEED = .7;
+
+    constexpr double P = 0.1;
+    constexpr double I = 0.0;
+    constexpr double D = 0.0;
+
+} // namespace TURRET
+
+namespace SHOOTER_WHEEL
+{
+    constexpr can_adr PORT_1 = 4;
+    constexpr can_adr PORT_2 = 5;
+
+    constexpr auto IDLE_MODE = rev::CANSparkMax::IdleMode::kCoast;
+
+    constexpr double SHOOTING_RPM = 8000;
+} // namespace SHOOTER_WHEEL
+
+namespace FIVE_BALL_CONSTANTS
+{
+    using namespace std::literals::chrono_literals;
+
+    constexpr double PICKUP_DISTANCE = 115;
+    constexpr auto   TURN_TIME       = 0.2s;
+    constexpr auto   TIME_BACKWARD   = 1.5s;
+} // namespace FIVE_BALL_CONSTANTS
 
 namespace HOPPER
 {
-    namespace TRANSPORT
-    {
-        constexpr int    PORT        = 3;
-        constexpr double SPEED       = 0.7;
-        constexpr double SHOOT_SPEED = 1.0;
-        constexpr double DISTANCE    = 73;
-        constexpr double P           = 0.1;
-        constexpr double I           = 0;
-        constexpr double D           = 0.0001;
-    } // namespace TRANSPORT
-
     namespace INDEXER
     {
-        constexpr int PORT = 10;
+        constexpr can_adr PORT  = 10;
+        constexpr double  SPEED = 1;
 
-        constexpr double SPEED = 1.0;
+        constexpr auto IDLE_MODE = rev::CANSparkMax::IdleMode::kBrake;
     } // namespace INDEXER
 
-    // Used to define which motor direction is forward or not, can be negated as needed.
-    constexpr double hopperTransportForward = 1.0;
-    constexpr double hopperIndexerForward   = 1.0;
-    constexpr double hopperFeedForward      = 1.0;
-    //Define motor CAN IDs
+    namespace TRANSPORT
+    {
+        constexpr can_adr PORT = 3;
 
-    constexpr int    laserPort   = 0;       //can be changed later
-    constexpr double hopperTimer = 0.31771; //Will need to be changed
+        constexpr auto IDLE_MODE = rev::CANSparkMax::IdleMode::kBrake;
+
+        constexpr double SPEED       = 0.7;
+        constexpr double SHOOT_SPEED = 1.0;
+
+        constexpr double DISTANCE  = 73.0 / 3;
+        constexpr double TOLERANCE = 1;
+
+        constexpr double P = 0.3;
+        constexpr double I = 0;
+        constexpr double D = 0.0001;
+    } // namespace TRANSPORT
+
+    constexpr can_adr LIMIT_SWITCH = 0;
+
 } // namespace HOPPER
-
-namespace INTAKE
-{
-    constexpr int IntakePort    = 12;
-    constexpr int intakeairport = 1;
-} // namespace INTAKE
-
-namespace SHOOTER
-{
-    namespace WHEEL
-    {
-        constexpr int    PORT_1       = 4;    //subject to change
-        constexpr int    PORT_2       = 5;    //subject to change
-        constexpr double SHOOTING_RPM = 8000; //Lol no idea
-        constexpr double IDLE_RPM     = 3000; //lol lets not do this its dumb
-        constexpr double P            = 0.0001;
-        constexpr double I            = 0.0001;
-        constexpr double D            = 0.0001;
-        constexpr double FF           = 0.1;
-    } // namespace WHEEL
-
-    namespace TURRET
-    {
-        constexpr int PORT = 6; //subject to change
-
-        constexpr double TRAVERSE_SPEED = .5;
-        constexpr double P              = 0.1;
-        constexpr double I              = 0.0;
-        constexpr double D              = 0.0;
-
-        constexpr double SAFE_TO_DEPLOY_HOOD_FRONT = -44;
-
-        //Define the 4 quadrants
-        constexpr double ZERO      = 0;
-        constexpr double FORWARD   = -53;
-        constexpr double BACKWARDS = 53;
-        //constexpr double RIGHT = 50;
-        //constexpr double LEFT = -50;
-
-        //Define max travels
-        constexpr double MAX_LEFT  = -74;
-        constexpr double MAX_RIGHT = 74;
-
-        //Camera offset
-        constexpr double CAMERA_OFFSET = 4.2517710;
-    } // namespace TURRET
-
-    namespace HOOD
-    {
-        constexpr int PORT = 7; //subject to change
-
-        constexpr double P = 0.1;
-        constexpr double I = 0.0;
-        constexpr double D = 0.0;
-
-        constexpr int    BOTTOM       = 0;
-        constexpr double TRAVERSE     = -9.4;
-        constexpr int    SAFE_TO_TURN = -42;
-        constexpr int    MIDPOINT     = -26;
-        constexpr int    BATTER       = -89;
-    } // namespace HOOD
-
-} // namespace SHOOTER
 
 namespace CLIMBER
 {
     constexpr int PORT_1 = 47;
     constexpr int PORT_2 = 9;
 
-    constexpr double P          = 0.1771;
-    constexpr double I          = 0.0;
-    constexpr double D          = 0.0;
+    constexpr auto IDLE_MODE = rev::CANSparkMax::IdleMode::kBrake;
+
+    constexpr double P = 0.1771;
+    constexpr double I = 0.0;
+    constexpr double D = 0.0;
+
     constexpr double MAX_OUTPUT = 1;
 
-    namespace POSITIONS
-    {
-        constexpr double DOWN = 100;
-        constexpr double UP   = 802; //802
-        constexpr double ZERO = 0;
-    } // namespace POSITIONS
+    typedef enum {
+        DOWN = 100,
+        UP   = 802,
+        ZERO = 0
+    } POSITION;
+
 
 } // namespace CLIMBER
 
-namespace AUTON
+namespace INTAKE
 {
-    constexpr double AUTON_DRIVE_TIMER        = 0.3; //How long to drive forward for
-    constexpr double AUTON_SHOOT_TIMER        = 1.0; //When we can shoot (for spin up time)
-    constexpr double AUTON_SHOOT_TIMER_SIMPLE = 7.0;
-    constexpr double AUTON_FEED_SHOOTER_TIMER = 3.5; //How long to shoot for
-    constexpr double AUTON_MAX_TIMER          = 12;  //max time
-    constexpr double AUTON_LIMELIGHT_TIMER    = 3;
+    constexpr can_adr PCM_PORT = 1;
+    constexpr can_adr PORT     = 12;
 
-    constexpr double DISTANCE_FORWARD = 115;
-    constexpr double TIME_BACKWARD    = 1.5;
-    constexpr double TURN_TIME        = .2;
+    constexpr auto IDLE_MODE = rev::CANSparkMax::IdleMode::kCoast;
 
-} // namespace AUTON
+    enum class DIRECTION {
+        OUT,
+        OFF,
+        IN
+    };
 
-namespace BUTTONS
+    constexpr double IN_SPEED  = -1;
+    constexpr double OUT_SPEED = 1;
+} // namespace INTAKE
+
+
+namespace ngr // North Gwinnett Robotics
 {
-    namespace INTAKE
+    [[nodiscard]] constexpr bool value_in_range(double value, double min, double max)
     {
-        constexpr int intakedown = 3;
-        constexpr int intakein   = 4;
-        constexpr int intakeout  = 5;
-    } // namespace INTAKE
-    namespace TURRET
-    {
-        constexpr int AIM_LEFT  = 8;
-        constexpr int AIM_RIGHT = 10;
-        //constexpr int AIM_LEFT_MANUAL = 9;
-        //constexpr int AIM_RIGHT_MANUAL = 8;
-        constexpr int SHOOT_FORWARD = 2;
-        constexpr int HOOD_ZERO     = 4;
-        //constexpr int HOOD_MIDPOINT = 6;
-        constexpr int TURRET_HOOD_BATTERSHOT = 6;
-    } // namespace TURRET
-    namespace HOPPER
-    {
-        constexpr int SHOOT = 1;
+        return value > min && value < max;
     }
+    static_assert(value_in_range(1, 0, 2) == true);
+    static_assert(value_in_range(0, 0, 1) == false);
+    static_assert(value_in_range(1, 0, 1) == false);
+    static_assert(value_in_range(2, 0, 1) == false);
+    static_assert(value_in_range(-1, 0, 1) == false);
 
-    namespace CLIMBER
+    // it compiled fine with std::fabs this, but this got rid of red squigles
+    [[nodiscard]] constexpr static double fabs(double value)
     {
-        constexpr int RAISE = 8; // lstick
-        constexpr int DOWN  = 9; // lstick
-    }                            // namespace CLIMBER
-} // namespace BUTTONS
+        if(value < 0)
+            return -value;
+        else
+            return value;
+    }
+    static_assert(fabs(1) == 1);
+    static_assert(fabs(-1) == 1);
+    static_assert(fabs(0) == 0);
+
+    // floating point comparison at compile time
+    [[nodiscard]] constexpr static bool is_close_to(double value,
+                                                    double target,
+                                                    double tol = 0.00001)
+    {
+        return fabs(value - target) < tol;
+    }
+    static_assert(is_close_to(.5, .500000001) == true);
+    static_assert(is_close_to(.1, .999989) == false);
+    static_assert(is_close_to(.1, .10002) == false);
+
+
+    [[nodiscard]] constexpr static double scaleOutput(double inputMin, double inputMax, double outputMin, double outputMax, double input)
+    {
+        return ((input - inputMin) / (inputMax - inputMin)) * ((outputMax - outputMin)) + outputMin;
+    }
+    static_assert(is_close_to(scaleOutput(0, 1, -1, 1, 0), -1));
+    static_assert(is_close_to(scaleOutput(0, 1, -1, 1, 1), 1));
+    static_assert(is_close_to(scaleOutput(0, 1, -1, 1, .5), 0));
+} // namespace ngr
+
+
+// bad, but good enough implimentation of std::midpoint from C++20
+// remove this if upgraded to C++20
+namespace std
+{
+    template <typename A, typename B>
+    constexpr std::common_type_t<A, B> midpoint(A const& a, B const& b)
+    {
+        return (a + b) / 2;
+    }
+} // namespace std

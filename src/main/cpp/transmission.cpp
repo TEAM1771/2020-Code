@@ -1,35 +1,28 @@
 #include "transmission.hpp"
 
-Transmission::Transmission(int falcon_adr, int neo_adr)
+Transmission::Transmission(int falcon_adr)
     : falcon { falcon_adr }
-    ,
-    //  neo ( neo_adr, rev::CANSparkMaxLowLevel::MotorType::kBrushless ),
-    sensors { falcon.GetSensorCollection() }
+    , sensors { falcon.GetSensorCollection() }
 {
-    //   neo.SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);
-    falcon.SetNeutralMode(NeutralMode::Coast);
-    //sensors = falcon.GetSensorCollection();
+    falcon.SetNeutralMode(TRANSMISSION::IDLE_MODE);
 }
 
-ctre::phoenix::motorcontrol::can::TalonFX* Transmission::operator->()
+WPI_TalonFX* Transmission::operator->()
 {
     return &falcon;
 }
 
 void Transmission::Set(double val)
 {
-    // neo.Set(val);
     falcon.Set(ControlMode::PercentOutput, val);
 }
 
-
 double Transmission::getEncoderDistance()
 {
-    return sensors.GetIntegratedSensorPosition() / 2048;
-    // return encoder.GetPosition();
+    return sensors.GetIntegratedSensorPosition() / 2048.0;
 }
 
 void Transmission::setEncoderDistance(double distance)
 {
-    sensors.SetIntegratedSensorPosition(distance);
+    sensors.SetIntegratedSensorPosition(distance * 2048);
 }
