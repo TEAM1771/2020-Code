@@ -33,7 +33,7 @@ namespace BUTTON
 
     namespace CLIMBER
     {
-        inline JoystickButton RAISE { BUTTON::lStick, 11 };
+        inline JoystickButton RAISE { BUTTON::oStick, 11 };
     }
 } // namespace BUTTON
 
@@ -68,13 +68,11 @@ namespace HOOD
     constexpr double MAX_SPEED = 0.8;
 
     typedef enum {
-        // commented values are corret for normal operation
-        // they are replaced for safely testing the batershot position
         BOTTOM       = 0,
         TRAVERSE     = -9,
-        SAFE_TO_TURN = -30, //-42,
+        SAFE_TO_TURN = -42, 
         MIDPOINT     = -26,
-        BATTER       = -42 //-89
+        BATTER       = -89
     } POSITION;
 } // namespace HOOD
 
@@ -114,6 +112,15 @@ namespace SHOOTER_WHEEL
     constexpr double SHOOTING_RPM = 8000;
 } // namespace SHOOTER_WHEEL
 
+namespace FIVE_BALL_CONSTANTS
+{
+    using namespace std::literals::chrono_literals;
+
+    constexpr double PICKUP_DISTANCE = 115;
+    constexpr auto   TURN_TIME       = 0.2s;
+    constexpr auto   TIME_BACKWARD   = 1.5s;
+} // namespace FIVE_BALL_CONSTANTS
+
 namespace HOPPER
 {
     namespace INDEXER
@@ -126,7 +133,7 @@ namespace HOPPER
 
     namespace TRANSPORT
     {
-        constexpr can_adr PORT = 10;
+        constexpr can_adr PORT = 3;
 
         constexpr auto IDLE_MODE = rev::CANSparkMax::IdleMode::kBrake;
 
@@ -134,7 +141,7 @@ namespace HOPPER
         constexpr double SHOOT_SPEED = 1.0;
 
         constexpr double DISTANCE  = 73.0 / 3;
-        constexpr double TOLERANCE = 0.1;
+        constexpr double TOLERANCE = 1;
 
         constexpr double P = 0.3;
         constexpr double I = 0;

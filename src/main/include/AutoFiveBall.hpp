@@ -3,14 +3,14 @@
 #include "AutoBase.hpp"
 #include "Constants.hpp"
 
-namespace FIVE_BALL_CONSTANTS
-{
-    using namespace std::literals::chrono_literals;
+// namespace FIVE_BALL_CONSTANTS
+// {
+//     using namespace std::literals::chrono_literals;
 
-    constexpr double PICKUP_DISTANCE = 115;
-    constexpr auto   TURN_TIME       = 0.2s;
-    constexpr auto   TIME_BACKWARD   = 1.5s;
-} // namespace FIVE_BALL_CONSTANTS
+//     constexpr double PICKUP_DISTANCE = 115;
+//     constexpr auto   TURN_TIME       = 0.2s;
+//     constexpr auto   TIME_BACKWARD   = 1.5s;
+// } // namespace FIVE_BALL_CONSTANTS
 
 template <class Robot>
 class AutoFiveBall : public AutoBase<Robot>
@@ -34,7 +34,8 @@ public:
             {
                 robot->shooter_wheel.bangbang();
                 robot->hopper.index(false);       // don't warn when called while shooting
-                std::this_thread::sleep_for(5ms); // don't spam the CAN network
+                frc::Wait(.005);
+                //std::this_thread::sleep_for(5ms); // don't spam the CAN network
             }
         } };
 
@@ -42,7 +43,7 @@ public:
         robot->intake.deploy(true);
         robot->intake.drive(INTAKE::DIRECTION::IN);
         while(robot->drivetrain.driveForwards(PICKUP_DISTANCE))
-            std::this_thread::sleep_for(20ms); // don't spam the CAN network
+            frc::Wait(.02); // don't spam the CAN network
         // turn
         robot->drivetrain.drive(.3, 0);
         std::this_thread::sleep_for(TURN_TIME);

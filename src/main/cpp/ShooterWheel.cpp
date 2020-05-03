@@ -10,7 +10,7 @@ ShooterWheel::ShooterWheel()
 }
 
 void ShooterWheel::bangbang() // origional code with commented code removed
-{
+{    
     if(abs(shooter_encoder.GetVelocity() > SHOOTER_WHEEL::SHOOTING_RPM - 1200))
         shooter_1.SetOpenLoopRampRate(0);
     else

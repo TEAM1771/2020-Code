@@ -39,6 +39,7 @@ Turret::visionState Turret::visionTrack(TURRET::POSITION initPosition, double to
 
     if(limelight_.hasTarget())
     {
+        std::cout<<"tracking\n";
         double const xOffset = limelight_.getX() + CAMERA::X_OFFSET;
         double const output  = xOffset / 35;
         turretTurnyTurny_.Set(output);
