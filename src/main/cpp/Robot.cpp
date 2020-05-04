@@ -64,7 +64,7 @@ void Robot::TeleopPeriodic()
 
 void Robot::TestPeriodic()
 {
-    hopper.index();
+    turret.visionTrack_v2(TURRET::POSITION::BACK);
 }
 
 void Robot::DisabledInit()
