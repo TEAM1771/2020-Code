@@ -60,7 +60,7 @@ Turret::visionState Turret::visionTrack_v2(TURRET::POSITION initPosition, double
     if(limelight_.hasTarget())
     {
         double const xOffsetDeg = limelight_.getX() + CAMERA::X_OFFSET;
-        double const xOffsetRad = xOffsetDeg * 2 * pi / 180;
+        double const xOffsetRad = xOffsetDeg * pi / 180;
         double const xOffset    = xOffsetRad * TURRET::TICKS_PER_RADIAN;
 
         double const xPosition = turretTurnyTurny_.encoder.GetPosition();
