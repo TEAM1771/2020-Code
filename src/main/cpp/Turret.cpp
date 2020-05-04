@@ -39,7 +39,6 @@ Turret::visionState Turret::visionTrack(TURRET::POSITION initPosition, double to
 
     if(limelight_.hasTarget())
     {
-        std::cout << "tracking\n";
         double const xOffset = limelight_.getX() + CAMERA::X_OFFSET;
         double const output  = xOffset / 35;
         turretTurnyTurny_.Set(output);
@@ -68,10 +67,7 @@ Turret::visionState Turret::visionTrack_v2(TURRET::POSITION initPosition, double
 
         static double prevOffsetDeg = 0;
         if(prevOffsetDeg == xOffsetDeg) // prevents reusing outdated data
-        {
-            std::cout << "cam data reused\n";              // remove this section if this doesn't appear in the output, if it does appear remove this print statment
-            return { true, fabs(xOffsetDeg) < tolerance }; // maybe unnecissary, idk
-        }
+            return { true, fabs(xOffsetDeg) < tolerance };
         prevOffsetDeg = xOffsetDeg;
 
         // for testing, this should print a constant or near constant value when the robot is stationary
