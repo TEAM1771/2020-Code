@@ -70,7 +70,7 @@ namespace HOOD
     typedef enum {
         BOTTOM       = 0,
         TRAVERSE     = -9,
-        SAFE_TO_TURN = -42, 
+        SAFE_TO_TURN = -42,
         MIDPOINT     = -26,
         BATTER       = -89
     } POSITION;
@@ -235,6 +235,21 @@ namespace ngr // North Gwinnett Robotics
     static_assert(is_close_to(scaleOutput(0, 1, -1, 1, 0), -1));
     static_assert(is_close_to(scaleOutput(0, 1, -1, 1, 1), 1));
     static_assert(is_close_to(scaleOutput(0, 1, -1, 1, .5), 0));
+
+    [[nodiscard]] constexpr static double deg2rad(double deg)
+    {
+        return deg * pi / 180;
+    }
+    static_assert(is_close_to(deg2rad(360), 2 * pi));
+    static_assert(is_close_to(deg2rad(0), 0));
+
+    [[nodiscard]] constexpr static double rad2deg(double rad)
+    {
+        return rad * 180 / pi;
+    }
+    static_assert(is_close_to(rad2deg(pi), 180));
+    static_assert(is_close_to(rad2deg(0), 0));
+
 } // namespace ngr
 
 

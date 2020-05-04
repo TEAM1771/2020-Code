@@ -1,4 +1,24 @@
-See file:///C:/Users/FRC%20%23Team%201771/Documents/GitHub/2020-Code/build/tmp/compileFrcUserProgramReleaseExecutableFrcUserProgramCpp/output.txt for all output for compileFrcUserProgramReleaseExecutableFrcUserProgramCpp.
-compiling Drivetrain.cpp successful.
+See file:///D:/ryan/Documents/Code/1771/2020-Code/build/tmp/compileFrcUserProgramReleaseExecutableFrcUserProgramCpp/output.txt for all output for compileFrcUserProgramReleaseExecutableFrcUserProgramCpp.
+compiling Timer.cpp failed.
+In file included from D:\ryan\Documents\Code\1771\2020-Code\src\main\cpp\Timer.cpp:1:0:
+D:\ryan\Documents\Code\1771\2020-Code\src\main\include/Timer.hpp:98:113: error: expected identifier before '!' token
+         bool HasPeriodPassed(std::chrono::duration<REP, RATIO> period, bool do_default_behaviour = false) const(! do_default_behaviour)
+                                                                                                                 ^
+D:\ryan\Documents\Code\1771\2020-Code\src\main\include/Timer.hpp:98:113: error: expected ',' or '...' before '!' token
+In file included from D:\ryan\Documents\Code\1771\2020-Code\src\main\cpp\Timer.cpp:1:0:
+D:\ryan\Documents\Code\1771\2020-Code\src\main\include/Timer.hpp:98:135: error: 'HasPeriodPassed' declared as function returning a function
+         bool HasPeriodPassed(std::chrono::duration<REP, RATIO> period, bool do_default_behaviour = false) const(! do_default_behaviour)
+                                                                                                                                       ^
 
-Finished compileFrcUserProgramReleaseExecutableFrcUserProgramCpp, see full log file:///C:/Users/FRC%20%23Team%201771/Documents/GitHub/2020-Code/build/tmp/compileFrcUserProgramReleaseExecutableFrcUserProgramCpp/output.txt.
+compiling Robot.cpp failed.
+In file included from D:\ryan\Documents\Code\1771\2020-Code\src\main\cpp\Robot.cpp:2:0:
+D:\ryan\Documents\Code\1771\2020-Code\src\main\include/Timer.hpp:98:113: error: expected identifier before '!' token
+         bool HasPeriodPassed(std::chrono::duration<REP, RATIO> period, bool do_default_behaviour = false) const(! do_default_behaviour)
+                                                                                                                 ^
+D:\ryan\Documents\Code\1771\2020-Code\src\main\include/Timer.hpp:98:113: error: expected ',' or '...' before '!' token
+In file included from D:\ryan\Documents\Code\1771\2020-Code\src\main\cpp\Robot.cpp:2:0:
+D:\ryan\Documents\Code\1771\2020-Code\src\main\include/Timer.hpp:98:135: error: 'HasPeriodPassed' declared as function returning a function
+         bool HasPeriodPassed(std::chrono::duration<REP, RATIO> period, bool do_default_behaviour = false) const(! do_default_behaviour)
+                                                                                                                                       ^
+
+Finished compileFrcUserProgramReleaseExecutableFrcUserProgramCpp, see full log file:///D:/ryan/Documents/Code/1771/2020-Code/build/tmp/compileFrcUserProgramReleaseExecutableFrcUserProgramCpp/output.txt.
