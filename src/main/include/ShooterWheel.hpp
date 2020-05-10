@@ -1,17 +1,16 @@
 #pragma once
 
 #include "Constants.hpp"
+#include "PID_CANSparkMax.hpp"
 
 class ShooterWheel
 {
-    rev::CANSparkMax shooter_1 { SHOOTER_WHEEL::PORT_1, rev::CANSparkMaxLowLevel::MotorType::kBrushless };
-    rev::CANSparkMax shooter_2 { SHOOTER_WHEEL::PORT_2, rev::CANSparkMaxLowLevel::MotorType::kBrushless };
+    PID_CANSparkMax shooter_1 { SHOOTER_WHEEL::PORT_1, rev::CANSparkMaxLowLevel::MotorType::kBrushless };
+    PID_CANSparkMax shooter_2 { SHOOTER_WHEEL::PORT_2, rev::CANSparkMaxLowLevel::MotorType::kBrushless };
 
-    rev::CANEncoder shooter_encoder  = shooter_1.GetEncoder();
-    rev::CANEncoder shooter2_encoder = shooter_2.GetEncoder();
 
 public:
     ShooterWheel();
 
-    void bangbang();
+    [[deprecated]] void bangbang();
 };

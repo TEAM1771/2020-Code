@@ -90,5 +90,7 @@
     "cinttypes": "cpp",
     "typeinfo": "cpp",
     "bit": "cpp"
-  }
+  },
+  "wpilib.skipTests": true,
+  "wpilib.deployOffline": true
 }

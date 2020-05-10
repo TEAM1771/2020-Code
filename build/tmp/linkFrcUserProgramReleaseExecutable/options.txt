@@ -1,59 +1,59 @@
 -o
-"C:\\Users\\FRC #Team 1771\\Documents\\GitHub\\2020-Code\\build\\exe\\frcUserProgram\\release\\frcUserProgram"
-"C:\\Users\\FRC #Team 1771\\Documents\\GitHub\\2020-Code\\build\\objs\\frcUserProgram\\release\\frcUserProgramCpp\\14bveugl4qrg2ooekhq0i3r9e\\transmission.o"
-"C:\\Users\\FRC #Team 1771\\Documents\\GitHub\\2020-Code\\build\\objs\\frcUserProgram\\release\\frcUserProgramCpp\\1q3nmz23eyq7mv8szac7tikov\\Intake.o"
-"C:\\Users\\FRC #Team 1771\\Documents\\GitHub\\2020-Code\\build\\objs\\frcUserProgram\\release\\frcUserProgramCpp\\25euz6pj7ia02c4elvfnnhcnn\\Climber.o"
-"C:\\Users\\FRC #Team 1771\\Documents\\GitHub\\2020-Code\\build\\objs\\frcUserProgram\\release\\frcUserProgramCpp\\2z522c3a0n1pdh2wovm7hafwb\\JoystickButton.o"
-"C:\\Users\\FRC #Team 1771\\Documents\\GitHub\\2020-Code\\build\\objs\\frcUserProgram\\release\\frcUserProgramCpp\\3bg5a77l7vd4edmrxq5jco6ri\\Robot.o"
-"C:\\Users\\FRC #Team 1771\\Documents\\GitHub\\2020-Code\\build\\objs\\frcUserProgram\\release\\frcUserProgramCpp\\3d4n96by0tdjugkdn5fk3pz9o\\Hopper.o"
-"C:\\Users\\FRC #Team 1771\\Documents\\GitHub\\2020-Code\\build\\objs\\frcUserProgram\\release\\frcUserProgramCpp\\4iev1vcq1xyvpa5y9sss7kmzw\\Turret.o"
-"C:\\Users\\FRC #Team 1771\\Documents\\GitHub\\2020-Code\\build\\objs\\frcUserProgram\\release\\frcUserProgramCpp\\6h8h3rcmfq0ugfqb5lnh77vlt\\LimeLight.o"
-"C:\\Users\\FRC #Team 1771\\Documents\\GitHub\\2020-Code\\build\\objs\\frcUserProgram\\release\\frcUserProgramCpp\\bv8allmn53jp7hrwetrf7id8i\\Drivetrain.o"
-"C:\\Users\\FRC #Team 1771\\Documents\\GitHub\\2020-Code\\build\\objs\\frcUserProgram\\release\\frcUserProgramCpp\\d23ocv971qvrm0tiu0zcmou85\\Hood.o"
-"C:\\Users\\FRC #Team 1771\\Documents\\GitHub\\2020-Code\\build\\objs\\frcUserProgram\\release\\frcUserProgramCpp\\ehai9jfgbqlad29lawj3pncyh\\PID_CANSparkMax.o"
-"C:\\Users\\FRC #Team 1771\\Documents\\GitHub\\2020-Code\\build\\objs\\frcUserProgram\\release\\frcUserProgramCpp\\exk29mb72ksxd2iradz6h12d9\\ShooterWheel.o"
-"C:\\Users\\FRC #Team 1771\\.gradle\\caches\\transforms-2\\files-2.1\\1e90ed5a0138947440cf461d36c28a76\\wpilibc-cpp-2020.2.2-linuxathena\\linux\\athena\\shared\\libwpilibc.so"
-"C:\\Users\\FRC #Team 1771\\.gradle\\caches\\transforms-2\\files-2.1\\75ace60583303967f651932bc2a3d4cd\\ntcore-cpp-2020.2.2-linuxathena\\linux\\athena\\shared\\libntcore.so"
-"C:\\Users\\FRC #Team 1771\\.gradle\\caches\\transforms-2\\files-2.1\\a63120862cf2d10103f9d15443bac884\\hal-cpp-2020.2.2-linuxathena\\linux\\athena\\shared\\libwpiHal.so"
-"C:\\Users\\FRC #Team 1771\\.gradle\\caches\\transforms-2\\files-2.1\\09a8ca571f40a60ac80106266639d2ef\\wpiutil-cpp-2020.2.2-linuxathena\\linux\\athena\\shared\\libwpiutil.so"
-"C:\\Users\\FRC #Team 1771\\.gradle\\caches\\transforms-2\\files-2.1\\89c62778e4b0d0c3f2831b00285c9340\\chipobject-2020.10.1-linuxathena\\linux\\athena\\shared\\libRoboRIO_FRC_ChipObject.so.20.0.0"
-"C:\\Users\\FRC #Team 1771\\.gradle\\caches\\transforms-2\\files-2.1\\453c4e02bcc470205fd2334f502c4592\\netcomm-2020.10.1-linuxathena\\linux\\athena\\shared\\libFRC_NetworkCommunication.so.20.0.0"
-"C:\\Users\\FRC #Team 1771\\.gradle\\caches\\transforms-2\\files-2.1\\d18210ad9360118ea1b5096e06f506f2\\visa-2020.10.1-linuxathena\\linux\\athena\\shared\\libvisa.so"
-"C:\\Users\\FRC #Team 1771\\.gradle\\caches\\transforms-2\\files-2.1\\e4eee9f18556c8c9a8375a54b3ae7ded\\runtime-2020.10.1-linuxathena\\linux\\athena\\shared\\libNiFpga.so.19.0.0"
-"C:\\Users\\FRC #Team 1771\\.gradle\\caches\\transforms-2\\files-2.1\\e4eee9f18556c8c9a8375a54b3ae7ded\\runtime-2020.10.1-linuxathena\\linux\\athena\\shared\\libNiFpgaLv.so.19.0.0"
-"C:\\Users\\FRC #Team 1771\\.gradle\\caches\\transforms-2\\files-2.1\\e4eee9f18556c8c9a8375a54b3ae7ded\\runtime-2020.10.1-linuxathena\\linux\\athena\\shared\\libniriodevenum.so.19.0.0"
-"C:\\Users\\FRC #Team 1771\\.gradle\\caches\\transforms-2\\files-2.1\\e4eee9f18556c8c9a8375a54b3ae7ded\\runtime-2020.10.1-linuxathena\\linux\\athena\\shared\\libniriosession.so.18.0.0"
-"C:\\Users\\FRC #Team 1771\\.gradle\\caches\\transforms-2\\files-2.1\\e4eee9f18556c8c9a8375a54b3ae7ded\\runtime-2020.10.1-linuxathena\\linux\\athena\\shared\\libNiRioSrv.so.19.0.0"
-"C:\\Users\\FRC #Team 1771\\.gradle\\caches\\transforms-2\\files-2.1\\e4eee9f18556c8c9a8375a54b3ae7ded\\runtime-2020.10.1-linuxathena\\linux\\athena\\shared\\libnirio_emb_can.so.16.0.0"
-"C:\\Users\\FRC #Team 1771\\.gradle\\caches\\transforms-2\\files-2.1\\e4eee9f18556c8c9a8375a54b3ae7ded\\runtime-2020.10.1-linuxathena\\linux\\athena\\shared\\libni_emb.so.12.0.0"
-"C:\\Users\\FRC #Team 1771\\.gradle\\caches\\transforms-2\\files-2.1\\e4eee9f18556c8c9a8375a54b3ae7ded\\runtime-2020.10.1-linuxathena\\linux\\athena\\shared\\libni_rtlog.so.2.8.0"
-"C:\\Users\\FRC #Team 1771\\.gradle\\caches\\transforms-2\\files-2.1\\1b3adea00afcc55886b978bff14b1a16\\cameraserver-cpp-2020.2.2-linuxathena\\linux\\athena\\shared\\libcameraserver.so"
-"C:\\Users\\FRC #Team 1771\\.gradle\\caches\\transforms-2\\files-2.1\\a85770716a2bbb293b9b3cfc3a945cb8\\cscore-cpp-2020.2.2-linuxathena\\linux\\athena\\shared\\libcscore.so"
-"C:\\Users\\FRC #Team 1771\\.gradle\\caches\\transforms-2\\files-2.1\\93646145e3110191cc8e2260e52d7438\\opencv-cpp-3.4.7-2-linuxathena\\linux\\athena\\shared\\libopencv_calib3d.so.3.4"
-"C:\\Users\\FRC #Team 1771\\.gradle\\caches\\transforms-2\\files-2.1\\93646145e3110191cc8e2260e52d7438\\opencv-cpp-3.4.7-2-linuxathena\\linux\\athena\\shared\\libopencv_core.so.3.4"
-"C:\\Users\\FRC #Team 1771\\.gradle\\caches\\transforms-2\\files-2.1\\93646145e3110191cc8e2260e52d7438\\opencv-cpp-3.4.7-2-linuxathena\\linux\\athena\\shared\\libopencv_features2d.so.3.4"
-"C:\\Users\\FRC #Team 1771\\.gradle\\caches\\transforms-2\\files-2.1\\93646145e3110191cc8e2260e52d7438\\opencv-cpp-3.4.7-2-linuxathena\\linux\\athena\\shared\\libopencv_flann.so.3.4"
-"C:\\Users\\FRC #Team 1771\\.gradle\\caches\\transforms-2\\files-2.1\\93646145e3110191cc8e2260e52d7438\\opencv-cpp-3.4.7-2-linuxathena\\linux\\athena\\shared\\libopencv_highgui.so.3.4"
-"C:\\Users\\FRC #Team 1771\\.gradle\\caches\\transforms-2\\files-2.1\\93646145e3110191cc8e2260e52d7438\\opencv-cpp-3.4.7-2-linuxathena\\linux\\athena\\shared\\libopencv_imgcodecs.so.3.4"
-"C:\\Users\\FRC #Team 1771\\.gradle\\caches\\transforms-2\\files-2.1\\93646145e3110191cc8e2260e52d7438\\opencv-cpp-3.4.7-2-linuxathena\\linux\\athena\\shared\\libopencv_imgproc.so.3.4"
-"C:\\Users\\FRC #Team 1771\\.gradle\\caches\\transforms-2\\files-2.1\\93646145e3110191cc8e2260e52d7438\\opencv-cpp-3.4.7-2-linuxathena\\linux\\athena\\shared\\libopencv_ml.so.3.4"
-"C:\\Users\\FRC #Team 1771\\.gradle\\caches\\transforms-2\\files-2.1\\93646145e3110191cc8e2260e52d7438\\opencv-cpp-3.4.7-2-linuxathena\\linux\\athena\\shared\\libopencv_objdetect.so.3.4"
-"C:\\Users\\FRC #Team 1771\\.gradle\\caches\\transforms-2\\files-2.1\\93646145e3110191cc8e2260e52d7438\\opencv-cpp-3.4.7-2-linuxathena\\linux\\athena\\shared\\libopencv_photo.so.3.4"
-"C:\\Users\\FRC #Team 1771\\.gradle\\caches\\transforms-2\\files-2.1\\93646145e3110191cc8e2260e52d7438\\opencv-cpp-3.4.7-2-linuxathena\\linux\\athena\\shared\\libopencv_shape.so.3.4"
-"C:\\Users\\FRC #Team 1771\\.gradle\\caches\\transforms-2\\files-2.1\\93646145e3110191cc8e2260e52d7438\\opencv-cpp-3.4.7-2-linuxathena\\linux\\athena\\shared\\libopencv_stitching.so.3.4"
-"C:\\Users\\FRC #Team 1771\\.gradle\\caches\\transforms-2\\files-2.1\\93646145e3110191cc8e2260e52d7438\\opencv-cpp-3.4.7-2-linuxathena\\linux\\athena\\shared\\libopencv_superres.so.3.4"
-"C:\\Users\\FRC #Team 1771\\.gradle\\caches\\transforms-2\\files-2.1\\93646145e3110191cc8e2260e52d7438\\opencv-cpp-3.4.7-2-linuxathena\\linux\\athena\\shared\\libopencv_video.so.3.4"
-"C:\\Users\\FRC #Team 1771\\.gradle\\caches\\transforms-2\\files-2.1\\93646145e3110191cc8e2260e52d7438\\opencv-cpp-3.4.7-2-linuxathena\\linux\\athena\\shared\\libopencv_videoio.so.3.4"
-"C:\\Users\\FRC #Team 1771\\.gradle\\caches\\transforms-2\\files-2.1\\93646145e3110191cc8e2260e52d7438\\opencv-cpp-3.4.7-2-linuxathena\\linux\\athena\\shared\\libopencv_videostab.so.3.4"
-"C:\\Users\\FRC #Team 1771\\.gradle\\caches\\transforms-2\\files-2.1\\f6a7239aa7f4b80c8b223da590d14626\\wpiapi-cpp-5.18.1-linuxathenastatic\\linux\\athena\\static\\libCTRE_Phoenix_WPI.a"
-"C:\\Users\\FRC #Team 1771\\.gradle\\caches\\transforms-2\\files-2.1\\97816fc7cf17ebf8f6dc05f004b7452a\\api-cpp-5.18.1-linuxathenastatic\\linux\\athena\\static\\libCTRE_Phoenix.a"
-"C:\\Users\\FRC #Team 1771\\.gradle\\caches\\transforms-2\\files-2.1\\2f1fe4ff05d36cc3c9a441d5c6e37ee1\\cci-5.18.1-linuxathenastatic\\linux\\athena\\static\\libCTRE_PhoenixCCI.a"
-"C:\\Users\\FRC #Team 1771\\.gradle\\caches\\transforms-2\\files-2.1\\ae3c9af1b1cfd5e23b7f16accd87ccd5\\diagnostics-5.18.1-linuxathenastatic\\linux\\athena\\static\\libCTRE_PhoenixDiagnostics.a"
-"C:\\Users\\FRC #Team 1771\\.gradle\\caches\\transforms-2\\files-2.1\\122892bbbe4570d4c7e53cba1edeba7f\\core-5.18.1-linuxathenastatic\\linux\\athena\\static\\libCTRE_PhoenixCore.a"
-"C:\\Users\\FRC #Team 1771\\.gradle\\caches\\transforms-2\\files-2.1\\62a6234e87dd22c65742fe6d8cfa9000\\SparkMax-cpp-1.5.1-linuxathenastatic\\linux\\athena\\static\\libSparkMax.a"
-"C:\\Users\\FRC #Team 1771\\.gradle\\caches\\transforms-2\\files-2.1\\b20d0ac2f00b8fb71877aad33fdd5ba6\\SparkMax-driver-1.5.1-linuxathenastatic\\linux\\athena\\static\\libSparkMaxDriver.a"
-"C:\\Users\\FRC #Team 1771\\.gradle\\caches\\transforms-2\\files-2.1\\d13258208c075e1075f191bf9f5e0f45\\wpilibNewCommands-cpp-2020.2.2-linuxathena\\linux\\athena\\shared\\libwpilibNewCommands.so"
-"C:\\Users\\FRC #Team 1771\\.gradle\\caches\\transforms-2\\files-2.1\\f4c4586b0234b16919e70a3ae9748395\\wpilibOldCommands-cpp-2020.2.2-linuxathena\\linux\\athena\\shared\\libwpilibOldCommands.so"
+D:\\ryan\\Documents\\Code\\1771\\2020-Code\\build\\exe\\frcUserProgram\\release\\frcUserProgram
+D:\\ryan\\Documents\\Code\\1771\\2020-Code\\build\\objs\\frcUserProgram\\release\\frcUserProgramCpp\\14bveugl4qrg2ooekhq0i3r9e\\transmission.o
+D:\\ryan\\Documents\\Code\\1771\\2020-Code\\build\\objs\\frcUserProgram\\release\\frcUserProgramCpp\\1q3nmz23eyq7mv8szac7tikov\\Intake.o
+D:\\ryan\\Documents\\Code\\1771\\2020-Code\\build\\objs\\frcUserProgram\\release\\frcUserProgramCpp\\25euz6pj7ia02c4elvfnnhcnn\\Climber.o
+D:\\ryan\\Documents\\Code\\1771\\2020-Code\\build\\objs\\frcUserProgram\\release\\frcUserProgramCpp\\2z522c3a0n1pdh2wovm7hafwb\\JoystickButton.o
+D:\\ryan\\Documents\\Code\\1771\\2020-Code\\build\\objs\\frcUserProgram\\release\\frcUserProgramCpp\\3bg5a77l7vd4edmrxq5jco6ri\\Robot.o
+D:\\ryan\\Documents\\Code\\1771\\2020-Code\\build\\objs\\frcUserProgram\\release\\frcUserProgramCpp\\3d4n96by0tdjugkdn5fk3pz9o\\Hopper.o
+D:\\ryan\\Documents\\Code\\1771\\2020-Code\\build\\objs\\frcUserProgram\\release\\frcUserProgramCpp\\4iev1vcq1xyvpa5y9sss7kmzw\\Turret.o
+D:\\ryan\\Documents\\Code\\1771\\2020-Code\\build\\objs\\frcUserProgram\\release\\frcUserProgramCpp\\6h8h3rcmfq0ugfqb5lnh77vlt\\LimeLight.o
+D:\\ryan\\Documents\\Code\\1771\\2020-Code\\build\\objs\\frcUserProgram\\release\\frcUserProgramCpp\\bv8allmn53jp7hrwetrf7id8i\\Drivetrain.o
+D:\\ryan\\Documents\\Code\\1771\\2020-Code\\build\\objs\\frcUserProgram\\release\\frcUserProgramCpp\\d23ocv971qvrm0tiu0zcmou85\\Hood.o
+D:\\ryan\\Documents\\Code\\1771\\2020-Code\\build\\objs\\frcUserProgram\\release\\frcUserProgramCpp\\ehai9jfgbqlad29lawj3pncyh\\PID_CANSparkMax.o
+D:\\ryan\\Documents\\Code\\1771\\2020-Code\\build\\objs\\frcUserProgram\\release\\frcUserProgramCpp\\exk29mb72ksxd2iradz6h12d9\\ShooterWheel.o
+C:\\Users\\mrrya\\.gradle\\caches\\transforms-2\\files-2.1\\73a0dcbcbd89a4efe991c13633b4bf2b\\wpilibc-cpp-2020.2.2-linuxathena\\linux\\athena\\shared\\libwpilibc.so
+C:\\Users\\mrrya\\.gradle\\caches\\transforms-2\\files-2.1\\825b57e598c335f79e38550587642cc4\\ntcore-cpp-2020.2.2-linuxathena\\linux\\athena\\shared\\libntcore.so
+C:\\Users\\mrrya\\.gradle\\caches\\transforms-2\\files-2.1\\0f827b81a9884f1565887d2fd17e956a\\hal-cpp-2020.2.2-linuxathena\\linux\\athena\\shared\\libwpiHal.so
+C:\\Users\\mrrya\\.gradle\\caches\\transforms-2\\files-2.1\\d61e602cd45e12741e60568abd759b13\\wpiutil-cpp-2020.2.2-linuxathena\\linux\\athena\\shared\\libwpiutil.so
+C:\\Users\\mrrya\\.gradle\\caches\\transforms-2\\files-2.1\\89c62778e4b0d0c3f2831b00285c9340\\chipobject-2020.10.1-linuxathena\\linux\\athena\\shared\\libRoboRIO_FRC_ChipObject.so.20.0.0
+C:\\Users\\mrrya\\.gradle\\caches\\transforms-2\\files-2.1\\453c4e02bcc470205fd2334f502c4592\\netcomm-2020.10.1-linuxathena\\linux\\athena\\shared\\libFRC_NetworkCommunication.so.20.0.0
+C:\\Users\\mrrya\\.gradle\\caches\\transforms-2\\files-2.1\\d18210ad9360118ea1b5096e06f506f2\\visa-2020.10.1-linuxathena\\linux\\athena\\shared\\libvisa.so
+C:\\Users\\mrrya\\.gradle\\caches\\transforms-2\\files-2.1\\e4eee9f18556c8c9a8375a54b3ae7ded\\runtime-2020.10.1-linuxathena\\linux\\athena\\shared\\libNiFpga.so.19.0.0
+C:\\Users\\mrrya\\.gradle\\caches\\transforms-2\\files-2.1\\e4eee9f18556c8c9a8375a54b3ae7ded\\runtime-2020.10.1-linuxathena\\linux\\athena\\shared\\libNiFpgaLv.so.19.0.0
+C:\\Users\\mrrya\\.gradle\\caches\\transforms-2\\files-2.1\\e4eee9f18556c8c9a8375a54b3ae7ded\\runtime-2020.10.1-linuxathena\\linux\\athena\\shared\\libniriodevenum.so.19.0.0
+C:\\Users\\mrrya\\.gradle\\caches\\transforms-2\\files-2.1\\e4eee9f18556c8c9a8375a54b3ae7ded\\runtime-2020.10.1-linuxathena\\linux\\athena\\shared\\libniriosession.so.18.0.0
+C:\\Users\\mrrya\\.gradle\\caches\\transforms-2\\files-2.1\\e4eee9f18556c8c9a8375a54b3ae7ded\\runtime-2020.10.1-linuxathena\\linux\\athena\\shared\\libNiRioSrv.so.19.0.0
+C:\\Users\\mrrya\\.gradle\\caches\\transforms-2\\files-2.1\\e4eee9f18556c8c9a8375a54b3ae7ded\\runtime-2020.10.1-linuxathena\\linux\\athena\\shared\\libnirio_emb_can.so.16.0.0
+C:\\Users\\mrrya\\.gradle\\caches\\transforms-2\\files-2.1\\e4eee9f18556c8c9a8375a54b3ae7ded\\runtime-2020.10.1-linuxathena\\linux\\athena\\shared\\libni_emb.so.12.0.0
+C:\\Users\\mrrya\\.gradle\\caches\\transforms-2\\files-2.1\\e4eee9f18556c8c9a8375a54b3ae7ded\\runtime-2020.10.1-linuxathena\\linux\\athena\\shared\\libni_rtlog.so.2.8.0
+C:\\Users\\mrrya\\.gradle\\caches\\transforms-2\\files-2.1\\d515003fa99016e3b34bb93d933e3b3a\\cameraserver-cpp-2020.2.2-linuxathena\\linux\\athena\\shared\\libcameraserver.so
+C:\\Users\\mrrya\\.gradle\\caches\\transforms-2\\files-2.1\\c492a70205a255848c8a9502b55324e4\\cscore-cpp-2020.2.2-linuxathena\\linux\\athena\\shared\\libcscore.so
+C:\\Users\\mrrya\\.gradle\\caches\\transforms-2\\files-2.1\\93646145e3110191cc8e2260e52d7438\\opencv-cpp-3.4.7-2-linuxathena\\linux\\athena\\shared\\libopencv_calib3d.so.3.4
+C:\\Users\\mrrya\\.gradle\\caches\\transforms-2\\files-2.1\\93646145e3110191cc8e2260e52d7438\\opencv-cpp-3.4.7-2-linuxathena\\linux\\athena\\shared\\libopencv_core.so.3.4
+C:\\Users\\mrrya\\.gradle\\caches\\transforms-2\\files-2.1\\93646145e3110191cc8e2260e52d7438\\opencv-cpp-3.4.7-2-linuxathena\\linux\\athena\\shared\\libopencv_features2d.so.3.4
+C:\\Users\\mrrya\\.gradle\\caches\\transforms-2\\files-2.1\\93646145e3110191cc8e2260e52d7438\\opencv-cpp-3.4.7-2-linuxathena\\linux\\athena\\shared\\libopencv_flann.so.3.4
+C:\\Users\\mrrya\\.gradle\\caches\\transforms-2\\files-2.1\\93646145e3110191cc8e2260e52d7438\\opencv-cpp-3.4.7-2-linuxathena\\linux\\athena\\shared\\libopencv_highgui.so.3.4
+C:\\Users\\mrrya\\.gradle\\caches\\transforms-2\\files-2.1\\93646145e3110191cc8e2260e52d7438\\opencv-cpp-3.4.7-2-linuxathena\\linux\\athena\\shared\\libopencv_imgcodecs.so.3.4
+C:\\Users\\mrrya\\.gradle\\caches\\transforms-2\\files-2.1\\93646145e3110191cc8e2260e52d7438\\opencv-cpp-3.4.7-2-linuxathena\\linux\\athena\\shared\\libopencv_imgproc.so.3.4
+C:\\Users\\mrrya\\.gradle\\caches\\transforms-2\\files-2.1\\93646145e3110191cc8e2260e52d7438\\opencv-cpp-3.4.7-2-linuxathena\\linux\\athena\\shared\\libopencv_ml.so.3.4
+C:\\Users\\mrrya\\.gradle\\caches\\transforms-2\\files-2.1\\93646145e3110191cc8e2260e52d7438\\opencv-cpp-3.4.7-2-linuxathena\\linux\\athena\\shared\\libopencv_objdetect.so.3.4
+C:\\Users\\mrrya\\.gradle\\caches\\transforms-2\\files-2.1\\93646145e3110191cc8e2260e52d7438\\opencv-cpp-3.4.7-2-linuxathena\\linux\\athena\\shared\\libopencv_photo.so.3.4
+C:\\Users\\mrrya\\.gradle\\caches\\transforms-2\\files-2.1\\93646145e3110191cc8e2260e52d7438\\opencv-cpp-3.4.7-2-linuxathena\\linux\\athena\\shared\\libopencv_shape.so.3.4
+C:\\Users\\mrrya\\.gradle\\caches\\transforms-2\\files-2.1\\93646145e3110191cc8e2260e52d7438\\opencv-cpp-3.4.7-2-linuxathena\\linux\\athena\\shared\\libopencv_stitching.so.3.4
+C:\\Users\\mrrya\\.gradle\\caches\\transforms-2\\files-2.1\\93646145e3110191cc8e2260e52d7438\\opencv-cpp-3.4.7-2-linuxathena\\linux\\athena\\shared\\libopencv_superres.so.3.4
+C:\\Users\\mrrya\\.gradle\\caches\\transforms-2\\files-2.1\\93646145e3110191cc8e2260e52d7438\\opencv-cpp-3.4.7-2-linuxathena\\linux\\athena\\shared\\libopencv_video.so.3.4
+C:\\Users\\mrrya\\.gradle\\caches\\transforms-2\\files-2.1\\93646145e3110191cc8e2260e52d7438\\opencv-cpp-3.4.7-2-linuxathena\\linux\\athena\\shared\\libopencv_videoio.so.3.4
+C:\\Users\\mrrya\\.gradle\\caches\\transforms-2\\files-2.1\\93646145e3110191cc8e2260e52d7438\\opencv-cpp-3.4.7-2-linuxathena\\linux\\athena\\shared\\libopencv_videostab.so.3.4
+C:\\Users\\mrrya\\.gradle\\caches\\transforms-2\\files-2.1\\bee35e2c4eca1b596931e3528002c6ac\\wpiapi-cpp-5.18.1-linuxathenastatic\\linux\\athena\\static\\libCTRE_Phoenix_WPI.a
+C:\\Users\\mrrya\\.gradle\\caches\\transforms-2\\files-2.1\\2e06d0cdf5bb2c041d6f997d6283d522\\api-cpp-5.18.1-linuxathenastatic\\linux\\athena\\static\\libCTRE_Phoenix.a
+C:\\Users\\mrrya\\.gradle\\caches\\transforms-2\\files-2.1\\2a7bdb1c76f3753c4fa8d77b25962a01\\cci-5.18.1-linuxathenastatic\\linux\\athena\\static\\libCTRE_PhoenixCCI.a
+C:\\Users\\mrrya\\.gradle\\caches\\transforms-2\\files-2.1\\571eb75b06e62bc17210f074c7283836\\diagnostics-5.18.1-linuxathenastatic\\linux\\athena\\static\\libCTRE_PhoenixDiagnostics.a
+C:\\Users\\mrrya\\.gradle\\caches\\transforms-2\\files-2.1\\87458e423189dce0c2cbf8fce9df44af\\core-5.18.1-linuxathenastatic\\linux\\athena\\static\\libCTRE_PhoenixCore.a
+C:\\Users\\mrrya\\.gradle\\caches\\transforms-2\\files-2.1\\713a3e6916760c5cace8e839e487a811\\SparkMax-cpp-1.5.1-linuxathenastatic\\linux\\athena\\static\\libSparkMax.a
+C:\\Users\\mrrya\\.gradle\\caches\\transforms-2\\files-2.1\\a794aa46db941912980cfa228aa902f7\\SparkMax-driver-1.5.1-linuxathenastatic\\linux\\athena\\static\\libSparkMaxDriver.a
+C:\\Users\\mrrya\\.gradle\\caches\\transforms-2\\files-2.1\\5158daf2d1a15388b62c6c1ba608e6f2\\wpilibNewCommands-cpp-2020.2.2-linuxathena\\linux\\athena\\shared\\libwpilibNewCommands.so
+C:\\Users\\mrrya\\.gradle\\caches\\transforms-2\\files-2.1\\5b2a29f9c0bbf0d798a6fbdfca1a7599\\wpilibOldCommands-cpp-2020.2.2-linuxathena\\linux\\athena\\shared\\libwpilibOldCommands.so
 -rdynamic
 -pthread
 -ldl

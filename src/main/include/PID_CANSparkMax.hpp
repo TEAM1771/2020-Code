@@ -46,7 +46,9 @@ public:
      */
     void SetTarget(double target, rev::ControlType = default_control_type);
 
-    void SetP(double P);
-    void SetI(double I);
-    void SetD(double D);
+    rev::CANError SetP(double P);
+    rev::CANError SetI(double I);
+    rev::CANError SetD(double D);
+    rev::CANError SetDFilter(double F);
+    rev::CANError SetFF(double FF);
 };

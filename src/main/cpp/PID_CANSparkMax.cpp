@@ -37,20 +37,11 @@ void PID_CANSparkMax::SetTarget(double position, rev::ControlType control_type)
     pid_controller.SetReference(std::clamp(position, min_position, max_position), control_type);
 }
 
-void PID_CANSparkMax::SetP(double P)
-{
-    pid_controller.SetP(P);
-}
-
-void PID_CANSparkMax::SetI(double I)
-{
-    pid_controller.SetI(I);
-}
-
-void PID_CANSparkMax::SetD(double D)
-{
-    pid_controller.SetD(D);
-}
+rev::CANError PID_CANSparkMax::SetP(double P) { return pid_controller.SetP(P); }
+rev::CANError PID_CANSparkMax::SetI(double I) { return pid_controller.SetI(I); }
+rev::CANError PID_CANSparkMax::SetD(double D) { return pid_controller.SetD(D); }
+rev::CANError PID_CANSparkMax::SetDFilter(double F) { return pid_controller.SetDFilter(F); }
+rev::CANError PID_CANSparkMax::SetFF(double FF) { return pid_controller.SetFF(FF); }
 
 rev::CANPIDController PID_CANSparkMax::GetPIDController()
 {
