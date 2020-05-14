@@ -27,7 +27,7 @@ public:
     void run() override
     {
         robot->shooter_wheel.bangbang();
-        if(robot->drivetrain.driveDistanceForward(2))
+        if(!robot->drivetrain.driveDistanceForward(2))
         {
             if(auto [is_tracking, readyToShoot] = robot->turret.visionTrack(TURRET::POSITION::FRONT); is_tracking)
             {

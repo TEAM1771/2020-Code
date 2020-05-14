@@ -26,10 +26,10 @@ public:
     bool goToPosition(TURRET::POSITION position, double tolerance = 1);
 
     /// goes to position and then starts tracking, returns true if tolerance (in degrees) is met
-    visionState visionTrack(TURRET::POSITION initPosition, double tolerance = 10);
+    [[depricated]] visionState visionTrack_v1(TURRET::POSITION initPosition, double tolerance = 10);
 
     /// geos to position, then determines angle of target and goes to that angle
-    visionState visionTrack_v2(TURRET::POSITION initPosition, double tolerance = 10);
+    visionState visionTrack(TURRET::POSITION initPosition, double tolerance = 10);
 
     /// used for tuning interpolation tables
     void manualPositionControl(double position);

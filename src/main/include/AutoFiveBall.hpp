@@ -28,12 +28,11 @@ public:
         using namespace std::literals::chrono_literals;
 
         // Start BangBang and indexer
-        std::thread run_shooter_wheel_and_index_balls = { [this] {
+        std::thread index_balls = { [this] {
             using namespace std::literals::chrono_literals;
             while(is_auto())
             {
-                robot->shooter_wheel.bangbang();
-                robot->hopper.index(false);       // don't warn when called while shooting
+                robot->hopper.index(false); // don't warn when called while shooting
                 frc::Wait(.005);
                 //std::this_thread::sleep_for(5ms); // don't spam the CAN network
             }
@@ -42,7 +41,7 @@ public:
         // drive back / intake
         robot->intake.deploy(true);
         robot->intake.drive(INTAKE::DIRECTION::IN);
-        while(robot->drivetrain.driveForwards(PICKUP_DISTANCE))
+        while(! robot->drivetrain.driveForwards(PICKUP_DISTANCE))
             frc::Wait(.02); // don't spam the CAN network
         // turn
         robot->drivetrain.drive(.3, 0);
@@ -62,7 +61,8 @@ public:
         robot->drivetrain.drive(0, 0);
 
         // wait for threads to exit
-        run_shooter_wheel_and_index_balls.join();
+        index_balls.join();
         aim_and_shoot.join();
     }
 };
+#include <tuple>
