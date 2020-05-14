@@ -65,7 +65,7 @@ void Robot::TeleopPeriodic()
 void Robot::TestPeriodic()
 {
     intake.deploy(true);
-    turret.visionTrack_v2(TURRET::POSITION::BACK);
+    turret.visionTrack(TURRET::POSITION::BACK);
 }
 
 void Robot::DisabledInit()

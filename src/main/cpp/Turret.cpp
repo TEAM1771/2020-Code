@@ -29,7 +29,7 @@ bool Turret::goToPosition(TURRET::POSITION position, double tolerance)
     return std::fabs(turretTurnyTurny_.encoder.GetPosition() - position) < tolerance;
 }
 
-Turret::visionState Turret::visionTrack(TURRET::POSITION initPosition, double tolerance)
+Turret::visionState Turret::visionTrack_v1(TURRET::POSITION initPosition, double tolerance)
 {
     if(! tracking_) // move to initPosition
     {
@@ -48,7 +48,7 @@ Turret::visionState Turret::visionTrack(TURRET::POSITION initPosition, double to
     return { false, false };
 }
 
-Turret::visionState Turret::visionTrack_v2(TURRET::POSITION initPosition, double tolerance)
+Turret::visionState Turret::visionTrack(TURRET::POSITION initPosition, double tolerance)
 {
     if(! tracking_) // move to initPosition
     {
@@ -70,10 +70,6 @@ Turret::visionState Turret::visionTrack_v2(TURRET::POSITION initPosition, double
             return { true, fabs(xOffsetDeg) < tolerance };
         prevOffsetDeg = xOffsetDeg;
 
-        // for testing, this should print a constant or near constant value when the robot is stationary
-        // the value should change when the robot moves
-        // std::cout << "xTarget: " << xTarget << "\txDeg: " << xOffset << "\tpos: " << xPosition << "\n";
-        // turretTurnyTurny_.Set(0);
         turretTurnyTurny_.SetTarget(xTarget);
 
         return { true, fabs(xOffsetDeg) < tolerance };

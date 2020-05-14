@@ -1,4 +1,37 @@
-See file:///C:/Users/FRC%20%23Team%201771/Documents/GitHub/2020-Code/build/tmp/compileFrcUserProgramReleaseExecutableFrcUserProgramCpp/output.txt for all output for compileFrcUserProgramReleaseExecutableFrcUserProgramCpp.
-compiling Robot.cpp successful.
+See file:///D:/ryan/Documents/Code/1771/2020-Code/build/tmp/compileFrcUserProgramReleaseExecutableFrcUserProgramCpp/output.txt for all output for compileFrcUserProgramReleaseExecutableFrcUserProgramCpp.
+compiling Climber.cpp successful.
 
-Finished compileFrcUserProgramReleaseExecutableFrcUserProgramCpp, see full log file:///C:/Users/FRC%20%23Team%201771/Documents/GitHub/2020-Code/build/tmp/compileFrcUserProgramReleaseExecutableFrcUserProgramCpp/output.txt.
+compiling Drivetrain.cpp successful.
+
+compiling Hood.cpp successful.
+
+compiling LimeLight.cpp successful.
+
+compiling Intake.cpp successful.
+
+compiling Hopper.cpp successful.
+
+compiling PID_CANSparkMax.cpp successful.
+
+compiling Robot.cpp successful.
+In file included from D:\ryan\Documents\Code\1771\2020-Code\src\main\include/Robot.hpp:18:0,
+                 from D:\ryan\Documents\Code\1771\2020-Code\src\main\cpp\Robot.cpp:1:
+D:\ryan\Documents\Code\1771\2020-Code\src\main\include/Turret.hpp:29:99: warning: 'depricated' attribute directive ignored [-Wattributes]
+     [[depricated]] visionState visionTrack_v1(TURRET::POSITION initPosition, double tolerance = 10);
+                                                                                                   ^
+
+compiling JoystickButton.cpp successful.
+
+compiling ShooterWheel.cpp successful.
+
+compiling Timer.cpp successful.
+
+compiling transmission.cpp successful.
+
+compiling Turret.cpp successful.
+In file included from D:\ryan\Documents\Code\1771\2020-Code\src\main\cpp\Turret.cpp:1:0:
+D:\ryan\Documents\Code\1771\2020-Code\src\main\include/Turret.hpp:29:99: warning: 'depricated' attribute directive ignored [-Wattributes]
+     [[depricated]] visionState visionTrack_v1(TURRET::POSITION initPosition, double tolerance = 10);
+                                                                                                   ^
+
+Finished compileFrcUserProgramReleaseExecutableFrcUserProgramCpp, see full log file:///D:/ryan/Documents/Code/1771/2020-Code/build/tmp/compileFrcUserProgramReleaseExecutableFrcUserProgramCpp/output.txt.
