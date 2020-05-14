@@ -11,6 +11,6 @@ class ShooterWheel
 
 public:
     ShooterWheel();
-
+    void print_RPM();
     [[deprecated]] void bangbang();
 };

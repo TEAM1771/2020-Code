@@ -46,3 +46,8 @@ void ShooterWheel::bangbang()
     else
         shooter_2.Set(0);
 }
+
+void ShooterWheel::print_RPM()
+{
+    std::cout<<"Shooter RPM: "<<shooter_2.encoder.GetVelocity()<<"\n";
+}

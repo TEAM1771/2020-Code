@@ -109,12 +109,12 @@ namespace SHOOTER_WHEEL
 
     constexpr auto IDLE_MODE = rev::CANSparkMax::IdleMode::kCoast;
 
-    constexpr double SHOOTING_RPM = 8000;
+    constexpr double SHOOTING_RPM = 1000;
 
-    constexpr double P  = 0.1;
+    constexpr double P  = 0.05;
     constexpr double I  = 0.0;
     constexpr double D  = 0.0;
-    constexpr double F  = 0.0;
+    constexpr double F  = 0.1;
     constexpr double FF = 1.0; // needs tuning, remove this comment once tuned
 
 } // namespace SHOOTER_WHEEL

@@ -53,6 +53,7 @@ void Robot::TeleopInit()
 
 void Robot::TeleopPeriodic()
 {
+    shooter_wheel.print_RPM();
     ButtonManager();
     drivetrain.drive(BUTTON::lStick.GetY(), BUTTON::rStick.GetY());
     drivetrain.shift();
