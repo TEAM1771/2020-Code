@@ -72,9 +72,9 @@ Turret::visionState Turret::visionTrack_v2(TURRET::POSITION initPosition, double
 
         // for testing, this should print a constant or near constant value when the robot is stationary
         // the value should change when the robot moves
-        std::cout << "xTarget: " << xTarget << "\n";
-        turretTurnyTurny_.Set(0);
-        //turretTurnyTurny_.SetTarget(xTarget);
+        // std::cout << "xTarget: " << xTarget << "\txDeg: " << xOffset << "\tpos: " << xPosition << "\n";
+        // turretTurnyTurny_.Set(0);
+        turretTurnyTurny_.SetTarget(xTarget);
 
         return { true, fabs(xOffsetDeg) < tolerance };
     }
