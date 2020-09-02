@@ -19,7 +19,7 @@ public:
     {
         std::cout << "No Auton Mode Selected\n";
     }
-    virtual void run() {};
+    virtual void run() {}
 
     bool is_auto() const
     {

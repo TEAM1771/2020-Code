@@ -25,24 +25,23 @@ public:
     void init() override
     {
         using namespace FIVE_BALL_CONSTANTS;
-        using namespace std::literals::chrono_literals;
 
         // Start BangBang and indexer
-        std::thread index_balls = { [this] {
-            using namespace std::literals::chrono_literals;
+        std::thread run_shooter_wheel_and_index_balls = { [this] {
             while(is_auto())
             {
-                robot->hopper.index(false); // don't warn when called while shooting
-                frc::Wait(.005);
-                //std::this_thread::sleep_for(5ms); // don't spam the CAN network
+                robot->shooter_wheel.bangbang();
+                robot->hopper.index(false);       // don't warn when called while shooting
+                std::this_thread::sleep_for(5ms); // don't spam the CAN network
             }
         } };
 
         // drive back / intake
         robot->intake.deploy(true);
         robot->intake.drive(INTAKE::DIRECTION::IN);
+        drivetrain.reset();
         while(! robot->drivetrain.driveForwards(PICKUP_DISTANCE))
-            frc::Wait(.02); // don't spam the CAN network
+            std::this_thread::sleep_for(20ms); // don't spam the CAN network
         // turn
         robot->drivetrain.drive(.3, 0);
         std::this_thread::sleep_for(TURN_TIME);
@@ -61,8 +60,7 @@ public:
         robot->drivetrain.drive(0, 0);
 
         // wait for threads to exit
-        index_balls.join();
+        run_shooter_wheel_and_index_balls.join();
         aim_and_shoot.join();
     }
 };
-#include <tuple>

@@ -7,7 +7,7 @@
 
 #include "AutoBase.hpp"
 #include "AutoFiveBall.hpp"
-#include "AutoSimple.hpp"
+#include "AutoThreeBall.hpp"
 #include "Climber.hpp"
 #include "Drivetrain.hpp"
 #include "Hood.hpp"
@@ -42,13 +42,11 @@ public:
 
     // returns true when aimed at goal
     bool aim(TURRET::POSITION);
-    void ThreeBall();
-    void FiveBall();
 
 private:
-    friend class AutoSimple<Robot>;
-    friend class AutoFiveBall<Robot>;                                       // Repeat this for all Auton Modes
-    std::unique_ptr<AutoBase<Robot>> auton { new AutoSimple<Robot>(this) }; // setup active auton
+    friend class AutoThreeBall<Robot>;
+    friend class AutoFiveBall<Robot>;                                         // Repeat this for all Auton Modes
+    std::unique_ptr<AutoBase<Robot>> auton { new AutoFiveBall<Robot>(this) }; // setup active auton
 
     Drivetrain   drivetrain;
     LimeLight    limelight;

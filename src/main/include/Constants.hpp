@@ -122,8 +122,8 @@ namespace AUTO
     {
         using namespace std::literals::chrono_literals;
 
-        constexpr double drive_distance     = 2;
-        constexpr double minimum_shoot_time = 10s;
+        constexpr double DRIVE_DISTANCE     = 2;
+        constexpr double MINIMUM_SHOOT_TIME = 10s;
     } // namespace THREE_BALL
 
     namespace FIVE_BALL
