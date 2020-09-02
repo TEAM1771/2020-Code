@@ -12,16 +12,16 @@ Climber::Climber()
     climber_1.SetP(CLIMBER::P);
     climber_1.SetI(CLIMBER::I);
     climber_1.SetD(CLIMBER::D);
-    climber_1.SetTarget(CLIMBER::POSITION::ZERO);
     climber_1.SetOutputRange(-CLIMBER::MAX_OUTPUT, CLIMBER::MAX_OUTPUT);
     climber_2.SetPositionRange(CLIMBER::POSITION::ZERO, CLIMBER::POSITION::UP);
+    climber_1.SetTarget(CLIMBER::POSITION::ZERO);
 
     climber_2.SetP(CLIMBER::P);
     climber_2.SetI(CLIMBER::I);
     climber_2.SetD(CLIMBER::D);
-    climber_2.SetTarget(CLIMBER::POSITION::ZERO);
     climber_2.SetOutputRange(-CLIMBER::MAX_OUTPUT, CLIMBER::MAX_OUTPUT);
     climber_2.SetPositionRange(-CLIMBER::POSITION::UP, CLIMBER::POSITION::ZERO);
+    climber_2.SetTarget(CLIMBER::POSITION::ZERO);
 }
 
 void Climber::set(CLIMBER::POSITION position)

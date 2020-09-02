@@ -74,6 +74,8 @@ namespace HOOD
         MIDPOINT     = -26,
         BATTER       = -89
     } POSITION;
+
+    constexpr double TOLERANCE = 1;
 } // namespace HOOD
 
 namespace TURRET
@@ -90,6 +92,8 @@ namespace TURRET
         BACK                      = 53,
         MAX_RIGHT                 = 74
     } POSITION;
+
+    constexpr double TOLERANCE = 10;
 
     constexpr double TICKS_PER_REVOLUTION = 212; // replace me with correct, number. this should be close if not exact
     constexpr double TICKS_PER_RADIAN     = TICKS_PER_REVOLUTION / (2 * pi);
@@ -112,15 +116,25 @@ namespace SHOOTER_WHEEL
     constexpr double SHOOTING_RPM = 8000;
 } // namespace SHOOTER_WHEEL
 
-namespace FIVE_BALL_CONSTANTS
+namespace AUTO
 {
-    using namespace std::literals::chrono_literals;
+    namespace THREE_BALL
+    {
+        using namespace std::literals::chrono_literals;
 
-    constexpr double PICKUP_DISTANCE = 115;
-    constexpr auto   TURN_TIME       = 0.2s;
-    constexpr auto   TIME_BACKWARD   = 1.5s;
-} // namespace FIVE_BALL_CONSTANTS
+        constexpr double drive_distance     = 2;
+        constexpr double minimum_shoot_time = 10s;
+    } // namespace THREE_BALL
 
+    namespace FIVE_BALL
+    {
+        using namespace std::literals::chrono_literals;
+
+        constexpr double PICKUP_DISTANCE = 115;
+        constexpr auto   TURN_TIME       = 0.2s;
+        constexpr auto   TIME_BACKWARD   = 1.5s;
+    } // namespace FIVE_BALL
+} // namespace AUTO
 namespace HOPPER
 {
     namespace INDEXER

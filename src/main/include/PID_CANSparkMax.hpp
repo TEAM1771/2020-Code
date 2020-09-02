@@ -13,6 +13,16 @@
 #include <rev\CANSparkMax.h>
 #include <type_traits>
 
+/**
+ * This class exists to add output range protection.
+ * This is helpfull because it makes it imposible to accidentally 
+ * tell a motor to drive to a position that could damage a mechanism.
+ * 
+ * This class also combines the several objects that need to be initialized
+ * for CAN_SparkMax PID control into one object
+ * 
+ * Note: This class will not help if encoder positions are lost
+ */
 class PID_CANSparkMax : public rev::CANSparkMax
 {
 private:
@@ -38,6 +48,12 @@ public:
         max_position = max;
     }
 
+    /**
+     * Provides direct access to the internal PID controller.
+     * 
+     * Warning: This completely bypasses the range protection 
+     * built into this class
+     */
     [[deprecated]] rev::CANPIDController GetPIDController();
 
     /**

@@ -42,6 +42,8 @@ public:
 
     // returns true when aimed at goal
     bool aim(TURRET::POSITION);
+    void ThreeBall();
+    void FiveBall();
 
 private:
     friend class AutoSimple<Robot>;

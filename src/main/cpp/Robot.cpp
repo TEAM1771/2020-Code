@@ -1,10 +1,42 @@
 #include "Robot.hpp"
 #include "Timer.hpp"
 
-void Robot::AutonomousInit()
+void Robot::ThreeBall()
 {
-    using namespace FIVE_BALL_CONSTANTS;
-    using namespace std::literals::chrono_literals;
+    using namespace AUTO::THREE_BALL;
+
+    ngr::Timer timer;
+
+    // Start BangBang and indexer
+    std::thread run_shooter_wheel { [this] {
+        while(IsAutonomous() && IsEnabled())
+        {
+            shooter_wheel.bangbang();
+            std::this_thread::sleep_for(5ms); // don't spam the CAN network
+        }
+    } };
+
+    while(drivetrain.driveDistanceForward(drive_distance) && IsAutonomous() && IsEnabled())
+    {
+        aim(TURRET::POSITION::BACK);
+        std::this_thread::sleep_for(10ms);
+    }
+
+
+    limelight.setLEDMode(LimeLight::LED_Mode::Force_On);
+    while(IsAutonomous() && IsEnabled())
+    {
+        std::this_thread::sleep_for(10ms);
+        if(aim(TURRET::POSITION::BACK) && timer.Get() > minimum_shoot_time)
+            hopper.shoot();
+    }
+
+    run_shooter_wheel.join();
+}
+
+void Robot::FiveBall()
+{
+    using namespace AUTO::FIVE_BALL;
 
     // Start BangBang and indexer
     std::thread run_shooter_wheel_and_index_balls { [this] {
@@ -20,6 +52,7 @@ void Robot::AutonomousInit()
     // drive back / intake
     intake.deploy(true);
     intake.drive(INTAKE::DIRECTION::IN);
+    drivetrain.reset();
     while(! drivetrain.driveDistanceForward(PICKUP_DISTANCE))
         std::this_thread::sleep_for(20ms); // don't spam the CAN network
 
@@ -43,6 +76,11 @@ void Robot::AutonomousInit()
     // wait for threads to exit
     run_shooter_wheel_and_index_balls.join();
     aim_and_shoot.join();
+}
+
+void Robot::AutonomousInit()
+{
+    FiveBall();
 }
 
 void Robot::AutonomousPeriodic()
