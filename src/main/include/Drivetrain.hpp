@@ -13,7 +13,12 @@ class Drivetrain
     frc::Solenoid shifter { TRANSMISSION::SHIFTER };
 
     struct DriveDistance
+    {
         double rDist;
+        double lDist;
+        double netDist;
+    };
+
 public:
     Drivetrain();
     void drive(double lval, double rval);
