@@ -11,30 +11,17 @@ void Drivetrain::reset()
     rdrive.sensors.SetIntegratedSensorPosition(0);
 }
 
-bool Drivetrain::driveDistanceForward(double distance)
+bool Drivetrain::driveDistanceForward(double distance) // TODO?: fix this
 {
-    static bool isReset = false;
-    if(! isReset)
+    if(getDistance().netDist < fabs(distance))
     {
-        reset();
-        isReset = true;
-    }
-    if((fabs(rdrive.getEncoderDistance()) + fabs(ldrive.getEncoderDistance())) / 2 < fabs(distance))
-    {
-        if(fabs(rdrive.getEncoderDistance()) < fabs(ldrive.getEncoderDistance()))
+        if(fabs(rdrive.getEncoderDistance()) > fabs(ldrive.getEncoderDistance()))
         {
-            if(fabs(rdrive.getEncoderDistance()) > fabs(ldrive.getEncoderDistance()))
-            {
-                drive(-.35, -.25);
-            }
-            else if(fabs(rdrive.getEncoderDistance()) < fabs(ldrive.getEncoderDistance()))
-            {
-                drive(-.25, -.35);
-            }
-            else
-            {
-                drive(-.25, -.25);
-            }
+            drive(-.35, -.25);
+        }
+        else if(fabs(rdrive.getEncoderDistance()) < fabs(ldrive.getEncoderDistance()))
+        {
+            drive(-.25, -.35);
         }
         else
         {
@@ -49,21 +36,24 @@ bool Drivetrain::driveDistanceForward(double distance)
     }
 }
 
-void Drivetrain::printDistance()
+void Drivetrain::printDistance() const
 {
     std::cout << "Left: " << ldrive.getEncoderDistance() << std::endl;
     std::cout << "Right: " << rdrive.getEncoderDistance() << std::endl;
 }
 
-bool Drivetrain::driveDistanceBackward(double distance) // TODO: fix this
+Drivetrain::DriveDistance GetDistance() const
 {
-    static bool isReset = false;
-    if(! isReset)
-    {
-        reset();
-        isReset = true;
-    }
-    if((fabs(rdrive.getEncoderDistance()) + fabs(ldrive.getEncoderDistance())) / 2 < fabs(distance)) //96
+    return {
+        ldrive.getEncoderDistance(),
+        rdrive.getEncoderDistance(),
+        (fabs(rdrive.getEncoderDistance()) + fabs(ldrive.getEncoderDistance())) / 2
+    };
+}
+
+bool Drivetrain::driveDistanceBackward(double distance) // TODO?: fix this
+{
+    if(getDistance().netDist < fabs(distance)) //96
     {
         std::cout << "Going back" << std::endl;
         if(fabs(rdrive.getEncoderDistance()) > fabs(ldrive.getEncoderDistance()))
@@ -80,8 +70,11 @@ bool Drivetrain::driveDistanceBackward(double distance) // TODO: fix this
         }
         return false;
     }
-    drive(0, 0);
-    return true;
+    else
+    {
+        drive(0, 0);
+        return true;
+    }
 }
 
 void Drivetrain::drive(double lval, double rval)

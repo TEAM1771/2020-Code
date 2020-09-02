@@ -17,10 +17,10 @@ public:
     explicit Hood(LimeLight const& limelight);
 
     /// returns true if tolerance is met
-    bool goToPosition(HOOD::POSITION position, double tolerance = 1);
+    bool goToPosition(HOOD::POSITION position, double tolerance = HOOD::TOLERANCE);
 
     /// returns true if tolerance is met
-    bool visionTrack(double tolerance = 1);
+    bool visionTrack(double tolerance = HOOD::TOLERANCE);
 
     /// used for tuning interpolation tables
     void manualPositionControl(double position);

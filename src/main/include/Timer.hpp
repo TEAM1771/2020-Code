@@ -1,5 +1,6 @@
 /**
  * This file includes a lot of code copied and modified from frc::Timer
+ * The only difference is that it returns std::chrono utilities rather than frc ones
  */
 
 #pragma once

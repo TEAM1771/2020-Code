@@ -11,9 +11,9 @@ Turret::Turret(LimeLight const& limelight)
     turretTurnyTurny_.SetI(TURRET::I);
     turretTurnyTurny_.SetD(TURRET::D);
 
-    turretTurnyTurny_.SetTarget(TURRET::POSITION::ZERO);
     turretTurnyTurny_.SetOutputRange(-TURRET::TRAVERSE_SPEED, TURRET::TRAVERSE_SPEED);
     turretTurnyTurny_.SetPositionRange(TURRET::POSITION::MAX_LEFT, TURRET::POSITION::MAX_RIGHT);
+    turretTurnyTurny_.SetTarget(TURRET::POSITION::ZERO);
 }
 
 bool Turret::goToPosition(TURRET::POSITION position, double tolerance)

@@ -29,7 +29,7 @@ public:
     [[depricated]] visionState visionTrack_v1(TURRET::POSITION initPosition, double tolerance = 10);
 
     /// geos to position, then determines angle of target and goes to that angle
-    visionState visionTrack(TURRET::POSITION initPosition, double tolerance = 10);
+    visionState visionTrack(TURRET::POSITION initPosition, double tolerance = TURRET::TOLERANCE);
 
     /// used for tuning interpolation tables
     void manualPositionControl(double position);
