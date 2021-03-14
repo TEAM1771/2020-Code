@@ -244,7 +244,7 @@ namespace ngr // North Gwinnett Robotics
     static_assert(is_close_to(scaleOutput(0, 1, -1, 1, .5), 0));
 } // namespace ngr
 
-
+// Note: Do NOT write code in namespace std
 // bad, but good enough implimentation of std::midpoint from C++20
 // remove this if upgraded to C++20
 namespace std
@@ -254,4 +254,5 @@ namespace std
     {
         return (a + b) / 2;
     }
+    static_assert(midpoint(1, 3) == 2);
 } // namespace std
